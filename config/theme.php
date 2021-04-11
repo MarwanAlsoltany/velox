@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * ---------------------------------------------------------------------------------------------------------------------
+ *  This config file can be used to edit/extend theme configuration.
+ *  This file is mainly used by the "View::class" and the "Path::class".
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
+
+
+
+return [
+
+
+    // Currently active theme.
+    'active' => 'velox',
+
+
+    // Theme parent(s), array or string. Used to inherit view files from.
+    'parent' => 'default',
+
+
+    // Theme directory structure.
+    'paths'  => [
+        'root'     => '{global.paths.themes}/{theme.active}',
+        'assets'   => '{global.paths.themes}/{theme.active}/assets',
+        'layouts'  => '{global.paths.themes}/{theme.active}/layouts',
+        'pages'    => '{global.paths.themes}/{theme.active}/pages',
+        'partials' => '{global.paths.themes}/{theme.active}/partials',
+    ],
+
+
+];
