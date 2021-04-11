@@ -1,0 +1,34 @@
+{
+    "name": "marwanalsoltany/velox",
+    "description": "PHP Micro-Framework",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marwan Al-Soltany",
+            "email": "MarwanAlsoltany@gmail.com"
+        }
+    ],
+    "require": {
+        "php" : ">=7.4"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "MAKS\\Velox\\": "classes",
+            "App\\": "app"
+        }
+    },
+    "autoload-dev": {},
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.1-dev"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": false,
+        "process-timeout": 0
+    },
+    "prefer-stable": true
+}
