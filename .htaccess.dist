@@ -1,0 +1,85 @@
+##
+## BasicAuth for development purposes
+##
+# AuthType Basic
+# AuthName "Say my name!"
+# AuthUserFile /ABSOLUTE/PATH/TO/.htpasswd
+# Require valid-user
+
+
+DirectoryIndex index.php
+
+
+<IfModule mod_rewrite.c>
+
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    <IfModule mod_autoindex.c>
+        Options -Indexes
+    </IfModule>
+
+    Options +SymLinksIfOwnerMatch
+
+    # Use UTF-8 encoding for anything served text/plain or text/html
+    AddDefaultCharset UTF-8
+
+    ##
+    ## Enable apache rewrite engine
+    ##
+    RewriteEngine On
+
+    ##
+    ## You may need to uncomment the following line for some hosting environments,
+    ## if you have installed to a subdirectory, enter the name here also.
+    ##
+    # RewriteBase /
+
+    ##
+    ## Uncomment following lines to force HTTPS.
+    ##
+    # RewriteCond %{HTTPS} off
+    # RewriteRule (.*) https://%{SERVER_NAME}/$1 [L,R=301]
+
+    ##
+    ## Black listed folders
+    ##
+    RewriteRule ^bootstrap/.* index.php [L,NC]
+    RewriteRule ^classes/.* index.php [L,NC]
+    RewriteRule ^functions/* index.php [L,NC]
+    RewriteRule ^app/.* index.php [L,NC]
+    RewriteRule ^config/.* index.php [L,NC]
+
+    ##
+    ## White listed folders
+    ##
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_FILENAME} !/.well-known/*
+    RewriteCond %{REQUEST_FILENAME} !/(uploads|storage|public)/.*
+    RewriteCond %{REQUEST_FILENAME} !/themes/.*/(assets|resources|public)/.*
+    RewriteRule !^index.php index.php [L,NC]
+
+    # restrict access to dotfiles
+    RewriteCond %{REQUEST_FILENAME} -d [OR]
+    RewriteCond %{REQUEST_FILENAME} -l [OR]
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule /\.|^\.(?!well-known/) - [F,L]
+
+    ##
+    ## Block all PHP files, except app index
+    ##
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_FILENAME} \.php$
+    RewriteRule !^index.php index.php [L,NC]
+
+    ##
+    ## Standard routes
+    ##
+    # Deliver the folder or file directly if it exists on the server
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Push every request to index.php
+    RewriteRule ^(.*)$ /index.php [QSA]
+
+</IfModule>
