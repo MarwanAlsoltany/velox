@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zxx">
+    <head>
+        <?= View::partial('meta/metadata') ?>
+        <?= View::partial('meta/stylesheets') ?>
+
+        <?= View::yield('head') ?>
+    </head>
+    <body>
+        <?= View::yield('body') ?>
+
+        <header class="header">
+            <?= View::partial('page/header') ?>
+        </header>
+
+        <main class="main">
+            <?= View::yield(Config::get('view.defaultSectionName')) ?>
+        </main>
+
+        <footer class="footer">
+            <?= View::partial('page/footer') ?>
+        </footer>
+
+        <?= stripos(Config::get('global.env'), 'PROD') === false
+            ? HTML::div('Website is in development mode!', ['class' => 'has-background-warning p-2 has-text-centered'])
+            : ''
+        ?>
+
+        <?= View::partial('meta/scripts') ?>
+    </body>
+</html>

@@ -1,0 +1,66 @@
+<?php
+    (new HTML())
+        ->open('section', ['class' => 'section is-small'])
+            ->open('div', ['class' => 'container'])
+                ->open('div', ['class' => 'columns'])
+                    ->open('div', ['class' => 'column is-two-thirds'])
+                        ->comment('SIMPLE FORM')
+                        ->open('form', ['method' => 'POST', 'class' => 'box'])
+                            ->open('div', ['class' => 'field'])
+                                ->label('Message', ['class' => 'label'])
+                                ->open('div', ['class' => 'control has-icons-right'])
+                                    ->input(null, [
+                                        'class' => 'input is-large is-success',
+                                        'type' => 'text',
+                                        'name' =>'message',
+                                        'placeholder' => 'Your message ...',
+                                        'required'
+                                    ])
+                                    ->open('span', ['class' => 'icon is-small is-right'])
+                                        ->i('', ['class' => 'fas fa-check'])
+                                    ->close()
+                                ->close()
+                                ->p(!$message ? 'Write anything ...' : 'Write again ...', ['class' => 'help is-success'])
+                            ->close()
+                            ->open('div', ['class' => 'field is-grouped'])
+                                ->open('div', ['class' => 'control'])
+                                    ->input(null, [
+                                        'class' => 'button is-success',
+                                        'type' => 'submit',
+                                        'value' => 'Submit'
+                                    ])
+                                ->close()
+                                ->open('div', ['class' => 'control'])
+                                    ->input(null, [
+                                        'class' => 'button is-success is-light',
+                                        'type' => 'reset',
+                                        'value' => 'Reset'
+                                    ])
+                                ->close()
+                                ->condition($message)
+                                ->open('div', ['class' => 'control'])
+                                    ->a('Reload', [
+                                        'class' => 'button is-danger is-light',
+                                        'href' => 'javascript:window.location.reload();'
+                                    ])
+                                ->close()
+                            ->close()
+                        ->close()
+                    ->close()
+                    ->open('div', ['class' => 'column'])
+                        ->condition($message)
+                        ->open('div', ['class' => 'card'])
+                            ->open('div', ['class' => 'card-content'])
+                                ->p('You wrote:', ['class' => 'subtitle'])
+                                ->p(sprintf('“%s”', $message), ['class' => 'title'])
+                            ->close()
+                            ->open('div', ['class' => 'card-footer'])
+                                ->p('RESULT', ['class' => 'card-footer-item'])
+                            ->close()
+                        ->close()
+                    ->close()
+                ->close()
+            ->close()
+        ->close()
+    ->echo();
+?>

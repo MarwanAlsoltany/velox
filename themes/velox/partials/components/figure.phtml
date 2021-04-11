@@ -1,0 +1,10 @@
+<?= HTML::figure(
+    HTML::img(null, [
+        'src' => $src ?? false,
+        'alt' => $alt ?? false,
+    ]).
+    HTML::figcaption($caption ?? ''),
+    [
+        'class' => $class ?? false
+    ]
+) ?>

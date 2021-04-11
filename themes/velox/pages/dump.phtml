@@ -1,0 +1,13 @@
+<?= Data::set('page.title', 'Dump') ?>
+
+<?= View::sectionStart('head') ?>
+    <style>
+        html {
+            max-width: 85vw;
+        }
+    </style>
+<?= View::sectionEnd() ?>
+
+<?= View::sectionStart('body') ?>
+    <?php dump($vars) ?>
+<?= View::sectionEnd() ?>

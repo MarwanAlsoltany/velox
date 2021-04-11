@@ -1,0 +1,16 @@
+<section class="hero <?= $class ?? 'is-large is-primary is-bold' ?>">
+    <div class="hero-body">
+        <div class="container">
+            <?= View::partial('components/heading', [
+                'content' => $title,
+                'level' => 1,
+                'class' => 'title is-1 is-spaced'
+            ]) ?>
+            <?= View::partial('components/heading', [
+                'content' => $subtitle,
+                'level' => 2,
+                'class' => 'subtitle'
+            ]) ?>
+        </div>
+    </div>
+</section>

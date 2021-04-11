@@ -1,0 +1,52 @@
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <span class="title has-text-primary m-0">VELOX</span>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="nav-menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="nav-menu" class="navbar-menu">
+        <div class="navbar-end">
+            <?= HTML::a('Home', [
+                'href' => Path::resolveUrl('/'),
+                'class' => Path::current('/') ? 'navbar-item is-active has-text-primary' : 'navbar-item'
+            ]) ?>
+            <?= HTML::a('Contact', [
+                'href' => Path::resolveUrl('/contact'),
+                'class' => Path::current('/contact') ? 'navbar-item is-active has-text-primary' : 'navbar-item'
+            ]) ?>
+            <?= HTML::a('Example', [
+                'href' => Path::resolveUrl('/example'),
+                'class' => Path::current('/example') ? 'navbar-item is-active has-text-primary' : 'navbar-item'
+            ]) ?>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">More</a>
+                <div class="navbar-dropdown">
+                    <a href="<?= Path::resolveUrl('/not-found') ?>" class="navbar-item">404</a>
+                    <a href="<?= Path::resolveUrl('/not-allowed') ?>" class="navbar-item">405</a>
+                    <hr class="navbar-divider">
+                    <a href="<?= Path::resolveUrl('/redirect') ?>" class="navbar-item">Redirect</a>
+                    <a href="<?= Path::resolveUrl('/forward') ?>" class="navbar-item">Forward</a>
+                    <hr class="navbar-divider">
+                    <a href="<?= Path::resolveUrl('/development-exception') ?>" class="navbar-item">Development Exception</a>
+                    <a href="<?= Path::resolveUrl('/production-exception') ?>" class="navbar-item">Production Exception</a>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a href="<?= Path::resolveUrl('/learn-more') ?>" class="button is-primary is-light is-rounded">
+                        <strong>Learn more</strong>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

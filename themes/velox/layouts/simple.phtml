@@ -1,0 +1,11 @@
+<?php // this layout extends the "base" layout by writing to the "head" section and including the base layout at the bottom ?>
+
+<?= View::sectionStart('head') ?>
+    <title>
+        <?= Data::get('page.title', 'Page') ?>
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<?= View::sectionEnd() ?>
+
+<?= View::include('layouts/base') ?>

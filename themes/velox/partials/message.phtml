@@ -1,0 +1,19 @@
+
+<section class="section is-small">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-two-thirds">
+                <article class="message <?= $class ?? 'is-primary' ?>">
+                    <?php if (!empty($title)): ?>
+                        <div class="message-header">
+                            <p><?= $title ?></p>
+                        </div>
+                    <?php endif; ?>
+                    <div class="message-body">
+                        <?= $body ?? '' ?>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>

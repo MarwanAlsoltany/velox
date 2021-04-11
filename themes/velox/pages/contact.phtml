@@ -1,0 +1,36 @@
+<?= Data::set('page.title', $title) ?>
+
+<?= View::partial('hero', [
+    'title'=> 'Contact',
+    'subtitle'=> 'Check out the form down below.',
+    'class' => 'is-medium is-primary is-bold'
+]) ?>
+
+<?= View::partial('text', [
+    'heading' => [
+        'content' => 'Lorem ipsum',
+        'class' => 'title',
+    ],
+    'paragraph' => [
+        'content' => 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'
+    ],
+]) ?>
+
+<?= View::partial('form', [
+    'message' => $message ?? null,
+]) ?>
+
+<?= View::partial('text-image', [
+    'heading' => [
+        'content' => 'Lorem ipsum',
+        'class' => 'title',
+    ],
+    'paragraph' => [
+        'content' => 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'
+    ],
+    'image' => [
+        'src' => Path::resolveUrlFromAssets('images/velox.png'),
+        'alt' => 'VELOX',
+        'caption' => 'Lorem ipsum dolor sit amet'
+    ]
+]) ?>
