@@ -1,6 +1,6 @@
 <p align="center">
 
-![VELOX](./themes/velox/assets/images/velox-logo.png)
+<img width="223" height="144" src="https://raw.githubusercontent.com/MarwanAlsoltany/velox/master/themes/velox/assets/images/velox-logo.png" alt="VELOX"/>
 
 </p>
 
