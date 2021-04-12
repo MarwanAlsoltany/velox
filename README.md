@@ -187,8 +187,8 @@ VELOX functions are divided into these files:
 * [`helper.php`](./functions/helper.php): This is where helper functions for VELOX classes live, these are mainly functions that return an instance of class or alias some method on it.
 * [`html.php`](./functions/html.php): This is where HTML helper functions live, these are nothing other than aliases for the most used PHP functions with HTML.
 
-| | | |
-|-|-|-|
+| Class/Group | Function(s) |
+|-|-|
 | `App::class` | `app()` |
 | `Config::class` | `config()` |
 | `Router::class` | `router()`, <br>`handle()`, `redirect()`, `forward()` |
