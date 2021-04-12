@@ -23,9 +23,9 @@ The fastest way to build simple websites using PHP!
 [About VELOX](#about-velox)<br/>
 [Architecture](#architecture)<br/>
 [Config](#config)<br/>
-[Classes](#Classes)<br/>
-[Functions](#Functions)<br/>
-[Themes](#Themes)<br/>
+[Classes](#classes)<br/>
+[Functions](#functions)<br/>
+[Themes](#themes)<br/>
 [Changelog](./CHANGELOG.md)
 
 </p>
@@ -88,16 +88,16 @@ VELOX is a lightweight micro-framework that makes creating a simple website usin
 
 | Directory | Description |
 | --- | --- |
-| `bootstrap`](./bootstrap) | This is where VELOX bootstraps the application. You normally don't have to change anything in this directory, unless you want to extend VELOX functionality beyond basic stuff. |
-| `config`](./config) | This is where all config files will live. All files here will be accessible using the `Config` class at runtime. |
-| `storage`](./storage) | This is where VELOX will write caches and logs. You can also use this directory to store installation-wide assets. |
-| `classes`](./classes) | This is where VELOX source files live. You shouldn't be touching anything here unless you want to make your own version of VELOX. |
-| `functions`](./functions) | This where all functions that are loaded in the application live. You can freely add yours, or delete the entire directory |
-| `themes`](./themes) | This where all your frontend themes will be placed. You will be mostly working here for the frontend part of the app. |
-| `app`](./app) | This where your own backend logic will be placed. You will be mostly working here for the backend part of the app. |
-| `bin`](./bin) | This is where PHP executables are placed. You can freely add yours, or delete the entire directory. |
-| `public`](./public) | This is where you should put your `index.php` for maximum security. You can freely delete this directory if you want to. |
-| `vendor`](./vendor) | This where your composer dependencies will find their place. You can freely delete this directory if you don't want to use composer. |
+| [`bootstrap`](./bootstrap) | This is where VELOX bootstraps the application. You normally don't have to change anything in this directory, unless you want to extend VELOX functionality beyond basic stuff. |
+| [`config`](./config) | This is where all config files will live. All files here will be accessible using the `Config` class at runtime. |
+| [`storage`](./storage) | This is where VELOX will write caches and logs. You can also use this directory to store installation-wide assets. |
+| [`classes`](./classes) | This is where VELOX source files live. You shouldn't be touching anything here unless you want to make your own version of VELOX. |
+| [`functions`](./functions) | This where all functions that are loaded in the application live. You can freely add yours, or delete the entire directory |
+| [`themes`](./themes) | This where all your frontend themes will be placed. You will be mostly working here for the frontend part of the app. |
+| [`app`](./app) | This where your own backend logic will be placed. You will be mostly working here for the backend part of the app. |
+| [`bin`](./bin) | This is where PHP executables are placed. You can freely add yours, or delete the entire directory. |
+| [`public`](./public) | This is where you should put your `index.php` for maximum security. You can freely delete this directory if you want to. |
+| [`vendor`](./vendor) | This where your composer dependencies will find their place. You can freely delete this directory if you don't want to use composer. |
 
 ![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Most files listed in these directories are documented. Take a look through them to learn more about VELOX.*
 
