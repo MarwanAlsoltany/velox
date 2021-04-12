@@ -5,7 +5,7 @@ require_once 'bootstrap/autoload.php';
 
 
 Router::handle('/', function () {
-    return View::render('home', ['title' => 'Home ']);
+    return View::render('home', ['title' => 'Home']);
 });
 
 
