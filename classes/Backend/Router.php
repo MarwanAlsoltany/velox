@@ -192,7 +192,8 @@ class Router
      */
     public static function forward(string $to): void
     {
-        $path = trim(static::$base, '/') . '/' . ltrim($to, '/');
+        $base = static::$base ?? '';
+        $path = trim($base, '/') . '/' . ltrim($to, '/');
 
         static::setRequestUri($path);
         static::start(...self::$params);
@@ -244,12 +245,12 @@ class Router
     {
         self::$params = func_get_args();
 
-        $appConfig = Config::get('router');
+        $routerConfig = Config::get('router');
 
-        $base            ??= $appConfig['base'];
-        $allowMultiMatch ??= $appConfig['allowMultiMatch'];
-        $caseMatters     ??= $appConfig['caseMatters'];
-        $slashMatters    ??= $appConfig['slashMatters'];
+        $base            ??= $routerConfig['base'];
+        $allowMultiMatch ??= $routerConfig['allowMultiMatch'];
+        $caseMatters     ??= $routerConfig['caseMatters'];
+        $slashMatters    ??= $routerConfig['slashMatters'];
 
         $url  = static::getParsedUrl();
         $base = static::$base = trim($base, '/');
