@@ -225,28 +225,34 @@ class Dumper
                                             ->th('Arguments *')
                                         ->close()
                                     ->close()
-                                    ->open('tbody');
-                                    foreach ($trace as $i => $trace) {
-                                        $this
-                                        ->open('tr', ['class' => $i % 2 == 0 ? 'even' : 'odd'])
-                                            ->td(strval($i + 1), ['class' => 'number'])
-                                            ->td(isset($trace['file']) ? basename($trace['file']) : '', ['class' => 'file', 'title' => $trace['file'] ?? false])
-                                            ->td(strval($trace['line'] ?? ''), ['class' => 'line'])
-                                            ->td(strval($trace['class'] ?? ''), ['class' => 'class'])
-                                            ->td(strval($trace['function'] ?? ''), ['class' => 'function'])
-                                            ->open('td', ['class' => 'arguments']);
-                                            if (isset($trace['args'])) {
-                                                foreach ($trace['args'] as $i => $arg) {
-                                                    $this->span(gettype($arg), ['title' => print_r($arg, true)]);
-                                                }
-                                            } else {
-                                                $this->node('NULL');
-                                            }
-                                            $this->close();
-                                        $this->close();
-                                    }
-                                    $this->close();
-                                $this->close();
+                                    ->open('tbody')
+                                    ->execute(function () use ($trace) {
+                                        /** @var HTML $this */
+                                        foreach ($trace as $i => $trace) {
+                                            $this
+                                            ->open('tr', ['class' => $i % 2 == 0 ? 'even' : 'odd'])
+                                                ->td(strval($i + 1), ['class' => 'number'])
+                                                ->td(isset($trace['file']) ? basename($trace['file']) : '', ['class' => 'file', 'title' => $trace['file'] ?? false])
+                                                ->td(strval($trace['line'] ?? ''), ['class' => 'line'])
+                                                ->td(strval($trace['class'] ?? ''), ['class' => 'class'])
+                                                ->td(strval($trace['function'] ?? ''), ['class' => 'function'])
+                                                ->open('td', ['class' => 'arguments'])
+                                                ->execute(function () use ($trace) {
+                                                    /** @var HTML $this */
+                                                    if (isset($trace['args'])) {
+                                                        foreach ($trace['args'] as $i => $arg) {
+                                                            $this->span(gettype($arg), ['title' => print_r($arg, true)]);
+                                                        }
+                                                    } else {
+                                                        $this->node('NULL');
+                                                    }
+                                                })
+                                                ->close()
+                                            ->close();
+                                        }
+                                    })
+                                    ->close()
+                                ->close();
                             } else {
                                 $this->pre($traceString);
                             }
