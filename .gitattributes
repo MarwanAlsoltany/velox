@@ -2,6 +2,9 @@
 # https://www.kernel.org/pub/software/scm/git/docs/gitattributes.html
 
 /.github export-ignore
+/.gitattributes export-ignore
+/*.xml.dist export-ignore
+/*.yml export-ignore
 
 * text=auto
 *.php text eol=lf
