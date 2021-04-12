@@ -12,7 +12,7 @@ use MAKS\Velox\Frontend\HTML;
 use MAKS\Velox\Frontend\Path;
 
 /**
- * An abstract class that serves as a base Controller that can be extended to make handlers for `App::route()`.
+ * An abstract class that serves as a base Controller that can be extended to make handlers for application router.
  * This class has these properties: `$config` = `Config`, `$router` = `Router`, `$data` = `Data`, `$view` = `View`, `$html` = `HTML`, `$path` = `Path`, and the passed array as `$vars`.
  *
  * Example:
