@@ -150,6 +150,7 @@ class Dumper
         $traceString = $exception->getTraceAsString();
         $name        = get_class($exception);
         $filename    = basename($file);
+        $lines       = null;
 
         if (file_exists($file)) {
             $lines = file($file);
