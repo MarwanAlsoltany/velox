@@ -104,7 +104,12 @@ class Router
     protected static ?string $base = null;
 
     /**
-     * The current registered routes.
+     * The currently requested path.
+     */
+    protected static ?string $path = null;
+
+    /**
+     * The currently registered routes.
      */
     protected static array $routes = [];
 
@@ -245,28 +250,13 @@ class Router
     {
         self::$params = func_get_args();
 
-        $routerConfig = Config::get('router');
+        [$base, $allowMultiMatch, $caseMatters, $slashMatters] = static::getValidParameters($base, $allowMultiMatch, $caseMatters, $slashMatters);
 
-        $base            ??= $routerConfig['base'];
-        $allowMultiMatch ??= $routerConfig['allowMultiMatch'];
-        $caseMatters     ??= $routerConfig['caseMatters'];
-        $slashMatters    ??= $routerConfig['slashMatters'];
+        static::$base = $base = trim($base, '/');
+        static::$path = $path = static::getRoutePath($base, $slashMatters);
 
-        $url  = static::getParsedUrl();
-        $base = static::$base = trim($base, '/');
-        $path = '/';
-
-        if (isset($url['path'])) {
-            $path = $url['path'];
-            if (!$slashMatters && $path !== $base . '/') {
-                $path = rtrim($path, '/');
-            }
-        }
-
-        $path = urldecode($path);
-
-        $pathMatchFound = false;
         $routeMatchFound = false;
+        $pathMatchFound  = false;
         $result = null;
 
         foreach (static::$routes as &$route) {
@@ -274,18 +264,8 @@ class Router
                 $route['expression'] = $base . $route['expression'];
             }
 
-            $routePlaceholderRegex = '/{([a-z0-9_\-\.?]+)}/i';
-            if (preg_match($routePlaceholderRegex, $route['expression'])) {
-                $routeMatchRegex = strpos($route['expression'], '?}') !== false ? '(.*)?' : '(.+)';
-                $route['expression'] = preg_replace(
-                    $routePlaceholderRegex,
-                    $routeMatchRegex,
-                    $route['expression']
-                );
-            }
-
-            $routeMatchRegex = sprintf('<^%s$>%s', $route['expression'], ($caseMatters ? 'iu' : 'u'));
-            if (preg_match($routeMatchRegex, $path, $matches, PREG_UNMATCHED_AS_NULL)) {
+            $regex = static::getRouteRegex($route['expression'], $caseMatters);
+            if (preg_match($regex, $path, $matches, PREG_UNMATCHED_AS_NULL)) {
                 $pathMatchFound = true;
 
                 $allowedMethods = (array)$route['method'];
@@ -297,21 +277,13 @@ class Router
 
                     $routeMatchFound = true;
 
-                    $route['arguments'] = array_merge($route['arguments'], $matches ?? [$path]);
-                    $route['arguments'] = array_filter($route['arguments']);
-                    if (count($route['arguments']) > 1) {
-                        array_push($route['arguments'], $result);
-                    } else {
-                        array_push($route['arguments'], null, $result);
-                    }
+                    $route['arguments'] = static::getRouteArguments($route['arguments'], $matches, $result);
 
                     $result = call_user_func_array($route['handler'], $route['arguments']);
 
                     if ($result === false) {
                         throw new \Exception("Something went wrong when trying to respond to '{$path}'! Check the handler for this route");
                     }
-
-                    header(static::getServerProtocol() . ' 200 OK', false, 200);
                 }
             }
 
@@ -322,34 +294,143 @@ class Router
 
         unset($route);
 
+        static::echoResponse($routeMatchFound, $pathMatchFound, $result);
+    }
+
+    /**
+     * Returns valid parameters for `self::start()` by validating the passed parameters and adding the deficiency from router config.
+     *
+     * @param string|null $base
+     * @param bool|null $allowMultiMatch
+     * @param bool|null $caseMatters
+     * @param bool|null $slashMatters
+     *
+     * @return array
+     */
+    private static function getValidParameters(?string $base, ?bool $allowMultiMatch, ?bool $caseMatters, ?bool $slashMatters): array
+    {
+        $routerConfig = Config::get('router');
+
+        $base            ??= $routerConfig['base'];
+        $allowMultiMatch ??= $routerConfig['allowMultiMatch'];
+        $caseMatters     ??= $routerConfig['caseMatters'];
+        $slashMatters    ??= $routerConfig['slashMatters'];
+
+        return [
+            $base,
+            $allowMultiMatch,
+            $caseMatters,
+            $slashMatters,
+        ];
+    }
+
+    /**
+     * Returns the a valid decoded route path.
+     *
+     * @param string $base
+     * @param bool $slashMatters
+     *
+     * @return string
+     */
+    private static function getRoutePath(string $base, bool $slashMatters): string
+    {
+        $url = static::getParsedUrl();
+
+        $path = '/';
+        if (isset($url['path'])) {
+            $path = $url['path'];
+            if (!$slashMatters && $path !== $base . '/') {
+                $path = rtrim($path, '/');
+            }
+        }
+
+        return urldecode($path);
+    }
+
+    /**
+     * Returns a valid route regex.
+     * @param string $expression
+     * @param bool $caseMatters
+     * @return string
+     */
+    private static function getRouteRegex(string $expression, bool $caseMatters): string
+    {
+        $routePlaceholderRegex = '/{([a-z0-9_\-\.?]+)}/i';
+        if (preg_match($routePlaceholderRegex, $expression)) {
+            $routeMatchRegex = strpos($expression, '?}') !== false ? '(.*)?' : '(.+)';
+            $expression = preg_replace(
+                $routePlaceholderRegex,
+                $routeMatchRegex,
+                $expression
+            );
+        }
+
+        return sprintf('<^%s$>%s', $expression, ($caseMatters ? 'iu' : 'u'));
+    }
+
+    /**
+     * Returns valid arguments for route handler with the order thy expect.
+     * @param array $current
+     * @param array $matches
+     * @param mixed $result
+     * @return array
+     * @since Returns valid arguments for route handler with the order thy expect.
+     */
+    private static function getRouteArguments(array $current, array $matches, $result): array
+    {
+        $arguments = array_merge($current, $matches);
+        $arguments = array_filter($arguments);
+        if (count($arguments) > 1) {
+            array_push($arguments, $result);
+        } else {
+            array_push($arguments, null, $result);
+        }
+
+        return $arguments;
+    }
+
+    /**
+     * Echos the response according to the passed parameters.
+     * @param bool $routeMatchFound
+     * @param bool $pathMatchFound
+     * @param mixed $result
+     * @return void
+     */
+    private static function echoResponse(bool $routeMatchFound, bool $pathMatchFound, $result): void
+    {
+        $protocol = static::getServerProtocol();
+        $method   = static::getRequestMethod();
+
         if (!$routeMatchFound) {
             $result = 'The route is not found, or the request method is not allowed!';
 
             if ($pathMatchFound) {
                 if (static::$methodNotAllowedCallback) {
-                    $result = call_user_func(static::$methodNotAllowedCallback, $path, static::getRequestMethod());
+                    $result = call_user_func(static::$methodNotAllowedCallback, static::$path, $method);
 
-                    header(static::getServerProtocol() . ' 405 Method Not Allowed', true, 405);
+                    header("{$protocol} 405 Method Not Allowed", true, 405);
                 }
 
                 Misc::log(
                     'Responded with 405 to the request for "{path}" with method "{method}"',
-                    ['path' => $path, 'method' => static::getRequestMethod()],
+                    ['path' => static::$path, 'method' => $method],
                     'system'
                 );
             } else {
                 if (static::$routeNotFoundCallback) {
-                    $result = call_user_func(static::$routeNotFoundCallback, $path);
+                    $result = call_user_func(static::$routeNotFoundCallback, static::$path);
 
-                    header(static::getServerProtocol() . ' 404 Not Found', true, 404);
+                    header("{$protocol} 404 Not Found", true, 404);
                 }
 
                 Misc::log(
                     'Responded with 404 to the request for "{path}"',
-                    ['path' => $path],
+                    ['path' => static::$path],
                     'system'
                 );
             }
+        } else {
+            header("{$protocol} 200 OK", false, 200);
         }
 
         echo $result;
