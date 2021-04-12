@@ -10,6 +10,9 @@ The fastest way to build simple websites using PHP!
 [![License][license-icon]][license-href]
 [![Maintenance][maintenance-icon]][maintenance-href]
 [![Total Downloads][downloads-icon]][downloads-href]
+[![Scrutinizer Build Status][scrutinizer-icon]][scrutinizer-href]
+[![Scrutinizer Code Quality][scrutinizer-quality-icon]][scrutinizer-quality-href]
+[![StyleCI Code Style][styleci-icon]][styleci-href]
 
 
 <details>
@@ -85,16 +88,16 @@ VELOX is a lightweight micro-framework that makes creating a simple website usin
 
 | Directory | Description |
 | --- | --- |
-| `bootstrap` | This is where VELOX bootstraps the application. You normally don't have to change anything in this directory, unless you want to extend VELOX functionality beyond basic stuff. |
-| `config` | This is where all config files will live. All files here will be accessible using the `Config` class at runtime. |
-| `storage` | This is where VELOX will write caches and logs. You can also use this directory to store installation-wide assets. |
-| `classes` | This is where VELOX source files live. You shouldn't be touching anything here unless you want to make your own version of VELOX. |
-| `functions` | This where all functions that are loaded in the application live. You can freely add yours, or delete the entire directory |
-| `themes` | This where all your frontend themes will be placed. You will be mostly working here for the frontend part of the app. |
-| `app` | This where your own backend logic will be placed. You will be mostly working here for the backend part of the app. |
-| `bin` | This is where PHP executables are placed. You can freely add yours, or delete the entire directory. |
-| `public` | This is where you should put your `index.php` for maximum security. You can freely delete this directory if you want to. |
-| `vendor` | This where your composer dependencies will find their place. You can freely delete this directory if you don't want to use composer. |
+| `bootstrap`](./bootstrap) | This is where VELOX bootstraps the application. You normally don't have to change anything in this directory, unless you want to extend VELOX functionality beyond basic stuff. |
+| `config`](./config) | This is where all config files will live. All files here will be accessible using the `Config` class at runtime. |
+| `storage`](./storage) | This is where VELOX will write caches and logs. You can also use this directory to store installation-wide assets. |
+| `classes`](./classes) | This is where VELOX source files live. You shouldn't be touching anything here unless you want to make your own version of VELOX. |
+| `functions`](./functions) | This where all functions that are loaded in the application live. You can freely add yours, or delete the entire directory |
+| `themes`](./themes) | This where all your frontend themes will be placed. You will be mostly working here for the frontend part of the app. |
+| `app`](./app) | This where your own backend logic will be placed. You will be mostly working here for the backend part of the app. |
+| `bin`](./bin) | This is where PHP executables are placed. You can freely add yours, or delete the entire directory. |
+| `public`](./public) | This is where you should put your `index.php` for maximum security. You can freely delete this directory if you want to. |
+| `vendor`](./vendor) | This where your composer dependencies will find their place. You can freely delete this directory if you don't want to use composer. |
 
 ![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Most files listed in these directories are documented. Take a look through them to learn more about VELOX.*
 
@@ -130,11 +133,11 @@ The following table lists all config files that come shipped with VELOX.
 
 | Config File | Description |
 | --- | --- |
-| `global.php` | This config file contains some global variables that are used by almost all classes (app-wide config). |
-| `router.php` | This config file can be used to override `Router::class` default parameters. |
-| `theme.php` | This config file can be used to edit/extend theme configuration. |
-| `view.php` | This config file can be used to customize everything about the views. It is used by the `View::class`. |
-| `data.php` | This config file can be used to provide any arbitrary data, this will then be injected in the `Data::class`. |
+| [`global.php`](./config/global.php) | This config file contains some global variables that are used by almost all classes (app-wide config). |
+| [`router.php`](./config/router.php) | This config file can be used to override `Router::class` default parameters. |
+| [`theme.php`](./config/theme.php) | This config file can be used to edit/extend theme configuration. |
+| [`view.php`](./config/view.php) | This config file can be used to customize everything about the views. It is used by the `View::class`. |
+| [`data.php`](./config/data.php) | This config file can be used to provide any arbitrary data, this will then be injected in the `Data::class`. |
 
 ![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own config files too, all you need to do is to create a new file under `/config` and add you own configuration in it. VELOX will know about this file and load it in the application. You can access your config via `Config::get('filename.whatEverKeyYouWrote')`.*
 
@@ -216,12 +219,12 @@ VELOX is built around the idea of `themes`, a theme is divided into four directo
 
 You can customize the behavior of themes using the `config/theme.php` file. Here you can set the active theme with the `active` key. Themes can inherit from each other by setting parent(s) with the `parent` key. You can also change the theme directory structure if you wish to using the `paths` key. Other configurations that worth taking a look at which have to do with themes can be found in the `config/view.php` file.
 
-![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *You can take a look at the provided `velox` theme to see how all stuff work together in practice.*
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *You can take a look at the provided [`velox`](./themes/velox) theme to see how all stuff work together in practice.*
 
 ### Examples:
 1. Layout: [`themes/velox/layouts/main.phtml`](./themes/velox/layouts/main.phtml)
-2. Page: [`themes/velox/pages/home.phtml`](./themes/velox/pages/home.phtml`)
-3. Partial: [`themes/velox/partials/text-image.phtml`](./themes/velox/partials/text-image.phtml`)
+2. Page: [`themes/velox/pages/home.phtml`](./themes/velox/pages/home.phtml)
+3. Partial: [`themes/velox/partials/text-image.phtml`](./themes/velox/partials/text-image.phtml)
 
 
 ---
@@ -245,12 +248,18 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 
 [php-icon]: https://img.shields.io/badge/php-%3D%3C7.4-yellow?style=flat-square
 [version-icon]: https://img.shields.io/packagist/v/marwanalsoltany/velox.svg?style=flat-square
-[license-icon]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
+[license-icon]: https://img.shields.io/badge/license-MIT-red.svg?style=flat-square
 [maintenance-icon]: https://img.shields.io/badge/maintained-yes-orange.svg?style=flat-square
 [downloads-icon]: https://img.shields.io/packagist/dt/marwanalsoltany/velox.svg?style=flat-square
+[scrutinizer-icon]: https://img.shields.io/scrutinizer/build/g/MarwanAlsoltany/velox/master?style=flat-square
+[scrutinizer-quality-icon]: https://img.shields.io/scrutinizer/g/MarwanAlsoltany/velox.svg?style=flat-square
+[styleci-icon]: https://github.styleci.io/repos/356515801/shield?branch=master
 
 [php-href]: https://github.com/MarwanAlsoltany/velox/search?l=php
 [version-href]: https://packagist.org/packages/marwanalsoltany/velox
 [license-href]: ./LICENSE
 [maintenance-href]: https://github.com/MarwanAlsoltany/velox/graphs/commit-activity
-[downloads-href]: https://packagist.org/packages/velox/amqp-agent/stats
+[downloads-href]: https://packagist.org/packages/marwanalsoltany/velox/stats
+[scrutinizer-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/build-status/master
+[scrutinizer-quality-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/?branch=maste
+[styleci-href]: https://github.styleci.io/repos/356515801
