@@ -593,7 +593,7 @@ class HTML
 
         $xml = libxml_use_internal_errors(true);
 
-        $dom = New \DOMDocument();
+        $dom = new \DOMDocument();
         $dom->validateOnParse = true;
         $dom->loadHTML($html);
         // $dom->saveHTML();
