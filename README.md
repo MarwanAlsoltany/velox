@@ -1,3 +1,13 @@
+<p align="center">
+
+![VELOX](./themes/velox/assets/images/velox-logo.png)
+
+</p>
+
+
+---
+
+
 <h1 align="center">VELOX</h1>
 
 <div align="center">
@@ -34,6 +44,16 @@ The fastest way to build simple websites using PHP!
 <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FMarwanAlsoltany%2Fvelox&text=The%20fastest%20way%20to%20build%20simple%20websites%20using%20%23PHP%21" title="Tweet" target="_blank"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" alt="Tweet"></a>
 </div>
 
+
+
+---
+
+
+<p align="center">
+
+
+
+</p>
 
 
 ---
