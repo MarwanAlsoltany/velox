@@ -158,7 +158,7 @@ class View
             throw new \Exception(
                 vsprintf(
                     'Not in a context to end a section! Call to %s::%s() in %s on line %s is superfluous',
-                    Misc::backtrace(['class', 'function', 'file', 'line'], 1)
+                    Misc::backtrace(['class', 'function', 'file', 'line'], 1) ?? ['CLASS', 'FUNCTION', 'FILE', 'LINE']
                 )
             );
         }
