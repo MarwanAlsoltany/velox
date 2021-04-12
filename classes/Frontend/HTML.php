@@ -321,7 +321,7 @@ class HTML
             throw new \Exception(
                 vsprintf(
                     'Invalid name supplied to %s::%s() in %s on line %s. Tag name cannot be an empty string',
-                    Misc::backtrace(['class', 'function', 'file', 'line'], 1)
+                    Misc::backtrace(['class', 'function', 'file', 'line'], 1) ?? ['CLASS', 'FUNCTION', 'FILE', 'LINE']
                 )
             );
         }
@@ -354,7 +354,7 @@ class HTML
             throw new \Exception(
                 vsprintf(
                     'Invalid name supplied to %s::%s() in %s on line %s. Entity name cannot be an empty string',
-                    Misc::backtrace(['class', 'function', 'file', 'line'], 1)
+                    Misc::backtrace(['class', 'function', 'file', 'line'], 1) ?? ['CLASS', 'FUNCTION', 'FILE', 'LINE']
                 )
             );
         }
@@ -418,7 +418,7 @@ class HTML
             throw new \Exception(
                 vsprintf(
                     'Invalid name supplied to %s::%s() in %s on line %s. Tag name cannot be an empty string',
-                    Misc::backtrace(['class', 'function', 'file', 'line'], 1)
+                    Misc::backtrace(['class', 'function', 'file', 'line'], 1) ?? ['CLASS', 'FUNCTION', 'FILE', 'LINE']
                 )
             );
         }
@@ -449,7 +449,7 @@ class HTML
             throw new \Exception(
                 vsprintf(
                     'Not in a context to close a tag! Call to %s::%s() in %s on line %s is superfluous',
-                    Misc::backtrace(['class', 'function', 'file', 'line'], 1)
+                    Misc::backtrace(['class', 'function', 'file', 'line'], 1) ?? ['CLASS', 'FUNCTION', 'FILE', 'LINE']
                 )
             );
         }
@@ -606,7 +606,7 @@ class HTML
             throw new \Exception(
                 vsprintf(
                     'HTML is invalid in %s! Found %s problem(s). Last LibXMLError: [level:%s/code:%s] %s',
-                    [Misc::backtrace('file', 3), count($errors), $errors[0]->level, $errors[0]->code, $errors[0]->message]
+                    [Misc::backtrace('file', 3) ?? 'FILE', count($errors), $errors[0]->level, $errors[0]->code, $errors[0]->message]
                 )
             );
         }
@@ -627,7 +627,7 @@ class HTML
             throw new \Exception(
                 sprintf(
                     "Cannot return HTML in %s. The following tag(s): '%s' has/have not been closed properly",
-                    Misc::backtrace('file', 2),
+                    Misc::backtrace('file', 2) ?? 'FILE',
                     implode(', ', $this->stack)
                 )
             );
