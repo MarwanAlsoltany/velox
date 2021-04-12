@@ -14,7 +14,7 @@ namespace MAKS\Velox\Helper;
 use MAKS\Velox\Frontend\HTML;
 
 /**
- * A class that a dumper for variables and exception in nice formatting.
+ * A class that dumps variables and exception in a nice formatting.
  */
 class Dumper
 {
