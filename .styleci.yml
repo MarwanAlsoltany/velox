@@ -1,0 +1,17 @@
+risky: false
+version: 7
+preset: psr12
+finder:
+    exclude:
+        - functions
+        - themes
+        - app
+        - bin
+        - bootstrap
+        - config
+        - storage
+        - public
+        - vendor
+    name: '*.php'
+    not-name:
+        - '*.phtml'
