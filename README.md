@@ -45,17 +45,6 @@ The fastest way to build simple websites using PHP!
 </div>
 
 
-
----
-
-
-<p align="center">
-
-
-
-</p>
-
-
 ---
 
 
@@ -96,7 +85,15 @@ Download [VELOX](https://github.com/MarwanAlsoltany/velox/releases) as a `.zip` 
 
 ## About VELOX
 
-VELOX is a lightweight micro-framework that makes creating a simple website using PHP joyful. It helps you create future-proof websites faster and more efficiently. It provides components that facilitate the process of creating a website using vanilla PHP. VELOX does not have any dependencies, the VELOX package and everything that it needs is included in the project itself. All that VELOX provides is a way to work with `config`, pass `data`, register `routes`, render `views`, handle `exceptions`, `autoload` code, and `resolve` assets. It provides the *View* and the *Controller* parts of an *MVC* design pattern, leaving the *Model* part for you to implement as you wish in case you needed it. VELOX can also be used as a **Static Site Generator** if all you need is HTML files in the end.
+VELOX is a lightweight micro-framework that makes creating a simple website using PHP joyful. It helps you create future-proof websites faster and more efficiently. It provides components that facilitate the process of creating a website using vanilla PHP. VELOX does not have any dependencies, the VELOX package and everything that it needs is included in the project itself. All that VELOX provides is a way to work with `config`, pass `data`, register `routes`, render `views`, handle `exceptions`, `autoload` code, and `resolve` assets. It provides the *View* and the *Controller* parts of an *MVC* design pattern, leaving the *Model* part for you to implement as you wish, or use any 3rd-Party Package; in case you needed it. VELOX can also be used as a **Static Site Generator** if all you need is HTML files in the end.
+
+### Why does VELOX exist?
+
+VELOX was created to solve a specific problem, it's a way to build a website that is between dynamic and static, a way to create a simple website with few pages without being forced to use a framework or a CMS that comes with a ton of stuff which will never get used, it's lightweight and straight to the point.
+
+It's not recommended to use VELOX if you have an intermediary project, you would be better off using some well-established frameworks. VELOX is not an initiative to reinvent the wheel, you can look at VELOX as a starter-kit for small projects.
+
+VELOX has a very special use-case, simple websites, and here is meant really simple websites. The advantage is, you don't have stuff that you don't need. Comparing VELOX to Laravel or Symfony is irrelevant, as these frameworks play in a totally different area, it also worth mentioning that VELOX is much simpler than Lumen or Slim.
 
 
 ---
@@ -112,18 +109,18 @@ VELOX is a lightweight micro-framework that makes creating a simple website usin
 | [`config`](./config) | This is where all config files will live. All files here will be accessible using the `Config` class at runtime. |
 | [`storage`](./storage) | This is where VELOX will write caches and logs. You can also use this directory to store installation-wide assets. |
 | [`classes`](./classes) | This is where VELOX source files live. You shouldn't be touching anything here unless you want to make your own version of VELOX. |
-| [`functions`](./functions) | This where all functions that are loaded in the application live. You can freely add yours, or delete the entire directory |
-| [`themes`](./themes) | This where all your frontend themes will be placed. You will be mostly working here for the frontend part of the app. |
-| [`app`](./app) | This where your own backend logic will be placed. You will be mostly working here for the backend part of the app. |
+| [`functions`](./functions) | This is where all functions that are loaded in the application live. You can freely add yours, or delete the entire directory |
+| [`themes`](./themes) | This is where all your frontend themes will be placed. You will be mostly working here for the frontend part of the app. |
+| [`app`](./app) | This is where your own backend logic will be placed. You will be mostly working here for the backend part of the app. |
 | [`bin`](./bin) | This is where PHP executables are placed. You can freely add yours, or delete the entire directory. |
 | [`public`](./public) | This is where you should put your `index.php` for maximum security. You can freely delete this directory if you want to. |
-| [`vendor`](./vendor) | This where your composer dependencies will find their place. You can freely delete this directory if you don't want to use composer. |
+| [`vendor`](./vendor) | This is where your composer dependencies will be placed. You can freely delete this directory if you don't want to use composer. |
 
 ![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Most files listed in these directories are documented. Take a look through them to learn more about VELOX.*
 
 ### App Entry
 
-The entry point for a VELOX app is the `index.php`, here you need to require the `bootstrap/autoload.php`, register some routes with their handlers using the `Router` class, and start the router. This is all that you need to have a working VELOX app.
+The entry point for a VELOX app is the [`index.php`](./index.php), here you need to require the [`bootstrap/autoload.php`](./bootstrap/autoload.php), register some routes with their handlers using the `Router` class, and start the router. This is all that you need to have a working VELOX app.
 
 ```php
 <?php
@@ -139,7 +136,7 @@ Router::start();
 
 Additionally, you can also set up handlers for `404` and `405` responses using `Router::handleRouteNotFound()` `Router::handleMethodNotAllowed()` respectively.
 
-Alternatively, you can extract the *"routes registration part"* in its own file and let VELOX know about it using `bootstrap/additional.php`
+Alternatively, you can extract the *"routes registration part"* in its own file and let VELOX know about it using [`bootstrap/additional.php`](./bootstrap/additional.php).
 
 ![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *In order for VELOX to work correctly and safely, you need to redirect all requests to the application entry point (`index.php`) and block all requests to other PHP files on the server (take a look at `.htaccess.dist` to get started with Apache).*
 
@@ -178,16 +175,16 @@ VELOX classes are divided in four namespaces:
 
 | Class | Description |
 | --- | --- |
-| [Config](./classes/Backend/Config.php) | A class that loads everything from the `/config` directory and make it as an array that is accessible via dot-notation. |
-| [Router](./classes/Backend/Router.php) | A class that serves as a router and an entry point for the application. |
-| [Controller](./classes/Backend/Controller.php) | An abstract class that serves as a base Controller that can be extended to make handlers for the router. |
-| [Data](./classes/Frontend/Data.php) | A class that serves as an abstracted data bag/store that is accessible via dot-notation. |
-| [View](./classes/Frontend/View.php) | A class that renders and caches view files (Layouts, Pages, and Partials) with the ability to include additional files and divide page content into sections. |
-| [HTML](./classes/Frontend/HTML.php) | A class that serves as a fluent interface to write HTML in PHP. It also helps with creating HTML elements on the fly. |
-| [Path](./classes/Frontend/Path.php) | A class that serves as a path resolver for different paths/URLs of the app. |
-| [Dumper](./classes/Helper/Dumper.php) | A class that dumps variables and exception in a nice formatting. |
-| [Misc](./classes/Helper/Misc.php) | A class that serves as a holder for various miscellaneous utility function. |
-| [App](./classes/App.php) | A class that serves as a basic service-container for VELOX. |
+| [`Config`](./classes/Backend/Config.php) | A class that loads everything from the `/config` directory and make it as an array that is accessible via dot-notation. |
+| [`Router`](./classes/Backend/Router.php) | A class that serves as a router and an entry point for the application. |
+| [`Controller`](./classes/Backend/Controller.php) | An abstract class that serves as a base Controller that can be extended to make handlers for the router. |
+| [`Data`](./classes/Frontend/Data.php) | A class that serves as an abstracted data bag/store that is accessible via dot-notation. |
+| [`View`](./classes/Frontend/View.php) | A class that renders and caches view files (Layouts, Pages, and Partials) with the ability to include additional files and divide page content into sections. |
+| [`HTML`](./classes/Frontend/HTML.php) | A class that serves as a fluent interface to write HTML in PHP. It also helps with creating HTML elements on the fly. |
+| [`Path`](./classes/Frontend/Path.php) | A class that serves as a path resolver for different paths/URLs of the app. |
+| [`Dumper`](./classes/Helper/Dumper.php) | A class that dumps variables and exception in a nice formatting. |
+| [`Misc`](./classes/Helper/Misc.php) | A class that serves as a holder for various miscellaneous utility function. |
+| [`App`](./classes/App.php) | A class that serves as a basic service-container for VELOX. |
 
 
 ![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *This all what the VELOX package provides out of the box.*
@@ -207,7 +204,7 @@ The following table lists all available functions and to which class they belong
 
 VELOX functions are divided into these files:
 
-* [`helper.php`](./functions/helper.php): This is where helper functions for VELOX classes live, these are mainly functions that return an instance of class or alias some method on it.
+* [`helpers.php`](./functions/helpers.php): This is where helper functions for VELOX classes live, these are mainly functions that return an instance of class or alias some method on it.
 * [`html.php`](./functions/html.php): This is where HTML helper functions live, these are nothing other than aliases for the most used PHP functions with HTML.
 
 | Class/Group | Function(s) |
@@ -232,12 +229,13 @@ VELOX functions are divided into these files:
 ## Themes
 
 VELOX is built around the idea of `themes`, a theme is divided into four directories:
-* The `assets/` directory is where all your static assets associated with this theme will find their place
-* The `layouts/` directory is where you define your layouts. A layout in VELOX terminology is the outer framing of a webpage
-* The `pages/` directory is where you put the content specific to every page, the page will then be wrapped with some layout of your choice and finally rendered. A page in VELOX terminology is the actual content of a webpage
-* The `partials/` directory is where you put all your reusable pieces of the theme, which then will be used in your layouts or pages. A good example for **partials** could be: *Components*, *Includes*, and *Content-Elements*
 
-You can customize the behavior of themes using the `config/theme.php` file. Here you can set the active theme with the `active` key. Themes can inherit from each other by setting parent(s) with the `parent` key. You can also change the theme directory structure if you wish to using the `paths` key. Other configurations that worth taking a look at which have to do with themes can be found in the `config/view.php` file.
+* The `assets/` directory is where all your static assets associated with this theme will find their place.
+* The `layouts/` directory is where you define your layouts. A layout in VELOX terminology is the outer framing of a webpage.
+* The `pages/` directory is where you put the content specific to every page, the page will then be wrapped with some layout of your choice and finally rendered. A page in VELOX terminology is the actual content of a webpage.
+* The `partials/` directory is where you put all your reusable pieces of the theme, which then will be used in your layouts or pages. A good example for **partials** could be: *Components*, *Includes*, and *Content-Elements*.
+
+You can customize the behavior of themes using the [`config/theme.php`](./config/theme.php) file. Here you can set the active theme with the `active` key. Themes can inherit from each other by setting parent(s) with the `parent` key. You can also change the theme directory structure if you wish to using the `paths` key. Other configurations that worth taking a look at which have to do with themes can be found in the [`config/view.php`](./config/view.php) file.
 
 ![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *You can take a look at the provided [`velox`](./themes/velox) theme to see how all stuff work together in practice.*
 
