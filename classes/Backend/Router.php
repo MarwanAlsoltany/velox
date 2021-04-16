@@ -51,11 +51,14 @@ use MAKS\Velox\Helper\Misc;
  * ```
  *
  * @method static self get(string $expression, callable $handler)
+ * @method static self head(string $expression, callable $handler)
  * @method static self post(string $expression, callable $handler)
  * @method static self put(string $expression, callable $handler)
  * @method static self patch(string $expression, callable $handler)
- * @method static self update(string $expression, callable $handler)
  * @method static self delete(string $expression, callable $handler)
+ * @method static self connect(string $expression, callable $handler)
+ * @method static self options(string $expression, callable $handler)
+ * @method static self trace(string $expression, callable $handler)
  * @method static self any(string $expression, callable $handler)
  *
  * @since 1.0.0
@@ -260,7 +263,7 @@ class Router
         $result = null;
 
         foreach (static::$routes as &$route) {
-            if ($base !== '' || $base !== '/') {
+            if ($base !== '') {
                 $route['expression'] = $base . $route['expression'];
             }
 
@@ -268,9 +271,9 @@ class Router
             if (preg_match($regex, $path, $matches, PREG_UNMATCHED_AS_NULL)) {
                 $pathMatchFound = true;
 
+                $currentMethod  = static::getRequestMethod();
                 $allowedMethods = (array)$route['method'];
                 foreach ($allowedMethods as $allowedMethod) {
-                    $currentMethod = static::getRequestMethod();
                     if (strtoupper($currentMethod) !== strtoupper($allowedMethod)) {
                         continue;
                     }
@@ -349,8 +352,10 @@ class Router
 
     /**
      * Returns a valid route regex.
+     *
      * @param string $expression
      * @param bool $caseMatters
+     *
      * @return string
      */
     private static function getRouteRegex(string $expression, bool $caseMatters): string
@@ -370,11 +375,12 @@ class Router
 
     /**
      * Returns valid arguments for route handler with the order thy expect.
+     *
      * @param array $current
      * @param array $matches
      * @param mixed $result
+     *
      * @return array
-     * @since Returns valid arguments for route handler with the order thy expect.
      */
     private static function getRouteArguments(array $current, array $matches, $result): array
     {
@@ -391,9 +397,11 @@ class Router
 
     /**
      * Echos the response according to the passed parameters.
+     *
      * @param bool $routeMatchFound
      * @param bool $pathMatchFound
      * @param mixed $result
+     *
      * @return void
      */
     private static function echoResponse(bool $routeMatchFound, bool $pathMatchFound, $result): void
@@ -540,6 +548,16 @@ class Router
     public static function getRegisteredRoutes(): array
     {
         return static::$routes;
+    }
+
+
+    /**
+     * Class constructor.
+     */
+    final public function __construct()
+    {
+        // prevent overwriting constructor in subclasses to allow to use
+        // "return new static()" without caring about dependencies.
     }
 
     /**
