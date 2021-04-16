@@ -316,15 +316,10 @@ class HTML
      */
     public function element(string $name, ?string $content = '', array $attributes = []): HTML
     {
-        if (!strlen(trim($name))) {
-            $variables = ['class', 'function', 'file', 'line'];
-            $backtrace = Misc::backtrace($variables, 1);
-            $backtrace = is_array($backtrace) ? $backtrace : array_map('strtoupper', $variables);
-
-            throw new \Exception(
-                vsprintf('Invalid name supplied to %s::%s() in %s on line %s. Tag name cannot be an empty string', $backtrace)
-            );
-        }
+        $this->agreeOrFail(
+            !strlen($name),
+            'Invalid name supplied to %s::%s() in %s on line %s. Tag name cannot be an empty string'
+        );
 
         if ($this->isConditionTruthy()) {
             $tag = $content !== null
@@ -350,15 +345,10 @@ class HTML
      */
     public function entity(string $name): HTML
     {
-        if (!strlen(trim($name))) {
-            $variables = ['class', 'function', 'file', 'line'];
-            $backtrace = Misc::backtrace($variables, 1);
-            $backtrace = is_array($backtrace) ? $backtrace : array_map('strtoupper', $variables);
-
-            throw new \Exception(
-                vsprintf('Invalid name supplied to %s::%s() in %s on line %s. Entity name cannot be an empty string', $backtrace)
-            );
-        }
+        $this->agreeOrFail(
+            !strlen($name),
+            'Invalid name supplied to %s::%s() in %s on line %s. Entity name cannot be an empty string'
+        );
 
         if ($this->isConditionTruthy()) {
             $entity = sprintf('&%s;', trim($name, '& ;'));
@@ -375,9 +365,16 @@ class HTML
      * @param string $comment The text content of the HTML comment without `<!--` and `-->`.
      *
      * @return $this
+     *
+     * @throws \Exception If the supplied text is invalid.
      */
     public function comment(string $text): HTML
     {
+        $this->agreeOrFail(
+            !strlen($text),
+            'Invalid text supplied to %s::%s() in %s on line %s. Comment text cannot be an empty string'
+        );
+
         if ($this->isConditionTruthy()) {
             $comment = sprintf('<!-- %s -->', trim($text));
             $this->buffer[] = $comment;
@@ -392,9 +389,16 @@ class HTML
      * @param string $text The text to pass to the buffer.
      *
      * @return $this
+     *
+     * @throws \Exception If the supplied text is invalid.
      */
     public function node(string $text): HTML
     {
+        $this->agreeOrFail(
+            !strlen($text),
+            'Invalid text supplied to %s::%s() in %s on line %s. Node text cannot be an empty string'
+        );
+
         if ($this->isConditionTruthy()) {
             $text = trim($text);
             $this->buffer[] = $text;
@@ -415,15 +419,10 @@ class HTML
      */
     public function open(string $name, array $attributes = []): HTML
     {
-        if (!strlen($name)) {
-            $variables = ['class', 'function', 'file', 'line'];
-            $backtrace = Misc::backtrace($variables, 1);
-            $backtrace = is_array($backtrace) ? $backtrace : array_map('strtoupper', $variables);
-
-            throw new \Exception(
-                vsprintf('Invalid name supplied to %s::%s() in %s on line %s. Tag name cannot be an empty string', $backtrace)
-            );
-        }
+        $this->agreeOrFail(
+            !strlen($name),
+            'Invalid name supplied to %s::%s() in %s on line %s. Tag name cannot be an empty string'
+        );
 
         if ($this->isConditionTruthy(1)) {
             $tag = '<{name}{attributes}>';
@@ -447,15 +446,10 @@ class HTML
      */
     public function close(): HTML
     {
-        if (!count($this->stack)) {
-            $variables = ['class', 'function', 'file', 'line'];
-            $backtrace = Misc::backtrace($variables, 1);
-            $backtrace = is_array($backtrace) ? $backtrace : array_map('strtoupper', $variables);
-
-            throw new \Exception(
-                vsprintf('Not in a context to close a tag! Call to %s::%s() in %s on line %s is superfluous', $backtrace)
-            );
-        }
+        $this->agreeOrFail(
+            !count($this->stack),
+            'Not in a context to close a tag! Call to %s::%s() in %s on line %s is superfluous'
+        );
 
         if ($this->isConditionTruthy(-1)) {
             $tag = '</{name}>';
@@ -544,6 +538,29 @@ class HTML
         }
 
         return $result;
+    }
+
+    /**
+     * Checks if the passed condition and throws exception if it's not truthy.
+     * The message that is passed to this function should contain four `%s` placeholders for the
+     * `class`, `function`, `file` and `line` of the previous caller (offset 2 of the backtrace)
+     *
+     * @param bool $condition
+     * @param string $message
+     *
+     * @return void
+     *
+     * @throws \Exception
+     */
+    private function agreeOrFail(bool $condition, string $message): void
+    {
+        if ($condition) {
+            $variables = ['class', 'function', 'file', 'line'];
+            $backtrace = Misc::backtrace($variables, 2);
+            $backtrace = is_array($backtrace) ? $backtrace : array_map('strtoupper', $variables);
+
+            throw new \Exception(vsprintf($message, $backtrace));
+        }
     }
 
     /**
