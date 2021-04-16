@@ -81,7 +81,7 @@ final class Path
      */
     public static function currentUrl(?string $compareTo = null)
     {
-        $url = static::resolveUrl(static::current());
+        $url = static::resolveUrl((string)static::current());
 
         if ($compareTo) {
             return $url === $compareTo;
