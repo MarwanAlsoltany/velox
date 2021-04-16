@@ -23,8 +23,10 @@ use MAKS\Velox\Helper\Misc;
  * $html = HTML::div('This is a div!', ['class' => 'container']);
  *
  * // structuring deeply nested elements using wrapping methods
+ * // ->condition() to make the next action conditional
+ * // ->execute() to execute some logic (loops, complex if-statements)
  * // ->open() and ->close() for containing elements
- * // ->{tagName}() and ->entity() for tags and entities
+ * // ->{$tagName}() or ->element() for elements, ->entity() for entities, ->comment() for comments
  * // ->echo() or ->return() for retrieving the final result
  * (new HTML())
  *     ->element('h1', 'HTML Forms', ['class' => 'title'])
@@ -51,9 +53,6 @@ use MAKS\Velox\Helper\Misc;
  *     ->close()
  * ->echo();
  * ```
- *
- * @method HTML {$elmName}(?string $content = '', array $attributes = [])
- * @method static string {$elmName}(?string $content = '', array $attributes = [])
  *
  * @method HTML a(?string $content = '', array $attributes = [])
  * @method static string a(?string $content = '', array $attributes = [])
@@ -318,11 +317,12 @@ class HTML
     public function element(string $name, ?string $content = '', array $attributes = []): HTML
     {
         if (!strlen(trim($name))) {
+            $variables = ['class', 'function', 'file', 'line'];
+            $backtrace = Misc::backtrace($variables, 1);
+            $backtrace = is_array($backtrace) ? $backtrace : array_map('strtoupper', $variables);
+
             throw new \Exception(
-                vsprintf(
-                    'Invalid name supplied to %s::%s() in %s on line %s. Tag name cannot be an empty string',
-                    Misc::backtrace(['class', 'function', 'file', 'line'], 1) ?? ['CLASS', 'FUNCTION', 'FILE', 'LINE']
-                )
+                vsprintf('Invalid name supplied to %s::%s() in %s on line %s. Tag name cannot be an empty string', $backtrace)
             );
         }
 
@@ -351,11 +351,12 @@ class HTML
     public function entity(string $name): HTML
     {
         if (!strlen(trim($name))) {
+            $variables = ['class', 'function', 'file', 'line'];
+            $backtrace = Misc::backtrace($variables, 1);
+            $backtrace = is_array($backtrace) ? $backtrace : array_map('strtoupper', $variables);
+
             throw new \Exception(
-                vsprintf(
-                    'Invalid name supplied to %s::%s() in %s on line %s. Entity name cannot be an empty string',
-                    Misc::backtrace(['class', 'function', 'file', 'line'], 1) ?? ['CLASS', 'FUNCTION', 'FILE', 'LINE']
-                )
+                vsprintf('Invalid name supplied to %s::%s() in %s on line %s. Entity name cannot be an empty string', $backtrace)
             );
         }
 
@@ -415,11 +416,12 @@ class HTML
     public function open(string $name, array $attributes = []): HTML
     {
         if (!strlen($name)) {
+            $variables = ['class', 'function', 'file', 'line'];
+            $backtrace = Misc::backtrace($variables, 1);
+            $backtrace = is_array($backtrace) ? $backtrace : array_map('strtoupper', $variables);
+
             throw new \Exception(
-                vsprintf(
-                    'Invalid name supplied to %s::%s() in %s on line %s. Tag name cannot be an empty string',
-                    Misc::backtrace(['class', 'function', 'file', 'line'], 1) ?? ['CLASS', 'FUNCTION', 'FILE', 'LINE']
-                )
+                vsprintf('Invalid name supplied to %s::%s() in %s on line %s. Tag name cannot be an empty string', $backtrace)
             );
         }
 
@@ -446,11 +448,12 @@ class HTML
     public function close(): HTML
     {
         if (!count($this->stack)) {
+            $variables = ['class', 'function', 'file', 'line'];
+            $backtrace = Misc::backtrace($variables, 1);
+            $backtrace = is_array($backtrace) ? $backtrace : array_map('strtoupper', $variables);
+
             throw new \Exception(
-                vsprintf(
-                    'Not in a context to close a tag! Call to %s::%s() in %s on line %s is superfluous',
-                    Misc::backtrace(['class', 'function', 'file', 'line'], 1) ?? ['CLASS', 'FUNCTION', 'FILE', 'LINE']
-                )
+                vsprintf('Not in a context to close a tag! Call to %s::%s() in %s on line %s is superfluous', $backtrace)
             );
         }
 
@@ -475,7 +478,13 @@ class HTML
     public function execute(callable $callback): HTML
     {
         if ($this->isConditionTruthy()) {
-            \Closure::fromCallable($callback)->bindTo($this)($this);
+            $boundClosure = \Closure::fromCallable($callback)->bindTo($this);
+
+            if ($boundClosure !== false) {
+                $boundClosure($this);
+            } else {
+                $callback($this);
+            }
         }
 
         return $this;
@@ -540,7 +549,7 @@ class HTML
     /**
      * Returns an HTML attributes string from an associative array of attributes.
      *
-     * @param string[] $attributes
+     * @param array $attributes
      *
      * @return string
      */
@@ -555,7 +564,7 @@ class HTML
 
             $attrStr .= is_string($name) && !is_null($value)
                 ? sprintf(' %s="%s"', $name, $value)
-                : sprintf(' %s', ($value ?: $name ?? ''));
+                : sprintf(' %s', ($value ?: $name ?: ''));
         }
 
         return $attrStr;
@@ -581,11 +590,11 @@ class HTML
     }
 
     /**
-     * Echos the created HTML elements found in the buffer and empties it.
+     * Asserts that the passed HTML is valid.
      *
-     * @return string
+     * @return void
      *
-     * @throws \Exception If the generated html is invalid.
+     * @throws \Exception If the passed html is invalid.
      */
     private function validate(string $html): void
     {
@@ -603,10 +612,13 @@ class HTML
         libxml_clear_errors();
 
         if (!empty($errors) && !in_array($errors[0]->code, $ignoredCodes)) {
+            $file = Misc::backtrace('file', 3);
+            $file = is_string($file) ? $file : 'FILE';
+
             throw new \Exception(
                 vsprintf(
                     'HTML is invalid in %s! Found %s problem(s). Last LibXMLError: [level:%s/code:%s] %s',
-                    [Misc::backtrace('file', 3) ?? 'FILE', count($errors), $errors[0]->level, $errors[0]->code, $errors[0]->message]
+                    [$file, count($errors), $errors[0]->level, $errors[0]->code, $errors[0]->message]
                 )
             );
         }
@@ -624,10 +636,13 @@ class HTML
     public function return(): string
     {
         if (count($this->stack)) {
+            $file = Misc::backtrace('file', 2);
+            $file = is_string($file) ? $file : 'FILE';
+
             throw new \Exception(
                 sprintf(
                     "Cannot return HTML in %s. The following tag(s): '%s' has/have not been closed properly",
-                    Misc::backtrace('file', 2) ?? 'FILE',
+                    $file,
                     implode(', ', $this->stack)
                 )
             );
@@ -647,7 +662,7 @@ class HTML
     /**
      * Echos the created HTML elements found in the buffer and empties it.
      *
-     * @return string
+     * @return void
      *
      * @throws \Exception If not all open elements are closed or the generated html is invalid.
      */
@@ -698,12 +713,12 @@ class HTML
     /**
      * Makes HTML tags available as static methods on the class.
      */
-    public static function __callStatic($method, $arguments)
+    public static function __callStatic(string $method, array $arguments)
     {
         static $instance = null;
 
         if ($instance === null) {
-            $instance = new static(false);
+            $instance = new HTML(false);
         }
 
         return $instance->condition(true)->{$method}(...$arguments)->return();
