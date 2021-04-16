@@ -86,10 +86,10 @@ class App
 
         try {
             return $this->{$method};
-        } catch (\Throwable $error) {
+        } catch (\Exception $error) {
             throw new \Exception(
                 "Call to undefined method {$class}::{$method}()",
-                $error->getCode(),
+                (int)$error->getCode(),
                 $error
             );
         }
