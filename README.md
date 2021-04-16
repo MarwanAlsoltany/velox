@@ -212,7 +212,7 @@ VELOX functions are divided into these files:
 | `App::class` | `app()` |
 | `Config::class` | `config()` |
 | `Router::class` | `router()`, <br>`handle()`, `redirect()`, `forward()` |
-| `View::class` | `view()`, <br>`render()`, `render_layout()`, `render_page()`, `render_partial()`, <br>`section_push()`, `section_reset()`, `section_start()`, `section_end()`, `section_yield()`, `include_file()` |
+| `View::class` | `view()`, <br>`render()`, `render_layout()`, `render_page()`, `render_partial()`, <br>`section_push()`, `section_reset()`, `section_start()`, `section_end()`, `section_yield()`, <br>`include_file()` |
 | `Data::class` | `data()`, <br>`data_has()`, `data_get()`, `data_set()` |
 | `HTML::class` | `html()` |
 | `Path::class` | `path()`, <br>`app_path_current()`, `app_url_current()`, <br>`app_path()`, `app_url()`, <br>`theme_path()`, `theme_url()`, <br>`assets_path()`, `assets_url()` |
