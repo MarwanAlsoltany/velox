@@ -44,20 +44,20 @@ class Config
      *
      * @var string
      */
-    protected const CONFIG_DIR = __DIR__ . '/../../config';
+    protected const CONFIG_DIR = BASE_PATH . '/config';
 
     /**
      * The path of the cached configuration file.
      *
      * @var string
      */
-    protected const CONFIG_CACHE_FILE = __DIR__ . '/../../storage/cache/config/config.json';
+    protected const CONFIG_CACHE_FILE = BASE_PATH . '/storage/cache/config/config.json';
 
 
     /**
      * The currently loaded configuration.
      */
-    private static ?array $config;
+    private static array $config;
 
 
     public function __construct()
@@ -218,14 +218,15 @@ class Config
      * Gets a value of a key from the configuration via dot-notation.
      *
      * @param string $key The dotted key representation.
+     * @param mixed $fallback [optional] The default fallback value.
      *
      * @return mixed The requested value or null.
      */
-    public static function get(string $key, $default = null)
+    public static function get(string $key, $fallback = null)
     {
         static::load();
 
-        return Misc::getArrayValueByKey(static::$config, $key, $default);
+        return Misc::getArrayValueByKey(static::$config, $key, $fallback);
     }
 
     /**
