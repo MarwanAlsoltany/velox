@@ -106,7 +106,7 @@ class Dumper
 
         foreach ($variable as $dump) {
             if (!$isCli) {
-                $code = highlight_string('<?php ' . self::exportVariable($dump), true);
+                $code = highlight_string('<?php ' . self::exportExpression($dump), true);
                 $html = sprintf(
                     $markup['dumpBlock'],
                     preg_replace(
@@ -118,7 +118,7 @@ class Dumper
 
                 echo $html;
             } else {
-                echo self::exportVariable($dump);
+                echo self::exportExpression($dump);
             }
         }
 
@@ -177,11 +177,10 @@ class Dumper
                             ->p($message)
                         ->close()
                         ->h2('Thrown in:')
-                        ->execute(function () use ($file, $line, $lines) {
-                            /** @var HTML $this */
+                        ->execute(function (HTML $html) use ($file, $line, $lines) {
                             if (isset($lines)) {
-                                $this->p($file);
-                                $this->open('ul', ['class' => 'code']);
+                                $html->p($file);
+                                $html->open('ul', ['class' => 'code']);
                                 for ($i = $line - 3; $i < $line + 4; $i++) {
                                     if ($i > 0 && $i < count($lines)) {
                                         $highlightedCode = highlight_string('<?php ' . $lines[$i], true);
@@ -192,14 +191,14 @@ class Dumper
                                         );
                                         if ($i == $line - 1) {
                                             $arrow = str_pad('>', strlen("{$i}"), '=', STR_PAD_LEFT);
-                                            $this
+                                            $html
                                                 ->open('li', ['class' => 'exception-line'])
                                                     ->span($arrow, ['class' => 'line'])
                                                     ->node($highlightedCode)
                                                 ->close();
                                         } else {
                                             $number = strval($i + 1);
-                                            $this
+                                            $html
                                                 ->open('li')
                                                     ->span($number, ['class' => 'line'])
                                                     ->node($highlightedCode)
@@ -207,15 +206,14 @@ class Dumper
                                         }
                                     }
                                 }
-                                $this->close();
+                                $html->close();
                             }
                         })
                         ->h2('Stack trace:')
-                        ->execute(function () use ($trace, $traceString) {
-                            /** @var HTML $this */
-                            if (is_array($trace)) {
-                                $this->p('<i>Hover on fields with * to reveal more info.</i>');
-                                $this->open('table', ['class' => 'trace'])
+                        ->execute(function (HTML $html) use ($trace, $traceString) {
+                            if (count($trace)) {
+                                $html->p('<i>Hover on fields with * to reveal more info.</i>');
+                                $html->open('table', ['class' => 'trace'])
                                     ->open('thead')
                                         ->open('tr')
                                             ->th('No.')
@@ -227,25 +225,24 @@ class Dumper
                                         ->close()
                                     ->close()
                                     ->open('tbody')
-                                    ->execute(function () use ($trace) {
-                                        /** @var HTML $this */
+                                    ->execute(function (HTML $html) use ($trace) {
                                         foreach ($trace as $i => $trace) {
-                                            $this
-                                            ->open('tr', ['class' => $i % 2 == 0 ? 'even' : 'odd'])
-                                                ->td(strval($i + 1), ['class' => 'number'])
+                                            $count = (int)$i + 1;
+                                            $html
+                                            ->open('tr', ['class' => $count % 2 == 0 ? 'even' : 'odd'])
+                                                ->td(strval($count), ['class' => 'number'])
                                                 ->td(isset($trace['file']) ? basename($trace['file']) : '', ['class' => 'file', 'title' => $trace['file'] ?? false])
                                                 ->td(strval($trace['line'] ?? ''), ['class' => 'line'])
                                                 ->td(strval($trace['class'] ?? ''), ['class' => 'class'])
                                                 ->td(strval($trace['function'] ?? ''), ['class' => 'function'])
                                                 ->open('td', ['class' => 'arguments'])
-                                                ->execute(function () use ($trace) {
-                                                    /** @var HTML $this */
+                                                ->execute(function (HTML $html) use ($trace) {
                                                     if (isset($trace['args'])) {
                                                         foreach ($trace['args'] as $i => $arg) {
-                                                            $this->span(gettype($arg), ['title' => print_r($arg, true)]);
+                                                            $html->span(gettype($arg), ['title' => print_r($arg, true)]);
                                                         }
                                                     } else {
-                                                        $this->node('NULL');
+                                                        $html->node('NULL');
                                                     }
                                                 })
                                                 ->close()
@@ -255,7 +252,7 @@ class Dumper
                                     ->close()
                                 ->close();
                             } else {
-                                $this->pre($traceString);
+                                $html->pre($traceString);
                             }
                         })
                     ->close()
@@ -266,7 +263,13 @@ class Dumper
         exit;
     }
 
-    private static function exportVariable($expression): string
+    /**
+     * Dumps an expression using `var_export()` or `print_r()`.
+     *
+     * @param mixed $expression
+     * @return string
+     */
+    private static function exportExpression($expression): string
     {
         $export = null;
 
