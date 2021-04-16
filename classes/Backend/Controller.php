@@ -56,7 +56,7 @@ abstract class Controller
     /**
      * Class constructor.
      *
-     * @param array $vars Additional variables to pass to the controller.
+     * @param array $vars [optional] Additional variables to pass to the controller.
      */
     public function __construct(array $vars = [])
     {
