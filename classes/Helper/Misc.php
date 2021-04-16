@@ -133,7 +133,7 @@ final class Misc
     /**
      * Returns the passed key(s) from the backtrace.
      *
-     * @param string|array|null [optional] $pluck The key to to get as a string or an array of strings (keys) from this list `[file, line, function, class, type, args]`, passing `null` will return the entire backtrace.
+     * @param null|string|string[] $pluck [optional] $pluck The key to to get as a string or an array of strings (keys) from this list `[file, line, function, class, type, args]`, passing `null` will return the entire backtrace.
      * @param int $offset [optional] The offset of the backtrace, passing `-1` will reference the last item in the backtrace.
      *
      * @return string|int|array|null A string or int if a string is passed, an array if an array or null is passed, and null if no match was found.
