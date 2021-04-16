@@ -81,7 +81,7 @@ class View
      *
      * @var string
      */
-    protected const VIEWS_CACHE_DIR = __DIR__ . '/../../storage/cache/views';
+    protected const VIEWS_CACHE_DIR = BASE_PATH . '/storage/cache/views';
 
 
     /**
@@ -116,7 +116,7 @@ class View
     /**
      * Resets (empties) the buffer of the section with the given name.
      *
-     * @param string|null $name The name of the section.
+     * @param string $name The name of the section.
      *
      * @return void
      */
@@ -155,11 +155,12 @@ class View
     public static function sectionEnd(): void
     {
         if (!count(static::$stack) || !ob_get_level()) {
+            $variables = ['class', 'function', 'file', 'line'];
+            $backtrace = Misc::backtrace($variables, 1);
+            $backtrace = is_array($backtrace) ? $backtrace : array_map('strtoupper', $variables);
+
             throw new \Exception(
-                vsprintf(
-                    'Not in a context to end a section! Call to %s::%s() in %s on line %s is superfluous',
-                    Misc::backtrace(['class', 'function', 'file', 'line'], 1) ?? ['CLASS', 'FUNCTION', 'FILE', 'LINE']
-                )
+                vsprintf('Not in a context to end a section! Call to %s::%s() in %s on line %s is superfluous', $backtrace)
             );
         }
 
@@ -167,7 +168,7 @@ class View
 
         $name = array_pop(static::$stack);
 
-        static::$sections[$name][] = $buffer ?? '';
+        static::$sections[$name][] = $buffer ?: '';
     }
 
     /**
@@ -215,7 +216,7 @@ class View
      * Renders a theme layout with the passed variables.
      *
      * @param string $name The name of the layout.
-     * @param array|null $variables [optional] An associative array of the variables to pass.
+     * @param array $variables An associative array of the variables to pass.
      *
      * @return string
      */
@@ -234,7 +235,7 @@ class View
      * Renders a theme page with the passed variables.
      *
      * @param string $name The name of the page.
-     * @param array|null $variables [optional] An associative array of the variables to pass.
+     * @param array $variables An associative array of the variables to pass.
      *
      * @return string
      */
@@ -253,7 +254,7 @@ class View
      * Renders a theme partial with the passed variables.
      *
      * @param string $name The name of the partial.
-     * @param array|null $variables [optional] An associative array of the variables to pass.
+     * @param array $variables An associative array of the variables to pass.
      *
      * @return string
      */
@@ -272,7 +273,7 @@ class View
      * Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to "{view.defaultSectionName}" section.
      *
      * @param string $page The name of the page.
-     * @param array|null $variables [optional] An associative array of the variables to pass.
+     * @param array $variables [optional] An associative array of the variables to pass.
      * @param string|null $layout [optional] The name of the Layout to use.
      *
      * @return string
@@ -301,7 +302,7 @@ class View
      * This function is exactly like `self::render()` but with caching capabilities.
      *
      * @param string $page The name of the page.
-     * @param array|null $variables [optional] An associative array of the variables to pass.
+     * @param array $variables [optional] An associative array of the variables to pass.
      * @param string|null $layout [optional] The name of the Layout to use.
      *
      * @return string
@@ -431,10 +432,9 @@ class View
      * Requires a PHP file and pass it the passed variables.
      *
      * @param string $file An absolute path to the file that should be compiled.
-     * @param string $type The type of the file (just a name to make for friendly exceptions).
-     * @param array|null [optional] An associative array of the variables to pass.
+     * @param array|null $variables [optional] An associative array of the variables to pass.
      *
-     * @return string
+     * @return void
      *
      * @throws \Exception If the file could not be loaded.
      */
