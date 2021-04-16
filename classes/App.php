@@ -35,13 +35,11 @@ use MAKS\Velox\Helper\Misc;
  * Example:
  * ```
  * // create an instance
- * $velox = new Velox();
- * // available properties are
- *
+ * $app = new App();
  * // get an instance of the `App` class via public property access notation
- * $velox->router->handle('/dump', 'dd');
+ * $app->router->handle('/dump', 'dd');
  * // or via calling a method with the same name
- * $velox->router()->handle('/dump', 'dd');
+ * $app->router()->handle('/dump', 'dd');
  * ```
  *
  * @since 1.0.0
