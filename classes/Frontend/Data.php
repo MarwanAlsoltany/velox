@@ -40,7 +40,7 @@ class Data
     /**
      * The currently loaded data.
      */
-    protected static ?array $bag;
+    protected static array $bag;
 
 
     /**
@@ -77,15 +77,15 @@ class Data
      * Gets a value of a key from `self::$bag` via dot-notation.
      *
      * @param string $key The dotted key representation.
-     * @param mixed $fallback [optional] The default fallback value.
+     * @param mixed $default [optional] The default fallback value.
      *
      * @return mixed The requested value or null.
      */
-    public static function get(string $key, $fallback = null)
+    public static function get(string $key, $default = null)
     {
         static::load();
 
-        return Misc::getArrayValueByKey(self::$bag, $key, $fallback);
+        return Misc::getArrayValueByKey(self::$bag, $key, $default);
     }
 
     /**
