@@ -189,7 +189,7 @@ final class Misc
         }
 
         if (!$directory) {
-            $directory = __DIR__ . '/../../storage/logs/';
+            $directory = BASE_PATH . '/storage/logs/';
         }
 
         $file = self::getNormalizedPath($directory, $filename, '.log');
