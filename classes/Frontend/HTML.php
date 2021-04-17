@@ -503,9 +503,9 @@ class HTML
      *
      * @param int $parent [optional] A flag to indicate condition depth `[+1 = parentOpened, 0 = normal, -1 = parentClosed]`.
      *
-     * @return bool|null The result of the condition, or null if the passed `$parent` is not in `[-1, 0, +1]`.
+     * @return bool The result of the current condition.
      */
-    private function isConditionTruthy(int $parent = 0): ?bool
+    private function isConditionTruthy(int $parent = 0): bool
     {
         static $parentConditions = [];
 
@@ -530,8 +530,6 @@ class HTML
                 case 0:
                     // NORMAL!
                     break;
-                default:
-                    return null;
             }
 
             array_pop($this->conditions);
@@ -581,7 +579,7 @@ class HTML
 
             $attrStr .= is_string($name) && !is_null($value)
                 ? sprintf(' %s="%s"', $name, $value)
-                : sprintf(' %s', ($value ?: $name ?: ''));
+                : sprintf(' %s', $value ?: $name);
         }
 
         return $attrStr;
