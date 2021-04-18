@@ -40,13 +40,14 @@ $namespaces = [
 
 $aliases = [
     // Alias => FQN
-    'App'    => \MAKS\Velox\App::class,
-    'Config' => \MAKS\Velox\Backend\Config::class,
-    'Router' => \MAKS\Velox\Backend\Router::class,
-    'Data'   => \MAKS\Velox\Frontend\Data::class,
-    'View'   => \MAKS\Velox\Frontend\View::class,
-    'HTML'   => \MAKS\Velox\Frontend\HTML::class,
-    'Path'   => \MAKS\Velox\Frontend\Path::class,
+    'App'     => \MAKS\Velox\App::class,
+    'Config'  => \MAKS\Velox\Backend\Config::class,
+    'Router'  => \MAKS\Velox\Backend\Router::class,
+    'Globals' => \MAKS\Velox\Backend\Globals::class,
+    'Data'    => \MAKS\Velox\Frontend\Data::class,
+    'View'    => \MAKS\Velox\Frontend\View::class,
+    'HTML'    => \MAKS\Velox\Frontend\HTML::class,
+    'Path'    => \MAKS\Velox\Frontend\Path::class,
 ];
 
 $loader = function ($class) use (&$loader, $namespaces, $aliases) {
