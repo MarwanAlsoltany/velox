@@ -1,6 +1,6 @@
 <p align="center">
 
-<img width="223" height="144" src="https://raw.githubusercontent.com/MarwanAlsoltany/velox/master/themes/velox/assets/images/velox-logo.png" alt="VELOX"/>
+<img width="162" height="100" src="https://raw.githubusercontent.com/MarwanAlsoltany/velox/master/themes/velox/assets/images/velox-logo.png" alt="VELOX"/>
 
 </p>
 
@@ -65,7 +65,7 @@ The fastest way to build simple websites using PHP!
 composer create-project marwanalsoltany/velox my-velox-app
 ```
 
-![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *You may need to add the `--stability=dev ` depending on the version/branch.*
+![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *You may need to add the `--stability=dev` depending on the version/branch.*
 
 #### Using Git:
 
@@ -177,6 +177,7 @@ VELOX classes are divided in four namespaces:
 | --- | --- |
 | [`Config`](./classes/Backend/Config.php) | A class that loads everything from the `/config` directory and make it as an array that is accessible via dot-notation. |
 | [`Router`](./classes/Backend/Router.php) | A class that serves as a router and an entry point for the application. |
+| [`Globals`](./classes/Backend/Globals.php) | A class that serves as an abstraction/wrapper to work with superglobals. |
 | [`Controller`](./classes/Backend/Controller.php) | An abstract class that serves as a base Controller that can be extended to make handlers for the router. |
 | [`Data`](./classes/Frontend/Data.php) | A class that serves as an abstracted data bag/store that is accessible via dot-notation. |
 | [`View`](./classes/Frontend/View.php) | A class that renders and caches view files (Layouts, Pages, and Partials) with the ability to include additional files and divide page content into sections. |
@@ -208,10 +209,11 @@ VELOX functions are divided into these files:
 * [`html.php`](./functions/html.php): This is where HTML helper functions live, these are nothing other than aliases for the most used PHP functions with HTML.
 
 | Class/Group | Function(s) |
-|-|-|
+| --- | --- |
 | `App::class` | `app()` |
 | `Config::class` | `config()` |
 | `Router::class` | `router()`, <br>`handle()`, `redirect()`, `forward()` |
+| `Globals::class` | `globals()` |
 | `View::class` | `view()`, <br>`render()`, `render_layout()`, `render_page()`, `render_partial()`, <br>`section_push()`, `section_reset()`, `section_start()`, `section_end()`, `section_yield()`, <br>`include_file()` |
 | `Data::class` | `data()`, <br>`data_has()`, `data_get()`, `data_set()` |
 | `HTML::class` | `html()` |
