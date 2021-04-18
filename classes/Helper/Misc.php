@@ -46,7 +46,7 @@ final class Misc
      */
     public static function getArrayValueByKey(array &$array, string $key, $default = null)
     {
-        if (!strlen($key) || !count($array)) {
+        if (!count($array)) {
             return $default;
         }
 
