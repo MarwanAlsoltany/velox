@@ -1,5 +1,7 @@
 <?php
 
+use MAKS\Velox\Helper\Misc;
+
 require_once 'bootstrap/autoload.php';
 
 
@@ -11,8 +13,9 @@ Router::handle('/', function () {
 
 
 Router::middleware('/contact', function () {
-    if (isset($_POST['message']) && !empty($_POST['message'])) {
-        return htmlspecialchars($_POST['message'], ENT_QUOTES);
+    $message = Globals::getPost('message');
+    if ($message) {
+        return htmlspecialchars($message, ENT_QUOTES);
     }
 }, 'POST');
 
