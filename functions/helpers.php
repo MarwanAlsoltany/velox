@@ -107,6 +107,19 @@ if (!function_exists('forward')) {
 
 
 
+if (!function_exists('globals')) {
+    /**
+     * Returns an instance of the `Globals` class.
+     *
+     * @return \MAKS\Velox\Backend\Globals
+     */
+    function globals() {
+        return app()->globals;
+    }
+}
+
+
+
 if (!function_exists('view')) {
     /**
      * Returns an instance of the `View` class.
