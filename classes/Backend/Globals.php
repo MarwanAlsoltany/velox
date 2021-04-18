@@ -69,14 +69,10 @@ class Globals
         static $isInitialized = false;
 
         if (!$isInitialized) {
-            static::$_SERVER  = isset($_SERVER)  ? static::$_SERVER  = &$_SERVER  : [];
-            static::$_REQUEST = isset($_REQUEST) ? static::$_REQUEST = &$_REQUEST : [];
-            static::$_GET     = isset($_GET)     ? static::$_GET     = &$_GET     : [];
-            static::$_POST    = isset($_POST)    ? static::$_POST    = &$_POST    : [];
-            static::$_FILES   = isset($_FILES)   ? static::$_FILES   = &$_FILES   : [];
-            static::$_SESSION = isset($_SESSION) ? static::$_SESSION = &$_SESSION : [];
-            static::$_COOKIE  = isset($_COOKIE)  ? static::$_COOKIE  = &$_COOKIE  : [];
-            static::$_ENV     = isset($_ENV)     ? static::$_ENV     = &$_ENV     : [];
+            foreach (self::GLOBALS as $global) {
+                global $$global;
+                self::$$global = isset($$global) ? self::$$global = &$$global : [];
+            }
 
             $isInitialized = true;
         }
