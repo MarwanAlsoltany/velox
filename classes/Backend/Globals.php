@@ -16,14 +16,14 @@ use MAKS\Velox\Helper\Misc;
 /**
  * A class that serves as an abstraction/wrapper to work with superglobals.
  *
- * @method static mixed getGet(string $key)
- * @method static mixed getPost(string $key)
- * @method static mixed getFiles(string $key)
- * @method static mixed getCookie(string $key)
- * @method static mixed getSession(string $key)
- * @method static mixed getRequest(string $key)
- * @method static mixed getServer(string $key)
- * @method static mixed getEnv(string $key)
+ * @method static mixed getGet(string $key = null)
+ * @method static mixed getPost(string $key = null)
+ * @method static mixed getFiles(string $key = null)
+ * @method static mixed getCookie(string $key = null)
+ * @method static mixed getSession(string $key = null)
+ * @method static mixed getRequest(string $key = null)
+ * @method static mixed getServer(string $key = null)
+ * @method static mixed getEnv(string $key = null)
  * @method static static setGet(string $key, $value)
  * @method static static setPost(string $key, $value)
  * @method static static setFiles(string $key, $value)
