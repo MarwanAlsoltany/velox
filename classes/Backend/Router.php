@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Backend;
 
 use MAKS\Velox\Backend\Config;
+use MAKS\Velox\Backend\Globals;
 use MAKS\Velox\Helper\Misc;
 
 /**
@@ -79,7 +80,7 @@ class Router
     ];
 
     /**
-     * The default values of class parameters.
+     * Supported HTTP methods.
      *
      * @var array
      */
@@ -177,8 +178,8 @@ class Router
         if (filter_var($to, FILTER_VALIDATE_URL)) {
             $header = sprintf('Location: %s', $to);
         } else {
-            $scheme = static::isHttpsCompliant() ? 'https' : 'http';
-            $host   = static::getServerHost();
+            $scheme = Globals::getServer('HTTPS') == 'on' ? 'https' : 'http';
+            $host   = Globals::getServer('HTTP_HOST');
             $path   = static::$base . '/' . $to;
             $path   = trim(preg_replace('/(\/+)/', '/', $path), '/');
 
@@ -203,7 +204,8 @@ class Router
         $base = static::$base ?? '';
         $path = trim($base, '/') . '/' . ltrim($to, '/');
 
-        static::setRequestUri($path);
+        Globals::setServer('REQUEST_URI', $path);
+
         static::start(...self::$params);
 
         exit;
@@ -328,7 +330,7 @@ class Router
     }
 
     /**
-     * Returns the a valid decoded route path.
+     * Returns a valid decoded route path.
      *
      * @param string $base
      * @param bool $slashMatters
@@ -374,7 +376,7 @@ class Router
     }
 
     /**
-     * Returns valid arguments for route handler with the order thy expect.
+     * Returns valid arguments for route handler in the order that the handler expect.
      *
      * @param array $current
      * @param array $matches
@@ -406,8 +408,8 @@ class Router
      */
     private static function echoResponse(bool $routeMatchFound, bool $pathMatchFound, $result): void
     {
-        $protocol = static::getServerProtocol();
-        $method   = static::getRequestMethod();
+        $protocol = Globals::getServer('SERVER_PROTOCOL');
+        $method   = Globals::getServer('REQUEST_METHOD');
 
         if (!$routeMatchFound) {
             $result = 'The route is not found, or the request method is not allowed!';
@@ -465,7 +467,7 @@ class Router
      */
     public static function getParsedUrl(): array
     {
-        $uri = static::getRequestUri();
+        $uri = Globals::getServer('REQUEST_URI');
 
         // remove double slashes as they make parse_url() fail
         $url = preg_replace('/(\/+)/', '/', $uri);
@@ -506,7 +508,7 @@ class Router
 
     protected static function getRequestMethod(): string
     {
-        $method = $_POST['_method'] ?? '';
+        $method = Globals::getPost('_method') ?? '';
         $methods = static::SUPPORTED_METHODS;
         $methodAllowed = in_array(
             strtoupper($method),
@@ -514,10 +516,10 @@ class Router
         );
 
         if ($methodAllowed) {
-            static::setRequestMethod($method);
+            Globals::setServer('REQUEST_METHOD', $method);
         }
 
-        return $_SERVER['REQUEST_METHOD'];
+        return Globals::getServer('REQUEST_METHOD');
     }
 
     protected static function setRequestMethod(string $method): void
@@ -594,6 +596,6 @@ class Router
      */
     public function __call(string $method, array $arguments)
     {
-        return self::__callStatic($method, $arguments);
+        return static::__callStatic($method, $arguments);
     }
 }
