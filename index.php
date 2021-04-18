@@ -1,7 +1,5 @@
 <?php
 
-use MAKS\Velox\Helper\Misc;
-
 require_once 'bootstrap/autoload.php';
 
 
