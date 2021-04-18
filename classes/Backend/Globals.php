@@ -1,0 +1,186 @@
+<?php
+
+/**
+ * @author Marwan Al-Soltany <MarwanAlsoltany@gmail.com>
+ * @copyright Marwan Al-Soltany 2021
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace MAKS\Velox\Backend;
+
+use MAKS\Velox\Helper\Misc;
+
+/**
+ * A class that serves as an abstraction/wrapper to work with superglobals.
+ *
+ * @method static mixed getGet(string $key)
+ * @method static mixed getPost(string $key)
+ * @method static mixed getFiles(string $key)
+ * @method static mixed getCookie(string $key)
+ * @method static mixed getSession(string $key)
+ * @method static mixed getRequest(string $key)
+ * @method static mixed getServer(string $key)
+ * @method static mixed getEnv(string $key)
+ * @method static static setGet(string $key, $value)
+ * @method static static setPost(string $key, $value)
+ * @method static static setFiles(string $key, $value)
+ * @method static static setCookie(string $key, $value)
+ * @method static static setSession(string $key, $value)
+ * @method static static setRequest(string $key, $value)
+ * @method static static setServer(string $key, $value)
+ * @method static static setEnv(string $key, $value)
+ *
+ * @since 1.0.0
+ */
+class Globals
+{
+    public const GLOBALS = [
+        '_GET'     => '_GET',
+        '_POST'    => '_POST',
+        '_FILES'   => '_FILES',
+        '_COOKIE'  => '_COOKIE',
+        '_SESSION' => '_SESSION',
+        '_REQUEST' => '_REQUEST',
+        '_SERVER'  => '_SERVER',
+        '_ENV'     => '_ENV',
+    ];
+
+
+    private static array $_GET;
+    private static array $_POST;
+    private static array $_FILES;
+    private static array $_COOKIE;
+    private static array $_SESSION;
+    private static array $_REQUEST;
+    private static array $_SERVER;
+    private static array $_ENV;
+
+
+    /**
+     * Initializes class internal state from superglobals.
+     *
+     * @return void
+     */
+    public static function initialize(): void
+    {
+        static $isInitialized = false;
+
+        if (!$isInitialized) {
+            static::$_SERVER  = isset($_SERVER)  ? static::$_SERVER  = &$_SERVER  : [];
+            static::$_REQUEST = isset($_REQUEST) ? static::$_REQUEST = &$_REQUEST : [];
+            static::$_GET     = isset($_GET)     ? static::$_GET     = &$_GET     : [];
+            static::$_POST    = isset($_POST)    ? static::$_POST    = &$_POST    : [];
+            static::$_FILES   = isset($_FILES)   ? static::$_FILES   = &$_FILES   : [];
+            static::$_SESSION = isset($_SESSION) ? static::$_SESSION = &$_SESSION : [];
+            static::$_COOKIE  = isset($_COOKIE)  ? static::$_COOKIE  = &$_COOKIE  : [];
+            static::$_ENV     = isset($_ENV)     ? static::$_ENV     = &$_ENV     : [];
+
+            $isInitialized = true;
+        }
+    }
+
+    /**
+     * Gets a value from the specified superglobal.
+     *
+     * @param string $name The superglobal name to get the value from. Can be written in any case with or without the leading underscore.
+     * @param string $key The array element to get from the superglobal. Dot-notation can be used with nested arrays.
+     *
+     * @return mixed
+     *
+     * @throws \Exception If the passed name is not a superglobal.
+     */
+    public static function get(string $name, string $key = null)
+    {
+        static::initialize();
+
+        $name = static::getValidNameOrFail($name);
+
+        if ($key !== null) {
+            return Misc::getArrayValueByKey(static::$$name, $key, null);
+        }
+
+        return static::$$name;
+    }
+
+    /**
+     * Sets a value in the specified superglobal.
+     *
+     * @param string $name The superglobal name to set the value in. Can be written in any case with or without the leading underscore.
+     * @param string $key The array element to set in the superglobal. Dot-notation can be used with nested arrays.
+     * @param mixed $value The value to set.
+     *
+     * @return static
+     *
+     * @throws \Exception If the passed name is not a superglobal.
+     */
+    public static function set(string $name, string $key, $value)
+    {
+        static::initialize();
+
+        $name = static::getValidNameOrFail($name);
+
+        Misc::setArrayValueByKey(static::$$name, $key, $value);
+
+        return new static();
+    }
+
+    /**
+     * Returns a valid superglobal name from the passed name.
+     *
+     * @param string $name
+     *
+     * @return string
+     *
+     * @throws \Exception
+     */
+    private static function getValidNameOrFail(string $name): string
+    {
+        $variable = '_' . trim(strtoupper($name), '_');
+
+        if (!in_array($variable, self::GLOBALS)) {
+            $available = implode(', ', self::GLOBALS);
+
+            throw new \Exception("There is no PHP superglobal with the name '{$name}'. Available superglobals are: [{$available}]");
+        }
+
+        return $variable;
+    }
+
+
+    /**
+     * Class constructor.
+     */
+    final public function __construct()
+    {
+        // the constructor is final to allow to the use of
+        // "return new static()" without caring about class dependencies.
+
+        $this->initialize();
+    }
+
+    /**
+     * Aliases getters and setter for class members.
+     */
+    public static function __callStatic(string $name, array $arguments)
+    {
+        if (preg_match('/^([gs]et)([_]{0,1}[a-z0-9]+)$/i', $name, $matches)) {
+            return forward_static_call_array(
+                [static::class, $matches[1]],
+                [static::getValidNameOrFail($matches[2]), ...$arguments]
+            );
+        }
+
+        throw new \Exception(sprintf('Call to undefined method %s::%s', static::class, $name));
+    }
+
+    /**
+     * Allows static methods handled by self::__callStatic() to be accessible via object operator `->`.
+     */
+    public function __call(string $method, array $arguments)
+    {
+        return static::__callStatic($method, $arguments);
+    }
+}
