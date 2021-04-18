@@ -10,9 +10,10 @@
 
 
 
-class App extends \MAKS\Velox\Backend\App {}
+class App extends \MAKS\Velox\App {}
 class Config extends \MAKS\Velox\Backend\Config {}
 class Router extends \MAKS\Velox\Backend\Router {}
+class Globals extends \MAKS\Velox\Backend\Globals {}
 class View extends \MAKS\Velox\Frontend\View {}
 class Data extends \MAKS\Velox\Frontend\Data {}
 class Path extends \MAKS\Velox\Frontend\Path {}
