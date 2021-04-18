@@ -11,8 +11,9 @@ declare(strict_types=1);
 
 namespace MAKS\Velox;
 
-use MAKS\Velox\Backend\Router;
 use MAKS\Velox\Backend\Config;
+use MAKS\Velox\Backend\Router;
+use MAKS\Velox\Backend\Globals;
 use MAKS\Velox\Frontend\Data;
 use MAKS\Velox\Frontend\View;
 use MAKS\Velox\Frontend\HTML;
@@ -23,14 +24,15 @@ use MAKS\Velox\Helper\Misc;
 /**
  * A class that serves as a basic service-container for VELOX.
  * This class has all VELOX classes as public properties:
- *      - `$config` = `Config::class`
- *      - `$router` = `Router::class`
- *      - `$data`   = `Data::class`
- *      - `$view`   = `View::class`
- *      - `$html`   = `HTML::class`
- *      - `$path`   = `Path::class`
- *      - `$dumper` = `Dumper::class`
- *      - `$misc`   = `Misc::class`
+ *      - `$config`  = `Config::class`
+ *      - `$router`  = `Router::class`
+ *      - `$globals` = `Globals::class`
+ *      - `$data`    = `Data::class`
+ *      - `$view`    = `View::class`
+ *      - `$html`    = `HTML::class`
+ *      - `$path`    = `Path::class`
+ *      - `$dumper`  = `Dumper::class`
+ *      - `$misc`    = `Misc::class`
  *
  * Example:
  * ```
@@ -50,6 +52,8 @@ class App
 
     public Router $router;
 
+    public Globals $globals;
+
     public Data $data;
 
     public View $view;
@@ -68,14 +72,15 @@ class App
      */
     public function __construct()
     {
-        $this->config = new Config();
-        $this->router = new Router();
-        $this->data   = new Data();
-        $this->view   = new View();
-        $this->html   = new HTML();
-        $this->path   = new Path();
-        $this->dumper = new Dumper();
-        $this->misc   = new Misc();
+        $this->config  = new Config();
+        $this->router  = new Router();
+        $this->globals = new Router();
+        $this->data    = new Data();
+        $this->view    = new View();
+        $this->html    = new HTML();
+        $this->path    = new Path();
+        $this->dumper  = new Dumper();
+        $this->misc    = new Misc();
     }
 
     public function __call(string $method, array $arguments)
