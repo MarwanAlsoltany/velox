@@ -74,7 +74,7 @@ class App
     {
         $this->config  = new Config();
         $this->router  = new Router();
-        $this->globals = new Router();
+        $this->globals = new Globals();
         $this->data    = new Data();
         $this->view    = new View();
         $this->html    = new HTML();
