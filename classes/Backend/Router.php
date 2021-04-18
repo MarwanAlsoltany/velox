@@ -476,36 +476,6 @@ class Router
         return $url;
     }
 
-    /**
-     * Returns `php://input`.
-     *
-     * @return string
-     */
-    public static function getInput(): string
-    {
-        return file_get_contents('php://input') ?: '';
-    }
-
-    /**
-     * Returns the currently requested route.
-     *
-     * @return string
-     */
-    public static function getCurrent(): string
-    {
-        return static::getRequestUri();
-    }
-
-    protected static function getServerHost(): string
-    {
-        return $_SERVER['HTTP_HOST'];
-    }
-
-    protected static function getServerProtocol(): string
-    {
-        return $_SERVER['SERVER_PROTOCOL'];
-    }
-
     protected static function getRequestMethod(): string
     {
         $method = Globals::getPost('_method') ?? '';
@@ -520,26 +490,6 @@ class Router
         }
 
         return Globals::getServer('REQUEST_METHOD');
-    }
-
-    protected static function setRequestMethod(string $method): void
-    {
-        $_SERVER['REQUEST_METHOD'] = $method;
-    }
-
-    protected static function getRequestUri(): string
-    {
-        return $_SERVER['REQUEST_URI'];
-    }
-
-    protected static function setRequestUri(string $uri): void
-    {
-        $_SERVER['REQUEST_URI'] = $uri;
-    }
-
-    protected static function isHttpsCompliant(): bool
-    {
-        return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
     }
 
     /**
