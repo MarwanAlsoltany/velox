@@ -6,6 +6,7 @@ namespace MAKS\Velox\Backend;
 
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Router;
+use MAKS\Velox\Backend\Globals;
 use MAKS\Velox\Frontend\Data;
 use MAKS\Velox\Frontend\View;
 use MAKS\Velox\Frontend\HTML;
@@ -13,7 +14,7 @@ use MAKS\Velox\Frontend\Path;
 
 /**
  * An abstract class that serves as a base Controller that can be extended to make handlers for application router.
- * This class has these properties: `$config` = `Config`, `$router` = `Router`, `$data` = `Data`, `$view` = `View`, `$html` = `HTML`, `$path` = `Path`, and the passed array as `$vars`.
+ * This class has these properties: `$config` = `Config`, `$router` = `Router`, `$globals` = `Globals`, `$data` = `Data`, `$view` = `View`, `$html` = `HTML`, `$path` = `Path`, and the passed array as `$vars`.
  *
  * Example:
  * ```
@@ -44,6 +45,8 @@ abstract class Controller
 
     protected Router $router;
 
+    protected Globals $globals;
+
     protected Data $data;
 
     protected View $view;
@@ -60,12 +63,13 @@ abstract class Controller
      */
     public function __construct(array $vars = [])
     {
-        $this->vars   = $vars;
-        $this->config = new Config();
-        $this->router = new Router();
-        $this->data   = new Data();
-        $this->view   = new View();
-        $this->html   = new HTML();
-        $this->path   = new Path();
+        $this->vars    = $vars;
+        $this->config  = new Config();
+        $this->router  = new Router();
+        $this->globals = new Globals();
+        $this->data    = new Data();
+        $this->view    = new View();
+        $this->html    = new HTML();
+        $this->path    = new Path();
     }
 }
