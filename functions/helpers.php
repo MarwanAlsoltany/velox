@@ -68,7 +68,7 @@ if (!function_exists('handle')) {
      *
      * @param string $expression A route like `/page`, `/page/{id}` (`id` is required), or `/page/{id?}` (`id` is optional). For more flexibility, pass en expression like `/page/([\d]+|[0-9]*)` (regex capture group).
      * @param callable $handler A function to call if route has matched. It will be passed the current `$path`, the `$match` or `...$match` from the expression if there was any, and lastly the `$previous` result (the return of the last middleware or route with a matching expression) if `$allowMultiMatch` is set to `true`.
-     * @param string|string[] $method Either a string or an array of the allowed method.
+     * @param string|string[] $method [optional] Either a string or an array of the allowed method.
      *
      * @return static
      */
@@ -82,7 +82,7 @@ if (!function_exists('redirect')) {
      * Redirects the request to another route.
      * Note that this function will exit the script (code that comes after it will not be executed).
      *
-     * @param string $to A route like `/page`.
+     * @param string $to A route like `/page` or a URL like `http://domain.tld`.
      *
      * @return void
      */
