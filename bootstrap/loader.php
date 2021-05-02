@@ -70,7 +70,7 @@ $loader = function ($class) use (&$loader, $namespaces, $aliases) {
             $file = $path . $name . $ext;
 
             if (file_exists($file)) {
-                include_once($file);
+                require($file);
             }
         }
     }
@@ -85,7 +85,10 @@ unset($loader);
 
 // everything is an exception, even minor warnings
 set_error_handler(function (int $code, string $message, string $file, int $line) {
-    class ErrorOrWarningException extends \ErrorException {};
+    if (!class_exists('ErrorOrWarningException')) {
+        class ErrorOrWarningException extends \ErrorException {};
+    }
+
     throw new ErrorOrWarningException($message, $code, 1, $file, $line, null);
 });
 
@@ -180,7 +183,7 @@ function require_recursive(string $directory): bool {
         }
 
         if (is_file($file)) {
-            require_once($file);
+            require($file);
 
             $files[] = $file;
         }
