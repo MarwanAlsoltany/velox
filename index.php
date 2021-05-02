@@ -1,6 +1,6 @@
 <?php
 
-require_once 'bootstrap/autoload.php';
+require 'bootstrap/autoload.php';
 
 
 
