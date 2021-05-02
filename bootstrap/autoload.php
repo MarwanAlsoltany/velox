@@ -37,7 +37,7 @@ include(BASE_PATH . '/bootstrap/loader.php');
 // load composer autoload if composer is used in this project
 $composer = BASE_PATH . '/vendor/autoload.php';
 if (file_exists($composer)) {
-    require_once($composer);
+    require($composer);
 }
 unset($composer);
 
@@ -54,7 +54,7 @@ unset($functions);
 $includes = include(BASE_PATH . '/bootstrap/additional.php');
 foreach ($includes as $include) {
     if (is_file($include)) {
-        require_once($include);
+        require($include);
     }
 
     if (is_dir($include)) {
