@@ -109,23 +109,23 @@ VELOX has a very special use-case, simple websites, and here is meant really sim
 | [`config`](./config) | This is where all config files will live. All files here will be accessible using the `Config` class at runtime. |
 | [`storage`](./storage) | This is where VELOX will write caches and logs. You can also use this directory to store installation-wide assets. |
 | [`classes`](./classes) | This is where VELOX source files live. You shouldn't be touching anything here unless you want to make your own version of VELOX. |
-| [`functions`](./functions) | This is where all functions that are loaded in the application live. You can freely add yours, or delete the entire directory |
-| [`themes`](./themes) | This is where all your frontend themes will be placed. You will be mostly working here for the frontend part of the app. |
-| [`app`](./app) | This is where your own backend logic will be placed. You will be mostly working here for the backend part of the app. |
+| [`functions`](./functions) | This is where all functions that are loaded in the application live. You can freely add yours, or delete the entire directory.|
+| [`themes`](./themes) | This is where all your frontend themes will be placed. You will be mostly working here for the frontend part of your app. |
+| [`app`](./app) | This is where your own backend logic will be placed. You will be mostly working here for the backend part of your app. |
 | [`bin`](./bin) | This is where PHP executables are placed. You can freely add yours, or delete the entire directory. |
 | [`public`](./public) | This is where you should put your `index.php` for maximum security. You can freely delete this directory if you want to. |
-| [`vendor`](./vendor) | This is where your composer dependencies will be placed. You can freely delete this directory if you don't want to use composer. |
+| [`vendor`](./vendor) | This is where your Composer dependencies will be placed. You can freely delete this directory if you don't want to use Composer. |
 
 ![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Most files listed in these directories are documented. Take a look through them to learn more about VELOX.*
 
 ### App Entry
 
-The entry point for a VELOX app is the [`index.php`](./index.php), here you need to require the [`bootstrap/autoload.php`](./bootstrap/autoload.php), register some routes with their handlers using the `Router` class, and start the router. This is all that you need to have a working VELOX app.
+The entry point for a VELOX app is the [`index.php`](./index.php), here you need to require the [`bootstrap/autoload.php`](./bootstrap/autoload.php), register some routes with their handlers using the `Router::class`, and start the router. This is all that you need to have a working VELOX app.
 
 ```php
 <?php
 
-require_once 'bootstrap/autoload.php';
+require 'bootstrap/autoload.php';
 
 Router::handle('/', function () {
     return View::render('home', ['title' => 'Home']);
@@ -138,7 +138,7 @@ Additionally, you can also set up handlers for `404` and `405` responses using `
 
 Alternatively, you can extract the *"routes registration part"* in its own file and let VELOX know about it using [`bootstrap/additional.php`](./bootstrap/additional.php).
 
-![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *In order for VELOX to work correctly and safely, you need to redirect all requests to the application entry point (`index.php`) and block all requests to other PHP files on the server (take a look at `.htaccess.dist` to get started with Apache).*
+![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *In order for VELOX to work correctly and safely, you need to redirect all requests to application entry point (`index.php`) and block all requests to other PHP files on the server (take a look at [`.htaccess.dist`](./.htaccess.dist) to get started with Apache).*
 
 
 ---
@@ -154,9 +154,9 @@ The following table lists all config files that come shipped with VELOX.
 | [`router.php`](./config/router.php) | This config file can be used to override `Router::class` default parameters. |
 | [`theme.php`](./config/theme.php) | This config file can be used to edit/extend theme configuration. |
 | [`view.php`](./config/view.php) | This config file can be used to customize everything about the views. It is used by the `View::class`. |
-| [`data.php`](./config/data.php) | This config file can be used to provide any arbitrary data, this will then be injected in the `Data::class`. |
+| [`data.php`](./config/data.php) | This config file can be used to provide any arbitrary data, which then will get injected in the `Data::class`. |
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own config files too, all you need to do is to create a new file under `/config` and add you own configuration in it. VELOX will know about this file and load it in the application. You can access your config via `Config::get('filename.whatEverKeyYouWrote')`.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own config files too, all you need to do is to create a new file under `/config` and add you own configuration to it. VELOX will know about this file and load it in the application. You can access your config via `Config::get('filename.whatEverKeyYouWrote')`.*
 
 
 ---
@@ -190,7 +190,7 @@ VELOX classes are divided in four namespaces:
 
 ![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *This all what the VELOX package provides out of the box.*
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *The `App`, `Config`, `Router`, `Data`, `View`, `HTML`, `Path` classes are aliased on the root namespace for ease-of-use.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *The `App`, `Config`, `Router`, `Globals`, `Data`, `View`, `HTML`, `Path` classes are aliased on the root namespace for ease-of-use.*
 
 ### Extending VELOX
 
@@ -201,7 +201,7 @@ To add you own classes use the `app/` directory, this is where you should put yo
 
 ## Functions
 
-The following table lists all available functions and to which class they belong.
+The following table lists all available functions and to which class/group they belong.
 
 VELOX functions are divided into these files:
 
@@ -222,7 +222,7 @@ VELOX functions are divided into these files:
 | HTML Helpers | `he()`, `hd()`, `hse()`, `hsd()`, `st()`, `nb()` |
 
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your functions too, all you need to do is to create a new file under `functions/` and add you own functions in it. VELOX will know about this file and load it in the application.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your functions too, all you need to do is to create a new file under `functions/` and add you own functions to it. VELOX will know about this file and load it in the application.*
 
 
 ---
@@ -246,13 +246,12 @@ You can customize the behavior of themes using the [`config/theme.php`](./config
 2. Page: [`themes/velox/pages/home.phtml`](./themes/velox/pages/home.phtml)
 3. Partial: [`themes/velox/partials/text-image.phtml`](./themes/velox/partials/text-image.phtml)
 
-
 ---
 
 
 ## License
 
-VELOX is an open-sourced project licensed under the [**MIT**](./LICENSE) license.
+VELOX is an open-source project licensed under the [**MIT**](./LICENSE) license.
 <br/>
 Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 <br/>
