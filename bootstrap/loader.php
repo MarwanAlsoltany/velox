@@ -70,7 +70,7 @@ $loader = function ($class) use (&$loader, $namespaces, $aliases) {
             $file = $path . $name . $ext;
 
             if (file_exists($file)) {
-                require($file);
+                require_once($file);
             }
         }
     }
@@ -183,7 +183,7 @@ function require_recursive(string $directory): bool {
         }
 
         if (is_file($file)) {
-            require($file);
+            require_once($file);
 
             $files[] = $file;
         }
