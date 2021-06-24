@@ -183,12 +183,14 @@ class Config
     }
 
     /**
-     * Deletes the cached configuration JSON.
+     * Deletes the cached configuration JSON and resets class internal state.
      *
      * @return void
      */
     public static function clearCache(): void
     {
+        static::$config = [];
+
         $configCacheFile = static::CONFIG_CACHE_FILE;
 
         if (file_exists($configCacheFile)) {
