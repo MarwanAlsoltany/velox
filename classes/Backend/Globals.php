@@ -124,6 +124,23 @@ class Globals
     }
 
     /**
+     * Returns all superglobals.
+     *
+     * @return array
+     */
+    public static function getAll(): ?array
+    {
+        static::initialize();
+
+        $globals = [];
+        foreach (self::GLOBALS as $global) {
+            $globals[$global] = static::$$global;
+        }
+
+        return $globals;
+    }
+
+    /**
      * Returns a valid superglobal name from the passed name.
      *
      * @param string $name
