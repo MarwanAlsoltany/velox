@@ -139,14 +139,14 @@ class Config
         $configDir       = static::CONFIG_DIR;
         $configCacheFile = static::CONFIG_CACHE_FILE;
 
-        if (!isset(static::$config) && file_exists($configCacheFile)) {
-            $configJson     = file_get_contents($configCacheFile);
-            static::$config = json_decode($configJson, true);
+        if (empty(static::$config)) {
+            if (file_exists($configCacheFile)) {
+                $configJson     = file_get_contents($configCacheFile);
+                static::$config = json_decode($configJson, true);
 
-            return;
-        }
+                return;
+            }
 
-        if (!isset(static::$config)) {
             static::$config = self::parse(self::include($configDir));
         }
     }
