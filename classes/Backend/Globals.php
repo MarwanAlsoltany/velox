@@ -162,14 +162,16 @@ class Globals
      */
     public static function __callStatic(string $name, array $arguments)
     {
-        if (preg_match('/^([gs]et)([_]{0,1}[a-z0-9]+)$/i', $name, $matches)) {
-            return forward_static_call_array(
-                [static::class, $matches[1]],
-                [static::getValidNameOrFail($matches[2]), ...$arguments]
-            );
+        try {
+            if (preg_match('/^([gs]et)([_]{0,1}[a-z0-9]+)$/i', $name, $matches)) {
+                return forward_static_call_array(
+                    [static::class, $matches[1]],
+                    [static::getValidNameOrFail($matches[2]), ...$arguments]
+                );
+            }
+        } catch (\Exception $error) {
+            throw new \Exception(sprintf('Call to undefined method %s::%s', static::class, $name), 0, $error );
         }
-
-        throw new \Exception(sprintf('Call to undefined method %s::%s', static::class, $name));
     }
 
     /**
