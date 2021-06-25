@@ -40,7 +40,7 @@ class Data
     /**
      * The currently loaded data.
      */
-    protected static array $bag;
+    protected static array $bag = [];
 
 
     /**
@@ -50,8 +50,8 @@ class Data
      */
     protected static function load(): void
     {
-        if (!isset(static::$bag)) {
-            static::$bag = Config::get('data', []);
+        if (empty(static::$bag)) {
+            static::$bag = (array)Config::get('data', static::$bag);
 
             Config::set('data', null);
         }
