@@ -474,11 +474,7 @@ class HTML
         if ($this->isConditionTruthy()) {
             $boundClosure = \Closure::fromCallable($callback)->bindTo($this);
 
-            if ($boundClosure !== false) {
-                $boundClosure($this);
-            } else {
-                $callback($this);
-            }
+            $boundClosure($this);
         }
 
         return $this;
