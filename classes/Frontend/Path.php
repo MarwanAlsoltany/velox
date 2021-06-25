@@ -235,4 +235,12 @@ final class Path
 
         return static::$method(...$arguments);
     }
+
+    /**
+     * Allows static methods handled by self::__callStatic() to be accessible via object operator `->`.
+     */
+    public function __call(string $method, array $arguments)
+    {
+        return static::__callStatic($method, $arguments);
+    }
 }
