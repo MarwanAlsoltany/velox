@@ -187,7 +187,7 @@ class Globals
                 );
             }
         } catch (\Exception $error) {
-            throw new \Exception(sprintf('Call to undefined method %s::%s', static::class, $name), 0, $error );
+            throw new \Exception(sprintf('Call to undefined method %s::%s', static::class, $name), 0, $error);
         }
     }
 
