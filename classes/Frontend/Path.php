@@ -105,11 +105,15 @@ final class Path
             $root = Config::get('global.paths.root');
         }
 
-        return sprintf(
+        $absolutePath = sprintf(
             '%s/%s',
             rtrim($root, '/'),
             ltrim($path, '/')
         );
+
+        $canonicalPath = realpath($absolutePath);
+
+        return $canonicalPath ? $canonicalPath : $absolutePath;
     }
 
     /**
