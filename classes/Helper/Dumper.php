@@ -90,7 +90,7 @@ class Dumper
         }
 
         $trace = 'Trace: N/A';
-        $backtrace = array_filter(array_reverse(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)), function($backtrace) use (&$trace) {
+        $backtrace = array_filter(array_reverse(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)), function ($backtrace) use (&$trace) {
             static $hasFound = false;
             if (!$hasFound && in_array($backtrace['function'], ['dump', 'dd'])) {
                 $trace = $backtrace['file'] . ':' . $backtrace['line'];
