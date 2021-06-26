@@ -415,7 +415,14 @@ class View
             extract($variables, EXTR_OVERWRITE);
         }
 
-        self::require($file, $variables);
+        try {
+            self::require($file, $variables);
+        } catch (\Exception $error) {
+            // clean started buffer before throwing the exception
+            ob_end_clean();
+
+            throw $error;
+        }
 
         $buffer = ob_get_contents();
         ob_end_clean();
