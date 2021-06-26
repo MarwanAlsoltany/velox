@@ -294,18 +294,19 @@ class Dumper
         }
 
         // convert array construct to square brackets
-        $afToSqPatterns = [
+        $acToSbPatterns = [
             '/(\()array\(/'                    => '$1[',
             '/\)(\))/'                         => ']$1',
             '/array \(/'                       => '[',
+            '/\(object\) array\(/'             => '(object)[',
             '/^([ ]*)\)(,?)$/m'                => '$1]$2',
             '/=>[ ]?\n[ ]+\[/'                 => '=> [',
             '/([ ]*)(\'[^\']+\') => ([\[\'])/' => '$1$2 => $3',
         ];
 
         return preg_replace(
-            array_keys($afToSqPatterns),
-            array_values($afToSqPatterns),
+            array_keys($acToSbPatterns),
+            array_values($acToSbPatterns),
             $export
         );
     }
@@ -326,6 +327,6 @@ class Dumper
 
     private static function isCli(): bool
     {
-        return strpos(php_sapi_name(), 'cli') !== false;
+        return php_sapi_name() === 'cli' ;
     }
 }
