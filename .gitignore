@@ -4,9 +4,13 @@
 test.php
 storage/*
 vendor/*
+build/*
 !**/.gitkeep
 
+.ht*
+!.ht*.*
 
+*.bak
 *.cache
 *.lock
 *.xml
