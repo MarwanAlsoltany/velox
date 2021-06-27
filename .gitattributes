@@ -5,6 +5,7 @@
 /.gitattributes export-ignore
 /*.xml.dist export-ignore
 /*.yml export-ignore
+/tests export-ignore
 
 * text=auto
 *.php text eol=lf
