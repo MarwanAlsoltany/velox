@@ -64,6 +64,8 @@ class Dumper
      * @param mixed ...$variable
      *
      * @return void The result will simply get echoed.
+     *
+     * @codeCoverageIgnore
      */
     public static function dd(...$variable): void
     {
@@ -86,7 +88,9 @@ class Dumper
         $contrastColor = self::$contrastColor;
 
         if (!$isCli) {
+            // @codeCoverageIgnoreStart
             self::setSyntaxHighlighting();
+            // @codeCoverageIgnoreEnd
         }
 
         $trace = 'Trace: N/A';
@@ -116,6 +120,7 @@ class Dumper
 
         foreach ($variable as $dump) {
             if (!$isCli) {
+                // @codeCoverageIgnoreStart
                 $code = highlight_string('<?php ' . self::exportExpression($dump), true);
                 $html = sprintf(
                     $markup['dumpBlock'],
@@ -127,6 +132,7 @@ class Dumper
                 );
 
                 echo $html;
+                // @codeCoverageIgnoreEnd
             } else {
                 echo self::exportExpression($dump);
             }
@@ -143,12 +149,16 @@ class Dumper
      * @param \Throwable $exception
      *
      * @return void The result will be echoed as HTML page or a string representation of the exception if the interface is CLI.
+     *
+     * @codeCoverageIgnore
      */
     public static function dumpException(\Throwable $exception): void
     {
         if (self::isCli()) {
+            // @codeCoverageIgnoreStart
             echo $exception;
             exit;
+            // @codeCoverageIgnoreEnd
         }
 
         self::setSyntaxHighlighting();
@@ -311,6 +321,9 @@ class Dumper
         );
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     private static function setSyntaxHighlighting(): void
     {
         $tokens = self::$syntaxHighlightTokens;
@@ -325,6 +338,9 @@ class Dumper
         }
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     private static function isCli(): bool
     {
         return php_sapi_name() === 'cli' ;
