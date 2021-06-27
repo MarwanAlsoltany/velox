@@ -21,7 +21,9 @@ The fastest way to build simple websites using PHP!
 [![Maintenance][maintenance-icon]][maintenance-href]
 [![Total Downloads][downloads-icon]][downloads-href]
 [![Scrutinizer Build Status][scrutinizer-icon]][scrutinizer-href]
+[![Scrutinizer Code Coverage][scrutinizer-coverage-icon]][scrutinizer-coverage-href]
 [![Scrutinizer Code Quality][scrutinizer-quality-icon]][scrutinizer-quality-href]
+[![Travis Build Status][travis-icon]][travis-href]
 [![StyleCI Code Style][styleci-icon]][styleci-href]
 
 
@@ -75,9 +77,11 @@ git clone https://github.com/MarwanAlsoltany/velox.git my-velox-app
 
 ![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *If you don't want to use any other third party packages. Installing VELOX using Git is sufficient.*
 
-#### Using source:
+#### Using Source:
 
 Download [VELOX](https://github.com/MarwanAlsoltany/velox/releases) as a `.zip` or `.tar.gz` and extract it in your server web root directory.
+
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *If you want to test out VELOX quickly and you don't have any web server available, use whatever installing method and run `php bin/app-serve` from inside VELOX directory. This command will spin up a development web server on `localhost:8000`.*
 
 
 ---
@@ -271,7 +275,9 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [maintenance-icon]: https://img.shields.io/badge/maintained-yes-orange.svg?style=flat-square
 [downloads-icon]: https://img.shields.io/packagist/dt/marwanalsoltany/velox.svg?style=flat-square
 [scrutinizer-icon]: https://img.shields.io/scrutinizer/build/g/MarwanAlsoltany/velox/master?style=flat-square
+[scrutinizer-coverage-icon]: https://img.shields.io/scrutinizer/coverage/g/MarwanAlsoltany/velox.svg?style=flat-square
 [scrutinizer-quality-icon]: https://img.shields.io/scrutinizer/g/MarwanAlsoltany/velox.svg?style=flat-square
+[travis-icon]: https://img.shields.io/travis/MarwanAlsoltany/velox/master.svg?style=flat-square
 [styleci-icon]: https://github.styleci.io/repos/356515801/shield?branch=master
 
 [php-href]: https://github.com/MarwanAlsoltany/velox/search?l=php
@@ -280,5 +286,7 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [maintenance-href]: https://github.com/MarwanAlsoltany/velox/graphs/commit-activity
 [downloads-href]: https://packagist.org/packages/marwanalsoltany/velox/stats
 [scrutinizer-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/build-status/master
+[scrutinizer-coverage-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/?branch=master
 [scrutinizer-quality-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/?branch=maste
+[travis-href]: https://travis-ci.com/MarwanAlsoltany/velox
 [styleci-href]: https://github.styleci.io/repos/356515801
