@@ -257,19 +257,17 @@ class Router
 
         [$base, $allowMultiMatch, $caseMatters, $slashMatters] = static::getValidParameters($base, $allowMultiMatch, $caseMatters, $slashMatters);
 
-        static::$base = $base = trim($base, '/');
-        static::$path = $path = static::getRoutePath($base, $slashMatters);
+        static::$base = $base = '/' . trim($base, '/');
+        static::$path = $path = static::getRoutePath($slashMatters);
 
         $routeMatchFound = false;
         $pathMatchFound  = false;
         $result = null;
 
         foreach (static::$routes as &$route) {
-            if ($base !== '') {
-                $route['expression'] = $base . $route['expression'];
-            }
+            $expression = $base === '/' ? $route['expression'] : sprintf('%s/%s', $base, ltrim($route['expression'], '/'));
 
-            $regex = static::getRouteRegex($route['expression'], $caseMatters);
+            $regex = static::getRouteRegex($expression, $slashMatters, $caseMatters);
             if (preg_match($regex, $path, $matches, PREG_UNMATCHED_AS_NULL)) {
                 $pathMatchFound = true;
 
@@ -333,20 +331,17 @@ class Router
      * Returns a valid decoded route path.
      *
      * @param string $base
-     * @param bool $slashMatters
      *
      * @return string
      */
-    private static function getRoutePath(string $base, bool $slashMatters): string
+    private static function getRoutePath(bool $slashMatters): string
     {
         $url = static::getParsedUrl();
 
         $path = '/';
         if (isset($url['path'])) {
             $path = $url['path'];
-            if (!$slashMatters && $path !== $base . '/') {
-                $path = rtrim($path, '/');
-            }
+            $path = !$slashMatters && $path !== '/' ? rtrim($path, '/') : $path;
         }
 
         return urldecode($path);
@@ -356,11 +351,12 @@ class Router
      * Returns a valid route regex.
      *
      * @param string $expression
+     * @param bool $slashMatters
      * @param bool $caseMatters
      *
      * @return string
      */
-    private static function getRouteRegex(string $expression, bool $caseMatters): string
+    private static function getRouteRegex(string $expression, bool $slashMatters, bool $caseMatters): string
     {
         $routePlaceholderRegex = '/{([a-z0-9_\-\.?]+)}/i';
         if (preg_match($routePlaceholderRegex, $expression)) {
@@ -371,8 +367,11 @@ class Router
                 $expression
             );
         }
-
-        return sprintf('<^%s$>%s', $expression, ($caseMatters ? 'iu' : 'u'));
+        return sprintf(
+            '<^%s$>%s',
+            (!$slashMatters && $expression !== '/' ? rtrim($expression, '/') : $expression),
+            (!$caseMatters ? 'iu' : 'u')
+        );
     }
 
     /**
@@ -412,7 +411,7 @@ class Router
         $method   = Globals::getServer('REQUEST_METHOD');
 
         if (!$routeMatchFound) {
-            $result = 'The route is not found, or the request method is not allowed!';
+            $result = sprintf('The "%s" route is not found, or the request method is not allowed!', static::$path);
 
             if ($pathMatchFound) {
                 if (static::$methodNotAllowedCallback) {
