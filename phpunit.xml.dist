@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="bootstrap/autoload.php" backupGlobals="false" backupStaticAttributes="false" colors="true" verbose="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <coverage>
+        <include>
+            <directory suffix=".php">classes</directory>
+        </include>
+        <report>
+            <clover outputFile="build/coverage/clover.xml"/>
+            <html outputDirectory="build/phpunit"/>
+            <text outputFile="build/coverage/text.txt"/>
+            <xml outputDirectory="build/coverage"/>
+        </report>
+    </coverage>
+    <testsuites>
+        <testsuite name="VELOX Test Suite - Unit Tests">
+            <directory>tests</directory>
+            <exclude>tests/TestCase.php</exclude>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <junit outputFile="build/phpunit/coverage.junit.xml"/>
+    </logging>
+</phpunit>
