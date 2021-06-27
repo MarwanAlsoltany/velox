@@ -12,6 +12,7 @@ finder:
         - storage
         - public
         - vendor
+        - tests
     name: '*.php'
     not-name:
         - '*.phtml'
