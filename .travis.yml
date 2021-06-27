@@ -13,6 +13,7 @@ env:
     global:
         - ECHO_MESSAGE="VELOX Test Suite"
         - COMPOSER_FLAGS="--prefer-stable --prefer-dist"
+        - XDEBUG_MODE="coverage"
 
 cache:
     directories:
@@ -25,8 +26,10 @@ before_script:
     - composer update $COMPOSER_FLAGS
 
 script:
+    - ls -l # for debugging
     - vendor/bin/phpunit --coverage-clover=coverage.clover
 
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    - ls -l # for debugging
