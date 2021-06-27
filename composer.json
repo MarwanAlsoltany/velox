@@ -1,29 +1,66 @@
 {
     "name": "marwanalsoltany/velox",
-    "description": "PHP Micro-Framework",
     "type": "project",
     "license": "MIT",
+    "description": "PHP Micro-Framework",
+    "keywords": [
+        "php",
+        "framework",
+        "micro-framework",
+        "static-website-generator"
+    ],
     "authors": [
         {
             "name": "Marwan Al-Soltany",
-            "email": "MarwanAlsoltany@gmail.com"
+            "email": "MarwanAlsoltany+gh@gmail.com"
         }
     ],
-    "require": {
-        "php" : ">=7.4"
+    "funding": [
+        {
+            "type": "ko-fi",
+            "url": "https://ko-fi.com/marwanalsoltany"
+        }
+    ],
+    "homepage": "https://github.com/MarwanAlsoltany/velox#readme",
+    "support": {
+        "docs": "https://github.com/MarwanAlsoltany/velox#readme",
+        "issues": "https://github.com/MarwanAlsoltany/velox/issues"
     },
-    "require-dev": {},
+    "require": {
+        "php" : "^7.4|^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
     "autoload": {
         "psr-4": {
             "MAKS\\Velox\\": "classes",
             "App\\": "app"
         }
     },
-    "autoload-dev": {},
+    "autoload-dev": {
+        "psr-4": {
+            "MAKS\\Velox\\Tests\\": "tests"
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "build": [
+            "@test"
+        ],
+        "build-dev": [
+            "composer run-script build --dev --verbose",
+            "echo ! && echo !  Development build completed! && echo !"
+        ],
+        "build-prod": [
+            "composer run-script build --quiet",
+            "echo ! && echo !  Production build completed! && echo !"
+        ]
     },
     "config": {
         "optimize-autoloader": true,
