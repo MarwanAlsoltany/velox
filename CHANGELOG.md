@@ -18,3 +18,9 @@ All notable changes to **VELOX** will be documented in this file.
 
 
 <br />
+
+## [[1.0.0] - 2021-06-27](https://github.com/MarwanAlsoltany/velox/compare/v1.0.0-rc...v1.0.0)
+- Initial release.
+
+
+<br />
