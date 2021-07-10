@@ -44,20 +44,20 @@ class Config
      *
      * @var string
      */
-    protected const CONFIG_DIR = BASE_PATH . '/config';
+    public const CONFIG_DIR = BASE_PATH . '/config';
 
     /**
      * The path of the cached configuration file.
      *
      * @var string
      */
-    protected const CONFIG_CACHE_FILE = BASE_PATH . '/storage/cache/config/config.json';
+    public const CONFIG_CACHE_FILE = BASE_PATH . '/storage/cache/config/config.json';
 
 
     /**
      * The currently loaded configuration.
      */
-    private static array $config;
+    protected static array $config;
 
 
     public function __construct()
@@ -113,18 +113,21 @@ class Config
     private static function parse(array $config): array
     {
         // parses all config variables
-        array_walk_recursive($config, function (&$value) use (&$config) {
-            if (is_string($value)) {
-                if (preg_match_all('/{([a-z0-9_\-\.]*)}/i', $value, $matches)) {
-                    $variables = [];
-                    array_walk($matches[1], function (&$variable) use (&$variables, &$config) {
-                        $variables[$variable] = Misc::getArrayValueByKey($config, $variable, null);
-                    });
+        $tries = count($config);
+        for ($i = 0; $i < $tries; $i++) {
+            array_walk_recursive($config, function (&$value) use (&$config) {
+                if (is_string($value)) {
+                    if (preg_match_all('/{([a-z0-9_\-\.]*)}/i', $value, $matches)) {
+                        $variables = [];
+                        array_walk($matches[1], function (&$variable) use (&$variables, &$config) {
+                            $variables[$variable] = Misc::getArrayValueByKey($config, $variable, null);
+                        });
 
-                    $value = Misc::interpolate($value, $variables);
+                        $value = Misc::interpolate($value, $variables);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         return $config;
     }
@@ -201,7 +204,7 @@ class Config
     }
 
     /**
-     * Checks whether a value exists in the configuration via dot-notation.
+     * Checks whether a value of a key exists in the configuration via dot-notation.
      *
      * @param string $key The dotted key representation.
      *
@@ -232,7 +235,7 @@ class Config
     }
 
     /**
-     * Sets a value of a key from the configuration via dot-notation.
+     * Sets a value of a key in the configuration via dot-notation.
      *
      * @param string $key The dotted key representation.
      * @param mixed $value The value to set.
