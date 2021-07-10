@@ -38,7 +38,7 @@ use MAKS\Velox\Helper\Misc;
  * ```
  * // create an instance
  * $app = new App();
- * // get an instance of the `App` class via public property access notation
+ * // get an instance of the `Router` class via public property access notation
  * $app->router->handle('/dump', 'dd');
  * // or via calling a method with the same name
  * $app->router()->handle('/dump', 'dd');
