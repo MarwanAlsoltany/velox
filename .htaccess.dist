@@ -50,6 +50,7 @@ DirectoryIndex index.php
     RewriteRule ^functions/* index.php [L,NC]
     RewriteRule ^app/.* index.php [L,NC]
     RewriteRule ^config/.* index.php [L,NC]
+    RewriteRule ^tests/.* index.php [L,NC]
 
     ##
     ## White listed folders
@@ -60,7 +61,7 @@ DirectoryIndex index.php
     RewriteCond %{REQUEST_FILENAME} !/themes/.*/(assets|resources|public)/.*
     RewriteRule !^index.php index.php [L,NC]
 
-    # restrict access to dotfiles
+    # restrict access to dot files
     RewriteCond %{REQUEST_FILENAME} -d [OR]
     RewriteCond %{REQUEST_FILENAME} -l [OR]
     RewriteCond %{REQUEST_FILENAME} -f
