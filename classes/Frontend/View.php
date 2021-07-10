@@ -16,7 +16,7 @@ use MAKS\Velox\Frontend\HTML;
 use MAKS\Velox\Helper\Misc;
 
 /**
- * A class that renders and caches view files (Layouts, Pages, and Partials) with the ability to include additional files and divide page content into sections.
+ * A class that renders view files (Layouts, Pages, and Partials) with the ability to include additional files and divide page content into sections and cache rendered views.
  *
  * Example:
  * ```
@@ -29,7 +29,7 @@ use MAKS\Velox\Helper\Misc;
  * // delete cached views
  * View::clearCache();
  *
- * // set a section value
+ * // set section value
  * View::section('name', $content);
  *
  * // start capturing section content
@@ -37,6 +37,9 @@ use MAKS\Velox\Helper\Misc;
  *
  * // end capturing section content
  * View::sectionEnd();
+ *
+ * // reset (empty) section content
+ * View::sectionReset('name');
  *
  * // get section content
  * View::yield('name', 'fallback');
@@ -81,7 +84,7 @@ class View
      *
      * @var string
      */
-    protected const VIEWS_CACHE_DIR = BASE_PATH . '/storage/cache/views';
+    public const VIEWS_CACHE_DIR = BASE_PATH . '/storage/cache/views';
 
 
     /**
