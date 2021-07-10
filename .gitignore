@@ -1,6 +1,7 @@
 .vscode
 .idea
 
+server.php
 test.php
 storage/*
 vendor/*
