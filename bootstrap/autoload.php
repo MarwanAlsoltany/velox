@@ -2,7 +2,7 @@
 
 /**
  * ---------------------------------------------------------------------------------------------------------------------
- *  This file should be loaded in the application entry point ("../index.php" for example).
+ *  This file should be loaded in application entry point ("../index.php" for example).
  * ---------------------------------------------------------------------------------------------------------------------
  *  It takes care of:
  *      (1) Loading VELOX classes "../classes/" and "../app/".
@@ -30,7 +30,7 @@ define('BASE_PATH', dirname(__DIR__));
 
 
 // load VELOX classes from "../classes/", "../app/" and alias them
-include(BASE_PATH . '/bootstrap/loader.php');
+require(BASE_PATH . '/bootstrap/loader.php');
 
 
 
