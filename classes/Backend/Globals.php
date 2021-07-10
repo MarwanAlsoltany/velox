@@ -16,26 +16,26 @@ use MAKS\Velox\Helper\Misc;
 /**
  * A class that serves as an abstraction/wrapper to work with superglobals.
  *
- * @method static mixed getGet(string $key = null)
- * @method static mixed getPost(string $key = null)
- * @method static mixed getFiles(string $key = null)
- * @method static mixed getCookie(string $key = null)
- * @method static mixed getSession(string $key = null)
- * @method static mixed getRequest(string $key = null)
- * @method static mixed getServer(string $key = null)
- * @method static mixed getEnv(string $key = null)
- * @method static static setGet(string $key, $value)
- * @method static static setPost(string $key, $value)
- * @method static static setFiles(string $key, $value)
- * @method static static setCookie(string $key, $value)
- * @method static static setSession(string $key, $value)
- * @method static static setRequest(string $key, $value)
- * @method static static setServer(string $key, $value)
- * @method static static setEnv(string $key, $value)
+ * @method static mixed getGet(string $key = null) Gets a value from $_GET. Dot-notation can be used for nested values.
+ * @method static mixed getPost(string $key = null) Gets a value from $_POST. Dot-notation can be used for nested values.
+ * @method static mixed getFiles(string $key = null) Gets a value from $_FILES. Dot-notation can be used for nested values.
+ * @method static mixed getCookie(string $key = null) Gets a value from $_COOKIE. Dot-notation can be used for nested values.
+ * @method static mixed getSession(string $key = null) Gets a value from $_SESSION. Dot-notation can be used for nested values.
+ * @method static mixed getRequest(string $key = null) Gets a value from $_REQUEST. Dot-notation can be used for nested values.
+ * @method static mixed getServer(string $key = null) Gets a value from $_SERVER. Dot-notation can be used for nested values.
+ * @method static mixed getEnv(string $key = null) Gets a value from $_ENV. Dot-notation can be used for nested values.
+ * @method static static setGet(string $key, $value) Sets a value in $_GET. Dot-notation can be used for nested values.
+ * @method static static setPost(string $key, $value) Sets a value in $_POST. Dot-notation can be used for nested values.
+ * @method static static setFiles(string $key, $value) Sets a value in $_FILES. Dot-notation can be used for nested values.
+ * @method static static setCookie(string $key, $value) Sets a value in $_COOKIE. Dot-notation can be used for nested values.
+ * @method static static setSession(string $key, $value) Sets a value in $_SESSION. Dot-notation can be used for nested values.
+ * @method static static setRequest(string $key, $value) Sets a value in $_REQUEST. Dot-notation can be used for nested values.
+ * @method static static setServer(string $key, $value) Sets a value in $_SERVER. Dot-notation can be used for nested values.
+ * @method static static setEnv(string $key, $value) Sets a value in $_ENV. Dot-notation can be used for nested values.
  *
  * @since 1.0.0
  */
-class Globals
+final class Globals
 {
     public const GLOBALS = [
         '_GET'     => '_GET',
@@ -95,10 +95,10 @@ class Globals
         $name = static::getValidNameOrFail($name);
 
         if ($key !== null) {
-            return Misc::getArrayValueByKey(static::$$name, $key, null);
+            return Misc::getArrayValueByKey(self::$$name, $key, null);
         }
 
-        return static::$$name;
+        return self::$$name;
     }
 
     /**
@@ -118,7 +118,7 @@ class Globals
 
         $name = static::getValidNameOrFail($name);
 
-        Misc::setArrayValueByKey(static::$$name, $key, $value);
+        Misc::setArrayValueByKey(self::$$name, $key, $value);
 
         return new static();
     }
@@ -134,7 +134,7 @@ class Globals
 
         $globals = [];
         foreach (self::GLOBALS as $global) {
-            $globals[$global] = static::$$global;
+            $globals[$global] = self::$$global;
         }
 
         return $globals;
