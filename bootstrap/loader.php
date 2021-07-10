@@ -2,7 +2,7 @@
 
 /**
  * ---------------------------------------------------------------------------------------------------------------------
- *  This file should not be loaded directly in your application, "./autoload.php" takes care of loading it.
+ *  This file should not be loaded directly in the application, "./autoload.php" takes care of loading it.
  * ---------------------------------------------------------------------------------------------------------------------
  *  It takes care of:
  *      (1) Setting application include paths.
@@ -21,7 +21,6 @@
 $paths = [
     BASE_PATH,
 ];
-
 // set include paths
 set_include_path(
     implode(
@@ -39,7 +38,7 @@ $namespaces = [
 ];
 
 $aliases = [
-    // Alias => FQN
+    // Alias  => FQN
     'App'     => \MAKS\Velox\App::class,
     'Config'  => \MAKS\Velox\Backend\Config::class,
     'Router'  => \MAKS\Velox\Backend\Router::class,
@@ -77,13 +76,14 @@ $loader = function ($class) use (&$loader, $namespaces, $aliases) {
 };
 
 spl_autoload_register($loader, true, false);
+
 // clean up
 unset($namespaces);
 unset($aliases);
 unset($loader);
 
 
-// everything is an exception, even minor warnings
+// errors handler, makes everything an exception, even minor warnings
 set_error_handler(function (int $code, string $message, string $file, int $line) {
     if (!class_exists('ErrorOrWarningException')) {
         class ErrorOrWarningException extends \ErrorException {};
@@ -92,10 +92,8 @@ set_error_handler(function (int $code, string $message, string $file, int $line)
     throw new ErrorOrWarningException($message, $code, 1, $file, $line, null);
 });
 
-// exceptions handler, logs the exception and then dumps it and or displays a nice page
+// exceptions handler, logs the exception and then dumps it and/or displays a nice page
 set_exception_handler(function (\Throwable $exception) {
-    $globalConfig = \MAKS\Velox\Backend\Config::get('global');
-
     http_response_code(500);
 
     // only keep the last buffer if nested
@@ -106,7 +104,9 @@ set_exception_handler(function (\Throwable $exception) {
     // enable logging in case it is disabled
     \MAKS\Velox\Backend\Config::set('global.loggingEnabled', true);
     // log the exception
-    \MAKS\Velox\Helper\Misc::log("[ERROR] $exception", null, 'system');
+    \MAKS\Velox\Helper\Misc::log("[ERROR] {$exception}", null, 'system');
+
+    $globalConfig = \MAKS\Velox\Backend\Config::get('global');
 
     // if in development environment, dump detailed exceptions
     if (!in_array(strtoupper($globalConfig['env']), ['PROD', 'PRODUCTION'])) {
