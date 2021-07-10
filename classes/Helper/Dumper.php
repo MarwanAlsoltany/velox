@@ -94,7 +94,7 @@ class Dumper
         }
 
         $trace = 'Trace: N/A';
-        $backtrace = array_filter(array_reverse(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)), function ($backtrace) use (&$trace) {
+        array_filter(array_reverse(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)), function ($backtrace) use (&$trace) {
             static $hasFound = false;
             if (!$hasFound && in_array($backtrace['function'], ['dump', 'dd'])) {
                 $trace = $backtrace['file'] . ':' . $backtrace['line'];
@@ -132,7 +132,8 @@ class Dumper
                 );
 
                 echo $html;
-            // @codeCoverageIgnoreEnd
+                // @codeCoverageIgnoreEnd
+
             } else {
                 echo self::exportExpression($dump);
             }
@@ -170,11 +171,7 @@ class Dumper
         $traceString = $exception->getTraceAsString();
         $name        = get_class($exception);
         $filename    = basename($file);
-        $lines       = null;
-
-        if (file_exists($file)) {
-            $lines = file($file);
-        }
+        $lines       = file_exists($file) ? file($file) : null;
 
         $accentColor   = self::$accentColor;
         $contrastColor = self::$contrastColor;
@@ -305,13 +302,17 @@ class Dumper
 
         // convert array construct to square brackets
         $acToSbPatterns = [
-            '/(\()array\(/'                    => '$1[',
-            '/\)(\))/'                         => ']$1',
-            '/array \(/'                       => '[',
-            '/\(object\) array\(/'             => '(object)[',
-            '/^([ ]*)\)(,?)$/m'                => '$1]$2',
-            '/=>[ ]?\n[ ]+\[/'                 => '=> [',
-            '/([ ]*)(\'[^\']+\') => ([\[\'])/' => '$1$2 => $3',
+            '/(\()array\(/'                         => '$1[',
+            '/\)(\))/'                              => ']$1',
+            '/array \(/'                            => '[',
+            '/\(object\) array\(/'                  => '(object)[',
+            '/^([ ]*)\)(,?)$/m'                     => '$1]$2',
+            '/\[\n\]/'                              => '[]',
+            '/\[[ ]?\n[ ]+\]/'                      => '[]',
+            '/=>[ ]?\n[ ]+\[/'                      => '=> [',
+            '/=>[ ]?\n[ ]+([a-zA-Z0-9_\x7f-\xff])/' => '=> $1',
+            '/(\n)([ ]*)\]\)/'                      => '$1$2  ])',
+            '/([ ]*)(\'[^\']+\') => ([\[\'])/'      => '$1$2 => $3',
         ];
 
         return preg_replace(
