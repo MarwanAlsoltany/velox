@@ -3,6 +3,7 @@
 
 server.php
 test.php
+public/*
 storage/*
 vendor/*
 build/*
