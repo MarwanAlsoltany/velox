@@ -58,7 +58,7 @@ class Data
     }
 
     /**
-     * Checks whether a value exists in `self::$bag` via dot-notation.
+     * Checks whether a value of a key exists in `self::$bag` via dot-notation.
      *
      * @param string $key The dotted key representation.
      *
@@ -89,7 +89,7 @@ class Data
     }
 
     /**
-     * Sets a value of a key from `self::$bag` via dot-notation.
+     * Sets a value of a key in `self::$bag` via dot-notation.
      *
      * @param string $key The dotted key representation.
      * @param mixed $value The value to set.
