@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Frontend;
 
 use MAKS\Velox\Backend\Config;
+use MAKS\Velox\Backend\Globals;
 
 /**
  * A class that serves as a path resolver for different paths/URLs of the app.
@@ -63,7 +64,7 @@ final class Path
      */
     public static function current(?string $compareTo = null)
     {
-        $path = $_SERVER['REQUEST_URI'];
+        $path = Globals::getServer('REQUEST_URI');
 
         if ($compareTo) {
             return $path === $compareTo;
@@ -128,7 +129,7 @@ final class Path
         static $url = null;
 
         if ($url === null) {
-            $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+            $url = (Globals::getServer('HTTPS') === 'on' ? 'https' : 'http') . '://' . Globals::getServer('HTTP_HOST');
         }
 
         return sprintf(
