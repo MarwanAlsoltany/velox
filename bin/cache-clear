@@ -3,7 +3,24 @@
 
 require __DIR__ . '/../bootstrap/autoload.php';
 
-\MAKS\Velox\Backend\Config::clearCache();
-\MAKS\Velox\Frontend\View::clearCache();
+use MAKS\Velox\Backend\Config;
+use MAKS\Velox\Frontend\View;
 
-echo 'OK! ' . PHP_EOL;
+
+if (!Config::get('cli.cache-clear.enabled', false)) {
+    echo 'Command is disabled!', PHP_EOL;
+    exit(1);
+}
+
+
+if (Config::get('cli.cache-clear.args.config', true) === true) {
+    Config::clearCache();
+}
+
+if (Config::get('cli.cache-clear.args.views', true) === true) {
+    View::clearCache();
+}
+
+
+echo 'OK!', PHP_EOL;
+exit(0);
