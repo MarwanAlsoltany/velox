@@ -20,6 +20,7 @@ return [
         'themes'    => '{global.paths.root}/themes',
         'config'    => '{global.paths.root}/config',
         'storage'   => '{global.paths.root}/storage',
+        'public'    => '{global.paths.root}/public',
     ],
 
 
