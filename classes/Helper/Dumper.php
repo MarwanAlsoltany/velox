@@ -119,8 +119,8 @@ class Dumper
         ];
 
         foreach ($variable as $dump) {
+            // @codeCoverageIgnoreStart
             if (!$isCli) {
-                // @codeCoverageIgnoreStart
                 $code = highlight_string('<?php ' . self::exportExpression($dump), true);
                 $html = sprintf(
                     $markup['dumpBlock'],
@@ -132,8 +132,7 @@ class Dumper
                 );
 
                 echo $html;
-                // @codeCoverageIgnoreEnd
-            // CS
+            // @codeCoverageIgnoreEnd
             } else {
                 echo self::exportExpression($dump);
             }
