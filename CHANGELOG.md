@@ -3,6 +3,17 @@
 All notable changes to **VELOX** will be documented in this file.
 
 
+## [[1.0.2] - 2021-07-11](https://github.com/MarwanAlsoltany/velox/compare/v1.0.1...v1.0.2)
+- Update `composer.json`:
+    - Add required PHP extensions `ext-json` and `ext-dom`.
+- Update `app-mirror` command:
+    - Fix file permissions issues with generated files/directories.
+    - Fix platform related issue when removing old links.
+- Update `app-serve` command:
+    - Remove `declare(ticks=1)` execution directive that was introduced by mistake.
+
+<br />
+
 ## [[1.0.1] - 2021-07-11](https://github.com/MarwanAlsoltany/velox/compare/v1.0.0...v1.0.1)
 - Update `autoload.php`:
     - Use `require()` to load `./loader.php` instead of `include()`.
