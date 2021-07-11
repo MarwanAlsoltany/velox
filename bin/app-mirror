@@ -16,14 +16,16 @@ if (!Config::get('cli.app-mirror.enabled', false)) {
 $fileSystem = new class {
     public function link(string $target, string $link): bool
     {
-        if (file_exists($link)) {
-            if (is_link($link)) {
-                is_dir($link) ? rmdir($link) : unlink($link);
+        if (is_link($link)) {
+            if (is_dir($link) && PHP_OS == 'WINNT') {
+                rmdir($link);
+            } else {
+                unlink($link);
             }
         }
 
         if (!file_exists(dirname($link))) {
-            mkdir(dirname($link), 0744, true);
+            mkdir(dirname($link), 0755, true);
         }
 
         return symlink($target, $link);
@@ -60,7 +62,7 @@ $fileSystem = new class {
         }
 
         if (is_dir($source)) {
-            mkdir($destination, 744, true);
+            mkdir($destination, 755, true);
             $files = scandir($source);
             foreach ($files as $file) {
                 if ($file !== '.' && $file !== '..') {
