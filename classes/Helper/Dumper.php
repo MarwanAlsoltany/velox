@@ -133,7 +133,7 @@ class Dumper
 
                 echo $html;
                 // @codeCoverageIgnoreEnd
-
+            // CS
             } else {
                 echo self::exportExpression($dump);
             }
