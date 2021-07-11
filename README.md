@@ -17,14 +17,19 @@ The fastest way to build simple websites using PHP!
 
 [![PHP Version][php-icon]][php-href]
 [![Latest Version on Packagist][version-icon]][version-href]
+[![Total Downloads][downloads-icon]][downloads-href]
 [![License][license-icon]][license-href]
 [![Maintenance][maintenance-icon]][maintenance-href]
-[![Total Downloads][downloads-icon]][downloads-href]
 [![Scrutinizer Build Status][scrutinizer-icon]][scrutinizer-href]
 [![Scrutinizer Code Coverage][scrutinizer-coverage-icon]][scrutinizer-coverage-href]
 [![Scrutinizer Code Quality][scrutinizer-quality-icon]][scrutinizer-quality-href]
 [![Travis Build Status][travis-icon]][travis-href]
 [![StyleCI Code Style][styleci-icon]][styleci-href]
+
+[![Open in Visual Studio Code][vscode-icon]][vscode-href]
+
+[![Tweet][tweet-icon]][tweet-href]
+
 
 
 <details>
@@ -43,7 +48,6 @@ The fastest way to build simple websites using PHP!
 </p>
 </details>
 
-<a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FMarwanAlsoltany%2Fvelox&text=The%20fastest%20way%20to%20build%20simple%20websites%20using%20%23PHP%21" title="Tweet" target="_blank"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" alt="Tweet"></a>
 </div>
 
 
@@ -89,7 +93,7 @@ Download [VELOX](https://github.com/MarwanAlsoltany/velox/releases) as a `.zip` 
 
 ## About VELOX
 
-VELOX is a lightweight micro-framework that makes creating a simple website using PHP joyful. It helps you create future-proof websites faster and more efficiently. It provides components that facilitate the process of creating a website using vanilla PHP. VELOX does not have any dependencies, the VELOX package and everything that it needs is included in the project itself. All that VELOX provides is a way to work with `config`, pass `data`, register `routes`, render `views`, handle `exceptions`, `autoload` code, and `resolve` assets. It provides the *View* and the *Controller* parts of an *MVC* design pattern, leaving the *Model* part for you to implement as you wish, or use any 3rd-Party Package; in case you needed it. VELOX can also be used as a **Static Site Generator** if all you need is HTML files in the end.
+VELOX is a lightweight micro-framework that makes creating a simple website using PHP joyful. It helps you create future-proof websites faster and more efficiently. It provides components that facilitate the process of creating a website using vanilla PHP. VELOX does not have any dependencies, the VELOX package and everything that it needs is included in the project itself. All that VELOX provides is a way to work with **config**, pass **data**, register **routes**, render **views**, handle **exceptions**, **autoload** code, and **resolve** assets. It provides the *View* and the *Controller* parts of an *MVC* design pattern, leaving the *Model* part for you to implement as you wish, or use any 3rd-Party Package; in case you needed it. VELOX can also be used as a **Static Site Generator** if all you need is HTML files in the end.
 
 ### Why does VELOX exist?
 
@@ -117,7 +121,7 @@ VELOX has a very special use-case, simple websites, and here is meant really sim
 | [`themes`](./themes) | This is where all your frontend themes will be placed. You will be mostly working here for the frontend part of your app. |
 | [`app`](./app) | This is where your own backend logic will be placed. You will be mostly working here for the backend part of your app. |
 | [`bin`](./bin) | This is where PHP executables are placed. You can freely add yours, or delete the entire directory. |
-| [`public`](./public) | This is where you should put your `index.php` for maximum security. You can freely delete this directory if you want to. |
+| [`public`](./public) | This is where you should put your `index.php` with a symlink for static assets (active theme `assets/` directory for example) for maximum security. You can freely delete this directory if you want to. |
 | [`vendor`](./vendor) | This is where your Composer dependencies will be placed. You can freely delete this directory if you don't want to use Composer. |
 
 ![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Most files listed in these directories are documented. Take a look through them to learn more about VELOX.*
@@ -130,6 +134,7 @@ The entry point for a VELOX app is the [`index.php`](./index.php), here you need
 <?php
 
 require 'bootstrap/autoload.php';
+
 
 Router::handle('/', function () {
     return View::render('home', ['title' => 'Home']);
@@ -159,8 +164,9 @@ The following table lists all config files that come shipped with VELOX.
 | [`theme.php`](./config/theme.php) | This config file can be used to edit/extend theme configuration. |
 | [`view.php`](./config/view.php) | This config file can be used to customize everything about the views. It is used by the `View::class`. |
 | [`data.php`](./config/data.php) | This config file can be used to provide any arbitrary data, which then will get injected in the `Data::class`. |
+| [`cli.php`](./config/cli.php) | This config file can be used to enable/disable the commands or change their arguments. |
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own config files too, all you need to do is to create a new file under `/config` and add you own configuration to it. VELOX will know about this file and load it in the application. You can access your config via `Config::get('filename.whatEverKeyYouWrote')`.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own config files too, all you need to do is to create a new file under `/config/` and add your configuration to it. VELOX will know about this file and load it in the application. You can access your config via `Config::get('filename.whateverKeyYouWrote')`.*
 
 
 ---
@@ -184,7 +190,7 @@ VELOX classes are divided in four namespaces:
 | [`Globals`](./classes/Backend/Globals.php) | A class that serves as an abstraction/wrapper to work with superglobals. |
 | [`Controller`](./classes/Backend/Controller.php) | An abstract class that serves as a base Controller that can be extended to make handlers for the router. |
 | [`Data`](./classes/Frontend/Data.php) | A class that serves as an abstracted data bag/store that is accessible via dot-notation. |
-| [`View`](./classes/Frontend/View.php) | A class that renders and caches view files (Layouts, Pages, and Partials) with the ability to include additional files and divide page content into sections. |
+| [`View`](./classes/Frontend/View.php) | A class that renders view files (Layouts, Pages, and Partials) with the ability to include additional files, divide page content into sections and cache rendered views. |
 | [`HTML`](./classes/Frontend/HTML.php) | A class that serves as a fluent interface to write HTML in PHP. It also helps with creating HTML elements on the fly. |
 | [`Path`](./classes/Frontend/Path.php) | A class that serves as a path resolver for different paths/URLs of the app. |
 | [`Dumper`](./classes/Helper/Dumper.php) | A class that dumps variables and exception in a nice formatting. |
@@ -198,7 +204,27 @@ VELOX classes are divided in four namespaces:
 
 ### Extending VELOX
 
-To add you own classes use the `app/` directory, this is where you should put you own business logic. Note that you have to follow PSR-4 in order for VELOX to load you classes. See [`app/Controller/DefaultController`](./app/Controller/DefaultController.php), to get an idea.
+To add your own classes use the `app/` directory, this is where you should put you own business logic. Note that you have to follow PSR-4 in order for VELOX to load your classes. See [`app/Controller/DefaultController`](./app/Controller/DefaultController.php), to get an idea.
+
+
+---
+
+
+## Commands
+
+VELOX comes with some handy commands that you can use to do some repetitive tasks. You can execute these commands using the `php bin/{command-name}`.
+
+The following table lists all available commands with their description.
+
+| Command | Description |
+| --- | --- |
+| [`app-serve`](./bin/app-serve) | This command starts a development server. |
+| [`app-mirror`](./bin/app-mirror) | This command mirrors the app in the `/public/` directory. |
+| [`config-cache`](./bin/config-cache) | This command caches the current configuration. |
+| [`cache-clear`](./bin/cache-clear) | This command clears caches. |
+
+You can customize these commands using the [`config/cli.php`](./config/cli.php) file. Here you can enable/disable them or provide different arguments for them.
+
 
 ---
 
@@ -226,7 +252,7 @@ VELOX functions are divided into these files:
 | HTML Helpers | `he()`, `hd()`, `hse()`, `hsd()`, `st()`, `nb()` |
 
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your functions too, all you need to do is to create a new file under `functions/` and add you own functions to it. VELOX will know about this file and load it in the application.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own functions too, all you need to do is to create a new file under `/functions/` and add your functions to it. VELOX will know about this file and load it in the application.*
 
 
 ---
@@ -236,16 +262,17 @@ VELOX functions are divided into these files:
 
 VELOX is built around the idea of `themes`, a theme is divided into four directories:
 
-* The `assets/` directory is where all your static assets associated with this theme will find their place.
+* The `assets/` directory is where all your static assets associated with this theme will be placed.
 * The `layouts/` directory is where you define your layouts. A layout in VELOX terminology is the outer framing of a webpage.
-* The `pages/` directory is where you put the content specific to every page, the page will then be wrapped with some layout of your choice and finally rendered. A page in VELOX terminology is the actual content of a webpage.
-* The `partials/` directory is where you put all your reusable pieces of the theme, which then will be used in your layouts or pages. A good example for **partials** could be: *Components*, *Includes*, and *Content-Elements*.
+* The `pages/` directory is where you put the content specific to every page, the page will then be wrapped with some layout of your choice and finally get rendered. A page in VELOX terminology is the actual content of a webpage.
+* The `partials/` directory is where you put all your reusable pieces of the theme, which then will be used in your layouts, pages, or other partials. A good example for **partials** could be: *Components*, *Includes*, and *Content-Elements*.
 
 You can customize the behavior of themes using the [`config/theme.php`](./config/theme.php) file. Here you can set the active theme with the `active` key. Themes can inherit from each other by setting parent(s) with the `parent` key. You can also change the theme directory structure if you wish to using the `paths` key. Other configurations that worth taking a look at which have to do with themes can be found in the [`config/view.php`](./config/view.php) file.
 
 ![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *You can take a look at the provided [`velox`](./themes/velox) theme to see how all stuff work together in practice.*
 
 ### Examples:
+
 1. Layout: [`themes/velox/layouts/main.phtml`](./themes/velox/layouts/main.phtml)
 2. Page: [`themes/velox/pages/home.phtml`](./themes/velox/pages/home.phtml)
 3. Partial: [`themes/velox/partials/text-image.phtml`](./themes/velox/partials/text-image.phtml)
@@ -269,24 +296,28 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 
 
 
-[php-icon]: https://img.shields.io/badge/php-%3D%3C7.4-yellow?style=flat-square
-[version-icon]: https://img.shields.io/packagist/v/marwanalsoltany/velox.svg?style=flat-square
-[license-icon]: https://img.shields.io/badge/license-MIT-red.svg?style=flat-square
-[maintenance-icon]: https://img.shields.io/badge/maintained-yes-orange.svg?style=flat-square
-[downloads-icon]: https://img.shields.io/packagist/dt/marwanalsoltany/velox.svg?style=flat-square
-[scrutinizer-icon]: https://img.shields.io/scrutinizer/build/g/MarwanAlsoltany/velox/master?style=flat-square
-[scrutinizer-coverage-icon]: https://img.shields.io/scrutinizer/coverage/g/MarwanAlsoltany/velox.svg?style=flat-square
-[scrutinizer-quality-icon]: https://img.shields.io/scrutinizer/g/MarwanAlsoltany/velox.svg?style=flat-square
-[travis-icon]: https://img.shields.io/travis/MarwanAlsoltany/velox/master.svg?style=flat-square
-[styleci-icon]: https://github.styleci.io/repos/356515801/shield?branch=master
+[php-icon]: https://img.shields.io/badge/php-%3D%3C7.4-yellow?style=flat&logo=php
+[version-icon]: https://img.shields.io/packagist/v/marwanalsoltany/velox.svg?style=flat&logo=packagist
+[downloads-icon]: https://img.shields.io/packagist/dt/marwanalsoltany/velox.svg?style=flat&logo=packagist
+[license-icon]: https://img.shields.io/badge/license-MIT-red.svg?style=flat&logo=github
+[maintenance-icon]: https://img.shields.io/badge/maintained-yes-orange.svg?style=flat&logo=github
+[scrutinizer-icon]: https://img.shields.io/scrutinizer/build/g/MarwanAlsoltany/velox/master?style=flat&logo=scrutinizer
+[scrutinizer-coverage-icon]: https://img.shields.io/scrutinizer/coverage/g/MarwanAlsoltany/velox.svg?style=flat&logo=scrutinizer
+[scrutinizer-quality-icon]: https://img.shields.io/scrutinizer/g/MarwanAlsoltany/velox.svg?style=flat&logo=scrutinizer
+[travis-icon]: https://img.shields.io/travis/com/MarwanAlsoltany/velox/master.svg?style=flat&logo=travis
+[styleci-icon]: https://github.styleci.io/repos/356515801/shield?branch=master&style=flat
+[vscode-icon]: https://open.vscode.dev/badges/open-in-vscode.svg
+[tweet-icon]: https://img.shields.io/twitter/url/http/shields.io.svg?style=social
 
 [php-href]: https://github.com/MarwanAlsoltany/velox/search?l=php
 [version-href]: https://packagist.org/packages/marwanalsoltany/velox
+[downloads-href]: https://packagist.org/packages/marwanalsoltany/velox/stats
 [license-href]: ./LICENSE
 [maintenance-href]: https://github.com/MarwanAlsoltany/velox/graphs/commit-activity
-[downloads-href]: https://packagist.org/packages/marwanalsoltany/velox/stats
 [scrutinizer-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/build-status/master
 [scrutinizer-coverage-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/?branch=master
 [scrutinizer-quality-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/?branch=maste
 [travis-href]: https://travis-ci.com/MarwanAlsoltany/velox
 [styleci-href]: https://github.styleci.io/repos/356515801
+[vscode-href]: https://open.vscode.dev/MarwanAlsoltany/velox
+[tweet-href]: https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FMarwanAlsoltany%2Fvelox&text=The%20fastest%20way%20to%20build%20simple%20websites%20using%20%23PHP%21
