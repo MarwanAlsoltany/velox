@@ -81,65 +81,32 @@ class Dumper
      */
     public static function dump(...$variable): void
     {
-        $isCli = self::isCli();
-
+        self::setSyntaxHighlighting();
         $accentColor   = self::$accentColor;
         $contrastColor = self::$contrastColor;
 
-        if (!$isCli) {
-            // @codeCoverageIgnoreStart
-            self::setSyntaxHighlighting();
-            // @codeCoverageIgnoreEnd
-        }
+        $isCli = self::isCli();
+        $trace = self::getValidCallerTrace();
 
-        $trace = 'Trace: N/A';
-        array_filter(array_reverse(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)), function ($backtrace) use (&$trace) {
-            static $hasFound = false;
-            if (!$hasFound && in_array($backtrace['function'], ['dump', 'dd'])) {
-                $trace = $backtrace['file'] . ':' . $backtrace['line'];
-                $hasFound = true;
-
-                return true;
-            }
-
-            return false;
-        });
-
-        $markup = [
-            'traceBlock' => HTML::div($trace, [
+        $blocks = [
+            'traceBlock' => $isCli ? "\n// \e[33;1mTRACE:\e[0m \e[34;46m[{$trace}]\e[0m \n\n" : HTML::div($trace, [
                 'style' => "background:#fff;color:{$accentColor};font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;padding:4px 8px;margin-bottom:18px;"
             ]),
-            'dumpBlock'  => HTML::div('%s', [
+            'dumpBlock' => $isCli ? '%s' : HTML::div('%s', [
                 'style' => "display:table;background:{$contrastColor};color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:18px;padding:18px;margin:8px;"
             ]),
-            'statsBlock' => HTML::div('START_TIME + %.2fms', [
+            'timeBlock' => $isCli ? "\n\n// \e[36mSTART_TIME\e[0m + \e[35m%.2f\e[0mms \n\n\n" : HTML::div('START_TIME + %.2fms', [
                 'style' => "display:table;background:{$accentColor};color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:12px;font-weight:bold;padding:12px;margin:8px;"
             ]),
         ];
 
         foreach ($variable as $dump) {
-            // @codeCoverageIgnoreStart
-            if (!$isCli) {
-                $code = highlight_string('<?php ' . self::exportExpression($dump), true);
-                $html = sprintf(
-                    $markup['dumpBlock'],
-                    preg_replace(
-                        '/&lt;\?php&nbsp;/',
-                        $markup['traceBlock'],
-                        $code
-                    )
-                );
-
-                echo $html;
-            // @codeCoverageIgnoreEnd
-            } else {
-                echo self::exportExpression($dump);
-            }
+            $highlightedDump = self::exportExpressionWithSyntaxHighlighting($dump, $blocks['traceBlock']);
+            printf($blocks['dumpBlock'], $highlightedDump);
         }
 
-        $time  = (microtime(true) - START_TIME) * 1000;
-        $stats = $isCli ? "\n[%.2fms]\n" : $markup['statsBlock'];
-        echo sprintf($stats, $time);
+        $time = (microtime(true) - START_TIME) * 1000;
+        printf($blocks['timeBlock'], $time);
     }
 
     /**
@@ -280,6 +247,7 @@ class Dumper
      * Dumps an expression using `var_export()` or `print_r()`.
      *
      * @param mixed $expression
+     *
      * @return string
      */
     private static function exportExpression($expression): string
@@ -319,10 +287,124 @@ class Dumper
     }
 
     /**
+     * Dumps an expression using `var_export()` or `print_r()` with syntax highlighting.
+     *
+     * @param mixed $expression
+     * @param string|null $phpReplacement `<?php` replacement.
+     *
+     * @return string
+     */
+    private static function exportExpressionWithSyntaxHighlighting($expression, ?string $phpReplacement = ''): string
+    {
+        $export = self::exportExpression($expression);
+
+        $code = highlight_string('<?php ' . $export, true);
+        $html = preg_replace(
+            '/&lt;\?php&nbsp;/',
+            $phpReplacement ?? '',
+            $code
+        );
+
+        if (!self::isCli()) {
+            // @codeCoverageIgnoreStart
+            return $html;
+            // @codeCoverageIgnoreEnd
+        }
+
+        $mixed = preg_replace_callback(
+            '/@CLR\((#\w+)\)/',
+            fn ($matches) => self::getAnsiCodeFromHexColor($matches[1]),
+            preg_replace(
+                ['/<\w+\s+style="color:\s*(#[a-z0-9]+)">(.*?)<\/\w+>/im', '/<br ?\/?>/', '/&nbsp;/'],
+                ["\e[@CLR($1)m$2\e[0m", "\n", " "],
+                $html
+            )
+        );
+
+        $ansi = trim(html_entity_decode(strip_tags($mixed)));
+
+        return $ansi;
+    }
+
+    private static function getValidCallerTrace(): string
+    {
+        $trace = 'Trace: N/A';
+
+        array_filter(array_reverse(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)), function ($backtrace) use (&$trace) {
+            static $hasFound = false;
+            if (!$hasFound && in_array($backtrace['function'], ['dump', 'dd'])) {
+                $trace = $backtrace['file'] . ':' . $backtrace['line'];
+                $hasFound = true;
+
+                return true;
+            }
+
+            return false;
+        });
+
+        return $trace;
+    }
+
+    private static function getAnsiCodeFromHexColor(string $color): int
+    {
+        $colors = [
+            'black'   => ['ansi' => 30, 'rgb' => [0, 0, 0]],
+            'red'     => ['ansi' => 31, 'rgb' => [255, 0, 0]],
+            'green'   => ['ansi' => 32, 'rgb' => [0, 128, 0]],
+            'yellow'  => ['ansi' => 33, 'rgb' => [255, 255, 0]],
+            'blue'    => ['ansi' => 34, 'rgb' => [0, 0, 255]],
+            'magenta' => ['ansi' => 35, 'rgb' => [255, 0, 255]],
+            'cyan'    => ['ansi' => 36, 'rgb' => [0, 255, 255]],
+            'white'   => ['ansi' => 37, 'rgb' => [255, 255, 255]],
+            'default' => ['ansi' => 39, 'rgb' => [128, 128, 128]],
+        ];
+
+        $hexClr = ltrim($color, '#');
+        $hexNum = strval(strlen($hexClr));
+        $hexPos = [
+            '3' => [0, 0, 1, 1, 2, 2],
+            '6' => [0, 1, 2, 3, 4, 5],
+        ];
+
+        [$r, $g, $b] = [
+            $hexClr[$hexPos[$hexNum][0]] . $hexClr[$hexPos[$hexNum][1]],
+            $hexClr[$hexPos[$hexNum][2]] . $hexClr[$hexPos[$hexNum][3]],
+            $hexClr[$hexPos[$hexNum][4]] . $hexClr[$hexPos[$hexNum][5]],
+        ];
+
+        $color = [hexdec($r), hexdec($g), hexdec($b)];
+
+        $distances = [];
+        foreach ($colors as $name => $values) {
+            $distances[$name] = sqrt(
+                pow($values['rgb'][0] - $color[0], 2) +
+                pow($values['rgb'][1] - $color[1], 2) +
+                pow($values['rgb'][2] - $color[2], 2)
+            );
+        }
+
+        $colorName = '';
+        $minDistance = pow(2, 30);
+        foreach ($distances as $key => $value) {
+            if ($value < $minDistance) {
+                $minDistance = $value;
+                $colorName   = $key;
+            }
+        }
+
+        return $colors[$colorName]['ansi'];
+    }
+
+    /**
      * @codeCoverageIgnore
      */
     private static function setSyntaxHighlighting(): void
     {
+        if (self::isCli()) {
+            // use default entries for better contrast.
+            return;
+        }
+
         $tokens = self::$syntaxHighlightTokens;
 
         foreach ($tokens as $token) {
