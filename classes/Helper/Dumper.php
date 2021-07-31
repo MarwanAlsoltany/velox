@@ -57,7 +57,6 @@ class Dumper
     private static array $syntaxHighlightTokens = ['comment', 'keyword', 'string', 'default', 'html'];
 
 
-
     /**
      * Dumps a variable and dies.
      *
@@ -155,10 +154,8 @@ class Dumper
     public static function dumpException(\Throwable $exception): void
     {
         if (self::isCli()) {
-            // @codeCoverageIgnoreStart
             echo $exception;
             exit;
-            // @codeCoverageIgnoreEnd
         }
 
         self::setSyntaxHighlighting();
@@ -338,11 +335,8 @@ class Dumper
         }
     }
 
-    /**
-     * @codeCoverageIgnore
-     */
     private static function isCli(): bool
     {
-        return php_sapi_name() === 'cli' ;
+        return php_sapi_name() === 'cli';
     }
 }
