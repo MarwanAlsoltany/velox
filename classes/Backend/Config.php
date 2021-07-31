@@ -83,15 +83,20 @@ class Config
         $includes = [];
 
         // load all config files
-        $filenames = scandir($path);
+        $filenames = scandir($path) ?: [];
         foreach ($filenames as $filename) {
             $file = sprintf('%s/%s', $path, $filename);
             $config = basename($filename, '.php');
 
+            // do not include items that have dots in their names
+            // as this will conflict with array access separator
+            if (strpos($config, '.') !== false) {
+                continue;
+            }
+
             if (is_dir($file)) {
-                if (strpos($filename, '.') === false) {
-                    $includes[$config] = self::include($file);
-                }
+                $includes[$config] = self::include($file);
+
                 continue;
             }
 
