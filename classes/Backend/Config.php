@@ -128,7 +128,9 @@ class Config
                             $variables[$variable] = Misc::getArrayValueByKey($config, $variable, null);
                         });
 
-                        $value = Misc::interpolate($value, $variables);
+                        $value = $value === $matches[0][0]
+                            ? $variables[$matches[1][0]]
+                            : Misc::interpolate($value, $variables);
                     }
                 }
             });
