@@ -38,6 +38,15 @@ return [
     ],
 
 
+    // This command dumps the current configuration with syntax highlighting.
+    'config-dump' => [
+        'enabled' => true,
+        'args'    => [
+            'parse' => true,
+        ],
+    ],
+
+
     // This command mirrors (symlinks/copies) the provided files/directories in {global.paths.public}.
     'app-mirror' => [
         'enabled' => true,
