@@ -104,6 +104,95 @@ final class Misc
         return true;
     }
 
+
+    /**
+     * Gets a private, protected, or public property (default, static, or constant) of an object.
+     *
+     * @param object $object Class instance.
+     * @param string $property Property name.
+     *
+     * @return mixed The property value.
+     *
+     * @throws \Exception On failure.
+     */
+    public static function getObjectProperty($object, string $property)
+    {
+        return \Closure::bind(function ($object, $property) {
+            $return = null;
+
+            try {
+                $class = get_class($object);
+                if (defined($class . '::' . $property)) {
+                    $return = constant($class . '::' . $property);
+                } elseif (isset($object::$$property)) {
+                    $return = $object::$$property;
+                } elseif (isset($object->{$property})) {
+                    $return = $object->{$property};
+                } else {
+                    throw new \Exception("No default, static, or constant property with the name '{$property}' exists!");
+                }
+            } catch (\Exception $error) {
+                throw new \Exception(sprintf('%s() failed!', __METHOD__), $error->getCode(), $error);
+            }
+
+            return $return;
+        }, null, $object)($object, $property);
+    }
+
+    /**
+     * Sets a private, protected, or public property (default or static) of an object.
+     *
+     * @param object $object Class instance.
+     * @param string $property Property name.
+     * @param string $value Property value.
+     *
+     * @return mixed The new property value.
+     *
+     * @throws \Exception On failure.
+     */
+    public static function setObjectProperty($object, string $property, $value)
+    {
+        return \Closure::bind(function ($object, $property, $value) {
+            $return = null;
+
+            try {
+                if (isset($object::$$property)) {
+                    $return = $object::$$property = $value;
+                } elseif (isset($object->{$property})) {
+                    $return = $object->{$property} = $value;
+                } else {
+                    throw new \Exception("No default, static, or constant property with the name '{$property}' exists!");
+                }
+            } catch (\Exception $error) {
+                throw new \Exception(sprintf('%s() failed!', __METHOD__), $error->getCode(), $error);
+            }
+
+            return $return;
+        }, null, $object)($object, $property, $value);
+    }
+
+    /**
+     * Calls a private, protected, or public method on an object.
+     *
+     * @param object $object Class instance.
+     * @param string $method Method name.
+     * @param mixed ...$arguments
+     *
+     * @return mixed The function result, or false on error.
+     *
+     * @throws \Exception On failure or if the called function threw an exception.
+     */
+    public static function callObjectMethod($object, string $method, ...$arguments)
+    {
+        return \Closure::bind(function ($object, $method, $arguments) {
+            try {
+                return call_user_func_array([$object, $method], $arguments);
+            } catch (\Exception $error) {
+                throw new \Exception(sprintf('%s() failed!', __METHOD__), $error->getCode(), $error);
+            }
+        }, null, $object)($object, $method, $arguments);
+    }
+
     /**
      * Interpolates context values into text placeholders.
      *
