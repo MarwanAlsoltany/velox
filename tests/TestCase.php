@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Tests;
 
+use MAKS\Velox\Helper\Misc;
 use PHPUnit\Framework\TestCase as BaseTestCase;
-use Closure;
-use Exception;
 
 class TestCase extends BaseTestCase
 {
@@ -14,6 +13,7 @@ class TestCase extends BaseTestCase
     {
         parent::__construct();
     }
+
 
     public function setUp(): void
     {
@@ -28,79 +28,48 @@ class TestCase extends BaseTestCase
 
     /**
      * Gets a private, protected, or public property (default, static, or constant) of an object.
+     *
      * @param object $object Class instance.
      * @param string $property Property name.
+     *
      * @return mixed The property value.
-     * @throws Exception On failure.
+     *
+     * @throws \Exception On failure.
      */
     public static function getTestObjectProperty($object, string $property)
     {
-        return call_user_func(
-            Closure::bind(
-                function () use ($object, $property) {
-                    $return = null;
-                    try {
-                        $class = get_class($object);
-                        if (defined($class . '::' . $property)) {
-                            $return = constant($class . '::' . $property);
-                        } elseif (isset($object::$$property)) {
-                            $return = $object::$$property;
-                        } elseif (isset($object->{$property})) {
-                            $return = $object->{$property};
-                        } else {
-                            throw new Exception(
-                                sprintf(
-                                    'No default, static, or constant property with the name "%s" exists!',
-                                    $property
-                                )
-                            );
-                        }
-                    } catch (Exception $error) {
-                        throw new Exception(sprintf('%s::%s() failed!', static::class, __FUNCTION__), 0, $error);
-                    }
-                    return $return;
-                },
-                null,
-                $object
-            )
-        );
+        return Misc::getObjectProperty($object, $property);
     }
 
     /**
      * Sets a private, protected, or public property (default or static) of an object.
+     *
      * @param object $object Class instance.
      * @param string $property Property name.
      * @param string $value Property value.
+     *
      * @return mixed The new property value.
-     * @throws Exception On failure.
+     *
+     * @throws \Exception On failure.
      */
     public static function setTestObjectProperty($object, string $property, $value)
     {
-        return call_user_func(
-            Closure::bind(
-                function () use ($object, $property, $value) {
-                    $return = null;
-                    try {
-                        if (isset($object::$$property)) {
-                            $return = $object::$$property = $value;
-                        } elseif (isset($object->{$property})) {
-                            $return = $object->{$property} = $value;
-                        } else {
-                            throw new Exception(
-                                sprintf(
-                                    'No default or static property with the name "%s" exists!',
-                                    $property
-                                )
-                            );
-                        }
-                    } catch (Exception $error) {
-                        throw new Exception(sprintf('%s::%s() failed!', static::class, __FUNCTION__), 0, $error);
-                    }
-                    return $return;
-                },
-                null,
-                $object
-            )
-        );
+        return Misc::setObjectProperty($object, $property, $value);
+    }
+
+    /**
+     * Calls a private, protected, or public method on an object.
+     *
+     * @param object $object Class instance.
+     * @param string $method Method name.
+     * @param mixed ...$arguments
+     *
+     * @return mixed The function result, or false on error.
+     *
+     * @throws \Exception On failure or if the called function threw an exception.
+     */
+    public static function callTestObjectMethod($object, string $method, ...$arguments)
+    {
+        return Misc::callObjectMethod($object, $method, $arguments);
     }
 }
