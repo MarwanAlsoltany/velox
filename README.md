@@ -48,6 +48,9 @@ The fastest way to build simple websites using PHP!
 </p>
 </details>
 
+<br/>
+<small>If you like this project and would like to support its development, adding a :star: would be appreciated!</small>
+
 </div>
 
 
@@ -221,6 +224,7 @@ The following table lists all available commands with their description.
 | [`app-serve`](./bin/app-serve) | This command starts a development server. |
 | [`app-mirror`](./bin/app-mirror) | This command mirrors the app in the `/public/` directory. |
 | [`config-cache`](./bin/config-cache) | This command caches the current configuration. |
+| [`config-dump`](./bin/config-dump) | This command dumps the current configuration with syntax highlighting. |
 | [`cache-clear`](./bin/cache-clear) | This command clears caches. |
 
 You can customize these commands using the [`config/cli.php`](./config/cli.php) file. Here you can enable/disable them or provide different arguments for them.
