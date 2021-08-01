@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../bootstrap/autoload.php';
+
+use MAKS\Velox\Backend\Config;
+use MAKS\Velox\Helper\Misc;
+use MAKS\Velox\Helper\Dumper;
+
+
+if (!Config::get('cli.config-dump.enabled', false)) {
+    echo 'Command is disabled!', PHP_EOL;
+    exit(1);
+}
+
+
+if (Config::get('cli.config-dump.args.parse', true) === true) {
+    $config = Config::getAll();
+} else {
+    $config = Misc::callObjectMethod(new Config(), 'include', Config::CONFIG_DIR);
+}
+
+Dumper::dump($config);
+
+
+echo 'OK!', PHP_EOL;
+exit(0);
