@@ -19,17 +19,9 @@
 
 // additional include paths
 $paths = [
-    BASE_PATH,
+    // ID  => Path
+    'base' => BASE_PATH,
 ];
-// set include paths
-set_include_path(
-    implode(
-        PATH_SEPARATOR,
-        [get_include_path(), ...$paths]
-    )
-);
-unset($paths);
-
 
 $namespaces = [
     // DIR    => Namespace Prefix
@@ -63,7 +55,7 @@ $loader = function ($class) use (&$loader, $namespaces, $aliases) {
     foreach ($namespaces as $directory => $namespace) {
         if (strrpos($class, $namespace) !== false) {
             $ext = '.php';
-            $path = realpath(dirname(__DIR__) . DIRECTORY_SEPARATOR . $directory);
+            $path = realpath(BASE_PATH . DIRECTORY_SEPARATOR . $directory);
             $name = str_replace([$namespace, '\\'], [DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR], $class);
 
             $file = $path . $name . $ext;
@@ -77,7 +69,16 @@ $loader = function ($class) use (&$loader, $namespaces, $aliases) {
 
 spl_autoload_register($loader, true, false);
 
+// set include paths
+set_include_path(
+    implode(
+        PATH_SEPARATOR,
+        array(get_include_path(), ...array_values($paths))
+    )
+);
+
 // clean up
+unset($paths);
 unset($namespaces);
 unset($aliases);
 unset($loader);
