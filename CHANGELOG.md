@@ -3,6 +3,24 @@
 All notable changes to **VELOX** will be documented in this file.
 
 
+## [[1.0.3] - 2021-08-01](https://github.com/MarwanAlsoltany/velox/compare/v1.0.2...v1.0.3)
+- Update `loader.php`:
+    - Make autoload function use `BASE_PATH` instead of `dirname(__DIR__)`
+    - Update additional include paths array
+- Update `Config` class:
+    - Refactor `parse()` method to allow referencing items of all data types.
+    - Refactor `include()` method to skip files/directories that have dots in their names as this will conflict with array access separator.
+- Update `Misc` class:
+    - Add `getObjectProperty()` method.
+    - Add `setObjectProperty()` method.
+    - Add `callObjectMethod()` method.
+- Update `Dumper` class:
+    - Add support for syntax highlighting in the CLI.
+    - Refactor various class methods.
+- Add `config-dump` command.
+
+<br />
+
 ## [[1.0.2] - 2021-07-11](https://github.com/MarwanAlsoltany/velox/compare/v1.0.1...v1.0.2)
 - Update `composer.json`:
     - Add required PHP extensions `ext-json` and `ext-dom`.
