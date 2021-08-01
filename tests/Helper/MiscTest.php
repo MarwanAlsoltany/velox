@@ -18,6 +18,49 @@ class MiscTest extends TestCase
         parent::setUp();
 
         $this->misc = new Misc();
+
+        $this->testArray = [
+            'prop1' => 'test',
+            'prop2' => 123,
+            'prop3' => ['sub1' => true, 'sub2' => false, 'sub3' => ['nested' => null]]
+        ];
+
+        $this->testObject = new class {
+            // ...
+            public const CONST_PROP = 'CONST';
+            public static $staticProp = 'STATIC';
+            private $privateProp = 'PRIVATE';
+            protected $protectedProp = 'PROTECTED';
+            public $publicProp = 'PUBLIC';
+
+            public function __construct($staticProp = 'STATIC', $privateProp = 'PRIVATE', $protectedProp = 'PROTECTED', $publicProp = 'PUBLIC')
+            {
+                $this::$staticProp = $staticProp;
+                $this->privateProp = $privateProp;
+                $this->protectedProp = $protectedProp;
+                $this->publicProp = $publicProp;
+            }
+
+            private function privateMethod($string = '')
+            {
+                return 'PRIVATE: ' . $string;
+            }
+
+            protected function protectedMethod($string = '')
+            {
+                return 'PROTECTED: ' . $string;
+            }
+
+            public function publicMethod($string = '')
+            {
+                return 'PUBLIC: ' . $string;
+            }
+
+            public function exception()
+            {
+                throw new \Exception('Test!');
+            }
+        };
     }
 
     public function tearDown(): void
@@ -25,24 +68,27 @@ class MiscTest extends TestCase
         parent::tearDown();
 
         unset($this->misc);
+        unset($this->testObject);
     }
 
 
     public function testMiscGetArrayValueByKeyMethodGetsExpectedValues()
     {
-        $array = [
-            'prop1' => 'test',
-            'prop2' => 123,
-            'prop3' => ['sub1' => true, 'sub2' => false, 'sub3' => ['nested' => null]]
-        ];
+        $fallback = $this->misc->getArrayValueByKey($this->testArray, 'not.found', 'fallback');
+        $none     = $this->misc->getArrayValueByKey($this->testArray, 'prop0', 'none');
+        $test     = $this->misc->getArrayValueByKey($this->testArray, 'prop1');
+        $num123   = $this->misc->getArrayValueByKey($this->testArray, 'prop2');
+        $true     = $this->misc->getArrayValueByKey($this->testArray, 'prop3.sub1');
+        $false    = $this->misc->getArrayValueByKey($this->testArray, 'prop3.sub2');
+        $null     = $this->misc->getArrayValueByKey($this->testArray, 'prop3.sub3.nested');
 
-        $this->assertEquals('fallback', $this->misc->getArrayValueByKey($array, 'not.found', 'fallback'));
-        $this->assertEquals('none', $this->misc->getArrayValueByKey($array, 'prop0', 'none'));
-        $this->assertEquals('test', $this->misc->getArrayValueByKey($array, 'prop1'));
-        $this->assertEquals(123, $this->misc->getArrayValueByKey($array, 'prop2'));
-        $this->assertTrue($this->misc->getArrayValueByKey($array, 'prop3.sub1'));
-        $this->assertFalse($this->misc->getArrayValueByKey($array, 'prop3.sub2'));
-        $this->assertNull($this->misc->getArrayValueByKey($array, 'prop3.sub3.nested'));
+        $this->assertEquals('fallback', $fallback);
+        $this->assertEquals('none', $none);
+        $this->assertEquals('test', $test);
+        $this->assertEquals(123, $num123);
+        $this->assertTrue($true);
+        $this->assertFalse($false);
+        $this->assertNull($null);
 
         $arr = [];
         $str = '';
@@ -51,23 +97,65 @@ class MiscTest extends TestCase
 
     public function testMiscSetArrayValueByKeyMethodSetsExpectedValues()
     {
-        $array = [
-            'prop1' => 'test',
-            'prop2' => 123,
-            'prop3' => ['sub1' => true, 'sub2' => ['nested' => null]]
-        ];
+        $this->misc->setArrayValueByKey($this->testArray, 'prop4', 'abc');
+        $this->misc->setArrayValueByKey($this->testArray, 'prop5.sub1.nested', 'xyz');
 
-        $this->misc->setArrayValueByKey($array, 'prop4', 'abc');
-        $this->misc->setArrayValueByKey($array, 'prop5.sub1.nested', 'xyz');
-
-        $this->assertArrayHasKey('prop4', $array);
-        $this->assertArrayHasKey('nested', $array['prop5']['sub1']);
-        $this->assertEquals('abc', $array['prop4']);
-        $this->assertEquals('xyz', $array['prop5']['sub1']['nested']);
+        $this->assertArrayHasKey('prop4', $this->testArray);
+        $this->assertArrayHasKey('nested', $this->testArray['prop5']['sub1']);
+        $this->assertEquals('abc', $this->testArray['prop4']);
+        $this->assertEquals('xyz', $this->testArray['prop5']['sub1']['nested']);
 
         $arr = [];
         $str = '';
         $this->assertFalse($this->misc->setArrayValueByKey($arr, $str, $str));
+    }
+
+    public function testMiscCallMethodMethodExecutesAMethodOnTheGivenObject()
+    {
+        $privateMethod   = Misc::callObjectMethod($this->testObject, 'privateMethod', 'is not so private!');
+        $protectedMethod = Misc::callObjectMethod($this->testObject, 'protectedMethod', 'is not so protected!');
+        $publicMethod    = Misc::callObjectMethod($this->testObject, 'publicMethod', 'is simply public!');
+
+        $this->assertEquals('PRIVATE: is not so private!', $privateMethod);
+        $this->assertEquals('PROTECTED: is not so protected!', $protectedMethod);
+        $this->assertEquals('PUBLIC: is simply public!', $publicMethod);
+
+        $this->expectException(\Exception::class);
+        Misc::callObjectMethod($this->testObject, 'exception');
+    }
+
+    public function testMiscGetPropertyMethodGetsValuesAsExpected()
+    {
+        $privateProp   = Misc::getObjectProperty($this->testObject, 'privateProp');
+        $protectedProp = Misc::getObjectProperty($this->testObject, 'protectedProp');
+        $publicProp    = Misc::getObjectProperty($this->testObject, 'publicProp');
+        $staticProp    = Misc::getObjectProperty($this->testObject, 'staticProp');
+        $constProp     = Misc::getObjectProperty($this->testObject, 'CONST_PROP');
+
+        $this->assertEquals('PRIVATE', $privateProp);
+        $this->assertEquals('PROTECTED', $protectedProp);
+        $this->assertEquals('PUBLIC', $publicProp);
+        $this->assertEquals('STATIC', $staticProp);
+        $this->assertEquals('CONST', $constProp);
+
+        $this->expectException(\Exception::class);
+        Misc::getObjectProperty($this->testObject, 'UNKNOWN');
+    }
+
+    public function testMiscSetPropertyMethodSetsValuesAsExpected()
+    {
+        Misc::setObjectProperty($this->testObject, 'privateProp', 'private');
+        Misc::setObjectProperty($this->testObject, 'protectedProp', 'protected');
+        Misc::setObjectProperty($this->testObject, 'publicProp', 'public');
+        Misc::setObjectProperty($this->testObject, 'staticProp', 'static');
+
+        $this->assertEquals('private', $this->getTestObjectProperty($this->testObject, 'privateProp'));
+        $this->assertEquals('protected', $this->getTestObjectProperty($this->testObject, 'protectedProp'));
+        $this->assertEquals('public', $this->getTestObjectProperty($this->testObject, 'publicProp'));
+        $this->assertEquals('static', $this->getTestObjectProperty($this->testObject, 'staticProp'));
+
+        $this->expectException(\Exception::class);
+        Misc::setObjectProperty($this->testObject, 'UNKNOWN', 'UNKNOWN');
     }
 
     public function testInterpolateMethod()
