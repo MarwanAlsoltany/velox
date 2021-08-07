@@ -221,6 +221,23 @@ final class Path
         return static::resolveFromAssets($path, static::resolveUrl());
     }
 
+    /**
+     * Returns a normalized path based on OS.
+     *
+     * @param string $directory
+     * @param string $filename
+     * @param string $extension
+     *
+     * @return string
+     */
+    public static function normalize(string $directory, string $filename, string $extension = ''): string
+    {
+        $filename = substr($filename, -strlen($extension)) === $extension ? $filename : $filename . $extension;
+        $directory = $directory . '/';
+
+        return preg_replace('/\/+|\\+/', DIRECTORY_SEPARATOR, $directory . $filename);
+    }
+
 
     /**
      * Aliases `self::resolve*()` with a function of the same name without the "resolve" prefix.
