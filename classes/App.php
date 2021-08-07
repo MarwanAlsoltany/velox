@@ -147,11 +147,11 @@ class App
         $hasPassed = false;
 
         if (!$filename) {
-            $filename = $logging['defaultFilename'];
+            $filename = $logging['defaultFilename'] ?? 'log-' . date('Ymd');
         }
 
         if (!$directory) {
-            $directory = $logging['defaultDirectory'];
+            $directory = $logging['defaultDirectory'] ?? BASE_PATH;
         }
 
         $file = Path::normalize($directory, $filename, '.log');
@@ -170,8 +170,8 @@ class App
         // write in the log file
         if (is_writable($file)) {
             clearstatcache(true, $file);
-            // empty the file if it exceeds 64MB
-            if (filesize($file) > $logging['maxFileSize']) {
+            // empty the file if it exceeds the configured file size
+            if (filesize($file) > $logging['maxFileSize'] ?? 6.4e+7) {
                 $stream = fopen($file, 'r');
                 if (is_resource($stream)) {
                     $signature = fgets($stream) . 'For exceeding the configured {global.logging.maxFileSize}, it was overwritten on ' . date('l jS \of F Y h:i:s A (Ymdhis)') . PHP_EOL . PHP_EOL;
