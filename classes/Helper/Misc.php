@@ -127,7 +127,7 @@ final class Misc
      *
      * @param object $object Class instance.
      * @param string $property Property name.
-     * @param string $value Property value.
+     * @param mixed $value Property value.
      *
      * @return mixed The new property value.
      *
