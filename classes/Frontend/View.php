@@ -532,7 +532,7 @@ class View
      */
     private static function resolvePath(string $directory, string $filename, ?string $extension = null): string
     {
-        $extension = $extension ?? Config::get('view.fileExtension');
+        $extension = $extension ?? Config::get('view.fileExtension') ?? self::DEFAULTS['fileExtension'];
 
         return Path::normalize(
             $directory,
