@@ -49,7 +49,7 @@ The fastest way to build simple websites using PHP!
 </details>
 
 <br/>
-<small>If you like this project and would like to support its development, adding a :star: would be appreciated!</small>
+<small>If you like this project and would like to support its development, giving it a :star: would be appreciated!</small>
 
 </div>
 
