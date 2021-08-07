@@ -3,10 +3,40 @@
 All notable changes to **VELOX** will be documented in this file.
 
 
+## [[1.1.0] - 2021-08-07](https://github.com/MarwanAlsoltany/velox/compare/v1.0.3...v1.1.0)
+- Update `App` class:
+    - Add `extend()` method.
+    - Add `log()` method.
+- Update `Path` class:
+    - Add `normalize()` method.
+- Update `Misc` class:
+    - Remove `log()` method (moved to `App::log()`).
+    - Remove `getNormalizedPath()` method (moved to `Path::normalize()`).
+- Update `Data` class:
+    - Refactor `load()` method to make `Config::$config['data']` reference `Data::$bag`.
+- Update `View` class:
+    - Swap usage of `Misc::log()` with `App:log()`.
+    - Swap usage of `Misc::getNormalizedPath()` with `Path:normalize()`.
+- Update `Config` class:
+    - Refactor `include()` method to allow concatenating files and directories with the same name.
+    - Refactor `include()` to exclude files that are not `.php` files.
+    - Swap usage of `Misc::log()` with `App:log()`.
+- Update `Router` class:
+    - Swap usage of `Misc::log()` with `App:log()`.
+- Update `loader.php`:
+    - Swap usage of `Misc::log()` with `App:log()`.
+- Update `global.php` config file:
+    - Add `logging` config entry.
+    - Remove `loggingEnabled` config entry.
+- Update tests:
+    - Add new tests to the newly created methods.
+
+<br />
+
 ## [[1.0.3] - 2021-08-01](https://github.com/MarwanAlsoltany/velox/compare/v1.0.2...v1.0.3)
 - Update `loader.php`:
-    - Make autoload function use `BASE_PATH` instead of `dirname(__DIR__)`
-    - Update additional include paths array
+    - Make autoload function use `BASE_PATH` instead of `dirname(__DIR__)`.
+    - Update additional include paths array.
 - Update `Config` class:
     - Refactor `parse()` method to allow referencing items of all data types.
     - Refactor `include()` method to skip files/directories that have dots in their names as this will conflict with array access separator.
