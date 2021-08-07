@@ -84,7 +84,8 @@ class Config
         $includes = [];
         $include  = static function ($file) {
             if (is_file($file)) {
-                return include($file);
+                $info = pathinfo($file);
+                return $info['extension'] == 'php' ? include($file) : [];
             }
 
             return self::include($file);
