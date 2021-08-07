@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend;
 
+use MAKS\Velox\App;
 use MAKS\Velox\Helper\Misc;
 
 /**
@@ -186,7 +187,7 @@ class Config
 
         file_put_contents($configCacheFile, $configJson, LOCK_EX);
 
-        Misc::log(
+        App::log(
             'Generated cache for system config, checksum (SHA-256: {checksum})',
             ['checksum' => hash('sha256', $configJson)],
             'system'
@@ -208,7 +209,7 @@ class Config
             unlink($configCacheFile);
         }
 
-        Misc::log('Cleared config cache', null, 'system');
+        App::log('Cleared config cache', null, 'system');
     }
 
     /**
