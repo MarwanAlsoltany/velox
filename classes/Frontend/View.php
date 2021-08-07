@@ -11,8 +11,10 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Frontend;
 
+use MAKS\Velox\App;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Frontend\HTML;
+use MAKS\Velox\Frontend\Path;
 use MAKS\Velox\Helper\Misc;
 
 /**
@@ -361,7 +363,7 @@ class View
 
             file_put_contents($cacheFile, $content, LOCK_EX);
 
-            Misc::log('Generated cache for the "{page}" page', ['page' => $page], 'system');
+            App::log('Generated cache for the "{page}" page', ['page' => $page], 'system');
         }
 
         $content = $content ?? file_get_contents($cacheFile);
@@ -396,7 +398,7 @@ class View
 
         $clear($cacheDir);
 
-        Misc::log('Cleared views cache', null, 'system');
+        App::log('Cleared views cache', null, 'system');
     }
 
     /**
@@ -532,7 +534,7 @@ class View
     {
         $extension = $extension ?? Config::get('view.fileExtension');
 
-        return Misc::getNormalizedPath(
+        return Path::normalize(
             $directory,
             $filename,
             $extension
