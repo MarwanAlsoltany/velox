@@ -53,7 +53,10 @@ class Data
         if (empty(static::$bag)) {
             static::$bag = (array)Config::get('data', static::$bag);
 
-            Config::set('data', null);
+            // make `Config::$config['data']` points to `Data::$bag` (the same array in memory)
+            $config = Config::getAll();
+            $config['data'] = &static::$bag;
+            Misc::setObjectProperty(new Config(), 'config', $config);
         }
     }
 
