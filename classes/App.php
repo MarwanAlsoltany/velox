@@ -66,6 +66,8 @@ class App
 
     public Misc $misc;
 
+    protected array $methods;
+
 
     /**
      * Class constructor.
@@ -81,6 +83,7 @@ class App
         $this->path    = new Path();
         $this->dumper  = new Dumper();
         $this->misc    = new Misc();
+        $this->methods = [];
     }
 
     public function __call(string $method, array $arguments)
@@ -88,7 +91,7 @@ class App
         $class = static::class;
 
         try {
-            return $this->{$method};
+            return isset($this->methods[$method]) ? $this->methods[$method](...$arguments) : $this->{$method};
         } catch (\Exception $error) {
             throw new \Exception(
                 "Call to undefined method {$class}::{$method}()",
@@ -103,5 +106,94 @@ class App
         $class = static::class;
 
         throw new \Exception("Call to undefined property {$class}::${$property}");
+    }
+
+
+    /**
+     * Extends the class using the passed callback.
+     *
+     * @param string $name Method name.
+     * @param callable $callback The callback to use as method body.
+     *
+     * @return callable The created bound closure.
+     */
+    public function extend(string $name, callable $callback): callable
+    {
+        $method = \Closure::fromCallable($callback);
+        $method = \Closure::bind($method, $this, $this);
+
+        return $this->methods[$name] = $method;
+    }
+
+
+    /**
+     * Logs a message to a file and generates it if it does not exist.
+     *
+     * @param string $message The message wished to be logged.
+     * @param array|null $context An associative array of values where array key = {key} in the message (context).
+     * @param string|null $filename [optional] The name wished to be given to the file. If not provided `{global.logging.defaultFilename}` will be used instead.
+     * @param string|null $directory [optional] The directory where the log file should be written. If not provided `{global.logging.defaultDirectory}` will be used instead.
+     *
+     * @return bool True on success (if message was written).
+     */
+    public static function log(string $message, ?array $context = [], ?string $filename = null, ?string $directory = null): bool
+    {
+        $logging = Config::get('global.logging');
+
+        if (!$logging['enabled']) {
+            return true;
+        }
+
+        $hasPassed = false;
+
+        if (!$filename) {
+            $filename = $logging['defaultFilename'];
+        }
+
+        if (!$directory) {
+            $directory = $logging['defaultDirectory'];
+        }
+
+        $file = Path::normalize($directory, $filename, '.log');
+
+        if (!file_exists($directory)) {
+            mkdir($directory, 0744, true);
+        }
+
+        // create log file if it does not exist
+        if (!is_file($file) && is_writable($directory)) {
+            $signature = 'Created by ' . __METHOD__ . date('() \o\\n l jS \of F Y h:i:s A (Ymdhis)') . PHP_EOL . PHP_EOL;
+            file_put_contents($file, $signature, 0);
+            chmod($file, 0775);
+        }
+
+        // write in the log file
+        if (is_writable($file)) {
+            clearstatcache(true, $file);
+            // empty the file if it exceeds 64MB
+            if (filesize($file) > $logging['maxFileSize']) {
+                $stream = fopen($file, 'r');
+                if (is_resource($stream)) {
+                    $signature = fgets($stream) . 'For exceeding the configured {global.logging.maxFileSize}, it was overwritten on ' . date('l jS \of F Y h:i:s A (Ymdhis)') . PHP_EOL . PHP_EOL;
+                    fclose($stream);
+                    file_put_contents($file, $signature, 0);
+                    chmod($file, 0775);
+                }
+            }
+
+            $timestamp = (new \DateTime())->format(DATE_ISO8601);
+            $message   = Misc::interpolate($message, $context ?? []);
+
+            $log = "$timestamp\t$message\n";
+
+            $stream = fopen($file, 'a+');
+            if (is_resource($stream)) {
+                fwrite($stream, $log);
+                fclose($stream);
+                $hasPassed = true;
+            }
+        }
+
+        return $hasPassed;
     }
 }
