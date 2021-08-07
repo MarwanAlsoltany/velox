@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend;
 
+use MAKS\Velox\App;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Globals;
-use MAKS\Velox\Helper\Misc;
 
 /**
  * A class that serves as a router and an entry point for the application.
@@ -420,7 +420,7 @@ class Router
                     header("{$protocol} 405 Method Not Allowed", true, 405);
                 }
 
-                Misc::log(
+                App::log(
                     'Responded with 405 to the request for "{path}" with method "{method}"',
                     ['path' => static::$path, 'method' => $method],
                     'system'
@@ -432,7 +432,7 @@ class Router
                     header("{$protocol} 404 Not Found", true, 404);
                 }
 
-                Misc::log(
+                App::log(
                     'Responded with 404 to the request for "{path}"',
                     ['path' => static::$path],
                     'system'
