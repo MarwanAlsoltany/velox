@@ -103,11 +103,13 @@ set_exception_handler(function (\Throwable $exception) {
     }
 
     // enable logging in case it is disabled
-    \MAKS\Velox\Backend\Config::set('global.loggingEnabled', true);
-    // log the exception
-    \MAKS\Velox\Helper\Misc::log("[ERROR] {$exception}", null, 'system');
+    \MAKS\Velox\Backend\Config::set('global.logging.enabled', true);
 
+    // get global config
     $globalConfig = \MAKS\Velox\Backend\Config::get('global');
+
+    // log the exception
+    \MAKS\Velox\App::log("[ERROR: (env: {$globalConfig['env']})] {$exception}", null, 'system');
 
     // if in development environment, dump detailed exceptions
     if (!in_array(strtoupper($globalConfig['env']), ['PROD', 'PRODUCTION'])) {
