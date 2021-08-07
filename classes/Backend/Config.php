@@ -81,6 +81,13 @@ class Config
     private static function include(string $path): array
     {
         $includes = [];
+        $include  = static function ($file) {
+            if (is_file($file)) {
+                return include($file);
+            }
+
+            return self::include($file);
+        };
 
         // load all config files
         $filenames = scandir($path) ?: [];
@@ -94,15 +101,9 @@ class Config
                 continue;
             }
 
-            if (is_dir($file)) {
-                $includes[$config] = self::include($file);
-
-                continue;
-            }
-
-            if (is_file($file)) {
-                $includes[$config] = include($file);
-            }
+            $includes[$config] = isset($includes[$config])
+                ? $include($file) + (array)$includes[$config]
+                : $include($file);
         }
 
         return $includes;
