@@ -52,8 +52,7 @@ class RouterTest extends TestCase
         $this->assertEquals('/{word}', $routes[0]['expression']);
         $this->assertEquals('/{word}', $routes[1]['expression']);
 
-        $this->expectException(\ErrorOrWarningException::class);
-        $this->expectExceptionMessageMatches('/(Cannot modify header information)/');
+        $this->expectOutputString('Test: works === works');
 
         $this->router->start('/en', true, false, false);
     }
@@ -68,8 +67,7 @@ class RouterTest extends TestCase
         $this->router->handle('/multi-match', fn ($path, $match, $previous) => 'Executed!');
         $this->router->handle('/multi-match', fn ($path, $match, $previous) => 'Not Executed!');
 
-        $this->expectException(\ErrorOrWarningException::class);
-        $this->expectExceptionMessageMatches('/(Cannot modify header information)/');
+        $this->expectOutputString('Executed!');
 
         $this->router->start('/', false, false, false);
     }
@@ -172,8 +170,7 @@ class RouterTest extends TestCase
         $this->assertIsCallable($callback);
         $this->assertEquals('Test works!', $callback());
 
-        $this->expectException(\ErrorOrWarningException::class);
-        $this->expectExceptionMessageMatches('/(Cannot modify header information)/');
+        $this->expectOutputString('Test works!');
 
         $this->router->start('/', true, true, false);
     }
@@ -193,8 +190,7 @@ class RouterTest extends TestCase
         $this->assertIsCallable($callback);
         $this->assertEquals('Test works!', $callback());
 
-        $this->expectException(\ErrorOrWarningException::class);
-        $this->expectExceptionMessageMatches('/(Cannot modify header information)/');
+        $this->expectOutputString('Test works!');
 
         $this->router->start('/', false, false, true);
     }
