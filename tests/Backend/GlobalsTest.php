@@ -27,6 +27,11 @@ class GlobalsTest extends TestCase
     }
 
 
+    public function testGlobalsInstanceMethodReturnsAnInstance()
+    {
+        $this->assertInstanceOf(Globals::class, Globals::instance());
+    }
+
     public function testGlobalsGetMethodWithDiffrentWaysOfWritingSuperglobalName()
     {
         $server1 = $this->globals->get('server');
@@ -137,5 +142,33 @@ class GlobalsTest extends TestCase
         ));
 
         $this->assertEquals($zero, 0);
+    }
+
+    public function testGlobalsMagicGetReturnASuperglobalAsClass()
+    {
+        $this->setTestObjectProperty($this->globals, 'isInitialized', false);
+
+        $newA1 = $this->globals->setServer('NEW', 123);
+        $newA2 = $this->globals->server->set('NEW', 123);
+        $this->assertNotEquals($newA1, $newA2);
+
+        $newB1 = $this->globals->getServer('NEW');
+        $newB2 = $this->globals->server->get('NEW');
+        $this->assertEquals($newB1, $newB2);
+
+        $globals1 = $this->globals->getServer();
+        $globals2 = $this->globals->server->getAll();
+
+        $zero = count(array_diff_key(
+            array_keys($globals1),
+            array_keys($globals2)
+        ));
+
+        $this->assertEquals($zero, 0);
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessageMatches('/(Call to undefined property)/');
+
+        $this->globals->unknown;
     }
 }
