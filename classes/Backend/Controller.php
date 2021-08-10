@@ -75,5 +75,7 @@ abstract class Controller
         $this->view    = new View();
         $this->html    = new HTML();
         $this->path    = new Path();
+
+        Event::dispatch('controller.on.create', null, $this);
     }
 }
