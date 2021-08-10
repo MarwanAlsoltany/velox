@@ -51,6 +51,19 @@ if (!function_exists('config')) {
 
 
 
+if (!function_exists('event')) {
+    /**
+     * Returns an instance of the `Event` class.
+     *
+     * @return \MAKS\Velox\Backend\Router
+     */
+    function event() {
+        return app()->event;
+    }
+}
+
+
+
 if (!function_exists('router')) {
     /**
      * Returns an instance of the `Router` class.
