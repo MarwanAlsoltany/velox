@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Backend;
 
 use MAKS\Velox\App;
+use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Globals;
 use MAKS\Velox\Frontend\HTML;
@@ -152,6 +153,8 @@ class Router
 
         static::$routes[] = &$route;
 
+        Event::dispatch('router.on.register' . ucfirst($type), [&$route]);
+
         return new static();
     }
 
@@ -195,6 +198,8 @@ class Router
      */
     public static function redirect(string $to): void
     {
+        Event::dispatch('router.before.redirect', [$to]);
+
         if (filter_var($to, FILTER_VALIDATE_URL)) {
             $header = sprintf('Location: %s', $to);
         } else {
@@ -221,6 +226,8 @@ class Router
      */
     public static function forward(string $to): void
     {
+        Event::dispatch('router.before.forward', [$to]);
+
         $base = static::$base ?? '';
         $path = trim($base, '/') . '/' . ltrim($to, '/');
 
@@ -274,6 +281,8 @@ class Router
     public static function start(?string $base = null, ?bool $allowMultiMatch = null, ?bool $caseMatters = null, ?bool $slashMatters = null): void
     {
         self::$params = func_get_args();
+
+        Event::dispatch('router.on.start', [&self::$params]);
 
         [$base, $allowMultiMatch, $caseMatters, $slashMatters] = static::getValidParameters($base, $allowMultiMatch, $caseMatters, $slashMatters);
 
