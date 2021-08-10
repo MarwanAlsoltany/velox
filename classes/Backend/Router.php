@@ -14,6 +14,7 @@ namespace MAKS\Velox\Backend;
 use MAKS\Velox\App;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Globals;
+use MAKS\Velox\Frontend\HTML;
 
 /**
  * A class that serves as a router and an entry point for the application.
@@ -137,7 +138,7 @@ class Router
      * @param array $arguments
      * @param string|array $method
      *
-     * @return void
+     * @return static
      */
     private static function registerRoute(string $type, string $expression, callable $handler, array $arguments, $method)
     {
@@ -207,7 +208,7 @@ class Router
 
         header($header, true, 302);
 
-        exit;
+        exit; // @codeCoverageIgnore
     }
 
     /**
@@ -227,7 +228,7 @@ class Router
 
         static::start(...self::$params);
 
-        exit;
+        exit; // @codeCoverageIgnore
     }
 
     /**
@@ -426,42 +427,56 @@ class Router
      */
     private static function echoResponse(bool $routeMatchFound, bool $pathMatchFound, $result): void
     {
-        $protocol = Globals::getServer('SERVER_PROTOCOL');
-        $method   = Globals::getServer('REQUEST_METHOD');
+        $code = 200;
 
         if (!$routeMatchFound) {
-            $result = sprintf('The "%s" route is not found, or the request method is not allowed!', static::$path);
+            $code   = $pathMatchFound ? 405 : 404;
+            $path   = static::$path;
+            $method = static::getRequestMethod();
 
-            if ($pathMatchFound) {
-                if (static::$methodNotAllowedCallback) {
-                    $result = call_user_func(static::$methodNotAllowedCallback, static::$path, $method);
+            $title = $code === 404
+                ? sprintf('%d Not Found', $code)
+                : sprintf('%d Not Allowed', $code);
+            $message = $code === 404
+                ? sprintf('The "%s" route is not found!', $path)
+                : sprintf('The "%s" route is found, but the request method "%s" is not allowed!', $path, $method);
 
-                    header("{$protocol} 405 Method Not Allowed", true, 405);
-                }
+            $result = (new HTML())
+                ->node('<!DOCTYPE html>')
+                ->open('html', ['lang' => 'en'])
+                    ->open('head')
+                        ->title($title)
+                        ->link(null, [
+                            'href' => 'https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css',
+                            'rel' => 'stylesheet'
+                        ])
+                    ->close()
+                    ->open('body')
+                        ->open('section', ['class' => 'section is-large has-text-centered'])
+                            ->hr(null)
+                            ->h1($title, ['class' => 'title is-1 is-spaced has-text-danger'])
+                            ->h4($message, ['class' => 'subtitle'])
+                            ->hr(null)
+                            ->a('Home', ['class' => 'button is-success is-light', 'href' => '/'])
+                            ->hr(null)
+                        ->close()
+                    ->close()
+                ->close()
+            ->return();
 
-                App::log(
-                    'Responded with 405 to the request for "{path}" with method "{method}"',
-                    ['path' => static::$path, 'method' => $method],
-                    'system'
-                );
-            } else {
-                if (static::$routeNotFoundCallback) {
-                    $result = call_user_func(static::$routeNotFoundCallback, static::$path);
-
-                    header("{$protocol} 404 Not Found", true, 404);
-                }
-
-                App::log(
-                    'Responded with 404 to the request for "{path}"',
-                    ['path' => static::$path],
-                    'system'
-                );
+            if ($code === 404 && static::$routeNotFoundCallback !== null) {
+                $result = (static::$routeNotFoundCallback)($path);
             }
-        } else {
-            header("{$protocol} 200 OK", false, 200);
+
+            if ($code === 405 && static::$methodNotAllowedCallback !== null) {
+                $result = (static::$methodNotAllowedCallback)($path, $method);
+            }
+
+            App::log("Responded with {$code} to the request for '{$path}' with method '{$method}'", null, 'system');
         }
 
-        echo $result;
+        http_response_code($code);
+        echo($result);
     }
 
     /**
