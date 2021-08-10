@@ -42,6 +42,13 @@ class AppTest extends TestCase
         $this->app->unknown();
     }
 
+    public function testThrowsAnExceptionForCallesToUndefinedStaticMethods()
+    {
+        $this->expectException(\Exception::class);
+
+        App::unknown();
+    }
+
     public function testAppReturnsItsPropertyWhenCalledAsAMethod()
     {
         $this->assertEquals($this->app->data, $this->app->data());
@@ -58,6 +65,19 @@ class AppTest extends TestCase
             return $this;
         });
         $this->assertEquals($returnThis(), $this->app);
+    }
+
+    public function testAppExtendStaticMethodCanBeUsedToExtendTheClassWithNewMethods()
+    {
+        $returnParamStatic = App::extendStatic('returnParamStatic', fn ($param) => $param);
+        $this->assertIsCallable($returnParamStatic);
+        $this->assertEquals(App::returnParamStatic('param'), 'param');
+
+
+        $returnStatic = App::extendStatic('returnStatic', function () {
+            return static::class;
+        });
+        $this->assertEquals($returnStatic(), App::class);
     }
 
     public function testLogMethod()
