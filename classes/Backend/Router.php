@@ -129,6 +129,32 @@ class Router
 
 
     /**
+     * Registers a route.
+     *
+     * @param string $type
+     * @param string $expression
+     * @param callable $handler
+     * @param array $arguments
+     * @param string|array $method
+     *
+     * @return void
+     */
+    private static function registerRoute(string $type, string $expression, callable $handler, array $arguments, $method)
+    {
+        $route = [
+            'type' => $type,
+            'expression' => $expression,
+            'handler' => $handler,
+            'arguments' => $arguments,
+            'method' => $method
+        ];
+
+        static::$routes[] = &$route;
+
+        return new static();
+    }
+
+    /**
      * Registers a handler for a route.
      *
      * @param string $expression A route like `/page`, `/page/{id}` (`id` is required), or `/page/{id?}` (`id` is optional). For more flexibility, pass en expression like `/page/([\d]+|[0-9]*)` (regex capture group).
@@ -139,14 +165,7 @@ class Router
      */
     public static function handle(string $expression, callable $handler, $method = 'GET')
     {
-        static::$routes[] = [
-            'expression' => $expression,
-            'handler' => $handler,
-            'arguments' => [],
-            'method' => $method
-        ];
-
-        return new static();
+        return static::registerRoute('handler', $expression, $handler, [], $method);
     }
 
     /**
@@ -162,7 +181,7 @@ class Router
      */
     public static function middleware(string $expression, callable $handler, $method = 'GET')
     {
-        return static::handle($expression, $handler, $method);
+        return static::registerRoute('middleware', $expression, $handler, [], $method);
     }
 
     /**
