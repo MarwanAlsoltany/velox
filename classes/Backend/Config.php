@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Backend;
 
 use MAKS\Velox\App;
+use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Helper\Misc;
 
 /**
@@ -161,6 +162,8 @@ class Config
             }
 
             static::$config = self::parse(self::include($configDir));
+
+            Event::dispatch('config.on.load', [&static::$config]);
         }
     }
 
@@ -188,6 +191,8 @@ class Config
 
         file_put_contents($configCacheFile, $configJson, LOCK_EX);
 
+        Event::dispatch('config.on.cache');
+
         App::log(
             'Generated cache for system config, checksum (SHA-256: {checksum})',
             ['checksum' => hash('sha256', $configJson)],
@@ -209,6 +214,8 @@ class Config
         if (file_exists($configCacheFile)) {
             unlink($configCacheFile);
         }
+
+        Event::dispatch('config.on.clearCache');
 
         App::log('Cleared config cache', null, 'system');
     }
