@@ -68,6 +68,8 @@ class App
 
     protected array $methods;
 
+    protected static array $staticMethods;
+
 
     /**
      * Class constructor.
@@ -86,6 +88,13 @@ class App
         $this->methods = [];
     }
 
+    public function __get(string $property)
+    {
+        $class = static::class;
+
+        throw new \Exception("Call to undefined property {$class}::${$property}");
+    }
+
     public function __call(string $method, array $arguments)
     {
         $class = static::class;
@@ -101,11 +110,15 @@ class App
         }
     }
 
-    public function __get(string $property)
+    public static function __callStatic(string $method, array $arguments)
     {
         $class = static::class;
 
-        throw new \Exception("Call to undefined property {$class}::${$property}");
+        if (!isset(static::$staticMethods[$method])) {
+            throw new \Exception("Call to undefined static method {$class}::{$method}()");
+        }
+
+        return static::$staticMethods[$method](...$arguments);
     }
 
 
@@ -123,6 +136,22 @@ class App
         $method = \Closure::bind($method, $this, $this);
 
         return $this->methods[$name] = $method;
+    }
+
+    /**
+     * Extends the class using the passed callback.
+     *
+     * @param string $name Method name.
+     * @param callable $callback The callback to use as method body.
+     *
+     * @return callable The created closure.
+     */
+    public static function extendStatic(string $name, callable $callback): callable
+    {
+        $method = \Closure::fromCallable($callback);
+        $method = \Closure::bind($method, null, static::class);
+
+        return static::$staticMethods[$name] = $method;
     }
 
 
