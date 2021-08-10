@@ -49,6 +49,8 @@ final class Globals
     ];
 
 
+    protected static bool $isInitialized = false;
+
     private static array $_GET;
     private static array $_POST;
     private static array $_FILES;
@@ -66,15 +68,13 @@ final class Globals
      */
     public static function initialize(): void
     {
-        static $isInitialized = false;
-
-        if (!$isInitialized) {
+        if (!static::$isInitialized) {
             foreach (self::GLOBALS as $global) {
                 global $$global;
                 self::$$global = isset($$global) ? self::$$global = &$$global : [];
             }
 
-            $isInitialized = true;
+            static::$isInitialized = true;
         }
     }
 
@@ -128,7 +128,7 @@ final class Globals
      *
      * @return array
      */
-    public static function getAll(): ?array
+    public static function getAll(): array
     {
         static::initialize();
 
