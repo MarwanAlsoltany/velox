@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Frontend;
 
 use MAKS\Velox\App;
+use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Frontend\HTML;
 use MAKS\Velox\Frontend\Path;
@@ -295,6 +296,8 @@ class View
             return static::cache($page, $variables, $layout);
         }
 
+        Event::dispatch('view.before.render', [&$variables]);
+
         static::section($section, static::page($page, $variables));
 
         $view = static::layout($layout, $variables);
@@ -363,10 +366,14 @@ class View
 
             file_put_contents($cacheFile, $content, LOCK_EX);
 
+
+
             App::log('Generated cache for the "{page}" page', ['page' => $page], 'system');
         }
 
         $content = $content ?? file_get_contents($cacheFile);
+
+        Event::dispatch('view.on.cache');
 
         return $content;
     }
@@ -397,6 +404,8 @@ class View
         };
 
         $clear($cacheDir);
+
+        Event::dispatch('view.on.cacheClear');
 
         App::log('Cleared views cache', null, 'system');
     }
