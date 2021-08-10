@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Frontend;
 
+use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Helper\Misc;
 
@@ -57,6 +58,8 @@ class Data
             $config = Config::getAll();
             $config['data'] = &static::$bag;
             Misc::setObjectProperty(new Config(), 'config', $config);
+
+            Event::dispatch('data.on.load', [&static::$bag]);
         }
     }
 
