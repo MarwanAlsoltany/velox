@@ -8,7 +8,7 @@
  *      (1) Setting application include paths.
  *      (2) Registering an autoloader.
  *      (3) Aliasing VELOX classes.
- *      (4) Setting error and exception handlers.
+ *      (4) Setting error and exception handlers and the shutdown function.
  *      (5) Providing some helper functions for autoloading.
  * ---------------------------------------------------------------------------------------------------------------------
  *  If you ever wanted to extend VELOX functionality beyond basic stuff, you may want to do something here.
@@ -23,12 +23,14 @@ $paths = [
     'base' => BASE_PATH,
 ];
 
+// autoloader directory to namespace mapping
 $namespaces = [
     // DIR    => Namespace Prefix
     'classes' => 'MAKS\\Velox\\',
     'app'     => 'App\\',
 ];
 
+// autoloader dynamically aliased aliased classes
 $aliases = [
     // Alias  => FQN
     'App'     => \MAKS\Velox\App::class,
@@ -42,6 +44,12 @@ $aliases = [
     'Path'    => \MAKS\Velox\Frontend\Path::class,
 ];
 
+
+
+// include paths
+$paths = implode(PATH_SEPARATOR, [get_include_path(), ...array_values($paths)]);
+
+// autoloader function
 $loader = function ($class) use (&$loader, $namespaces, $aliases) {
     if (isset($aliases[$class])) {
         $loader($aliases[$class]);
@@ -68,34 +76,17 @@ $loader = function ($class) use (&$loader, $namespaces, $aliases) {
     }
 };
 
-spl_autoload_register($loader, true, false);
-
-// set include paths
-set_include_path(
-    implode(
-        PATH_SEPARATOR,
-        array(get_include_path(), ...array_values($paths))
-    )
-);
-
-// clean up
-unset($paths);
-unset($namespaces);
-unset($aliases);
-unset($loader);
-
-
 // errors handler, makes everything an exception, even minor warnings
-set_error_handler(function (int $code, string $message, string $file, int $line) {
+$errorHandler = function (int $code, string $message, string $file, int $line) {
     if (!class_exists('ErrorOrWarningException')) {
         class ErrorOrWarningException extends \ErrorException {};
     }
 
     throw new ErrorOrWarningException($message, $code, 1, $file, $line, null);
-});
+};
 
 // exceptions handler, logs the exception and then dumps it and/or displays a nice page
-set_exception_handler(function (\Throwable $exception) {
+$exceptionHandler = function (\Throwable $exception) {
     http_response_code(500);
 
     // only keep the last buffer if nested
@@ -156,7 +147,33 @@ set_exception_handler(function (\Throwable $exception) {
     ->echo();
 
     exit;
-});
+};
+
+// shutdown function, makes errors and exceptions handlers available at shutdown
+$shutdownFunction = function () use ($errorHandler, $exceptionHandler) {
+    \MAKS\Velox\App::extendStatic('handleError', $errorHandler);
+    \MAKS\Velox\App::extendStatic('handleException', $exceptionHandler);
+};
+
+
+
+// set include paths
+set_include_path($paths);
+spl_autoload_register($loader, true, false);
+set_error_handler($errorHandler);
+set_exception_handler($exceptionHandler);
+register_shutdown_function($shutdownFunction);
+
+
+
+// clean up
+unset($paths);
+unset($namespaces);
+unset($aliases);
+unset($loader);
+unset($exceptionHandler);
+unset($errorHandler);
+unset($shutdownFunction);
 
 
 
