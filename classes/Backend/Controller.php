@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend;
 
+use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Router;
 use MAKS\Velox\Backend\Globals;
@@ -14,7 +15,7 @@ use MAKS\Velox\Frontend\Path;
 
 /**
  * An abstract class that serves as a base Controller that can be extended to make handlers for application router.
- * This class has these properties: `$config` = `Config`, `$router` = `Router`, `$globals` = `Globals`, `$data` = `Data`, `$view` = `View`, `$html` = `HTML`, `$path` = `Path`, and the passed array as `$vars`.
+ * This class has these properties: `$config` = `Config`, `$event` = `Event`, `$router` = `Router`, `$globals` = `Globals`, `$data` = `Data`, `$view` = `View`, `$html` = `HTML`, `$path` = `Path`, and the passed array as `$vars`.
  *
  * Example:
  * ```
@@ -41,6 +42,8 @@ abstract class Controller
      */
     protected array $vars;
 
+    protected Event $event;
+
     protected Config $config;
 
     protected Router $router;
@@ -64,6 +67,7 @@ abstract class Controller
     public function __construct(array $vars = [])
     {
         $this->vars    = $vars;
+        $this->event   = new Event();
         $this->config  = new Config();
         $this->router  = new Router();
         $this->globals = new Globals();
