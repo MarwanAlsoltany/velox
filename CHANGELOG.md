@@ -3,6 +3,25 @@
 All notable changes to **VELOX** will be documented in this file.
 
 
+## [[1.1.1] - 2021-08-10](https://github.com/MarwanAlsoltany/velox/compare/v1.1.0...v1.1.1)
+- Update `composer.json`:
+    - Update `branch-alias`.
+    - Update `docs` link.
+- Update `App` class:
+    - Add `extendStatic()` method.
+    - Refactor `log()` method.
+- Update `Router` class:
+    - Add `registerRoute()` method.
+    - Refactor `handle()` and `middleware()` methods to make use of `registerRoute()`.
+- Update `Globals` class:
+    - Add `$globals` static property.
+    - Add `$isInitialized` static property.
+    - Add `instance()` method.
+    - Refactor `initialize()` method.
+- Update tests:
+    - Add new tests to the newly created methods.
+<br />
+
 ## [[1.1.0] - 2021-08-07](https://github.com/MarwanAlsoltany/velox/compare/v1.0.3...v1.1.0)
 - Update `App` class:
     - Add `extend()` method.
