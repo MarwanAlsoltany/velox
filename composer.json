@@ -23,7 +23,7 @@
     ],
     "homepage": "https://github.com/MarwanAlsoltany/velox#readme",
     "support": {
-        "docs": "https://github.com/MarwanAlsoltany/velox#readme",
+        "docs": "https://github.com/MarwanAlsoltany/velox/blob/master/README.md",
         "issues": "https://github.com/MarwanAlsoltany/velox/issues"
     },
     "require": {
@@ -47,7 +47,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     },
     "scripts": {
