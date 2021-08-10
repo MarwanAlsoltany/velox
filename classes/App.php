@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace MAKS\Velox;
 
+use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Router;
 use MAKS\Velox\Backend\Globals;
@@ -24,6 +25,7 @@ use MAKS\Velox\Helper\Misc;
 /**
  * A class that serves as a basic service-container for VELOX.
  * This class has all VELOX classes as public properties:
+ *      - `$event`   = `Event::class`
  *      - `$config`  = `Config::class`
  *      - `$router`  = `Router::class`
  *      - `$globals` = `Globals::class`
@@ -48,6 +50,8 @@ use MAKS\Velox\Helper\Misc;
  */
 class App
 {
+    public Event $event;
+
     public Config $config;
 
     public Router $router;
@@ -76,6 +80,7 @@ class App
      */
     public function __construct()
     {
+        $this->event   = new Event();
         $this->config  = new Config();
         $this->router  = new Router();
         $this->globals = new Globals();
