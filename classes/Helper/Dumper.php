@@ -68,6 +68,8 @@ class Dumper
      */
     public static function dd(...$variable): void
     {
+        $GLOBALS['_DIE'][__METHOD__] = true;
+
         self::dump(...$variable);
         die;
     }
