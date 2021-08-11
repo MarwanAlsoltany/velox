@@ -101,6 +101,6 @@ Router::handleMethodNotAllowed(function ($path, $method) {
 // registers all pages configured in "./config/data.php"
 foreach ((array)Config::get('data.pages') as $page) {
     Router::handle($page['route'], function () use ($page) {
-        return View::render($page['page'], $page['variables'], $page['layout'] );
+        return View::render($page['page'], $page['variables'], $page['layout']);
     }, $page['method']);
 }
