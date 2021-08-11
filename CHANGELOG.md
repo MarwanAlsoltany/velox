@@ -3,6 +3,25 @@
 All notable changes to **VELOX** will be documented in this file.
 
 
+## [[1.2.1] - 2021-08-11](https://github.com/MarwanAlsoltany/velox/compare/v1.2.0...v1.2.1)
+- Update `App` class:
+    - Add magic methods signatures in class DocBlock.
+- Update `additional.php`:
+    - Remove `includes` directory path.
+    - Remove `includes/events` directory path.
+    - Remove `includes/routes` directory path.
+- Update `Controller` class:
+    - Fix wrong name of the dispatched event in `__construct()` method.
+- Update `Router` class:
+    - Refactor `echoResponse()` method.
+- Update `events/system.php`:
+    - Add use statement for `Event` class to avoid class name collision.
+    - Update events handling examples.
+- Update `routes/web.php`:
+    -Add use statement for `Router` class to avoid class name collision.
+
+<br />
+
 ## [[1.2.0] - 2021-08-11](https://github.com/MarwanAlsoltany/velox/compare/v1.1.1...v1.2.0)
 - Add `Event` class.
 - Update `App` class:
