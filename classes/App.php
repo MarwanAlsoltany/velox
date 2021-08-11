@@ -46,6 +46,9 @@ use MAKS\Velox\Helper\Misc;
  * $app->router()->handle('/dump', 'dd');
  * ```
  *
+ * @method static void handleException(\Throwable $expression) This function is available only at shutdown.
+ * @method static void handleError(int $code, string $message, string $file, int $line) This function is available only at shutdown.
+ *
  * @since 1.0.0
  */
 class App
