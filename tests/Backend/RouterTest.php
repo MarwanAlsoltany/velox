@@ -195,6 +195,26 @@ class RouterTest extends TestCase
         $this->router->start('/', false, false, true);
     }
 
+    public function testRouter404And405FallbackPages()
+    {
+        $this->setTestObjectProperty($this->router, 'routes', []);
+        $this->setTestObjectProperty($this->router, 'methodNotAllowedCallback', null);
+        $this->setTestObjectProperty($this->router, 'routeNotFoundCallback', null);
+
+        Globals::setServer('REQUEST_URI', $route = '/' . uniqid());
+        Globals::setServer('REQUEST_METHOD', 'GET');
+
+        $this->router->handle($route, fn () => 'This should not be executed!', 'POST');
+
+        $this->expectOutputRegex('/(404 Not Found)/');
+
+        $this->router->start('/', true, true, false);
+
+        $this->expectOutputRegex('/(405 Not Allowed)/');
+
+        $this->router->start('/', true, true, false);
+    }
+
     public function testRouterGetParsedUrlMethod()
     {
         Globals::setServer('REQUEST_URI', '/?testing=true&lang=en');
