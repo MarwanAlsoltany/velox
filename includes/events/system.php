@@ -13,8 +13,6 @@
 
 use MAKS\Velox\Backend\Event;
 
-
-
 // Config::class
 // -------------
 // * 'config.on.load': This event will be dispatched when the config is loaded. It will be passed a reference to the config array.
