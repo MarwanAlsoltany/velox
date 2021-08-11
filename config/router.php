@@ -27,4 +27,8 @@ return [
     'slashMatters'    => Router::DEFAULTS['slashMatters'],
 
 
+    // Whether to start the router automatically without the need for calling `Router::start()` or not.
+    'allowAutoStart'  => Router::DEFAULTS['allowAutoStart'],
+
+
 ];
