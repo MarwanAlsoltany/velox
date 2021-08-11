@@ -17,6 +17,7 @@ return [
         'app'       => '{global.paths.root}/app',
         'classes'   => '{global.paths.root}/classes',
         'functions' => '{global.paths.root}/functions',
+        'includes'  => '{global.paths.root}/includes',
         'themes'    => '{global.paths.root}/themes',
         'config'    => '{global.paths.root}/config',
         'storage'   => '{global.paths.root}/storage',
