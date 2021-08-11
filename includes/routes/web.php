@@ -13,8 +13,6 @@
 
 use MAKS\Velox\Backend\Router;
 
-
-
 Router::handle('/', function () {
     return View::render('home', ['title' => 'Home']);
 });
