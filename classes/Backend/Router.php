@@ -79,6 +79,7 @@ class Router
         'allowMultiMatch' => true,
         'caseMatters' => false,
         'slashMatters' => true,
+        'allowAutoStart' => true,
     ];
 
     /**
@@ -552,6 +553,24 @@ class Router
     {
         // prevent overwriting constructor in subclasses to allow to use
         // "return new static()" without caring about dependencies.
+
+        // start the router if it's not started by the user
+        static $isStarted = false;
+        if (Config::get('router.allowAutoStart') && !$isStarted) {
+            register_shutdown_function(static function () use (&$isStarted) {
+                // @codeCoverageIgnoreStart
+                $isStarted = true;
+                // $params should be an array if the router has been started
+                if (self::$params === null && PHP_SAPI !== 'cli') {
+                    try {
+                        static::start();
+                    } catch (\Throwable $exception) {
+                        App::handleException($exception);
+                    }
+                }
+                // @codeCoverageIgnoreEnd
+            });
+        }
     }
 
     /**
@@ -584,7 +603,7 @@ class Router
     }
 
     /**
-     * Allows static methods handled by self::__callStatic() to be accessible via object operator `->`.
+     * Allows static methods handled by `self::__callStatic()` to be accessible via object operator `->`.
      */
     public function __call(string $method, array $arguments)
     {
