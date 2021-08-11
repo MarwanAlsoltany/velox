@@ -151,7 +151,7 @@ class Dumper
                 ->open('body')
                     ->open('div', ['class' => 'container'])
                         ->h1("Uncaught {$name}")
-                        ->p("An <b>{$name}</b> was thrown on line {$line} of file {$filename} which prevented further execution of the code.")
+                        ->p("An <code><b>{$name}</b></code> was thrown on line <code><b>{$line}</b></code> of file <code><b>{$filename}</b></code> which prevented further execution of the code.")
                         ->open('div', ['class' => 'message'])
                             ->h3($name)
                             ->p($message)
@@ -159,7 +159,7 @@ class Dumper
                         ->h2('Thrown in:')
                         ->execute(function (HTML $html) use ($file, $line, $lines) {
                             if (isset($lines)) {
-                                $html->p($file);
+                                $html->p("File: <code><b>{$file}</b></code>");
                                 $html->open('ul', ['class' => 'code']);
                                 for ($i = $line - 3; $i < $line + 4; $i++) {
                                     if ($i > 0 && $i < count($lines)) {
@@ -419,6 +419,6 @@ class Dumper
 
     private static function isCli(): bool
     {
-        return php_sapi_name() === 'cli';
+        return PHP_SAPI === 'cli';
     }
 }
