@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MAKS\Velox\Tests;
+namespace MAKS\Velox\Tests\Backend;
 
 use MAKS\Velox\Tests\TestCase;
 use MAKS\Velox\Backend\Controller;

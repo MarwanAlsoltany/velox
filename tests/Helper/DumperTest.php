@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MAKS\Velox\Tests;
+namespace MAKS\Velox\Tests\Helper;
 
 use MAKS\Velox\Tests\TestCase;
 use MAKS\Velox\Helper\Dumper;
