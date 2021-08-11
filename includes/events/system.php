@@ -11,6 +11,8 @@
  * ---------------------------------------------------------------------------------------------------------------------
  */
 
+use MAKS\Velox\Backend\Event;
+
 
 
 // Config::class
@@ -55,9 +57,17 @@
 
 Event::listen('config.on.load', function (&$config) {
     App::log('The config was loaded', null, 'events');
+
+    Config::set('eventExecuted', true);
+    if ($config['eventExecuted']) {
+        App::log('The config was manipulated', null, 'events');
+    }
 });
 
 Event::listen('controller.on.construct', function () {
+    /** @var \MAKS\Velox\Backend\Controller $this */
+    $this->__uid = uniqid(); // add new property $__uid.
+
     App::log('The {class} has been constructed', ['class' => get_class($this)], 'events');
 });
 
@@ -67,6 +77,11 @@ Event::listen('router.on.registerHandler', function (&$route) {
 
 Event::listen('data.on.load', function (&$data) {
     App::log('The data was loaded', null, 'events');
+
+    Data::set('eventExecuted', true);
+    if ($data['eventExecuted']) {
+        App::log('The data was manipulated', null, 'events');
+    }
 });
 
 Event::listen('view.before.render', function (&$variables) {
