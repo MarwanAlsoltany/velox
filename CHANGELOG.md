@@ -13,6 +13,7 @@ All notable changes to **VELOX** will be documented in this file.
 - Update `Router` class:
     - Add `Event::dispatch()` calls in different methods.
     - Update `__construct()` method to add auto start functionality.
+    - Refactor `echoResponse()` method to echo an auto-generated fallback pages for `404` and `405` responses.
 - Update `Dumper` class:
     - Update HTML markup in `dumpException()` method.
     - Refactor `isCli()` method.
