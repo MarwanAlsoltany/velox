@@ -6,6 +6,7 @@ namespace MAKS\Velox\Tests;
 
 use MAKS\Velox\Tests\TestCase;
 use MAKS\Velox\Backend\Controller;
+use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Router;
 use MAKS\Velox\Backend\Globals;
@@ -36,26 +37,21 @@ class ControllerTest extends TestCase
 
     public function testControllerPropertiesContainExpectedValues()
     {
-        $config = $this->getTestObjectProperty($this->controller, 'config');
-        $this->assertInstanceOf(Config::class, $config);
+        $properties = [
+            'event'   => Event::class,
+            'config'  => Config::class,
+            'router'  => Router::class,
+            'globals' => Globals::class,
+            'data'    => Data::class,
+            'view'    => View::class,
+            'html'    => HTML::class,
+            'path'    => Path::class,
+        ];
 
-        $router = $this->getTestObjectProperty($this->controller, 'router');
-        $this->assertInstanceOf(Router::class, $router);
-
-        $globals = $this->getTestObjectProperty($this->controller, 'globals');
-        $this->assertInstanceOf(Globals::class, $globals);
-
-        $data = $this->getTestObjectProperty($this->controller, 'data');
-        $this->assertInstanceOf(Data::class, $data);
-
-        $view = $this->getTestObjectProperty($this->controller, 'view');
-        $this->assertInstanceOf(View::class, $view);
-
-        $html = $this->getTestObjectProperty($this->controller, 'html');
-        $this->assertInstanceOf(HTML::class, $html);
-
-        $path = $this->getTestObjectProperty($this->controller, 'path');
-        $this->assertInstanceOf(Path::class, $path);
+        foreach ($properties as $property => $class) {
+            $instance = $this->getTestObjectProperty($this->controller, $property);
+            $this->assertInstanceOf($class, $instance);
+        }
 
         $vars = $this->getTestObjectProperty($this->controller, 'vars');
 
