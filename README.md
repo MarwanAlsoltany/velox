@@ -41,6 +41,7 @@ The fastest way to build simple websites using PHP!
 [Architecture](#architecture)<br/>
 [Config](#config)<br/>
 [Classes](#classes)<br/>
+[Commands](#commands)<br/>
 [Functions](#functions)<br/>
 [Themes](#themes)<br/>
 [Changelog](./CHANGELOG.md)
@@ -117,13 +118,14 @@ VELOX has a very special use-case, simple websites, and here is meant really sim
 | Directory | Description |
 | --- | --- |
 | [`bootstrap`](./bootstrap) | This is where VELOX bootstraps the application. You normally don't have to change anything in this directory, unless you want to extend VELOX functionality beyond basic stuff. |
-| [`config`](./config) | This is where all config files will live. All files here will be accessible using the `Config` class at runtime. |
-| [`storage`](./storage) | This is where VELOX will write caches and logs. You can also use this directory to store installation-wide assets. |
+| [`bin`](./bin) | This is where PHP executables are placed. You can freely add yours, or delete the entire directory. |
+| [`app`](./app) | This is where your own backend logic will be placed. You will be mostly working here for the backend part of your app. |
 | [`classes`](./classes) | This is where VELOX source files live. You shouldn't be touching anything here unless you want to make your own version of VELOX. |
 | [`functions`](./functions) | This is where all functions that are loaded in the application live. You can freely add yours, or delete the entire directory.|
+| [`includes`](./includes) | This is where all files that should be preloaded will be placed. You can freely add yours, or delete the entire directory.|
 | [`themes`](./themes) | This is where all your frontend themes will be placed. You will be mostly working here for the frontend part of your app. |
-| [`app`](./app) | This is where your own backend logic will be placed. You will be mostly working here for the backend part of your app. |
-| [`bin`](./bin) | This is where PHP executables are placed. You can freely add yours, or delete the entire directory. |
+| [`config`](./config) | This is where all config files will live. All files here will be accessible using the `Config` class at runtime. |
+| [`storage`](./storage) | This is where VELOX will write caches and logs. You can also use this directory to store installation-wide assets. |
 | [`public`](./public) | This is where you should put your `index.php` with a symlink for static assets (active theme `assets/` directory for example) for maximum security. You can freely delete this directory if you want to. |
 | [`vendor`](./vendor) | This is where your Composer dependencies will be placed. You can freely delete this directory if you don't want to use Composer. |
 
@@ -146,9 +148,10 @@ Router::handle('/', function () {
 Router::start();
 ```
 
-Additionally, you can also set up handlers for `404` and `405` responses using `Router::handleRouteNotFound()` `Router::handleMethodNotAllowed()` respectively.
+Additionally, you can add middlewares using `Router::middleware()` and/or set up handlers for `404` and `405` responses using `Router::handleRouteNotFound()` `Router::handleMethodNotAllowed()` respectively.
 
 Alternatively, you can extract the *"routes registration part"* in its own file and let VELOX know about it using [`bootstrap/additional.php`](./bootstrap/additional.php).
+Starting from `v1.2.0` VELOX does that by default, the file [`includes/routes/web.php`](./includes/routes/web.php) is where you should register your routes. The router will also start automatically if not started explicitly.
 
 ![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *In order for VELOX to work correctly and safely, you need to redirect all requests to application entry point (`index.php`) and block all requests to other PHP files on the server (take a look at [`.htaccess.dist`](./.htaccess.dist) to get started with Apache).*
 
@@ -169,7 +172,7 @@ The following table lists all config files that come shipped with VELOX.
 | [`data.php`](./config/data.php) | This config file can be used to provide any arbitrary data, which then will get injected in the `Data::class`. |
 | [`cli.php`](./config/cli.php) | This config file can be used to enable/disable the commands or change their arguments. |
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own config files too, all you need to do is to create a new file under `/config/` and add your configuration to it. VELOX will know about this file and load it in the application. You can access your config via `Config::get('filename.whateverKeyYouWrote')`.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own config files too, all you need to do is to create a new file under `/config` and add your configuration to it. VELOX will know about this file and load it in the application. You can access your config via `Config::get('filename.whateverKeyYouWrote')`.*
 
 
 ---
@@ -188,6 +191,8 @@ VELOX classes are divided in four namespaces:
 
 | Class | Description |
 | --- | --- |
+| [`App`](./classes/App.php) | A class that serves as a basic service-container for VELOX. |
+| [`Event`](./classes/Backend/Event.php) | A class that offers simple events handling functionality (dispatching and listening). |
 | [`Config`](./classes/Backend/Config.php) | A class that loads everything from the `/config` directory and make it as an array that is accessible via dot-notation. |
 | [`Router`](./classes/Backend/Router.php) | A class that serves as a router and an entry point for the application. |
 | [`Globals`](./classes/Backend/Globals.php) | A class that serves as an abstraction/wrapper to work with superglobals. |
@@ -198,36 +203,21 @@ VELOX classes are divided in four namespaces:
 | [`Path`](./classes/Frontend/Path.php) | A class that serves as a path resolver for different paths/URLs of the app. |
 | [`Dumper`](./classes/Helper/Dumper.php) | A class that dumps variables and exception in a nice formatting. |
 | [`Misc`](./classes/Helper/Misc.php) | A class that serves as a holder for various miscellaneous utility function. |
-| [`App`](./classes/App.php) | A class that serves as a basic service-container for VELOX. |
 
 
 ![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *This all what the VELOX package provides out of the box.*
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *The `App`, `Config`, `Router`, `Globals`, `Data`, `View`, `HTML`, `Path` classes are aliased on the root namespace for ease-of-use.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *The `App`, `Event`, `Config`, `Router`, `Globals`, `Data`, `View`, `HTML`, `Path` classes are aliased on the root namespace for ease-of-use.*
 
 ### Extending VELOX
 
 To add your own classes use the `app/` directory, this is where you should put you own business logic. Note that you have to follow PSR-4 in order for VELOX to load your classes. See [`app/Controller/DefaultController`](./app/Controller/DefaultController.php), to get an idea.
 
-
----
-
-
-## Commands
-
-VELOX comes with some handy commands that you can use to do some repetitive tasks. You can execute these commands using the `php bin/{command-name}`.
-
-The following table lists all available commands with their description.
-
-| Command | Description |
-| --- | --- |
-| [`app-serve`](./bin/app-serve) | This command starts a development server. |
-| [`app-mirror`](./bin/app-mirror) | This command mirrors the app in the `/public/` directory. |
-| [`config-cache`](./bin/config-cache) | This command caches the current configuration. |
-| [`config-dump`](./bin/config-dump) | This command dumps the current configuration with syntax highlighting. |
-| [`cache-clear`](./bin/cache-clear) | This command clears caches. |
-
-You can customize these commands using the [`config/cli.php`](./config/cli.php) file. Here you can enable/disable them or provide different arguments for them.
+Here is a list of some important files that you should consider when working with VELOX:
+* Loading additional files/directories [`autoload/additional.php`](./autoload/additional.php).
+* Providing additional data [`config/data.php`](./config/data.php).
+* Registering web routes [`includes/routes/web.php`](./includes/routes/web.php) (starting from `v1.2.0`).
+* Registering event handlers [`includes/events/system.php`](./includes/events/system.php) (starting from `v1.2.0`).
 
 
 ---
@@ -245,6 +235,7 @@ VELOX functions are divided into these files:
 | Class/Group | Function(s) |
 | --- | --- |
 | `App::class` | `app()` |
+| `Event::class` | `event()` |
 | `Config::class` | `config()` |
 | `Router::class` | `router()`, <br>`handle()`, `redirect()`, `forward()` |
 | `Globals::class` | `globals()` |
@@ -256,7 +247,27 @@ VELOX functions are divided into these files:
 | HTML Helpers | `he()`, `hd()`, `hse()`, `hsd()`, `st()`, `nb()` |
 
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own functions too, all you need to do is to create a new file under `/functions/` and add your functions to it. VELOX will know about this file and load it in the application.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own functions too, all you need to do is to create a new file under `/functions` and add your functions to it. VELOX will know about this file and load it in the application.*
+
+
+---
+
+
+## Commands
+
+VELOX comes with some handy commands that you can use to do some repetitive tasks. You can execute these commands using the `php bin/{command-name}`.
+
+The following table lists all available commands with their description.
+
+| Command | Description |
+| --- | --- |
+| [`app-serve`](./bin/app-serve) | This command starts a development server. |
+| [`app-mirror`](./bin/app-mirror) | This command mirrors the application in the `/public` directory. |
+| [`config-cache`](./bin/config-cache) | This command caches the current configuration. |
+| [`config-dump`](./bin/config-dump) | This command dumps the current configuration with syntax highlighting. |
+| [`cache-clear`](./bin/cache-clear) | This command clears caches. |
+
+You can customize these commands using the [`config/cli.php`](./config/cli.php) file. Here you can enable/disable them or provide different arguments for them.
 
 
 ---
@@ -264,22 +275,22 @@ VELOX functions are divided into these files:
 
 ## Themes
 
-VELOX is built around the idea of `themes`, a theme is divided into four directories:
+VELOX is built around the idea of <b><u><i>themes</i></u></b>, a theme is divided into four directories:
 
-* The `assets/` directory is where all your static assets associated with this theme will be placed.
-* The `layouts/` directory is where you define your layouts. A layout in VELOX terminology is the outer framing of a webpage.
-* The `pages/` directory is where you put the content specific to every page, the page will then be wrapped with some layout of your choice and finally get rendered. A page in VELOX terminology is the actual content of a webpage.
-* The `partials/` directory is where you put all your reusable pieces of the theme, which then will be used in your layouts, pages, or other partials. A good example for **partials** could be: *Components*, *Includes*, and *Content-Elements*.
+* The [`assets/`](./themes/velox/assets) directory is where all your static assets associated with this theme will be placed.
+* The [`layouts/`](./themes/velox/layouts) directory is where you define your layouts. A layout in VELOX terminology is the outer framing of a webpage.
+* The [`pages/`](./themes/velox/pages) directory is where you put the content specific to every page, the page will then be wrapped with some layout of your choice and finally get rendered. A page in VELOX terminology is the actual content of a webpage.
+* The [`partials/`](./themes/velox/partials) directory is where you put all your reusable pieces of the theme, which then will be used in your layouts, pages, or other partials. A good example for **partials** could be: *Components*, *Includes*, and *Content-Elements*.
 
-You can customize the behavior of themes using the [`config/theme.php`](./config/theme.php) file. Here you can set the active theme with the `active` key. Themes can inherit from each other by setting parent(s) with the `parent` key. You can also change the theme directory structure if you wish to using the `paths` key. Other configurations that worth taking a look at which have to do with themes can be found in the [`config/view.php`](./config/view.php) file.
+You can customize the behavior of themes using the [`config/theme.php`](./config/theme.php) file. Here you can set the active theme with the `active` key. Themes can inherit from each other by setting parent(s) with the `parent` key. You can also change the theme directory structure if you wish to using the `paths` key. Other configurations that worth taking a look at (caching for example) which have to do with themes can be found in the [`config/view.php`](./config/view.php) file.
 
 ![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *You can take a look at the provided [`velox`](./themes/velox) theme to see how all stuff work together in practice.*
 
 ### Examples:
 
-1. Layout: [`themes/velox/layouts/main.phtml`](./themes/velox/layouts/main.phtml)
-2. Page: [`themes/velox/pages/home.phtml`](./themes/velox/pages/home.phtml)
-3. Partial: [`themes/velox/partials/text-image.phtml`](./themes/velox/partials/text-image.phtml)
+1. [Layout](./themes/velox/layouts): [`themes/velox/layouts/main.phtml`](./themes/velox/layouts/main.phtml)
+2. [Page](./themes/velox/pages): [`themes/velox/pages/home.phtml`](./themes/velox/pages/home.phtml)
+3. [Partial](./themes/velox/partials): [`themes/velox/partials/text-image.phtml`](./themes/velox/partials/text-image.phtml)
 
 ---
 
