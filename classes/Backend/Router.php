@@ -28,7 +28,7 @@ use MAKS\Velox\Frontend\HTML;
  * }, 'POST');
  *
  * // register a route handler
- * Router::route('/pages/{pageId}', function ($path, $match, $previous) {
+ * Router::handle('/pages/{pageId}', function ($path, $match, $previous) {
  *      return sprintf('Hi from "%s" handler, Page ID is: %s, also the middleware said: %s', $path, $match, $previous ?? 'Nothing!');
  * }, ['GET', 'POST']);
  *
@@ -327,7 +327,7 @@ class Router
 
         unset($route);
 
-        static::echoResponse($routeMatchFound, $pathMatchFound, $result);
+        static::doEchoResponse($result, $routeMatchFound, $pathMatchFound);
     }
 
     /**
@@ -429,64 +429,66 @@ class Router
     /**
      * Echos the response according to the passed parameters.
      *
+     * @param mixed $result
      * @param bool $routeMatchFound
      * @param bool $pathMatchFound
-     * @param mixed $result
      *
      * @return void
      */
-    private static function echoResponse(bool $routeMatchFound, bool $pathMatchFound, $result): void
+    private static function doEchoResponse($result, bool $routeMatchFound, bool $pathMatchFound): void
     {
         $code = 200;
 
         if (!$routeMatchFound) {
-            $path    = static::$path;
-            $method  = static::getRequestMethod();
-            $title   = '';
-            $message = '';
+            $code   = $pathMatchFound ? 405 : 404;
+            $path   = static::$path;
+            $method = static::getRequestMethod();
 
-            if ($pathMatchFound === false) {
-                if (static::$routeNotFoundCallback) {
-                    $result = (static::$routeNotFoundCallback)($path);
-                }
+            $responses = [
+                404 => [
+                    'func' => &static::$routeNotFoundCallback,
+                    'args' => [$path],
+                    'html' => [
+                        'title'   => sprintf('%d Not Found', $code),
+                        'message' => sprintf('The "%s" route is not found!', $path),
+                    ]
+                ],
+                405 => [
+                    'func' => &static::$methodNotAllowedCallback,
+                    'args' => [$path, $method],
+                    'html' => [
+                        'title'   => sprintf('%d Not Allowed', $code),
+                        'message' => sprintf('The "%s" route is found, but the request method "%s" is not allowed!', $path, $method),
+                    ]
+                ],
+            ];
 
-                $code    = 404;
-                $title   = sprintf('%d Not Found', $code);
-                $message = sprintf('The "%s" route is not found!', $path);
-            }
-
-            if ($pathMatchFound === true) {
-                if (static::$methodNotAllowedCallback) {
-                    $result = (static::$methodNotAllowedCallback)($path, $method);
-                }
-
-                $code    = 405;
-                $title   = sprintf('%d Not Allowed', $code);
-                $message = sprintf('The "%s" route is found, but the request method "%s" is not allowed!', $path, $method);
-            }
-
-            $result = $result ?? (new HTML())
-                ->node('<!DOCTYPE html>')
-                ->open('html', ['lang' => 'en'])
-                    ->open('head')
-                        ->title($title)
-                        ->link(null, [
-                            'href' => 'https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css',
-                            'rel' => 'stylesheet'
-                        ])
-                    ->close()
-                    ->open('body')
-                        ->open('section', ['class' => 'section is-large has-text-centered'])
-                            ->hr(null)
-                            ->h1($title, ['class' => 'title is-1 is-spaced has-text-danger'])
-                            ->h4($message, ['class' => 'subtitle'])
-                            ->hr(null)
-                            ->a('Home', ['class' => 'button is-success is-light', 'href' => '/'])
-                            ->hr(null)
+            if (isset($responses[$code]['func'])) {
+                $result = ($responses[$code]['func'])(...$responses[$code]['args']);
+            } else {
+                $result = (new HTML())
+                    ->node('<!DOCTYPE html>')
+                    ->open('html', ['lang' => 'en'])
+                        ->open('head')
+                            ->title($responses[$code]['html']['title'])
+                            ->link(null, [
+                                'href' => 'https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css',
+                                'rel' => 'stylesheet'
+                            ])
+                        ->close()
+                        ->open('body')
+                            ->open('section', ['class' => 'section is-large has-text-centered'])
+                                ->hr(null)
+                                ->h1($responses[$code]['html']['title'], ['class' => 'title is-1 is-spaced has-text-danger'])
+                                ->h4($responses[$code]['html']['message'], ['class' => 'subtitle'])
+                                ->hr(null)
+                                ->a('Home', ['class' => 'button is-success is-light', 'href' => '/'])
+                                ->hr(null)
+                            ->close()
                         ->close()
                     ->close()
-                ->close()
-            ->return();
+                ->return();
+            }
 
             App::log("Responded with {$code} to the request for '{$path}' with method '{$method}'", null, 'system');
         }
