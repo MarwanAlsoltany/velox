@@ -440,18 +440,32 @@ class Router
         $code = 200;
 
         if (!$routeMatchFound) {
-            $code   = $pathMatchFound ? 405 : 404;
-            $path   = static::$path;
-            $method = static::getRequestMethod();
+            $path    = static::$path;
+            $method  = static::getRequestMethod();
+            $title   = '';
+            $message = '';
 
-            $title = $code === 404
-                ? sprintf('%d Not Found', $code)
-                : sprintf('%d Not Allowed', $code);
-            $message = $code === 404
-                ? sprintf('The "%s" route is not found!', $path)
-                : sprintf('The "%s" route is found, but the request method "%s" is not allowed!', $path, $method);
+            if ($pathMatchFound === false) {
+                if (static::$routeNotFoundCallback) {
+                    $result = (static::$routeNotFoundCallback)($path);
+                }
 
-            $result = (new HTML())
+                $code    = 404;
+                $title   = sprintf('%d Not Found', $code);
+                $message = sprintf('The "%s" route is not found!', $path);
+            }
+
+            if ($pathMatchFound === true) {
+                if (static::$methodNotAllowedCallback) {
+                    $result = (static::$methodNotAllowedCallback)($path, $method);
+                }
+
+                $code    = 405;
+                $title   = sprintf('%d Not Allowed', $code);
+                $message = sprintf('The "%s" route is found, but the request method "%s" is not allowed!', $path, $method);
+            }
+
+            $result = $result ?? (new HTML())
                 ->node('<!DOCTYPE html>')
                 ->open('html', ['lang' => 'en'])
                     ->open('head')
@@ -473,14 +487,6 @@ class Router
                     ->close()
                 ->close()
             ->return();
-
-            if ($code === 404 && static::$routeNotFoundCallback !== null) {
-                $result = (static::$routeNotFoundCallback)($path);
-            }
-
-            if ($code === 405 && static::$methodNotAllowedCallback !== null) {
-                $result = (static::$methodNotAllowedCallback)($path, $method);
-            }
 
             App::log("Responded with {$code} to the request for '{$path}' with method '{$method}'", null, 'system');
         }
