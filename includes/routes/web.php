@@ -11,7 +11,7 @@
  * ---------------------------------------------------------------------------------------------------------------------
  */
 
-use MAKS\Velox\Backend\Router;
+
 
 Router::handle('/', function () {
     return View::render('home', ['title' => 'Home']);
@@ -22,7 +22,7 @@ Router::handle('/', function () {
 Router::middleware('/contact', function () {
     $message = Globals::getPost('message');
     if ($message) {
-        return hse($message, ENT_QUOTES);
+        return htmlspecialchars($message, ENT_QUOTES);
     }
 }, 'POST');
 
