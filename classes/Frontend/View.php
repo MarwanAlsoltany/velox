@@ -366,14 +366,12 @@ class View
 
             file_put_contents($cacheFile, $content, LOCK_EX);
 
-
+            Event::dispatch('view.on.cache');
 
             App::log('Generated cache for the "{page}" page', ['page' => $page], 'system');
         }
 
         $content = $content ?? file_get_contents($cacheFile);
-
-        Event::dispatch('view.on.cache');
 
         return $content;
     }
