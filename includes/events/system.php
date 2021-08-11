@@ -11,7 +11,7 @@
  * ---------------------------------------------------------------------------------------------------------------------
  */
 
-use MAKS\Velox\Backend\Event;
+
 
 // Config::class
 // -------------
@@ -64,13 +64,13 @@ Event::listen('config.on.load', function (&$config) {
 
 Event::listen('controller.on.construct', function () {
     /** @var \MAKS\Velox\Backend\Controller $this */
-    $this->__uid = uniqid(); // add new property $__uid.
+    $this->vars['__uid'] = uniqid();
 
-    App::log('The {class} has been constructed', ['class' => get_class($this)], 'events');
+    App::log('The "{class}" has been constructed', ['class' => get_class($this)], 'events');
 });
 
 Event::listen('router.on.registerHandler', function (&$route) {
-    App::log('The handler for the route "{route}" was registered', ['route' => $route['expression']], 'events');
+    App::log('The handler for the route "{route}" has been registered', ['route' => $route['expression']], 'events');
 });
 
 Event::listen('data.on.load', function (&$data) {
