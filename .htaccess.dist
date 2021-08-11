@@ -48,6 +48,7 @@ DirectoryIndex index.php
     RewriteRule ^bootstrap/.* index.php [L,NC]
     RewriteRule ^classes/.* index.php [L,NC]
     RewriteRule ^functions/* index.php [L,NC]
+    RewriteRule ^includes/* index.php [L,NC]
     RewriteRule ^app/.* index.php [L,NC]
     RewriteRule ^config/.* index.php [L,NC]
     RewriteRule ^tests/.* index.php [L,NC]
