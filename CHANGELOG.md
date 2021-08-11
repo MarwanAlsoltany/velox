@@ -18,7 +18,7 @@ All notable changes to **VELOX** will be documented in this file.
     - Add use statement for `Event` class to avoid class name collision.
     - Update events handling examples.
 - Update `routes/web.php`:
-    -Add use statement for `Router` class to avoid class name collision.
+    - Add use statement for `Router` class to avoid class name collision.
 
 <br />
 
