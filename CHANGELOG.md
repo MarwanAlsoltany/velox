@@ -3,6 +3,57 @@
 All notable changes to **VELOX** will be documented in this file.
 
 
+## [[1.2.0] - 2021-08-11](https://github.com/MarwanAlsoltany/velox/compare/v1.1.1...v1.2.0)
+- Add `Event` class.
+- Update `App` class:
+    - Add new property `$event` (`Event` class).
+    - Refactor `log()` method.
+- Update `Controller` class:
+    - Add new property `$event` (`Event` class).
+- Update `Router` class:
+    - Add `Event::dispatch()` calls in different methods.
+    - Update `__construct()` method to add auto start functionality.
+- Update `Dumper` class:
+    - Update HTML markup in `dumpException()` method.
+    - Refactor `isCli()` method.
+- Update `Config` class:
+    - Add `Event::dispatch()` calls in different methods.
+- Update `Data` class:
+    - Add `Event::dispatch()` calls in different methods.
+- Update `View` class:
+    - Add `Event::dispatch()` calls in different methods.
+- Update `helpers.php`:
+    - Add `event()` function.
+- Update `router.php` config file:
+    - Add `allowAutoStart` config entry.
+- Update `global.php` config file:
+    - Add `includes` path to the available paths.
+- Update `.htaccess.dist`
+    - Add `includes/` to the black-listed directories
+- Update `additional.php`:
+    - Add `includes` directory path.
+- Update `intellisense.php`:
+    - Add alias for the `Event` class.
+- Update `loader.php`:
+    - Add `Event` class to the list of aliased classes.
+    - Extract error handler and exception handler functions into variables.
+    - Add shutdown function.
+- Update directory structure
+    - Add `includes/` directory.
+- Add `events/system.php`.
+- Add `routes/web.php`.
+- Update `index.php`
+    - Remove routes registration (moved to `/includes/routes/web.php`).
+    - Add `includes` to the black-listed directories.
+- Update tests:
+    - Add `EventTest` class.
+    - Update `RouterTest` class.
+    - Fix tests namespaces to be compliant with PSR-4
+- Update `composer.json`:
+    - Update `branch-alias`.
+
+<br />
+
 ## [[1.1.1] - 2021-08-10](https://github.com/MarwanAlsoltany/velox/compare/v1.1.0...v1.1.1)
 - Update `composer.json`:
     - Update `branch-alias`.
