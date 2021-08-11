@@ -3,6 +3,26 @@
 All notable changes to **VELOX** will be documented in this file.
 
 
+## [[1.2.2] - 2021-08-12](https://github.com/MarwanAlsoltany/velox/compare/v1.2.1...v1.2.2)
+- Update `Router` class:
+    - Refactor `echoResponse()` method.
+    - Rename `echoResponse()` method to `doEchoResponse()`.
+    - Update `start()` method to make use of `doEchoResponse()` method.
+- Update `Dumper` class:
+    - Update `dd()` method to make it skip shutdown function.
+- Update `loader.php`:
+    - Add a check for `$GLOBALS['_DIE']` in shutdown function to allow for exiting the script.
+- Update `events/system.php`:
+    - Remove use statement for `Event` class.
+    - Update events handling examples.
+- Update `routes/web.php`:
+    - Remove use statement for `Router` class.
+    - Replace `hse()` function call with `htmlspecialchars()`.
+- Update tests:
+    - Update `RouterTest` class.
+
+<br />
+
 ## [[1.2.1] - 2021-08-11](https://github.com/MarwanAlsoltany/velox/compare/v1.2.0...v1.2.1)
 - Update `App` class:
     - Add magic methods signatures in class DocBlock.
