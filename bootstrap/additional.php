@@ -13,6 +13,7 @@
 
 
 return [
+    BASE_PATH . '/includes',
     // BASE_PATH . '/path/to/file.php',
     // BASE_PATH . '/path/to/directory',
 ];
