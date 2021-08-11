@@ -151,6 +151,8 @@ $exceptionHandler = function (\Throwable $exception) {
 
 // shutdown function, makes errors and exceptions handlers available at shutdown
 $shutdownFunction = function () use ($errorHandler, $exceptionHandler) {
+    isset($GLOBALS['_DIE']) && die;
+
     \MAKS\Velox\App::extendStatic('handleError', $errorHandler);
     \MAKS\Velox\App::extendStatic('handleException', $exceptionHandler);
 };
