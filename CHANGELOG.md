@@ -2,6 +2,13 @@
 
 All notable changes to **VELOX** will be documented in this file.
 
+<br />
+
+## [[1.2.3] - 2021-08-26](https://github.com/MarwanAlsoltany/velox/compare/v1.2.2...v1.2.3)
+- Update `Globals` class:
+    - Update `__get()` magic method.
+
+<br />
 
 ## [[1.2.2] - 2021-08-12](https://github.com/MarwanAlsoltany/velox/compare/v1.2.1...v1.2.2)
 - Update `Router` class:
