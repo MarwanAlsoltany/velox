@@ -33,14 +33,14 @@ use MAKS\Velox\Helper\Misc;
  * @method static static setServer(string $key, $value) Sets a value in $_SERVER. Dot-notation can be used for nested values.
  * @method static static setEnv(string $key, $value) Sets a value in $_ENV. Dot-notation can be used for nested values.
  *
- * @property object $get A class around the superglobal `$_GET` that has the methods `get()`, `set()`, and `getAll()`.
- * @property object $post A class around the superglobal `$_POST` that has the methods `get()`, `set()`, and `getAll()`.
- * @property object $files A class around the superglobal `$_FILES` that has the methods `get()`, `set()`, and `getAll()`.
- * @property object $cookie A class around the superglobal `$_COOKIE` that has the methods `get()`, `set()`, and `getAll()`.
- * @property object $session A class around the superglobal `$_SESSION` that has the methods `get()`, `set()`, and `getAll()`.
- * @property object $request A class around the superglobal `$_REQUEST` that has the methods `get()`, `set()`, and `getAll()`.
- * @property object $server A class around the superglobal `$_SERVER` that has the methods `get()`, `set()`, and `getAll()`.
- * @property object $env A class around the superglobal `$_ENV` that has the methods `get()`, `set()`, and `getAll()`.
+ * @property object $get A class around the superglobal `$_GET` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
+ * @property object $post A class around the superglobal `$_POST` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
+ * @property object $files A class around the superglobal `$_FILES` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
+ * @property object $cookie A class around the superglobal `$_COOKIE` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
+ * @property object $session A class around the superglobal `$_SESSION` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
+ * @property object $request A class around the superglobal `$_REQUEST` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
+ * @property object $server A class around the superglobal `$_SERVER` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
+ * @property object $env A class around the superglobal `$_ENV` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
  *
  * @since 1.0.0
  */
@@ -219,14 +219,18 @@ final class Globals
                 {
                     $this->self = &$self;
                 }
-                public function get(string $key)
+                public function has(string $key)
                 {
-                    return Misc::getArrayValueByKey($this->self, $key, null);
+                    $value = Misc::getArrayValueByKey($this->self, $key, null);
+                    return isset($value);
+                }
+                public function get(string $key, $default = null)
+                {
+                    return Misc::getArrayValueByKey($this->self, $key, $default);
                 }
                 public function set(string $key, $value)
                 {
                     Misc::setArrayValueByKey($this->self, $key, $value);
-
                     return $this;
                 }
                 public function getAll(): array
