@@ -28,7 +28,7 @@ The fastest way to build simple websites using PHP!
 
 [![Open in Visual Studio Code][vscode-icon]][vscode-href]
 
-[![Tweet][tweet-icon]][tweet-href]
+[![Tweet][tweet-icon]][tweet-href] [![Star][github-icon]][github-href]
 
 
 
@@ -41,8 +41,8 @@ The fastest way to build simple websites using PHP!
 [Architecture](#architecture)<br/>
 [Config](#config)<br/>
 [Classes](#classes)<br/>
-[Commands](#commands)<br/>
 [Functions](#functions)<br/>
+[Commands](#commands)<br/>
 [Themes](#themes)<br/>
 [Changelog](./CHANGELOG.md)
 
@@ -50,7 +50,8 @@ The fastest way to build simple websites using PHP!
 </details>
 
 <br/>
-<small>If you like this project and would like to support its development, giving it a :star: would be appreciated!</small>
+
+<sup>If you like this project and would like to support its development, giving it a :star: would be appreciated!</sup>
 
 </div>
 
@@ -237,13 +238,13 @@ VELOX functions are divided into these files:
 | `App::class` | `app()` |
 | `Event::class` | `event()` |
 | `Config::class` | `config()` |
-| `Router::class` | `router()`, <br>`handle()`, `redirect()`, `forward()` |
+| `Router::class` | `router()`, <br>`handle()`, <br>`redirect()`, <br>`forward()` |
 | `Globals::class` | `globals()` |
-| `View::class` | `view()`, <br>`render()`, `render_layout()`, `render_page()`, `render_partial()`, <br>`section_push()`, `section_reset()`, `section_start()`, `section_end()`, `section_yield()`, <br>`include_file()` |
-| `Data::class` | `data()`, <br>`data_has()`, `data_get()`, `data_set()` |
+| `View::class` | `view()`, <br>`render()`, <br>`render_layout()`, <br>`render_page()`, <br>`render_partial()`, <br>`section_push()`, <br>`section_reset()`, <br>`section_start()`, <br>`section_end()`, <br>`section_yield()`, <br>`include_file()` |
+| `Data::class` | `data()`, <br>`data_has()`, <br>`data_get()`, <br>`data_set()` |
 | `HTML::class` | `html()` |
-| `Path::class` | `path()`, <br>`app_path_current()`, `app_url_current()`, <br>`app_path()`, `app_url()`, <br>`theme_path()`, `theme_url()`, <br>`assets_path()`, `assets_url()` |
-| `Dumper::class` | `dd()`, `dump()`, `dump_exception()` |
+| `Path::class` | `path()`, <br>`app_path_current()`, <br>`app_url_current()`, <br>`app_path()`, <br>`app_url()`, <br>`theme_path()`, <br>`theme_url()`, <br>`assets_path()`, <br>`assets_url()` |
+| `Dumper::class` | `dd()`, <br>`dump()`, <br>`dump_exception()` |
 | HTML Helpers | `he()`, `hd()`, `hse()`, `hsd()`, `st()`, `nb()` |
 
 
@@ -268,6 +269,8 @@ The following table lists all available commands with their description.
 | [`cache-clear`](./bin/cache-clear) | This command clears caches. |
 
 You can customize these commands using the [`config/cli.php`](./config/cli.php) file. Here you can enable/disable them or provide different arguments for them.
+
+If you would like to make all these commands accessible via a single interface. Check out my other package [Blend](https://github.com/MarwanAlsoltany/blend), which will do that for you and even more.
 
 
 ---
@@ -323,6 +326,7 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [styleci-icon]: https://github.styleci.io/repos/356515801/shield?branch=master&style=flat
 [vscode-icon]: https://open.vscode.dev/badges/open-in-vscode.svg
 [tweet-icon]: https://img.shields.io/twitter/url/http/shields.io.svg?style=social
+[github-icon]: https://img.shields.io/github/stars/MarwanAlsoltany/velox.svg?style=social&label=Star
 
 [php-href]: https://github.com/MarwanAlsoltany/velox/search?l=php
 [version-href]: https://packagist.org/packages/marwanalsoltany/velox
@@ -335,4 +339,5 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [travis-href]: https://travis-ci.com/MarwanAlsoltany/velox
 [styleci-href]: https://github.styleci.io/repos/356515801
 [vscode-href]: https://open.vscode.dev/MarwanAlsoltany/velox
-[tweet-href]: https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FMarwanAlsoltany%2Fvelox&text=The%20fastest%20way%20to%20build%20simple%20websites%20using%20%23PHP%21
+[tweet-href]: https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FMarwanAlsoltany%2Fvelox&text=A%20CLI%20Tool%20for%20PHP%20that%20makes%20you%20more%20productive
+[github-href]: https://github.com/MarwanAlsoltany/velox/stargazers
