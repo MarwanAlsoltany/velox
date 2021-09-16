@@ -4,6 +4,26 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.2.4] - 2021-09-16](https://github.com/MarwanAlsoltany/velox/compare/v1.2.3...v1.2.4)
+- Update `velox` theme:
+    - Replace filler text in pages with actual text.
+- Update `global.php` config file:
+    - Add `baseUrl` config entry.
+- Update `theme.php` config file:
+    - Update `paths`.
+- Update `Router` class:
+    - Update `redirect()` method to make use of 'baseUrl' config value.
+- Update `Path` class:
+    - Update `resolveUrl()` method to make use of 'baseUrl' config value.
+- Update `Misc` class:
+    - Fix an issue in `getArrayValueByKey()` method with default return value.
+- Update `HTML` class:
+    - Update `minify()` method to fix invalid HTML minification.
+- Update tests:
+    - Update `GlobalsTest` class.
+    - Update `HTMLTest` class.
+<br />
+
 ## [[1.2.3] - 2021-08-26](https://github.com/MarwanAlsoltany/velox/compare/v1.2.2...v1.2.3)
 - Update `Globals` class:
     - Update `__get()` magic method.
