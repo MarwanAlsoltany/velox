@@ -39,17 +39,17 @@ final class Misc
             $parts = explode('.', $key);
 
             foreach ($parts as $part) {
-                if (!array_key_exists($part, $data)) {
+                if (!isset($data[$part])) {
                     return $default;
                 }
 
                 $data = &$data[$part];
             }
 
-            return $data;
+            return $data ?? $default;
         }
 
-        return array_key_exists($key, $data) ? $data[$key] : $default;
+        return $data[$key] ?? $default;
     }
 
     /**
