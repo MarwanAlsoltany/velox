@@ -29,6 +29,10 @@ return [
     'env' => 'DEV',
 
 
+    // VELOX base URL, overrides server default base URL.
+    'baseUrl' => null,
+
+
     // An absolute path or a path from "BASE_PATH" for an HTML file to use for '500 Server Error' responses if an uncaught exception was thrown in production environment.
     'errorPage' => null,
 
