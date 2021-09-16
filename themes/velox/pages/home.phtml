@@ -7,12 +7,24 @@
 
 <?= View::partial('text', [
     'heading' => [
-        'content' => 'Lorem ipsum',
+        'content' => 'About VELOX',
         'class' => 'title',
     ],
     'paragraph' => [
-        'content' => 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+        'content' => 'VELOX is a lightweight micro-framework that makes creating a simple website using PHP joyful. It helps you create future-proof websites faster and more efficiently. It provides components that facilitate the process of creating a website using vanilla PHP. VELOX does not have any dependencies, the VELOX package and everything that it needs is included in the project itself. VELOX can be used as a Static Site Generator if all you need is HTML files in the end.',
     ],
+]) ?>
+
+<?= View::partial('message', [
+    'title' => 'Why does VELOX exist?',
+    'body' => 'VELOX was created to solve a specific problem, it\'s a way to build a website that is between dynamic and static, a way to create a simple website with few pages without being forced to use a framework or a CMS that comes with a ton of stuff which will never get used, it\'s lightweight and straight to the point.',
+    'class' => 'is-success',
+]) ?>
+
+<?= View::partial('message', [
+    'title' => 'What is the use-case for VELOX?',
+    'body' => 'VELOX has a very special use-case, simple websites, and here is meant really simple websites. The advantage is, you don\'t have stuff that you don\'t need.',
+    'class' => 'is-warning',
 ]) ?>
 
 <section class="section is-small">
@@ -20,18 +32,12 @@
         <div class="columns is-centered is-gapless">
             <div class="column is-half">
                 <?= View::partial('components/figure', [
-                    'src' => Path::resolveUrlFromAssets('images/velox.png'),
+                    'src' => Path::resolveUrlFromAssets('images/velox-logo.png'),
                     'alt' => 'VELOX',
                     'class' => 'has-text-centered',
-                    'caption' => 'VELOX'
+                    'caption' => '<b>VELOX</b> is a Latin word that stands for <i>“Swift”</i>.'
                 ]) ?>
             </div>
         </div>
     </div>
 </section>
-
-<?= View::partial('message', [
-    'title' => 'Lorem ipsum',
-    'body' => 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    'class' => 'is-link',
-]) ?>
