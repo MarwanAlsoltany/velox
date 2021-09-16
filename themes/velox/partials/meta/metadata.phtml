@@ -2,11 +2,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
 <title><?= Data::get('page.title', 'Untitled') ?></title>
-<base href="<?= Data::get('site.baseUrl', '/') ?>">
-<meta name="description" content="<?= Data::get('page.description', 'VELOX') ?>">
-<meta name="keywords" content="<?= Data::get('page.keywords', 'VELOX') ?>">
-<meta name="author" content="<?= Data::get('page.author', 'VELOX') ?>">
+<base href="<?= Data::get('site.baseUrl', Path::resolveUrl('/')) ?>">
+<meta name="description" content="<?= Data::get('page.description', 'VELOX PHP Micro-Framework') ?>">
+<meta name="keywords" content="<?= Data::get('page.keywords', 'VELOX, Framework, PHP') ?>">
+<meta name="author" content="<?= Data::get('page.author', 'Marwan Al-Soltany') ?>">
 <meta name="robots" content="<?= Data::get('page.robots', 'INDEX,FOLLOW') ?>">
-<link rel="canonical" href="<?= Data::get('page.canonical', 'VELOX') ?>"/>
-<link rel="shortcut icon" href="<?= Path::urlFromAssets('images/favicon.png') ?>">
+<link rel="canonical" href="<?= Data::get('page.canonical', Path::current()) ?>"/>
+<link rel="shortcut icon" href="<?= Path::resolveUrlFromAssets('images/favicon.png') ?>">
 <meta name="generator" content="VELOX"/>
