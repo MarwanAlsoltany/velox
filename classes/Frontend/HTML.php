@@ -695,7 +695,6 @@ class HTML
             '/(\s)+/s'          => '$1', // shorten multiple whitespace sequences
             '/>[^\S ]+/s'       => '>',  // remove spaces after tag, except one space
             '/[^\S ]+</s'       => '<',  // remove spaces before tag, except one space
-            '/>[\s]+</'         => '><', // remove spaces between tags, except one space
             '/<(\s|\t|\r?\n)+/' => '<',  // remove spaces, tabs, and new lines after start of the tag
             '/(\s|\t|\r?\n)+>/' => '>',  // remove spaces, tabs, and new lines before end of the tag
             '/<!--(.|\s)*?-->/' => '',   // remove comments
