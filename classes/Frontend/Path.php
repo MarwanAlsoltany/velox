@@ -129,7 +129,10 @@ final class Path
         static $url = null;
 
         if ($url === null) {
-            $url = (Globals::getServer('HTTPS') === 'on' ? 'https' : 'http') . '://' . Globals::getServer('HTTP_HOST');
+            $url = Config::get('global.baseUrl', vsprintf('%s://%s', [
+                Globals::getServer('HTTPS') === 'on' ? 'https' : 'http',
+                Globals::getServer('HTTP_HOST'),
+            ]));
         }
 
         return sprintf(
