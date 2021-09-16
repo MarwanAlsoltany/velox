@@ -206,10 +206,10 @@ class Router
         } else {
             $scheme = Globals::getServer('HTTPS') == 'on' ? 'https' : 'http';
             $host   = Globals::getServer('HTTP_HOST');
-            $path   = static::$base . '/' . $to;
-            $path   = trim(preg_replace('/(\/+)/', '/', $path), '/');
+            $path   = preg_replace('/(\/+)/', '/', static::$base . '/' . $to);
+            $base   = Config::get('global.baseUrl', $scheme . '://' . $host);
 
-            $header = sprintf('Location: %s://%s/%s', $scheme, $host, $path);
+            $header = sprintf('Location: %s/%s', trim($base, '/'), trim($path, '/'));
         }
 
         header($header, true, 302);
