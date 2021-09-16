@@ -213,7 +213,7 @@ final class Globals
                 return static::$globals[$name];
             }
 
-            return static::$globals[$name] = new class($global) {
+            return static::$globals[$name] = new class ($global) {
                 private $self;
                 public function __construct(&$self)
                 {
