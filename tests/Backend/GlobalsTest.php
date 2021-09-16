@@ -156,6 +156,9 @@ class GlobalsTest extends TestCase
         $newB2 = $this->globals->server->get('NEW');
         $this->assertEquals($newB1, $newB2);
 
+        $this->assertTrue($this->globals->server->has('PATH'));
+        $this->assertFalse($this->globals->server->has('UNKNOWN'));
+
         $globals1 = $this->globals->getServer();
         $globals2 = $this->globals->server->getAll();
 
