@@ -158,7 +158,7 @@ class HTMLTest extends TestCase
     public function testHTMLMinifyMethodMinifiesHTMLStrings()
     {
         $badHtml  = '<div ><     label>   Text:</label>   <input   type="text"         disabled   /> </div ' . PHP_EOL . '>';
-        $goodHtml = '<div><label> Text:</label><input type="text" disabled /></div>';
+        $goodHtml = '<div><label> Text:</label> <input type="text" disabled /> </div>';
 
         $this->assertEquals($goodHtml, HTML::minify($badHtml));
     }
