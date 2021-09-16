@@ -23,10 +23,10 @@ return [
     // Theme directory structure.
     'paths'  => [
         'root'     => '{global.paths.themes}/{theme.active}',
-        'assets'   => '{global.paths.themes}/{theme.active}/assets',
-        'layouts'  => '{global.paths.themes}/{theme.active}/layouts',
-        'pages'    => '{global.paths.themes}/{theme.active}/pages',
-        'partials' => '{global.paths.themes}/{theme.active}/partials',
+        'assets'   => '{theme.paths.root}/assets',
+        'layouts'  => '{theme.paths.root}/layouts',
+        'pages'    => '{theme.paths.root}/pages',
+        'partials' => '{theme.paths.root}/partials',
     ],
 
 
