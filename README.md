@@ -26,7 +26,7 @@ The fastest way to build simple websites using PHP!
 [![Travis Build Status][travis-icon]][travis-href]
 [![StyleCI Code Style][styleci-icon]][styleci-href]
 
-[![Open in Visual Studio Code][vscode-icon]][vscode-href]
+[![Open in Visual Studio Code][vscode-icon]][vscode-href] [![Run on Repl.it][replit-icon]][replit-href]
 
 [![Tweet][tweet-icon]][tweet-href] [![Star][github-icon]][github-href]
 
@@ -52,6 +52,15 @@ The fastest way to build simple websites using PHP!
 <br/>
 
 <sup>If you like this project and would like to support its development, giving it a :star: would be appreciated!</sup>
+
+<br/>
+<br/>
+
+<a href="https://replit.com/@MarwanAlsoltany/velox">
+<img src="https://user-images.githubusercontent.com/7969982/133680020-48b64343-eb6e-4519-b1ba-adc86737c184.jpeg" alt="VELOX Demo" width="768" />
+</a>
+
+Check out the [Demo](https://velox.marwanalsoltany.repl.co) or play with the [REPL](https://replit.com/@MarwanAlsoltany/velox).
 
 </div>
 
@@ -325,6 +334,7 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [travis-icon]: https://img.shields.io/travis/com/MarwanAlsoltany/velox/master.svg?style=flat&logo=travis
 [styleci-icon]: https://github.styleci.io/repos/356515801/shield?branch=master&style=flat
 [vscode-icon]: https://open.vscode.dev/badges/open-in-vscode.svg
+[replit-icon]: https://repl.it/badge/github/MarwanAlsoltany/velox
 [tweet-icon]: https://img.shields.io/twitter/url/http/shields.io.svg?style=social
 [github-icon]: https://img.shields.io/github/stars/MarwanAlsoltany/velox.svg?style=social&label=Star
 
@@ -339,5 +349,6 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [travis-href]: https://travis-ci.com/MarwanAlsoltany/velox
 [styleci-href]: https://github.styleci.io/repos/356515801
 [vscode-href]: https://open.vscode.dev/MarwanAlsoltany/velox
+[replit-href]: https://replit.com/@marwanalsoltany/velox
 [tweet-href]: https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FMarwanAlsoltany%2Fvelox&text=A%20CLI%20Tool%20for%20PHP%20that%20makes%20you%20more%20productive
 [github-href]: https://github.com/MarwanAlsoltany/velox/stargazers
