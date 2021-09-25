@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Helper;
 
-use MAKS\Velox\Backend\Config;
-
 /**
  * A class that serves as a holder for various miscellaneous utility function.
  */
@@ -56,7 +54,7 @@ final class Misc
      * Sets a value of an array via dot-notation.
      *
      * @param array $array The array to set the value in.
-     * @param string $key The string key representation.
+     * @param string $key The dotted key representation.
      * @param mixed $value The value to set.
      *
      * @return bool True on success.
@@ -85,6 +83,35 @@ final class Misc
         $data[$lastPart] = $value;
 
         return true;
+    }
+
+    /**
+     * Cuts a value of an array via dot-notation, the value will be returned and the key will be unset from the array.
+     *
+     * @param array $array The array to cut the value from.
+     * @param string $key The dotted key representation.
+     *
+     * @return mixed The requested value if found otherwise the default parameter.
+     */
+    public static function cutArrayValueByKey(array &$array, string $key, $default = null)
+    {
+        $cut = function (&$array, $key) use ($default, &$cut) {
+            if (!is_array($array)) {
+                return;
+            }
+
+            if (count($parts = explode('.', $key)) > 1) {
+                return $cut($array[$parts[0]], implode('.', array_slice($parts, 1)));
+            }
+
+            $value = $array[$key] ?? $default;
+
+            unset($array[$key]);
+
+            return $value;
+        };
+
+        return $cut($array, $key, $default);
     }
 
 
