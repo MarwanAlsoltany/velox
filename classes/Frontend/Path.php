@@ -238,7 +238,7 @@ final class Path
         $filename = substr($filename, -strlen($extension)) === $extension ? $filename : $filename . $extension;
         $directory = $directory . '/';
 
-        return preg_replace('/\/+|\\+/', DIRECTORY_SEPARATOR, $directory . $filename);
+        return preg_replace('/(\/|\\\)+/', DIRECTORY_SEPARATOR, $directory . $filename);
     }
 
 
