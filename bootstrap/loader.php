@@ -118,35 +118,7 @@ $exceptionHandler = function (\Throwable $exception) {
         }
     }
 
-    // production environment fallback error page
-    (new \MAKS\Velox\Frontend\HTML(false))
-        ->node('<!DOCTYPE html>')
-        ->open('html', ['lang' => 'en'])
-            ->open('head')
-                ->title('500 Server Error')
-                ->link(null, [
-                    'href' => 'https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css',
-                    'rel' => 'stylesheet'
-                ])
-            ->close()
-            ->open('body')
-                ->open('section', ['class' => 'section is-large has-text-centered'])
-                    ->hr(null)
-                    ->h1('500 Server Error', ['class' => 'title is-1 is-spaced has-text-danger'])
-                    ->h4('Something Bad Happened', ['class' => 'subtitle'])
-                    ->p('Try again later!', ['style' => 'text-decoration:underline;'])
-                    ->hr(null)
-                    ->a('Reload', ['class' => 'button is-warning is-light', 'href' => 'javascript:location.reload();'])
-                    ->entity('nbsp')
-                    ->entity('nbsp')
-                    ->a('Home', ['class' => 'button is-success is-light', 'href' => '/'])
-                    ->hr(null)
-                ->close()
-            ->close()
-        ->close()
-    ->echo();
-
-    exit;
+    \MAKS\Velox\App::abort(500, null, 'An error occurred, try again later.');
 };
 
 // shutdown function, makes errors and exceptions handlers available at shutdown
