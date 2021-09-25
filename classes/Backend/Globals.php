@@ -32,6 +32,14 @@ use MAKS\Velox\Helper\Misc;
  * @method static static setRequest(string $key, $value) Sets a value in $_REQUEST. Dot-notation can be used for nested values.
  * @method static static setServer(string $key, $value) Sets a value in $_SERVER. Dot-notation can be used for nested values.
  * @method static static setEnv(string $key, $value) Sets a value in $_ENV. Dot-notation can be used for nested values.
+ * @method static mixed cutGet(string $key = null) Cuts a value from $_GET. Dot-notation can be used for nested values.
+ * @method static mixed cutPost(string $key = null) Cuts a value from $_POST. Dot-notation can be used for nested values.
+ * @method static mixed cutFiles(string $key = null) Cuts a value from $_FILES. Dot-notation can be used for nested values.
+ * @method static mixed cutCookie(string $key = null) Cuts a value from $_COOKIE. Dot-notation can be used for nested values.
+ * @method static mixed cutSession(string $key = null) Cuts a value from $_SESSION. Dot-notation can be used for nested values.
+ * @method static mixed cutRequest(string $key = null) Cuts a value from $_REQUEST. Dot-notation can be used for nested values.
+ * @method static mixed cutServer(string $key = null) Cuts a value from $_SERVER. Dot-notation can be used for nested values.
+ * @method static mixed cutEnv(string $key = null) Cuts a value from $_ENV. Dot-notation can be used for nested values.
  *
  * @property object $get A class around the superglobal `$_GET` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
  * @property object $post A class around the superglobal `$_POST` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
@@ -150,6 +158,25 @@ final class Globals
     }
 
     /**
+     * Cuts a value from the specified superglobal. The value will be returned and the key will be unset from the superglobal.
+     *
+     * @param string $name The superglobal name to get the value from. Can be written in any case with or without the leading underscore.
+     * @param string $key The array element to get from the superglobal. Dot-notation can be used with nested arrays.
+     *
+     * @return static
+     *
+     * @throws \Exception If the passed name is not a superglobal.
+     */
+    public static function cut(string $name, string $key)
+    {
+        static::initialize();
+
+        $name = static::getValidNameOrFail($name);
+
+        return Misc::cutArrayValueByKey(self::$$name, $key, null);
+    }
+
+    /**
      * Returns all superglobals.
      *
      * @return array
@@ -257,7 +284,7 @@ final class Globals
     public static function __callStatic(string $name, array $arguments)
     {
         try {
-            if (preg_match('/^([gs]et)([_]{0,1}[a-z0-9]+)$/i', $name, $matches)) {
+            if (preg_match('/^([gs]et|cut)([_]{0,1}[a-z0-9]+)$/i', $name, $matches)) {
                 return forward_static_call_array(
                     [static::class, $matches[1]],
                     [static::getValidNameOrFail($matches[2]), ...$arguments]
