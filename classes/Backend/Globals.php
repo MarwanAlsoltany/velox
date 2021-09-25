@@ -103,6 +103,13 @@ final class Globals
     public static function initialize(): void
     {
         if (!static::$isInitialized) {
+            // $_SESSION is a special case, unlike other superglobals which are arrays by default,
+            // $_SESSION has the value null, we need to start it first in order to be able to reference it
+            // otherwise we will be referencing an array that is not referencing the actual $_SESSION superglobal.
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
             foreach (self::GLOBALS as $global) {
                 global $$global;
                 self::$$global = isset($$global) ? self::$$global = &$$global : [];
