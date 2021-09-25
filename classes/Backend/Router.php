@@ -444,6 +444,8 @@ class Router
             $path   = static::$path;
             $method = static::getRequestMethod();
 
+            App::log("Responded with {$code} to the request for '{$path}' with method '{$method}'", null, 'system');
+
             $responses = [
                 404 => [
                     'func' => &static::$routeNotFoundCallback,
@@ -463,37 +465,19 @@ class Router
                 ],
             ];
 
-            if (isset($responses[$code]['func'])) {
-                $result = ($responses[$code]['func'])(...$responses[$code]['args']);
-            } else {
-                $result = (new HTML())
-                    ->node('<!DOCTYPE html>')
-                    ->open('html', ['lang' => 'en'])
-                        ->open('head')
-                            ->title($responses[$code]['html']['title'])
-                            ->link(null, [
-                                'href' => 'https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css',
-                                'rel' => 'stylesheet'
-                            ])
-                        ->close()
-                        ->open('body')
-                            ->open('section', ['class' => 'section is-large has-text-centered'])
-                                ->hr(null)
-                                ->h1($responses[$code]['html']['title'], ['class' => 'title is-1 is-spaced has-text-danger'])
-                                ->h4($responses[$code]['html']['message'], ['class' => 'subtitle'])
-                                ->hr(null)
-                                ->a('Home', ['class' => 'button is-success is-light', 'href' => '/'])
-                                ->hr(null)
-                            ->close()
-                        ->close()
-                    ->close()
-                ->return();
+            if (!isset($responses[$code]['func'])) {
+                // this function will exit the script
+                App::abort(
+                    $code,
+                    $responses[$code]['html']['title'],
+                    $responses[$code]['html']['message']
+                );
             }
 
-            App::log("Responded with {$code} to the request for '{$path}' with method '{$method}'", null, 'system');
+            $result = ($responses[$code]['func'])(...$responses[$code]['args']);
         }
 
-        http_response_code($code);
+        http_response_code() || http_response_code($code);
         echo($result);
     }
 
@@ -529,7 +513,7 @@ class Router
 
     protected static function getRequestMethod(): string
     {
-        $method = Globals::getPost('_method') ?? '';
+        $method = Globals::cutPost('_method') ?? '';
         $methods = static::SUPPORTED_METHODS;
         $methodAllowed = in_array(
             strtoupper($method),
