@@ -153,10 +153,10 @@ class Dumper
                 ->open('body')
                     ->open('div', ['class' => 'container'])
                         ->h1("Uncaught {$name}")
-                        ->p("An <code><b>{$name}</b></code> was thrown on line <code><b>{$line}</b></code> of file <code><b>{$filename}</b></code> which prevented further execution of the code.")
+                        ->p("<code><b>{$name}</b></code> was thrown on line <code><b>{$line}</b></code> of file <code><b>{$filename}</b></code> which prevented further execution of the code.")
                         ->open('div', ['class' => 'message'])
                             ->h3($name)
-                            ->p($message)
+                            ->p((string)htmlspecialchars($message, ENT_QUOTES, 'UTF-8'))
                         ->close()
                         ->h2('Thrown in:')
                         ->execute(function (HTML $html) use ($file, $line, $lines) {
@@ -220,8 +220,14 @@ class Dumper
                                                 ->open('td', ['class' => 'arguments'])
                                                 ->execute(function (HTML $html) use ($trace) {
                                                     if (isset($trace['args'])) {
-                                                        foreach ($trace['args'] as $i => $arg) {
-                                                            $html->span(gettype($arg), ['title' => print_r($arg, true)]);
+                                                        foreach ($trace['args'] as $argument) {
+                                                            $html->span(gettype($argument), [
+                                                                'title' => htmlspecialchars(
+                                                                    Dumper::exportExpression($argument),
+                                                                    ENT_QUOTES,
+                                                                    'UTF-8'
+                                                                )
+                                                            ]);
                                                         }
                                                     } else {
                                                         $html->node('NULL');
