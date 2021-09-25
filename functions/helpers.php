@@ -277,6 +277,7 @@ if (!function_exists('include_file')) {
      * Can also be used as a mean of extending a layout if it was put at the end of it.
      *
      * @param string $file The path of the file starting from theme root.
+     * @param array|null $variables [optional] An associative array of the variables to pass.
      *
      * @return void
      */
