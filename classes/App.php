@@ -162,7 +162,6 @@ class App
         return static::$staticMethods[$name] = $method;
     }
 
-
     /**
      * Logs a message to a file and generates it if it does not exist.
      *
@@ -231,5 +230,69 @@ class App
         }
 
         return $hasPassed;
+    }
+
+    /**
+     * Aborts the current request and sends a response with the specified HTTP status code, title, and message.
+     * An HTML page will be rendered with the specified title and message.
+     * The title for the most comment HTTP status codes (`200`, `403`, `404`, `405`, `500`, `503`) is already configured.
+     *
+     * @param int $code The HTTP status code.
+     * @param string|null $title [optional] The title of the HTML page.
+     * @param string|null $message [optional] The message of the HTML page.
+     *
+     * @return void
+     *
+     * @since 1.2.5
+     */
+    public static function abort(int $code, ?string $title = null, ?string $message = null): void
+    {
+        $http = [
+            200 => 'OK',
+            403 => 'Forbidden',
+            404 => 'Not Found',
+            405 => 'Not Allowed',
+            500 => 'Internal Server Error',
+            503 => 'Service Unavailable',
+        ];
+
+        // only keep the last buffer if nested
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+
+        http_response_code($code);
+
+        $title    = htmlspecialchars($title ?? $code . ' ' . $http[$code] ?? '', ENT_QUOTES, 'UTF-8');
+        $message  = htmlspecialchars($message ?? '', ENT_QUOTES, 'UTF-8');
+
+        (new HTML(false))
+            ->node('<!DOCTYPE html>')
+            ->open('html', ['lang' => 'en'])
+                ->open('head')
+                    ->title((string)$code)
+                    ->link(null, [
+                        'href' => 'https://cdn.jsdelivr.net/npm/bulma@latest/css/bulma.min.css',
+                        'rel' => 'stylesheet'
+                    ])
+                ->close()
+                ->open('body')
+                    ->open('section', ['class' => 'section is-large has-text-centered'])
+                        ->hr(null)
+                        ->h1($title, ['class' => 'title is-1 is-spaced has-text-danger'])
+                        ->condition(strlen($message))
+                        ->h4($message, ['class' => 'subtitle'])
+                        ->hr(null)
+                        ->a('Reload', ['class' => 'button is-warning is-light', 'href' => 'javascript:location.reload();'])
+                        ->entity('nbsp')
+                        ->entity('nbsp')
+                        ->a('Home', ['class' => 'button is-success is-light', 'href' => '/'])
+                        ->hr(null)
+                    ->close()
+                ->close()
+            ->close()
+        ->echo();
+
+        exit;
     }
 }
