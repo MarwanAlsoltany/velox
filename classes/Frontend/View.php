@@ -199,16 +199,17 @@ class View
      * Can also be used as a mean of extending a layout if it was put at the end of it.
      *
      * @param string $file The path of the file starting from theme root.
+     * @param array|null $variables [optional] An associative array of the variables to pass.
      *
      * @return void
      */
-    public static function include(string $file): void
+    public static function include(string $file, ?array $variables = null): void
     {
         $path = Config::get('theme.paths.root');
 
         $include = self::resolvePath($path, $file);
 
-        self::require($include);
+        self::require($include, $variables);
     }
 
     /**
@@ -414,10 +415,6 @@ class View
     {
         ob_start();
 
-        if (is_array($variables)) {
-            extract($variables, EXTR_OVERWRITE);
-        }
-
         try {
             self::require($file, $variables);
         } catch (\Exception $error) {
@@ -458,11 +455,16 @@ class View
             );
         }
 
-        if (is_array($variables)) {
+        $_file = $file;
+        unset($file);
+
+        if ($variables !== null) {
             extract($variables, EXTR_OVERWRITE);
+            unset($variables);
         }
 
-        require($file);
+        require($_file);
+        unset($_file);
     }
 
     /**
