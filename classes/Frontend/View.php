@@ -82,13 +82,6 @@ class View
         'cacheWithTimestamp' => true,
     ];
 
-    /**
-     * The default directory of the cached views.
-     *
-     * @var string
-     */
-    public const VIEWS_CACHE_DIR = BASE_PATH . '/storage/cache/views';
-
 
     /**
      * Sections buffer.
@@ -322,7 +315,7 @@ class View
         $cacheExclude       = $viewConfig['cacheExclude'];
         $cacheAsIndex       = $viewConfig['cacheAsIndex'];
         $cacheWithTimestamp = $viewConfig['cacheWithTimestamp'];
-        $cacheDir           = static::VIEWS_CACHE_DIR;
+        $cacheDir           = Config::get('global.paths.storage') . '/cache/views/';
 
         if (!file_exists($cacheDir)) {
             mkdir($cacheDir, 0744, true);
@@ -383,8 +376,6 @@ class View
      */
     public static function clearCache(): void
     {
-        $cacheDir = static::VIEWS_CACHE_DIR;
-
         $clear = static function ($path) use (&$clear) {
             static $base = null;
             if (!$base) {
@@ -401,7 +392,7 @@ class View
             }
         };
 
-        $clear($cacheDir);
+        $clear(Config::get('global.paths.storage') . '/cache/views/');
 
         Event::dispatch('view.on.cacheClear');
 
@@ -517,7 +508,11 @@ class View
      */
     private static function resolveCachePath(string $pageName): string
     {
-        $cacheDir = static::VIEWS_CACHE_DIR;
+        static $cacheDir = null;
+
+        if ($cacheDir === null) {
+            $cacheDir = Config::get('global.paths.storage') . '/cache/views/';
+        }
 
         $cacheName = sprintf(
             '%s/%s',
