@@ -20,46 +20,46 @@ if (!function_exists('he')) {
      * @return string
      */
     function he($text) {
-        return htmlentities($text, ENT_QUOTES);
+        return htmlentities((string)$text, ENT_QUOTES, 'UTF-8');
     }
 }
 
 if (!function_exists('hd')) {
     /**
-     * Encodes the passed text with `html_entity_decode()`.
+     * Decodes the passed text with `html_entity_decode()`.
      *
      * @param string $text
      *
      * @return string
      */
     function hd($text) {
-        return html_entity_decode($text, ENT_QUOTES);
+        return html_entity_decode((string)$text, ENT_QUOTES, 'UTF-8');
     }
 }
 
 if (!function_exists('hse')) {
     /**
-     * Escapes the passed text with `htmlspecialchars()`.
+     * Encodes the passed text with `htmlspecialchars()`.
      *
      * @param string $text
      *
      * @return string
      */
     function hse($text) {
-        return htmlspecialchars($text, ENT_QUOTES);
+        return htmlspecialchars((string)$text, ENT_QUOTES, 'UTF-8');
     }
 }
 
 if (!function_exists('hsd')) {
     /**
-     * Unescapes the passed text with `htmlspecialchars_decode()`.
+     * Decodes the passed text with `htmlspecialchars_decode()`.
      *
      * @param string $text
      *
      * @return string
      */
     function hsd($text) {
-        return htmlspecialchars_decode($text, ENT_QUOTES);
+        return htmlspecialchars_decode((string)$text, ENT_QUOTES, 'UTF-8');
     }
 }
 
@@ -72,7 +72,7 @@ if (!function_exists('st')) {
      * @return string
      */
     function st($text) {
-        return strip_tags($text);
+        return strip_tags((string)$text);
     }
 }
 
@@ -85,6 +85,6 @@ if (!function_exists('nb')) {
      * @return string
      */
     function nb($text) {
-        return nl2br($text);
+        return nl2br((string)$text);
     }
 }
