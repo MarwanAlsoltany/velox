@@ -700,11 +700,13 @@ class HTML
             '/<!--(.|\s)*?-->/' => '',   // remove comments
         ];
 
-        return preg_replace(
+        $minified = preg_replace(
             array_keys($patterns),
             array_values($patterns),
             $html
         );
+
+        return trim($minified);
     }
 
 
