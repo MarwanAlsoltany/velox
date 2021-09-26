@@ -4,6 +4,49 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.2.5] - 2021-09-26](https://github.com/MarwanAlsoltany/velox/compare/v1.2.4...v1.2.5)
+
+- Update `App` class:
+    - Add `abort()` method.
+    - Add `terminate()` method.
+- Update `Globals` class:
+    - Add `cut()` method.
+    - Fix an issue in `initialize()` method with `$_SESSION` reference.
+- Update `Router` class:
+    - Update `getRequestMethod()` method to remove `_method` variable from `$_POST`.
+    - Refactor `doEchoResponse()` method.
+- Update `View` class:
+    - Remove `VIEWS_CACHE_DIR` class constant (config is used now instead).
+    - Update `cache()` method to replace `VIEWS_CACHE_DIR` with value from config.
+    - Update `cacheClear()` method to replace `VIEWS_CACHE_DIR` with value from config.
+    - Update `resolveCachePath()` method to replace `VIEWS_CACHE_DIR` with value from config.
+    - Update `include()` method to accept a parameter for variables.
+    - Update `require()` method to minimize variables leaking into the view.
+    - Refactor `compile()` method.
+- Update `HTML` class:
+    - Update `minify()` method.
+- Update `Path` class:
+    - Fix an issue with regex in `normalize()` method.
+- Update `Misc` class:
+    - Add `cutArrayValueByKey()` method.
+- Update `Dumper` class:
+    - Refactor `dumpException()` method to decode HTML in stack trace function arguments.
+- Update `loader.php`:
+    - Update exception handler function.
+- Update `helpers.php`:
+    - Add `abort()` function.
+    - Add `terminate()` function.
+- Update `html.php`:
+    - Add `string` casting to functions parameters.
+- Update `TestCase` class:
+    - Add `UNIT_TESTING` constant.
+- Update tests:
+    - Update `GlobalsTest` class.
+    - Update `MiscTest` class.
+    - Update `RouterTest` class.
+
+<br />
+
 ## [[1.2.4] - 2021-09-16](https://github.com/MarwanAlsoltany/velox/compare/v1.2.3...v1.2.4)
 - Update `velox` theme:
     - Replace filler text in pages with actual text.
@@ -22,6 +65,7 @@ All notable changes to **VELOX** will be documented in this file.
 - Update tests:
     - Update `GlobalsTest` class.
     - Update `HTMLTest` class.
+
 <br />
 
 ## [[1.2.3] - 2021-08-26](https://github.com/MarwanAlsoltany/velox/compare/v1.2.2...v1.2.3)
