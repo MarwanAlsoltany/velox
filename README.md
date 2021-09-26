@@ -243,7 +243,7 @@ VELOX functions are divided into these files:
 
 | Class/Group | Function(s) |
 | --- | --- |
-| `App::class` | `app()` |
+| `App::class` | `app()`, <br>`abort()`, <br>`terminate()` |
 | `Event::class` | `event()` |
 | `Config::class` | `config()` |
 | `Router::class` | `router()`, <br>`handle()`, <br>`redirect()`, <br>`forward()` |
