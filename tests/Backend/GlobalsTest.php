@@ -79,6 +79,28 @@ class GlobalsTest extends TestCase
         $this->globals->set('server', 'PATH', $oldPath);
     }
 
+    public function testGlobalsCutMethodCutsASuperglobalAndReturnsValue()
+    {
+        $_SERVER['TEST'] = [
+            'foo' => [
+                'bar' => [
+                    'baz' => 'qux',
+                ],
+            ],
+        ];
+
+        $this->assertNotEmpty($_SERVER['TEST']);
+
+        $baz = $this->globals->cut('server', 'TEST.foo.bar.baz');
+        $bar = $this->globals->cut('server', 'TEST.foo.bar');
+        $foo = $this->globals->cut('server', 'TEST.foo');
+
+        $this->assertEmpty($_SERVER['TEST']);
+        $this->assertEquals($baz, 'qux');
+        $this->assertEmpty($bar);
+        $this->assertEmpty($foo);
+    }
+
     public function testGlobalsSetMethodThrowsAnExceptionIfThePassedNameIsNotASuperglobal()
     {
         $this->expectException(\Exception::class);
@@ -129,6 +151,29 @@ class GlobalsTest extends TestCase
         $this->expectExceptionMessageMatches('/(Call to undefined method)/');
 
         $this->globals->setUnknown('key', 'value');
+    }
+
+    public function testGlobalsMagicCutMethod()
+    {
+        $_SERVER['TEST'] = [
+            'foo' => 'bar',
+        ];
+
+        $this->assertNotEmpty($_SERVER['TEST']);
+        $this->assertArrayHasKey('foo', $_SERVER['TEST']);
+
+        $bar = $this->globals->cutServer('TEST.foo');
+
+        $this->assertEmpty($_SERVER['TEST']);
+        $this->assertEquals('bar', $bar);
+    }
+
+    public function testGlobalsMagicCutMethodThrowsAnExceptionIfMethodNameDoesNotMatchASuperglobalName()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessageMatches('/(Call to undefined method)/');
+
+        $this->globals->cutUnknown();
     }
 
     public function testGetAllMethodReturnsAllSuperglobals()
