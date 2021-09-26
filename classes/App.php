@@ -293,6 +293,27 @@ class App
             ->close()
         ->echo();
 
-        exit;
+        static::terminate();
+    }
+
+
+    /**
+     * Terminates (exits) the PHP script.
+     * This function is used instead of PHP `exit` to allow for testing `exit` without breaking the unit tests.
+     *
+     * @param int|string|null $status The exit status code/message.
+     *
+     * @return void This function never returns. It will terminate the script.
+     * @throws \Exception If `UNIT_TESTING` is defined and truthy.
+     *
+     * @since 1.2.5
+     */
+    public static function terminate($status = null): void
+    {
+        if (defined('UNIT_TESTING') && UNIT_TESTING) {
+            throw new \Exception(empty($status) ? 'Exit' : 'Exit: ' . $status);
+        }
+
+        exit($status); // @codeCoverageIgnore
     }
 }
