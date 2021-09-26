@@ -201,17 +201,22 @@ class RouterTest extends TestCase
         $this->setTestObjectProperty($this->router, 'methodNotAllowedCallback', null);
         $this->setTestObjectProperty($this->router, 'routeNotFoundCallback', null);
 
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessageMatches('/(exit)/i');
+        $this->expectOutputRegex('/(404 Not Found)/');
+
+        Globals::setServer('REQUEST_URI', $route = '/' . uniqid());
+
+        $this->router->start('/', true, true, false);
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessageMatches('/(exit)/i');
+        $this->expectOutputRegex('/(405 Not Allowed)/');
+
         Globals::setServer('REQUEST_URI', $route = '/' . uniqid());
         Globals::setServer('REQUEST_METHOD', 'GET');
 
         $this->router->handle($route, fn () => 'This should not be executed!', 'POST');
-
-        $this->expectOutputRegex('/(404 Not Found)/');
-
-        $this->router->start('/', true, true, false);
-
-        $this->expectOutputRegex('/(405 Not Allowed)/');
-
         $this->router->start('/', true, true, false);
     }
 
