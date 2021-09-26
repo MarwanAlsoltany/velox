@@ -26,6 +26,43 @@ function app() {
     return $app;
 }
 
+if (!function_exists('abort')) {
+    /**
+     * Aborts the current request and sends a response with the specified HTTP status code, title, and message.
+     * An HTML page will be rendered with the specified title and message.
+     * The title for the most comment HTTP status codes (`200`, `403`, `404`, `405`, `500`, `503`) is already configured.
+     *
+     * @param int $code The HTTP status code.
+     * @param string|null $title [optional] The title of the HTML page.
+     * @param string|null $message [optional] The message of the HTML page.
+     *
+     * @return void
+     *
+     * @since 1.2.5
+     */
+    function abort() {
+        return app()->abort(...func_get_args());
+    }
+}
+
+if (!function_exists('terminate')) {
+    /**
+     * Terminates (exits) the PHP script.
+     * This function is used instead of PHP `exit` to allow for testing `exit` without breaking the unit tests.
+     *
+     * @param int|string|null $status The exit status code/message.
+     *
+     * @return void This function never returns. It will terminate the script.
+     * @throws \Exception If `UNIT_TESTING` is defined and truthy.
+     *
+     * @since 1.2.5
+     */
+    function terminate() {
+        return app()->terminate(...func_get_args());
+    }
+}
+
+
 
 if (!function_exists('config')) {
     /**
