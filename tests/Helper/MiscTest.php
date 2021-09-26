@@ -10,6 +10,8 @@ use MAKS\Velox\Helper\Misc;
 class MiscTest extends TestCase
 {
     private Misc $misc;
+    private array $testArray;
+    private object $testObject;
 
 
     public function setUp(): void
@@ -107,6 +109,19 @@ class MiscTest extends TestCase
         $arr = [];
         $str = '';
         $this->assertFalse($this->misc->setArrayValueByKey($arr, $str, $str));
+    }
+
+    public function testMiscCutArrayValueByKeyMethodCutsExpectedValues()
+    {
+        $prop1   = $this->misc->cutArrayValueByKey($this->testArray, 'prop1');
+        $nested  = $this->misc->cutArrayValueByKey($this->testArray, 'prop3.sub3.nested', 'test');
+        $unknown = $this->misc->cutArrayValueByKey($this->testArray, 'array.unknown');
+
+        $this->assertEquals('test', $prop1);
+        $this->assertEquals('test', $nested);
+        $this->assertArrayNotHasKey('prop1', $this->testArray);
+        $this->assertArrayNotHasKey('nested', $this->testArray['prop3']['sub3']);
+        $this->assertNull($unknown);
     }
 
     public function testMiscCallMethodMethodExecutesAMethodOnTheGivenObject()
