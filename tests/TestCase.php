@@ -12,6 +12,8 @@ class TestCase extends BaseTestCase
     public function __construct()
     {
         parent::__construct();
+
+        defined('UNIT_TESTING') || define('UNIT_TESTING', 1);
     }
 
 
