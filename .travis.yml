@@ -9,11 +9,21 @@ php:
     - 7.4
     - 8.0
 
+services:
+    - mysql
+
 env:
     global:
+        # Misc
         - ECHO_MESSAGE="VELOX Test Suite"
+        # Composer
         - COMPOSER_FLAGS="--prefer-stable --prefer-dist"
+        # PHPUnit
         - XDEBUG_MODE="coverage"
+        # MySQL
+        - DB_DSN="mysql:host=127.0.0.1;port=3306;dbname=velox;charset=utf8mb4"
+        - DB_USERNAME="root"
+        - DB_PASSWORD=""
 
 cache:
     directories:
@@ -21,9 +31,14 @@ cache:
         - $HOME/.local
 
 before_script:
+    # Misc
     - echo $ECHO_MESSAGE
+    # Composer
     - composer self-update
     - composer update $COMPOSER_FLAGS
+    # MySQL
+    - mysql -e 'CREATE DATABASE IF NOT EXISTS velox;'
+    - mysql -e 'ALTER DATABASE velox CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;'
 
 script:
     - ls -l # for debugging
