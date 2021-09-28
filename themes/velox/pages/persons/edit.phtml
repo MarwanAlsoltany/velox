@@ -1,0 +1,74 @@
+{! @extends 'velox/pages/persons/index' !}
+
+
+{! @block navigation !}
+    {# remove navigation by emptying the block #}
+{! @endblock !}
+
+{! @block content !}
+    <div class="columns is-centered">
+        <div class="column is-two-thirds-desktop">
+            <h1 class="title">Editing: {{ $person->name }}</h1>
+            <form id="edit-form" action="{{ Path::resolveUrl('persons/' . $person->id) }}" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <input type="hidden" name="_token" value="{{ Session::csrf()->token() }}">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" value="{{ $person->name }}" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Age</label>
+                    <div class="control">
+                        <input class="input" type="number" name="age" value="{{ $person->age }}" placeholder="Age" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Username</label>
+                    <div class="control">
+                        <input class="input" type="text" name="username" value="{{ $person->username }}" placeholder="Username">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">E-Mail</label>
+                    <div class="control">
+                        <input class="input" type="text" name="email" value="{{ $person->email }}" placeholder="E-Mail">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Address</label>
+                    <div class="control">
+                        <input class="input" type="text" name="address" value="{{ $person->address }}" placeholder="Address">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Company</label>
+                    <div class="control">
+                        <input class="input" type="text" name="company" value="{{ $person->company }}" placeholder="Company">
+                    </div>
+                </div>
+            </form>
+            <hr />
+            <div class="is-flex is-flex-direction-row is-flex-wrap-nowrap is-justify-content-between is-align-items-center">
+                <div class="field is-grouped is-flex-grow-1">
+                    <div class="control">
+                        <input class="button is-success" type="submit" value="Save" form="edit-form">
+                    </div>
+                    <div class="control">
+                        <a class="button is-light" href="javascript:window.history.back();">Cancel</a>
+                    </div>
+                </div>
+                <div class="field is-grouped is-flex-shrink-1">
+                    <div class="control">
+                        <form class="card-footer-item" action="{{ Path::resolveUrl('persons/' . $person->id) }}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            {{{ Session::csrf() }}}
+                            <input class="button is-danger" type="submit" value="Delete">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{! @endblock !}

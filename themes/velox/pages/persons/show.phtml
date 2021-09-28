@@ -1,0 +1,71 @@
+{! @extends 'velox/pages/persons/index' !}
+
+
+{! @block navigation !}
+    {# remove navigation by emptying the block #}
+{! @endblock !}
+
+{! @block content !}
+    <div class="columns is-centered">
+        <div class="column is-two-thirds-desktop">
+            <h1 class="title">Showing: {{ $person->name }}</h1>
+            <div class="card block">
+                <header class="card-header">
+                    <p class="card-header-title">{{ $person->name }}</p>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        <table class="table">
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ $person->id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ $person->name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Age</th>
+                                <td>{{ $person->age }}</td>
+                            </tr>
+                            <tr>
+                                <th>Username</th>
+                                <td>{{ $person->username }}</td>
+                            </tr>
+                            <tr>
+                                <th>E-Mail</th>
+                                <td>{{ $person->email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>{{ $person->address }}</td>
+                            </tr>
+                            <tr>
+                                <th>Company</th>
+                                <td>{{ $person->company }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <div class="card-footer-item">
+                        <a href="javascript:window.history.back();" class="button is-rounded is-small">Back</a>
+                    </div>
+                    <div class="card-footer-item">
+                        <a href="{{ Path::resolveUrl('persons/' . $person->id . '/edit') }}" class="button is-link is-rounded is-small">Edit</a>
+                    </div>
+                    <form class="card-footer-item" action="{{ Path::resolveUrl('persons/' . $person->id) }}" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        {{{ Session::csrf() }}}
+                        <input type="submit" value="Delete" class="button is-danger is-rounded is-small">
+                    </form>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <h4 class="subtitle">Others</h4>
+    {# parent block loops over an array of persons #}
+    {! $persons = $others !}
+    {! @super !}
+{! @endblock !}

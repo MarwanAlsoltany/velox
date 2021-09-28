@@ -1,0 +1,94 @@
+{! Data::set('page.title', $title ?? 'Persons') !}
+
+<main class="main">
+    {{{ View::partial('hero', [
+        'title' => 'Persons',
+        'subtitle' => 'CRUD Demo',
+        'class' => 'is-small is-primary is-bold'
+    ]) }}}
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    {! @block flashMessages !}
+                        <div class="block flash-messages">
+                            {{{ Session::flash() }}}
+                        </div>
+                    {! @endblock!}
+                    {! @block(flashMessages) !}
+
+                    {! @block navigation !}
+                        <aside class="menu">
+                            <p class="menu-label">Quick Action</p>
+                            <ul class="menu-list">
+                                {! @block navigationItems !}
+                                    <li><a href="{{ Path::resolveUrl('persons/create') }}">Create</a></li>
+                                {! @endblock !}
+                                {! @block(navigationItems) !}
+                            </ul>
+                        </aside>
+                        <hr />
+                    {! @endblock!}
+                    {! @block(navigation) !}
+
+                    {! @block content !}
+                        <div class="table-container">
+                            {! @if (isset($persons) && count($persons)) !}
+                                <table id="persons-table" class="table is-striped is-hoverable is-fullwidth">
+                                    <thead>
+                                        <tr>
+                                            <td>Id</td>
+                                            <td>Name</td>
+                                            <td>Age</td>
+                                            <td>Username</td>
+                                            <td>E-Mail</td>
+                                            <td>Address</td>
+                                            <td>Company</td>
+                                            <td>Action</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {! @foreach ($persons as $person) !}
+                                            <tr>
+                                                <td><code class="is-rounded">{{ $person->id }}</code></td>
+                                                <td>{{ $person->name }}</td>
+                                                <td>{{ $person->age }}</td>
+                                                <td>{{ $person->username }}</td>
+                                                <td>{{ $person->email }}</td>
+                                                <td>{{ $person->address }}</td>
+                                                <td>{{ $person->company }}</td>
+                                                <td>
+                                                    <div class="field is-grouped">
+                                                        <div class="control">
+                                                            <a class="button is-success is-light is-outlined is-rounded is-small" href="{{ Path::resolveUrl('persons/' . $person->id) }}">Show</a>
+                                                        </div>
+                                                        <div class="control">
+                                                            <a class="button is-link is-light is-outlined is-rounded is-small" href="{{ Path::resolveUrl('persons/' . $person->id . '/edit') }}">Edit</a>
+                                                        </div>
+                                                        <div class="control">
+                                                            <form action="{{ Path::resolveUrl('persons/' . $person->id) }}" method="POST">
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                {{{ Session::csrf() }}}
+                                                                <input type="submit" value="Delete" class="button is-danger is-light is-outlined is-rounded is-small">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {! @endforeach !}
+                                    </tbody>
+                                </table>
+                            {! @else !}
+                                <p>No persons found.</p>
+                                <p>&nbsp;</p>
+                                <p>To create a new one, click <a href="{{ Path::resolveUrl('persons/create') }}">here</a>.</p>
+                            {! @endif !}
+                        </div>
+                    {! @endblock !}
+                    {# a block has to be called at least once in order to be rendered #}
+                    {! @block(content) !}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
