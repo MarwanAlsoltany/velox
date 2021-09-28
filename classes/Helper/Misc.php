@@ -230,6 +230,79 @@ final class Misc
     }
 
     /**
+     * Transforms the case/content of a string by applying a one or more of the 20 available transformations.
+     * The transformations are applied in the order they are specified.
+     * Available transformations:
+     * - `clean`: discards all meta-characters (@#$%&^*+=-~:;,.!?(){}[]|/\\'"\`), separates concatenated words [`ExampleString-num.1`, `Example String num 1`].
+     * - `alnum`: removes every thing other that english letters, numbers and spaces. [`Example@123` -> `Example123`]
+     * - `alpha`: removes every thing other that english letters. [`Example123` -> `Example`]
+     * - `numeric`: removes every thing other that numbers. [`Example123` -> `123`]
+     * - `slug`: lowercase, all letters to their A-Z representation (transliteration), spaces to dashes, no special characters (URL-safe) [`Example (String)` -> `example-string`].
+     * - `title`: titlecase [`example string` -> `Example String`].
+     * - `pascal`: titlecase, no spaces [`example string` -> `ExampleString`].
+     * - `camel`: titlecase, no spaces, first letter lowercase [`example string` -> `exampleString`].
+     * - `constant`: uppercase, spaces to underscores [`Example String` -> `EXAMPLE_STRING`].
+     * - `snake`: lowercase, spaces to underscores [`Example String` -> `example_string`].
+     * - `kebab`: lowercase, spaces to dashes [`Example String` -> `example-string`].
+     * - `dot`: lowercase, spaces to dots [`Example String` -> `example.string`].
+     * - `spaceless`: removes spaces [`Example String` -> `ExampleString`].
+     * - A built-in function name from this list can also be used: `strtolower`, `strtoupper`, `lcfirst`, `ucfirst`, `ucwords`, `trim`, `ltrim`, `rtrim`.
+     *
+     * NOTE: Unknown transformations will be ignored silently.
+     *
+     * NOTE: The subject (string) loses some of its characteristics when a transformation is applied,
+     * that means reversing the transformations will not guarantee getting the old subject back.
+     *
+     * @param string $subject The string to transform.
+     * @param string ...$transformations One or more transformations to apply.
+     *
+     * @return string The transformed string.
+     */
+    public static function transform(string $subject, string ...$transformations): string
+    {
+        $specialMetaChars = '/[@\#\$%&\^\*\+\=\-~\:;,\.\!\?\(\)\{\}\[\]\|\/\\\'"`]+/';
+        $transliterations = 'Any-Latin;Latin-ASCII;NFD;NFC;Lower();[:NonSpacing Mark:] Remove;[:Punctuation:] Remove;[:Other:] Remove;[\u0080-\u7fff] Remove;';
+
+        static $cases = null;
+
+        if ($cases === null) {
+            $cases = [
+                'clean'     => fn ($string) => static::transform(preg_replace([$specialMetaChars, '/(?<!^)[A-Z]/', '/[ ]+/'], [' ', ' $0', ' '], $string), 'trim'),
+                'alnum'     => fn ($string) => static::transform(preg_replace('/[^a-zA-Z0-9 ]+/', '', $string), 'trim'),
+                'alpha'     => fn ($string) => static::transform(preg_replace('/[^a-zA-Z]+/', '', $string), 'trim'),
+                'numeric'   => fn ($string) => static::transform(preg_replace('/[^0-9]+/', '', $string), 'trim'),
+                'slug'      => fn ($string) => static::transform(transliterator_transliterate($transliterations, preg_replace('/-+/', ' ', $string)), 'kebab'),
+                'title'     => fn ($string) => static::transform($string, 'clean', 'ucwords'),
+                'pascal'    => fn ($string) => static::transform($string, 'title', 'spaceless'),
+                'camel'     => fn ($string) => static::transform($string, 'pascal', 'lcfirst'),
+                'constant'  => fn ($string) => static::transform($string, 'snake', 'strtoupper'),
+                'snake'     => fn ($string) => strtr(static::transform($string, 'clean', 'strtolower'), [' ' => '_']),
+                'kebab'     => fn ($string) => strtr(static::transform($string, 'clean', 'strtolower'), [' ' => '-']),
+                'dot'       => fn ($string) => strtr(static::transform($string, 'clean', 'strtolower'), [' ' => '.']),
+                'spaceless' => fn ($string) => strtr($string, [' ' => '']),
+                '*'         => ['strtolower', 'strtoupper', 'lcfirst', 'ucfirst', 'ucwords', 'trim', 'ltrim', 'rtrim'],
+            ];
+        }
+
+        $functions = array_flip((array)$cases['*']);
+
+        foreach ($transformations as $name) {
+            $name = strtolower($name);
+
+            if (isset($cases[$name]) && $name !== '*') {
+                $subject = $cases[$name]($subject);
+            } else {
+                $index = $functions[$name] ?? -1;
+                if ($index >= 0 && function_exists($cases['*'][$index])) {
+                    $subject = $cases['*'][$index]($subject);
+                }
+            }
+        }
+
+        return $subject;
+    }
+
+    /**
      * Returns the passed key(s) from the backtrace.
      *
      * @param null|string|string[] $pluck [optional] $pluck The key to to get as a string or an array of strings (keys) from this list `[file, line, function, class, type, args]`, passing `null` will return the entire backtrace.
