@@ -170,6 +170,58 @@ if (!function_exists('globals')) {
 
 
 
+if (!function_exists('session')) {
+    /**
+     * Returns an instance of the `Session` class.
+     *
+     * @return \MAKS\Velox\Backend\Session
+     */
+    function session() {
+        return app()->session;
+    }
+}
+
+if (!function_exists('flash')) {
+    /**
+     * Returns an instance of the `Flash` class.
+     *
+     * @see `\MAKS\Velox\Backend\Session::flash()`
+     *
+     * @return object
+     */
+    function flash() {
+        return app()->session->flash();
+    }
+}
+
+if (!function_exists('csrf')) {
+    /**
+     * Returns an instance of the `CSRF` class.
+     *
+     * @see `\MAKS\Velox\Backend\Session::csrf()`
+     *
+     * @return object
+     */
+    function csrf() {
+        return app()->session->csrf();
+    }
+}
+
+
+
+if (!function_exists('database')) {
+    /**
+     * Returns an instance of the `Database` class.
+     *
+     * @return \MAKS\Velox\Backend\Database
+     */
+    function database() {
+        return app()->database;
+    }
+}
+
+
+
 if (!function_exists('view')) {
     /**
      * Returns an instance of the `View` class.
