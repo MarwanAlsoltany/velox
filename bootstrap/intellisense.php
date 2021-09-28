@@ -15,6 +15,8 @@ class Event extends \MAKS\Velox\Backend\Event {}
 class Config extends \MAKS\Velox\Backend\Config {}
 class Router extends \MAKS\Velox\Backend\Router {}
 class Globals extends \MAKS\Velox\Backend\Globals {}
+class Session extends \MAKS\Velox\Backend\Session {}
+class Database extends \MAKS\Velox\Backend\Database {}
 class View extends \MAKS\Velox\Frontend\View {}
 class Data extends \MAKS\Velox\Frontend\Data {}
 class Path extends \MAKS\Velox\Frontend\Path {}
