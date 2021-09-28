@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Backend;
 
 use MAKS\Velox\Helper\Misc;
+use MAKS\Velox\Backend\Session;
 
 /**
  * A class that serves as an abstraction/wrapper to work with superglobals.
@@ -106,9 +107,7 @@ final class Globals
             // $_SESSION is a special case, unlike other superglobals which are arrays by default,
             // $_SESSION has the value null, we need to start it first in order to be able to reference it
             // otherwise we will be referencing an array that is not referencing the actual $_SESSION superglobal.
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
+            Session::start();
 
             foreach (self::GLOBALS as $global) {
                 global $$global;
