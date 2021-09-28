@@ -14,6 +14,7 @@ namespace MAKS\Velox\Frontend;
 use MAKS\Velox\App;
 use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
+use MAKS\Velox\Frontend\Engine;
 use MAKS\Velox\Frontend\HTML;
 use MAKS\Velox\Frontend\Path;
 use MAKS\Velox\Helper\Misc;
@@ -80,6 +81,11 @@ class View
         'cacheExclude' => ['__default__'],
         'cacheAsIndex' => false,
         'cacheWithTimestamp' => true,
+        'engine' => [
+            'enabled' => true,
+            'cache'   => true,
+            'debug'   => false,
+        ]
     ];
 
 
@@ -389,11 +395,12 @@ class View
             }
 
             if ($path !== $base) {
-                rmdir($path);
+                file_exists($path) && rmdir($path);
             }
         };
 
         $clear(Config::get('global.paths.storage') . '/cache/views/');
+        $clear(Config::get('global.paths.storage') . '/temp/views/');
 
         Event::dispatch('view.on.cacheClear');
 
@@ -432,7 +439,7 @@ class View
             throw new \Exception("Something went wrong when trying to compile the {$type} with the name '{$name}' in {$file}");
         }
 
-        return $buffer;
+        return trim($buffer);
     }
 
     /**
@@ -455,7 +462,7 @@ class View
             );
         }
 
-        $_file = $file;
+        $_file = static::parse($file);
         unset($file);
 
         if ($variables !== null) {
@@ -465,6 +472,38 @@ class View
 
         require($_file);
         unset($_file);
+    }
+
+    /**
+     * Parses a file through the templating engine and returns a path to the compiled file.
+     *
+     * @param string $file The file to parse.
+     *
+     * @return string
+     */
+    private static function parse(string $file): string
+    {
+        if (!Config::get('view.engine.enabled', true)) {
+            return $file;
+        }
+
+        static $engine = null;
+
+        if ($engine === null) {
+            $engine = new Engine(
+                Config::get('global.paths.themes') . '/',
+                Config::get('view.fileExtension'),
+                Config::get('global.paths.storage') . '/temp/views/',
+                Config::get('view.engine.cache', self::DEFAULTS['engine']['cache']),
+                Config::get('view.engine.debug', self::DEFAULTS['engine']['debug'])
+            );
+        }
+
+        $file = $engine->getCompiledFile(strtr($file, [
+            Path::normalize(Config::get('global.paths.themes'), '') => ''
+        ]));
+
+        return $file;
     }
 
     /**
