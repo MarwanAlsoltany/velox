@@ -38,6 +38,11 @@ Router::handle('/contact', function ($path, $match, $previous) {
 $controller = new \App\Controller\DefaultController();
 Router::handle('/example', [$controller, 'exampleAction']);
 
+// the routes in PersonsController will be registered automatically
+// as it's using annotation to define routes, it just needs to be
+// instantiated once for the auto-registration to take effect.
+new \App\Controller\PersonsController();
+
 
 
 Router::handle('/redirect', function () {
@@ -67,6 +72,8 @@ Router::get('/string/([a-z]+)', function ($path, $match) {
 
 
 
+// The /development-exception and /production-exception routes are for demonstration purposes only.
+
 Router::handle('/development-exception', function () {
     Config::set('global.env', 'DEVELOPMENT');
 
@@ -75,25 +82,44 @@ Router::handle('/development-exception', function () {
 
 Router::handle('/production-exception', function () {
     Config::set('global.env', 'PRODUCTION');
-    Config::set('global.errorPage', null);
+    Config::set('global.errorPages.500', null); // skip configured 500 error page
 
     throw new \Exception('Test!');
 });
 
 
 
-// '/not-found'   -> will be forwarded to Router::handleRouteNotFound()
-// '/not-allowed' -> will be forwarded to Router::handleMethodNotAllowed() (if request method is not POST)
-Router::post('/not-allowed', fn () => '');
+// The /403, /404, /405, and /500 routes are for demonstration purposes only.
 
+Router::get('/403', function () {
+    // mimicking a 403 error,
+    // this will render "{global.errorPages.403}" from config
+    Config::set('session.csrf.methods', ['GET']); // making CSRF checking for GET requests only
 
-
-Router::handleRouteNotFound(function ($path) {
-    return View::render('error/404', compact('path'));
+    Session::csrf()->token(); // generate a new CSRF token
+    Session::csrf()->check(); // check the CSRF token
 });
 
-Router::handleMethodNotAllowed(function ($path, $method) {
-    return View::render('error/405', compact('path', 'method'));
+Router::get('/404-' . uniqid(), function () {
+    // if requested path is not 404-XXXXXXXXXXXXX,
+    // request will be forwarded to Router::handleRouteNotFound()
+    // or fall back to render "{global.errorPages.404}"
+    return '';
+});
+
+Router::post('/405', function () {
+    // if request method is not POST,
+    // request will be forwarded to Router::handleMethodNotAllowed()
+    // or fall back to render "{global.errorPages.403}" from config
+    return '';
+});
+
+Router::get('/500', function () {
+    // mimicking a 500 error,
+    // this will render "{global.errorPages.500}" from config
+    Config::set('global.env', 'PRODUCTION');
+
+    throw new \Exception('Test!');
 });
 
 
