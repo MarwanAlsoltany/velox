@@ -28,21 +28,21 @@ class AppTest extends TestCase
     }
 
 
-    public function testAppThrowsAnExceptionForCallesToUndefinedProperties()
+    public function testAppThrowsAnExceptionForCallsToUndefinedProperties()
     {
         $this->expectException(\Exception::class);
 
         $this->app->unknown;
     }
 
-    public function testThrowsAnExceptionForCallesToUndefinedMethods()
+    public function testThrowsAnExceptionForCallsToUndefinedMethods()
     {
         $this->expectException(\Exception::class);
 
         $this->app->unknown();
     }
 
-    public function testThrowsAnExceptionForCallesToUndefinedStaticMethods()
+    public function testThrowsAnExceptionForCallsToUndefinedStaticMethods()
     {
         $this->expectException(\Exception::class);
 
@@ -119,5 +119,23 @@ class AppTest extends TestCase
             ...glob(__DIR__ . '/logs/*.log'),
             __DIR__ . '/logs',
         ]);
+    }
+
+    public function testAbortMethod()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessageMatches('/(exit)/i');
+        $this->expectOutputRegex('/(404 Not Found)/');
+        $this->expectOutputRegex('/(This is a test message!)/');
+
+        $this->app->abort(404, 'This is a test message!');
+    }
+
+    public function testTerminateMethod()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessageMatches('/(Exit: This is a test message!)/');
+
+        $this->app->terminate('This is a test message!');
     }
 }
