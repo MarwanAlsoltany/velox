@@ -55,9 +55,9 @@ class ViewTest extends TestCase
 
     public function testViewIncludeMethod()
     {
+        $this->expectOutputRegex('/\s*/');
         $this->view->include('partials/__default__');
 
-        $this->expectOutputString('');
         $this->expectException(\Exception::class);
         $this->expectExceptionMessageMatches('/(Could not load the file with the path)/');
 
@@ -100,6 +100,15 @@ class ViewTest extends TestCase
     public function testViewRenderMethod()
     {
         $view = $this->view->render('__default__', ['var' => 'Test'], '__default__');
+
+        $this->assertStringContainsString('', $view);
+    }
+
+    public function testViewRenderMethodWithoutTemplatingEngine()
+    {
+        Config::set('view.engine.enabled', false);
+        $view = $this->view->render('__default__', ['var' => 'Test'], '__default__');
+        Config::set('view.engine.enabled', true);
 
         $this->assertStringContainsString('', $view);
     }
