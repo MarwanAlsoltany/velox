@@ -235,7 +235,7 @@ class App
     /**
      * Aborts the current request and sends a response with the specified HTTP status code, title, and message.
      * An HTML page will be rendered with the specified title and message.
-     * The title for the most comment HTTP status codes (`200`, `403`, `404`, `405`, `500`, `503`) is already configured.
+     * The title for the most common HTTP status codes (`200`, `403`, `404`, `405`, `500`, `503`) is already configured.
      *
      * @param int $code The HTTP status code.
      * @param string|null $title [optional] The title of the HTML page.
@@ -255,11 +255,6 @@ class App
             500 => 'Internal Server Error',
             503 => 'Service Unavailable',
         ];
-
-        // only keep the last buffer if nested
-        while (ob_get_level() > 0) {
-            ob_end_clean();
-        }
 
         http_response_code($code);
 
@@ -304,13 +299,13 @@ class App
      * @param int|string|null $status The exit status code/message.
      *
      * @return void This function never returns. It will terminate the script.
-     * @throws \Exception If `UNIT_TESTING` is defined and truthy.
+     * @throws \Exception If `EXIT_EXCEPTION` is defined and truthy.
      *
      * @since 1.2.5
      */
     public static function terminate($status = null): void
     {
-        if (defined('UNIT_TESTING') && UNIT_TESTING) {
+        if (defined('EXIT_EXCEPTION') && EXIT_EXCEPTION) {
             throw new \Exception(empty($status) ? 'Exit' : 'Exit: ' . $status);
         }
 
