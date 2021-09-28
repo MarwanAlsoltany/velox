@@ -33,10 +33,20 @@ return [
     'baseUrl' => null,
 
 
-    // An absolute path or a path from "BASE_PATH" for an HTML file to use for '500 Server Error' responses if an uncaught exception was thrown in production environment.
-    'errorPage' => null,
+    // VELOX error pages, view files to render for HTTP errors.
+    'errorPages' => [
+        // A view file for "500 Internal Server Error" responses, if an uncaught exception was thrown in production environment.
+        '500' => 'error/500',
+        // A view file for "403 Forbidden" responses, if request CSRF token is invalid.
+        '403' => 'error/403',
+        // A view file for "404 Not Found" responses, if requested route was not found.
+        '404' => 'error/404',
+        // A view file for "405 Not Allowed" responses, if requested method is not allowed.
+        '405' => 'error/405',
+    ],
 
 
+    // VELOX logging configuration.
     'logging' => [
         // Whether or not to enable logging of different events of the app. Note that exception will be logged no matter what the value here is.
         'enabled'          => true,
