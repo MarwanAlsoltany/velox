@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Tests\Helper;
 
 use MAKS\Velox\Tests\TestCase;
+use MAKS\Velox\Tests\Mocks\TestObjectMock;
 use MAKS\Velox\Helper\Misc;
 
 class MiscTest extends TestCase
@@ -20,48 +21,8 @@ class MiscTest extends TestCase
 
         $this->misc = new Misc();
 
-        $this->testArray = [
-            'prop1' => 'test',
-            'prop2' => 123,
-            'prop3' => ['sub1' => true, 'sub2' => false, 'sub3' => ['nested' => null]]
-        ];
-
-        $this->testObject = new class {
-            // ...
-            public const CONST_PROP = 'CONST';
-            public static $staticProp = 'STATIC';
-            private $privateProp = 'PRIVATE';
-            protected $protectedProp = 'PROTECTED';
-            public $publicProp = 'PUBLIC';
-
-            public function __construct($staticProp = 'STATIC', $privateProp = 'PRIVATE', $protectedProp = 'PROTECTED', $publicProp = 'PUBLIC')
-            {
-                $this::$staticProp = $staticProp;
-                $this->privateProp = $privateProp;
-                $this->protectedProp = $protectedProp;
-                $this->publicProp = $publicProp;
-            }
-
-            private function privateMethod($string = '')
-            {
-                return 'PRIVATE: ' . $string;
-            }
-
-            protected function protectedMethod($string = '')
-            {
-                return 'PROTECTED: ' . $string;
-            }
-
-            public function publicMethod($string = '')
-            {
-                return 'PUBLIC: ' . $string;
-            }
-
-            public function exception()
-            {
-                throw new \Exception('Test!');
-            }
-        };
+        $this->testArray  = $this->getTestArray();
+        $this->testObject = $this->getTestObjectInstance();
     }
 
     public function tearDown(): void
@@ -183,6 +144,39 @@ class MiscTest extends TestCase
         $this->assertEquals('This is [text] with a different placeholder ...', $text3);
     }
 
+    public function testMiscTransformMethod()
+    {
+        $clean      = $this->misc->transform('TestString-num.1', 'clean');
+        $alnum      = $this->misc->transform('Test@123', 'alnum');
+        $alpha      = $this->misc->transform('Test123', 'alpha');
+        $numeric    = $this->misc->transform('Test123', 'numeric');
+        $slug       = $this->misc->transform('Test+String', 'slug');
+        $title      = $this->misc->transform('test string', 'title');
+        $pascal     = $this->misc->transform('test string', 'pascal');
+        $camel      = $this->misc->transform('test string', 'camel');
+        $constant   = $this->misc->transform('Test String', 'constant');
+        $snake      = $this->misc->transform('Test String', 'snake');
+        $kebab      = $this->misc->transform('Test String', 'kebab');
+        $dot        = $this->misc->transform('Test String', 'dot');
+        $spaceless  = $this->misc->transform('Test String', 'spaceless');
+        $strtolower = $this->misc->transform('Test String', 'strtolower');
+
+        $this->assertEquals('Test String num 1', $clean);
+        $this->assertEquals('Test123', $alnum);
+        $this->assertEquals('Test', $alpha);
+        $this->assertEquals('123', $numeric);
+        $this->assertEquals('test-string', $slug);
+        $this->assertEquals('Test String', $title);
+        $this->assertEquals('TestString', $pascal);
+        $this->assertEquals('testString', $camel);
+        $this->assertEquals('TEST_STRING', $constant);
+        $this->assertEquals('test_string', $snake);
+        $this->assertEquals('test-string', $kebab);
+        $this->assertEquals('test.string', $dot);
+        $this->assertEquals('TestString', $spaceless);
+        $this->assertEquals('test string', $strtolower);
+    }
+
     public function testMiscBacktraceMethod()
     {
         $backtrace = $this->misc->backtrace();
@@ -204,5 +198,26 @@ class MiscTest extends TestCase
         $this->assertIsString($fileFirst);
         $this->assertNotEquals(__FILE__, $fileFirst);
         $this->assertEmpty($none);
+    }
+
+
+    private function getTestArray(): array
+    {
+        return [
+            'prop1' => 'test',
+            'prop2' => 123,
+            'prop3' => [
+                'sub1' => true,
+                'sub2' => false,
+                'sub3' => [
+                    'nested' => null
+                ],
+            ],
+        ];
+    }
+
+    private function getTestObjectInstance(): object
+    {
+        return new TestObjectMock();
     }
 }
