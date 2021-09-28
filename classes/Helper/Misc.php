@@ -260,7 +260,7 @@ final class Misc
      */
     public static function transform(string $subject, string ...$transformations): string
     {
-        $specialMetaChars = '/[@\#\$%&\^\*\+\=\-~\:;,\.\!\?\(\)\{\}\[\]\|\/\\\'"`]+/';
+        $specialMetaChars = '/[@\#\$%&\^\*\+\=\-~\:;,\.\!\?\(\)\{\}\[\]\|\/\\\\\'"`]+/';
         $transliterations = 'Any-Latin;Latin-ASCII;NFD;NFC;Lower();[:NonSpacing Mark:] Remove;[:Punctuation:] Remove;[:Other:] Remove;[\u0080-\u7fff] Remove;';
 
         static $cases = null;
