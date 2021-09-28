@@ -46,4 +46,8 @@ return [
     'defaultPartialVars' => View::DEFAULTS['variables'],
 
 
+    // Templating engine configuration.
+    'engine'             =>  View::DEFAULTS['engine'],
+
+
 ];
