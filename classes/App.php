@@ -15,6 +15,8 @@ use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Router;
 use MAKS\Velox\Backend\Globals;
+use MAKS\Velox\Backend\Session;
+use MAKS\Velox\Backend\Database;
 use MAKS\Velox\Frontend\Data;
 use MAKS\Velox\Frontend\View;
 use MAKS\Velox\Frontend\HTML;
@@ -24,17 +26,19 @@ use MAKS\Velox\Helper\Misc;
 
 /**
  * A class that serves as a basic service-container for VELOX.
- * This class has all VELOX classes as public properties:
- *      - `$event`   = `Event::class`
- *      - `$config`  = `Config::class`
- *      - `$router`  = `Router::class`
- *      - `$globals` = `Globals::class`
- *      - `$data`    = `Data::class`
- *      - `$view`    = `View::class`
- *      - `$html`    = `HTML::class`
- *      - `$path`    = `Path::class`
- *      - `$dumper`  = `Dumper::class`
- *      - `$misc`    = `Misc::class`
+ * This class has most VELOX classes as public properties:
+ * - `$event`: Instance of the `Event` class.
+ * - `$config`: Instance of the `Config` class.
+ * - `$router`: Instance of the `Router` class.
+ * - `$globals`: Instance of the `Globals` class.
+ * - `$session`: Instance of the `Session` class.
+ * - `$database`: Instance of the `Database` class.
+ * - `$data`: Instance of the `Data` class.
+ * - `$view`: Instance of the `View` class.
+ * - `$html`: Instance of the `HTML` class.
+ * - `$path`: Instance of the `Path` class.
+ * - `$dumper`: Instance of the `Dumper` class.
+ * - `$misc`: Instance of the `Misc` class.
  *
  * Example:
  * ```
@@ -61,6 +65,10 @@ class App
 
     public Globals $globals;
 
+    public Session $session;
+
+    public Database $database;
+
     public Data $data;
 
     public View $view;
@@ -83,17 +91,19 @@ class App
      */
     public function __construct()
     {
-        $this->event   = new Event();
-        $this->config  = new Config();
-        $this->router  = new Router();
-        $this->globals = new Globals();
-        $this->data    = new Data();
-        $this->view    = new View();
-        $this->html    = new HTML();
-        $this->path    = new Path();
-        $this->dumper  = new Dumper();
-        $this->misc    = new Misc();
-        $this->methods = [];
+        $this->event    = new Event();
+        $this->config   = new Config();
+        $this->router   = new Router();
+        $this->globals  = new Globals();
+        $this->session  = new Session();
+        $this->database = Database::instance();
+        $this->data     = new Data();
+        $this->view     = new View();
+        $this->html     = new HTML();
+        $this->path     = new Path();
+        $this->dumper   = new Dumper();
+        $this->misc     = new Misc();
+        $this->methods  = [];
     }
 
     public function __get(string $property)
