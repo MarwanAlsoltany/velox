@@ -32,16 +32,18 @@ $namespaces = [
 
 // autoloader dynamically aliased aliased classes
 $aliases = [
-    // Alias  => FQN
-    'App'     => \MAKS\Velox\App::class,
-    'Event'   => \MAKS\Velox\Backend\Event::class,
-    'Config'  => \MAKS\Velox\Backend\Config::class,
-    'Router'  => \MAKS\Velox\Backend\Router::class,
-    'Globals' => \MAKS\Velox\Backend\Globals::class,
-    'Data'    => \MAKS\Velox\Frontend\Data::class,
-    'View'    => \MAKS\Velox\Frontend\View::class,
-    'HTML'    => \MAKS\Velox\Frontend\HTML::class,
-    'Path'    => \MAKS\Velox\Frontend\Path::class,
+    // Alias   => FQN
+    'App'      => \MAKS\Velox\App::class,
+    'Event'    => \MAKS\Velox\Backend\Event::class,
+    'Config'   => \MAKS\Velox\Backend\Config::class,
+    'Router'   => \MAKS\Velox\Backend\Router::class,
+    'Globals'  => \MAKS\Velox\Backend\Globals::class,
+    'Session'  => \MAKS\Velox\Backend\Session::class,
+    'Database' => \MAKS\Velox\Backend\Database::class,
+    'Data'     => \MAKS\Velox\Frontend\Data::class,
+    'View'     => \MAKS\Velox\Frontend\View::class,
+    'HTML'     => \MAKS\Velox\Frontend\HTML::class,
+    'Path'     => \MAKS\Velox\Frontend\Path::class,
 ];
 
 
@@ -110,15 +112,12 @@ $exceptionHandler = function (\Throwable $exception) {
     }
 
     // if in production environment, return a nice page without all the details
-    if ($globalConfig['errorPage']) {
-        // return user defined error page if there is any
-        if (file_exists($globalConfig['errorPage'])) {
-            echo file_get_contents($globalConfig['errorPage']);
-            exit;
-        }
+    try {
+        echo \MAKS\Velox\Frontend\View::render($globalConfig['errorPages']['500']);
+        exit;
+    } catch (\Throwable $e) {
+        \MAKS\Velox\App::abort(500, null, 'An error occurred, try again later.');
     }
-
-    \MAKS\Velox\App::abort(500, null, 'An error occurred, try again later.');
 };
 
 // shutdown function, makes errors and exceptions handlers available at shutdown
