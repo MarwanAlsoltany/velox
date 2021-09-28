@@ -13,7 +13,7 @@ class TestCase extends BaseTestCase
     {
         parent::__construct();
 
-        defined('UNIT_TESTING') || define('UNIT_TESTING', 1);
+        defined('EXIT_EXCEPTION') || define('EXIT_EXCEPTION', 1);
     }
 
 
