@@ -15,7 +15,7 @@ use MAKS\Velox\App;
 use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Globals;
-use MAKS\Velox\Frontend\HTML;
+use MAKS\Velox\Frontend\View;
 
 /**
  * A class that serves as a router and an entry point for the application.
@@ -214,7 +214,7 @@ class Router
 
         header($header, true, 302);
 
-        exit; // @codeCoverageIgnore
+        App::terminate(); // @codeCoverageIgnore
     }
 
     /**
@@ -236,7 +236,7 @@ class Router
 
         static::start(...self::$params);
 
-        exit; // @codeCoverageIgnore
+        App::terminate(); // @codeCoverageIgnore
     }
 
     /**
@@ -282,6 +282,8 @@ class Router
     public static function start(?string $base = null, ?bool $allowMultiMatch = null, ?bool $caseMatters = null, ?bool $slashMatters = null): void
     {
         self::$params = func_get_args();
+
+        Session::csrf()->check();
 
         Event::dispatch('router.on.start', [&self::$params]);
 
@@ -465,13 +467,20 @@ class Router
                 ],
             ];
 
+            http_response_code($code);
+
             if (!isset($responses[$code]['func'])) {
-                // this function will exit the script
-                App::abort(
-                    $code,
-                    $responses[$code]['html']['title'],
-                    $responses[$code]['html']['message']
-                );
+                try {
+                    echo View::render(Config::get('global.errorPages.' . $code), $responses[$code]['args']);
+                    App::terminate(); // @codeCoverageIgnore
+                } catch (\Throwable $e) {
+                    // this function will exit the script
+                    App::abort(
+                        $code,
+                        $responses[$code]['html']['title'],
+                        $responses[$code]['html']['message']
+                    );
+                }
             }
 
             $result = ($responses[$code]['func'])(...$responses[$code]['args']);
