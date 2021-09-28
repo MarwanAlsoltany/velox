@@ -28,11 +28,15 @@
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">More</a>
                 <div class="navbar-dropdown">
-                    <a href="<?= Path::resolveUrl('/not-found') ?>" class="navbar-item">404</a>
-                    <a href="<?= Path::resolveUrl('/not-allowed') ?>" class="navbar-item">405</a>
+                    <a href="<?= Path::resolveUrl('/persons') ?>" class="navbar-item">CRUD</a>
                     <hr class="navbar-divider">
                     <a href="<?= Path::resolveUrl('/redirect') ?>" class="navbar-item">Redirect</a>
                     <a href="<?= Path::resolveUrl('/forward') ?>" class="navbar-item">Forward</a>
+                    <hr class="navbar-divider">
+                    <a href="<?= Path::resolveUrl('/403') ?>" class="navbar-item">403</a>
+                    <a href="<?= Path::resolveUrl('/404') ?>" class="navbar-item">404</a>
+                    <a href="<?= Path::resolveUrl('/405') ?>" class="navbar-item">405</a>
+                    <a href="<?= Path::resolveUrl('/500') ?>" class="navbar-item">500</a>
                     <hr class="navbar-divider">
                     <a href="<?= Path::resolveUrl('/development-exception') ?>" class="navbar-item">Development Exception</a>
                     <a href="<?= Path::resolveUrl('/production-exception') ?>" class="navbar-item">Production Exception</a>
