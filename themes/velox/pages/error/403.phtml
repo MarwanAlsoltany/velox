@@ -1,0 +1,7 @@
+<?= Data::set('page.title', 'Forbidden') ?>
+
+<?= View::partial('hero', [
+    'title'=> '403 ¯\_( ͠❛ ͜ʖ͠❛ )_/¯',
+    'subtitle'=> 'Invalid CSRF Token!',
+    'class' => 'is-danger is-large is-bold'
+]) ?>
