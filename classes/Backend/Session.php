@@ -49,7 +49,7 @@ final class Session
      * @param string|null $limiter Session limiter.
      * @param string|null $path Session save path.
      */
-    public function __construct(?string $expiration = null, ?string $limiter = null, ?string $path = null)
+    public function __construct(?int $expiration = null, ?string $limiter = null, ?string $path = null)
     {
         $this->start($expiration, $limiter, $path);
     }
@@ -120,7 +120,7 @@ final class Session
         $destroy = session_destroy();
         $commit  = session_commit();
 
-        return (bool)($unset & $destroy & $commit);
+        return ($unset && $destroy && $commit);
         // @codeCoverageIgnoreEnd
     }
 
@@ -203,7 +203,7 @@ final class Session
         static $flash = null;
 
         if ($flash === null) {
-            $flash = new class {
+            $flash = new class () {
                 private string $name = '_flash';
                 private array $messages = [];
                 public function __construct()
@@ -325,7 +325,7 @@ final class Session
                     return;
                 }
 
-                App::log('Responded with 403 to the request for "{path}". CSRF is detected. Client IP address {ip}', [
+                App::log('Responded with 403 to the request for "{uri}". CSRF is detected. Client IP address {ip}', [
                     'uri' => Globals::getServer('REQUEST_URI'),
                     'ip'  => Globals::getServer('REMOTE_ADDR'),
                 ], 'system');
@@ -333,7 +333,7 @@ final class Session
                 http_response_code(403);
 
                 try {
-                    echo View::render(Config::get('global.errorPages.403'));
+                    echo View::render((string)Config::get('global.errorPages.403'));
                     App::terminate();
                 } catch (\Throwable $e) {
                     App::abort(403, null, 'Invalid CSRF token!');
@@ -352,7 +352,7 @@ final class Session
             private function isWhitelisted(): bool
             {
                 $method = Globals::getServer('REQUEST_METHOD');
-                $client = Globals::getServer('REMOTE_HOST', Globals::getServer('REMOTE_ADDR'));
+                $client = Globals::getServer('REMOTE_HOST') ?? Globals::getServer('REMOTE_ADDR');
 
                 return (
                     in_array($client, Config::get('session.csrf.whitelisted', [])) ||
@@ -361,7 +361,7 @@ final class Session
             }
             private function isIdentical(): bool
             {
-                $token = Globals::cutPost($this->name, Globals::cutGet($this->name)) ?? '';
+                $token = Globals::cutPost($this->name) ?? Globals::cutGet($this->name) ?? '';
 
                 return empty($this->token) || hash_equals($this->token, $token);
             }
