@@ -541,10 +541,7 @@ class Engine
 
             $comment     = sprintf('<!-- php::(\'%s\') [PHP] -->', $php) . PHP_EOL;
             $content     = sprintf('<?php %s ?>', $php);
-            $requirement = vsprintf('%s%s', $this->isDebug()
-                ? [$comment, $content]
-                : ['', $content]
-            );
+            $requirement = vsprintf('%s%s', $this->isDebug() ? [$comment, $content] : ['', $content]);
 
             $code = str_replace($match, $requirement, $code);
         }
