@@ -76,6 +76,8 @@ All notable changes to **VELOX** will be documented in this file.
 - Update `routes/web.php`:
     - Add instantiation for `PersonsController`.
     - Update error pages routes and demo routes documentation.
+- Update `app-mirror` command:
+    - Update blacklisted directories and files regex.
 - Update `velox` theme:
     - Update `navigation.phtml` partial.
     - Add `500.phtml`.
