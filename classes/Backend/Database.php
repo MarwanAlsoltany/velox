@@ -59,8 +59,8 @@ class Database extends \PDO
 
         $this->setAttribute(static::ATTR_ERRMODE, static::ERRMODE_EXCEPTION);
         $this->setAttribute(static::ATTR_DEFAULT_FETCH_MODE, static::FETCH_ASSOC);
-        $this->setAttribute(static::ATTR_EMULATE_PREPARES, FALSE);
-        $this->setAttribute(static::MYSQL_ATTR_FOUND_ROWS, TRUE);
+        $this->setAttribute(static::ATTR_EMULATE_PREPARES, false);
+        $this->setAttribute(static::MYSQL_ATTR_FOUND_ROWS, true);
         $this->setAttribute(static::ATTR_STATEMENT_CLASS, [$this->getStatementClass()]);
     }
 
@@ -76,7 +76,7 @@ class Database extends \PDO
      *
      * @return static
      */
-    final public static function connect(?string $dsn = null, ?string $username = null, ?string $password = null, ?array $options = null): Database
+    final public static function connect(string $dsn, ?string $username = null, ?string $password = null, ?array $options = null): Database
     {
         $connection = md5(serialize(func_get_args()));
 
@@ -97,7 +97,7 @@ class Database extends \PDO
         $databaseConfig = Config::get('database', []);
 
         return static::connect(
-            $databaseConfig['dsn'] ?? null,
+            $databaseConfig['dsn'] ?? '',
             $databaseConfig['username'] ?? null,
             $databaseConfig['password'] ?? null,
             $databaseConfig['options'] ?? null
@@ -198,12 +198,14 @@ class Database extends \PDO
                 $this->commit();
 
                 break;
-            } catch(\Throwable $error) {
+            } catch (\Throwable $error) {
                 $this->rollBack();
 
                 if (++$attempts === $retries) {
                     throw new \Exception(
-                        "Could not complete the transaction after {$retries} attempt(s).", 0, $error
+                        "Could not complete the transaction after {$retries} attempt(s).",
+                        (int)$error->getCode(),
+                        $error
                     );
                 }
             } finally {
