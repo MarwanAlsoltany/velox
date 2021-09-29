@@ -4,6 +4,93 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.3.0] - 2021-09-29](https://github.com/MarwanAlsoltany/velox/compare/v1.2.5...v1.3.0)
+
+- Add `Session` class.
+- Add `Database` class.
+- Add `Model` class.
+- Add `Engine` class.
+- Add `Person` class.
+- Add `PersonsController` class.
+- Update `App` class:
+    - Add `$session` property.
+    - Add `$database` property.
+    - Update `abort()` method to not clear all opened buffers.
+    - Update `terminate()` method to rename `UNIT_TESTING` constant to `EXIT_EXCEPTION`.
+- Update `Controller` class:
+    - Add `$crudRoutes` property.
+    - Add `$session` property.
+    - Add `$database` property.
+    - Add `$model` property.
+    - Add `associateModel()` and `doAssociateModel()` methods.
+    - Add `registerRoutes()` and `doRegisterRoutes()` methods.
+- Update `Router` class:
+    - Update `redirect()` method.
+    - Update `forward()` method.
+    - Update `start()` method to check fot CSRF.
+    - Update `doEchoResponse()` method to fall back to error pages in config.
+- Update `View` class:
+    - Add `parse()` method.
+    - Update `compile()` method.
+    - Update `require()` method.
+    - Update `clearCache()` method.
+    - Add `engine` config default in `DEFAULTS` constant.
+- Update `Misc` class:
+    - Add `transform()` method.
+- Update `Globals` class:
+    - Update `initialize()` method to replace direct use of session function with `Session` class.
+- Update `TestCase` class:
+    - Rename `UNIT_TESTING` constant to `EXIT_EXCEPTION`.
+- Update tests:
+    - Add `SessionTest` class.
+    - Add `DatabaseTest` class.
+    - Add `ModelTest` class.
+    - Add `EngineTest` class.
+    - Add `DatabaseMock` class.
+    - Add `ModelMock` class.
+    - Add `ControllerMock` class.
+    - Add `TestObjectMock` class.
+    - Update `AppTest` class.
+    - Update `ControllerTest` class.
+    - Update `ViewTest` class.
+    - Update `MiscTest` class.
+- Update `loader.php`:
+    - Add `Session` class to the list of aliased classes.
+    - Add `Database` class to the list of aliased classes.
+    - Update exception handler function.
+- Update `intellisense.php`:
+    - Add alias for the `Session` class.
+    - Add alias for the `Database` class.
+- Update `helper.php`:
+    - Add `session()` function
+    - Add `flash()` function
+    - Add `csrf()` function
+    - Add `database()` function
+- Add `session.php` config file.
+- Add `database.php` config file.
+- Update `global.php` config file:
+    - Add `errorPages` config entry
+    - Remove `errorPage` config entry
+- Update `view.php` config file:
+    - Add `engine` config entry
+- Update `routes/web.php`:
+    - Add instantiation for `PersonsController`.
+    - Update error pages routes and demo routes documentation.
+- Update `velox` theme:
+    - Update `navigation.phtml` partial.
+    - Add `500.phtml`.
+    - Add `403.phtml`.
+    - Update `404.phtml`.
+    - Update `405.phtml`.
+    - Add `PersonsController` views.
+- Update `composer.json`:
+    - Add new required PHP extensions `ext-pdo` and `ext-intl`.
+    - Update `branch-alias`.
+    - Update `keywords`.
+- Update `.travis.yml`:
+    - Add database config.
+<br />
+
 ## [[1.2.5] - 2021-09-26](https://github.com/MarwanAlsoltany/velox/compare/v1.2.4...v1.2.5)
 
 - Update `App` class:
