@@ -338,9 +338,9 @@ class Engine
             $startComment = sprintf('<!-- %s::(\'%s\') [START] -->', $type, $path) . PHP_EOL;
             $endComment   = sprintf('<!-- %s::(\'%s\') [END] -->', $type, $path) . PHP_EOL;
             $content      = $this->importDependencies($path);
-            $requirement  = vsprintf('%s%s%s', $this->isDebug()
-                ? [$startComment, $content, $endComment]
-                : ['', $content, '']
+            $requirement  = vsprintf(
+                '%s%s%s',
+                $this->isDebug() ? [$startComment, $content, $endComment] : ['', $content, '']
             );
 
             $code = str_replace($match, $requirement, $code);
@@ -374,9 +374,9 @@ class Engine
             $startComment = sprintf('<!-- include::(\'%s\') [START] -->', $path) . PHP_EOL;
             $endComment   = sprintf('<!-- include::(\'%s\') [END] -->', $path) . PHP_EOL;
             $content      = $this->getEvaluatedContent($path);
-            $requirement  = vsprintf('%s%s%s', $this->isDebug()
-                ? [$startComment, $content, $endComment]
-                : ['', $content, '']
+            $requirement  = vsprintf(
+                '%s%s%s',
+                $this->isDebug() ? [$startComment, $content, $endComment] : ['', $content, '']
             );
 
             $code = str_replace($match, $requirement, $code);
@@ -467,9 +467,9 @@ class Engine
                 $startComment     = sprintf('<!-- print::(\'%s\') [START] -->', $block) . PHP_EOL;
                 $endComment       = sprintf('<!-- print::(\'%s\') [END] -->', $block) . PHP_EOL;
                 $undefinedComment = sprintf('<!-- print::(\'$1\') [UNDEFINED] -->', $block);
-                $requirement      = vsprintf('%s%s%s', isset($this->blocks[$block])
-                    ? [$startComment, $requirement, $endComment]
-                    : ['', $undefinedComment, '']
+                $requirement      = vsprintf(
+                    '%s%s%s',
+                    isset($this->blocks[$block]) ? [$startComment, $requirement, $endComment] : ['', $undefinedComment, '']
                 );
             }
 
@@ -561,14 +561,14 @@ class Engine
      */
     final protected function wrapControlStructures(string $code): string
     {
-        // if code starts with an opening control structure
         if (preg_match(static::REGEX['controlStructure.start'], $code)) {
+            // if code starts with an opening control structure
             // check if it ends with ':' and add ':' if it does not
             if (substr($code, 0, 1) !== ':') {
                 $code = ltrim($code, '@ ') . ':';
             }
-        // if code ends with a closing control structure or anything else
         } else {
+            // if code ends with a closing control structure or anything else
             // check if it ends ';' and add ';' if it does not
             if (substr($code, -1) !== ';') {
                 $code = ltrim($code, '@ ') . ';';
