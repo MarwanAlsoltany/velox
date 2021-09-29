@@ -31,10 +31,10 @@ $routerContent = <<<PHP
 
 \$root = '{$server["root"]}';
 
-\$blackListed = '/\/bin\/|\/storage\/cache\/|\/storage\/views\/|\.php|\.phtml/i';
+\$blacklisted = '/\/bin\/|\/storage\/|\.php|\.phtml/i';
 \$requestPath = urldecode(parse_url(\$_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
-if (!preg_match(\$blackListed, \$requestPath)) {
+if (!preg_match(\$blacklisted, \$requestPath)) {
     return false;
 }
 
