@@ -91,6 +91,7 @@ All notable changes to **VELOX** will be documented in this file.
     - Update `keywords`.
 - Update `.travis.yml`:
     - Add database config.
+
 <br />
 
 ## [[1.2.5] - 2021-09-26](https://github.com/MarwanAlsoltany/velox/compare/v1.2.4...v1.2.5)
