@@ -492,10 +492,10 @@ class View
         if ($engine === null) {
             $engine = new Engine(
                 Config::get('global.paths.themes') . '/',
-                Config::get('view.fileExtension'),
+                Config::get('view.fileExtension') ?? self::DEFAULTS['fileExtension'],
                 Config::get('global.paths.storage') . '/temp/views/',
-                Config::get('view.engine.cache', self::DEFAULTS['engine']['cache']),
-                Config::get('view.engine.debug', self::DEFAULTS['engine']['debug'])
+                Config::get('view.engine.cache') ?? self::DEFAULTS['engine']['cache'],
+                Config::get('view.engine.debug') ?? self::DEFAULTS['engine']['debug']
             );
         }
 
