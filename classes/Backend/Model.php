@@ -24,7 +24,7 @@ use MAKS\Velox\Helper\Misc;
  * // creating/manipulating models
  * $model = new Model(); // set attributes later via setters or public assignment.
  * $model = new Model(['attribute_name' => $value]);
- * $model->get('attribute_name', $value);
+ * $model->get('attribute_name');
  * $model->set('attribute_name', $value);
  * $model->getAttributeName(); // case will be changed to 'snake_case' automatically.
  * $model->setAttributeName($value); // case will be changed to 'snake_case' automatically.
@@ -46,8 +46,8 @@ use MAKS\Velox\Helper\Misc;
  * $model = Model::find($id); // $id is the primary key of the model.
  * $models = Model::find('age', 27, 'name', 'John', ...); // or Model::find(['name' => $value]);
  * $models = Model::where('name', '=', $name); // fetch using a where clause condition.
- * $models = Model::where('name', 'LIKE', 'John%', [['AND', 'age', '>', 27], ...]);
- * $models = Model::fetch('SELECT * FROM @table WHERE `name` = :name', ['name' => $name]); // fetch using raw SQL query.
+ * $models = Model::where('name', 'LIKE', 'John%', [['AND', 'age', '>', 27], ...], 'age DESC', $limit, $offset);
+ * $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fetch using raw SQL query.
  * ```
  *
  * @method mixed get*() Getter for model attribute, (`attribute_name` -> `getAttributeName()`).
@@ -309,8 +309,8 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
         ]);
 
         $id = $this->getDatabase()->transactional(function () use ($query, $variables) {
+            /** @var Database $this */
             $this->perform($query, $variables);
-
             return $this->lastInsertId();
         });
 
@@ -345,6 +345,7 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
         ]);
 
         $this->getDatabase()->transactional(function () use ($query, $variables) {
+            /** @var Database $this */
             $this->perform($query, $variables);
         });
 
@@ -366,6 +367,7 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
         $variables = [':id' => $this->get($this->getPrimaryKey())];
 
         return $this->getDatabase()->transactional(function () use ($query, $variables) {
+            /** @var Database $this */
             return $this->perform($query, $variables)->rowCount();
         });
     }
@@ -425,11 +427,11 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
         $class = static::class;
 
         return static::getDatabase()->transactional(function () use ($query, $variables, $raw, $class) {
+            /** @var Database $this */
             $statement = $this->perform($query, $variables);
             $result    = $raw
                 ? $statement->fetchAll(\PDO::FETCH_ASSOC)
                 : $statement->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, $class, [/* $class constructor arguments */]);
-
             return $result;
         });
     }
@@ -462,15 +464,15 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
             $query .= ' WHERE ' . implode(' AND ', $sqlConditions);
         }
 
-        if ($order) {
+        if ($order !== null) {
             $query .= ' ORDER BY ' . $order;
         }
 
-        if ($limit) {
+        if ($limit !== null) {
             $query .= ' LIMIT ' . $limit;
         }
 
-        if ($offset) {
+        if ($offset !== null) {
             $query .= ' OFFSET ' . $offset;
         }
 
@@ -552,13 +554,14 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
         };
 
         $pairs = $format($condition);
+        $count = count($pairs);
 
-        if (count($pairs) === 1) {
+        if ($count === 1) {
             return static::one([static::getPrimaryKey() => current($condition)]);
         }
 
         $conditions = [];
-        for ($i = 0; $i < count($pairs); $i++) {
+        for ($i = 0; $i < $count; $i++) {
             if ($i % 2 === 0) {
                 $conditions[$pairs[$i]] = $pairs[$i + 1];
             }
@@ -627,15 +630,15 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
         $query     = sprintf('SELECT * FROM @table %s', $where['query']);
         $variables = $where['variables'];
 
-        if ($order) {
+        if ($order !== null) {
             $query .= ' ORDER BY ' . $order;
         }
 
-        if ($limit) {
+        if ($limit !== null) {
             $query .= ' LIMIT ' . $limit;
         }
 
-        if ($offset) {
+        if ($offset !== null) {
             $query .= ' OFFSET ' . $offset;
         }
 
@@ -652,7 +655,7 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
         foreach ($conditions as $index => $condition) {
             $result = static::buildNestedQuery($condition, $index);
 
-            $query     = $query     . $result['query'];
+            $query     = $query . $result['query'];
             $variables = $variables + $result['variables'];
         }
 
@@ -690,7 +693,7 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
                     $result = static::buildNestedQuery($subCondition, $subIndex);
                 }
 
-                $query     = $query     . $result['query'];
+                $query     = $query . $result['query'];
                 $variables = $variables + $result['variables'];
 
                 $nested--;
@@ -706,7 +709,8 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
         $operator1 = static::validateOperator($operator1, $index);
         $operator2 = static::validateOperator($operator2, $index);
 
-        $placeholder = sprintf('%s_%s', $column, $index);
+        $placeholder  = sprintf('%s_%s', $column, $index);
+        $placeholders = '';
 
         if ($isInOperator = substr($operator2, -2) === 'IN') {
             $placeholders = array_map(function ($id) use ($placeholder) {
@@ -947,28 +951,32 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
     /**
      * `ArrayAccess::offsetGet()` interface implementation.
      */
-    public function offsetGet($offset) {
+    public function offsetGet($offset)
+    {
         return $this->get($offset);
     }
 
     /**
      * `ArrayAccess::offsetSet()` interface implementation.
      */
-    public function offsetSet($offset, $value): void {
+    public function offsetSet($offset, $value): void
+    {
         $this->set($offset, $value);
     }
 
     /**
      * `ArrayAccess::offsetExists()` interface implementation.
      */
-    public function offsetExists($offset): bool {
+    public function offsetExists($offset): bool
+    {
         return $this->get($offset) !== null;
     }
 
     /**
      * `ArrayAccess::offsetUnset()` interface implementation.
      */
-    public function offsetUnset($offset): void {
+    public function offsetUnset($offset): void
+    {
         $this->set($offset, null);
     }
 
