@@ -44,6 +44,9 @@ The fastest way to build simple websites using PHP!
 [Functions](#functions)<br/>
 [Commands](#commands)<br/>
 [Themes](#themes)<br/>
+[Extending VELOX](#extending-velox)<br/>
+[MVC](#mvc)<br/>
+[Templating](#templating)<br/>
 [Changelog](./CHANGELOG.md)
 
 </p>
@@ -84,7 +87,7 @@ Check out the [Demo](https://velox.marwanalsoltany.repl.co) or play with the [RE
 composer create-project marwanalsoltany/velox my-velox-app
 ```
 
-![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *You may need to add the `--stability=dev` depending on the version/branch.*
+![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *You may need to add the `--stability=dev` depending on the version/branch. You may also want to add `--no-dev` flag to not install development dependencies.*
 
 #### Using Git:
 
@@ -106,13 +109,13 @@ Download [VELOX](https://github.com/MarwanAlsoltany/velox/releases) as a `.zip` 
 
 ## About VELOX
 
-VELOX is a lightweight micro-framework that makes creating a simple website using PHP joyful. It helps you create future-proof websites faster and more efficiently. It provides components that facilitate the process of creating a website using vanilla PHP. VELOX does not have any dependencies, the VELOX package and everything that it needs is included in the project itself. All that VELOX provides is a way to work with **config**, pass **data**, register **routes**, render **views**, handle **exceptions**, **autoload** code, and **resolve** assets. It provides the *View* and the *Controller* parts of an *MVC* design pattern, leaving the *Model* part for you to implement as you wish, or use any 3rd-Party Package; in case you needed it. VELOX can also be used as a **Static Site Generator** if all you need is HTML files in the end.
+VELOX is a lightweight micro-framework that makes creating a simple website using PHP joyful. It helps you create future-proof websites faster and more efficiently. It provides components that facilitate the process of creating a website using PHP. VELOX does not have any dependencies, the VELOX package and everything that it needs is included in the project itself. All that VELOX provides is a way to work with **config**, pass **data**, register **routes**, interact with the **database**, render **views**, handle **exceptions**, **autoload** code, and **resolve** assets. It provides the *View* and the *Controller* parts of an *MVC* design pattern. Staring from `v1.3.0`, VELOX also provides the *Model* part, making it a fully featured *MVC* framework. VELOX can also be used as a **Static Site Generator** if all you need is HTML files in the end.
 
 ### Why does VELOX exist?
 
 VELOX was created to solve a specific problem, it's a way to build a website that is between dynamic and static, a way to create a simple website with few pages without being forced to use a framework or a CMS that comes with a ton of stuff which will never get used, it's lightweight and straight to the point.
 
-It's not recommended to use VELOX if you have an intermediary project, you would be better off using some well-established frameworks. VELOX is not an initiative to reinvent the wheel, you can look at VELOX as a starter-kit for small projects.
+It's not recommended to use VELOX if you have an intermediary project, you would be better off using a well-established framework. VELOX is not an initiative to reinvent the wheel, you can look at VELOX as a starter-kit for small projects.
 
 VELOX has a very special use-case, simple websites, and here is meant really simple websites. The advantage is, you don't have stuff that you don't need. Comparing VELOX to Laravel or Symfony is irrelevant, as these frameworks play in a totally different area, it also worth mentioning that VELOX is much simpler than Lumen or Slim.
 
@@ -176,6 +179,8 @@ The following table lists all config files that come shipped with VELOX.
 | --- | --- |
 | [`global.php`](./config/global.php) | This config file contains some global variables that are used by almost all classes (app-wide config). |
 | [`router.php`](./config/router.php) | This config file can be used to override `Router::class` default parameters. |
+| [`database.php`](./config/database.php) | This config file contains database credentials, it is used by the `Database::class`. |
+| [`session.php`](./config/session.php) | This config file contains session configuration, it is used by the `Session::class`. |
 | [`theme.php`](./config/theme.php) | This config file can be used to edit/extend theme configuration. |
 | [`view.php`](./config/view.php) | This config file can be used to customize everything about the views. It is used by the `View::class`. |
 | [`data.php`](./config/data.php) | This config file can be used to provide any arbitrary data, which then will get injected in the `Data::class`. |
@@ -189,14 +194,14 @@ The following table lists all config files that come shipped with VELOX.
 
 ## Classes
 
-The following table lists all available classes with their description.
-
 VELOX classes are divided in four namespaces:
 
 * [`MAKS\Velox`](./classes)
 * [`MAKS\Velox\Backend`](./classes/Backend)
 * [`MAKS\Velox\Frontend`](./classes/Frontend)
 * [`MAKS\Velox\Helper`](./classes/Helper)
+
+The following table lists all available classes with their description:
 
 | Class | Description |
 | --- | --- |
@@ -205,9 +210,13 @@ VELOX classes are divided in four namespaces:
 | [`Config`](./classes/Backend/Config.php) | A class that loads everything from the `/config` directory and make it as an array that is accessible via dot-notation. |
 | [`Router`](./classes/Backend/Router.php) | A class that serves as a router and an entry point for the application. |
 | [`Globals`](./classes/Backend/Globals.php) | A class that serves as an abstraction/wrapper to work with superglobals. |
+| [`Session`](./classes/Backend/Session.php) | A class that offers a simple interface to work with sessions. |
 | [`Controller`](./classes/Backend/Controller.php) | An abstract class that serves as a base Controller that can be extended to make handlers for the router. |
+| [`Database`](./classes/Backend/Database.php) | A class that represents the database and handles database operations. |
+| [`Model`](./classes/Backend/Model.php) | An abstract class that serves as a base model that can be extended to create custom models. |
 | [`Data`](./classes/Frontend/Data.php) | A class that serves as an abstracted data bag/store that is accessible via dot-notation. |
 | [`View`](./classes/Frontend/View.php) | A class that renders view files (Layouts, Pages, and Partials) with the ability to include additional files, divide page content into sections and cache rendered views. |
+| [`Engine`](./classes/Frontend/Engine.php) | A class that serves as a templating engine for view files. |
 | [`HTML`](./classes/Frontend/HTML.php) | A class that serves as a fluent interface to write HTML in PHP. It also helps with creating HTML elements on the fly. |
 | [`Path`](./classes/Frontend/Path.php) | A class that serves as a path resolver for different paths/URLs of the app. |
 | [`Dumper`](./classes/Helper/Dumper.php) | A class that dumps variables and exception in a nice formatting. |
@@ -216,17 +225,7 @@ VELOX classes are divided in four namespaces:
 
 ![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *This all what the VELOX package provides out of the box.*
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *The `App`, `Event`, `Config`, `Router`, `Globals`, `Data`, `View`, `HTML`, `Path` classes are aliased on the root namespace for ease-of-use.*
-
-### Extending VELOX
-
-To add your own classes use the `app/` directory, this is where you should put you own business logic. Note that you have to follow PSR-4 in order for VELOX to load your classes. See [`app/Controller/DefaultController`](./app/Controller/DefaultController.php), to get an idea.
-
-Here is a list of some important files that you should consider when working with VELOX:
-* Loading additional files/directories [`autoload/additional.php`](./autoload/additional.php).
-* Providing additional data [`config/data.php`](./config/data.php).
-* Registering web routes [`includes/routes/web.php`](./includes/routes/web.php) (starting from `v1.2.0`).
-* Registering event handlers [`includes/events/system.php`](./includes/events/system.php) (starting from `v1.2.0`).
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *The `App`, `Event`, `Config`, `Router`, `Globals`, `Session`, `Database`, `Data`, `View`, `HTML`, `Path` classes are aliased on the root namespace for ease-of-use.*
 
 
 ---
@@ -234,12 +233,12 @@ Here is a list of some important files that you should consider when working wit
 
 ## Functions
 
-The following table lists all available functions and to which class/group they belong.
-
 VELOX functions are divided into these files:
 
 * [`helpers.php`](./functions/helpers.php): This is where helper functions for VELOX classes live, these are mainly functions that return an instance of class or alias some method on it.
 * [`html.php`](./functions/html.php): This is where HTML helper functions live, these are nothing other than aliases for the most used PHP functions with HTML.
+
+The following table lists all available functions and to which class/group they belong:
 
 | Class/Group | Function(s) |
 | --- | --- |
@@ -247,7 +246,9 @@ VELOX functions are divided into these files:
 | `Event::class` | `event()` |
 | `Config::class` | `config()` |
 | `Router::class` | `router()`, <br>`handle()`, <br>`redirect()`, <br>`forward()` |
+| `Database::class` | `database()` |
 | `Globals::class` | `globals()` |
+| `Session::class` | `session()`, <br>`flash()`, <br>`csrf()` |
 | `View::class` | `view()`, <br>`render()`, <br>`render_layout()`, <br>`render_page()`, <br>`render_partial()`, <br>`section_push()`, <br>`section_reset()`, <br>`section_start()`, <br>`section_end()`, <br>`section_yield()`, <br>`include_file()` |
 | `Data::class` | `data()`, <br>`data_has()`, <br>`data_get()`, <br>`data_set()` |
 | `HTML::class` | `html()` |
@@ -293,7 +294,7 @@ VELOX is built around the idea of <b><u><i>themes</i></u></b>, a theme is divide
 * The [`pages/`](./themes/velox/pages) directory is where you put the content specific to every page, the page will then be wrapped with some layout of your choice and finally get rendered. A page in VELOX terminology is the actual content of a webpage.
 * The [`partials/`](./themes/velox/partials) directory is where you put all your reusable pieces of the theme, which then will be used in your layouts, pages, or other partials. A good example for **partials** could be: *Components*, *Includes*, and *Content-Elements*.
 
-You can customize the behavior of themes using the [`config/theme.php`](./config/theme.php) file. Here you can set the active theme with the `active` key. Themes can inherit from each other by setting parent(s) with the `parent` key. You can also change the theme directory structure if you wish to using the `paths` key. Other configurations that worth taking a look at (caching for example) which have to do with themes can be found in the [`config/view.php`](./config/view.php) file.
+You can customize the behavior of themes using the [`config/theme.php`](./config/theme.php) file. Here you can set the active theme with the `active` key. Themes can inherit from each other by setting parent(s) with the `parent` key. You can also change the theme directory structure if you wish to using the `paths` key. Other configurations (caching for example) that worth taking a look at which have to do with themes can be found in the [`config/view.php`](./config/view.php) file.
 
 ![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *You can take a look at the provided [`velox`](./themes/velox) theme to see how all stuff work together in practice.*
 
@@ -302,6 +303,174 @@ You can customize the behavior of themes using the [`config/theme.php`](./config
 1. [Layout](./themes/velox/layouts): [`themes/velox/layouts/main.phtml`](./themes/velox/layouts/main.phtml)
 2. [Page](./themes/velox/pages): [`themes/velox/pages/home.phtml`](./themes/velox/pages/home.phtml)
 3. [Partial](./themes/velox/partials): [`themes/velox/partials/text-image.phtml`](./themes/velox/partials/text-image.phtml)
+
+
+
+---
+
+
+## Extending VELOX
+
+To add your own classes use the `app/` directory, this is where you should put you own business logic. Note that you have to follow [PSR-4](https://www.php-fig.org/psr/psr-4/) in order for VELOX to load your classes. See [`app/Controller/DefaultController.php`](./app/Controller/DefaultController.php), to get an idea.
+
+Here is a list of some important files that you should consider when working with VELOX:
+* Preloading files/directories [`autoload/additional.php`](./autoload/additional.php).
+* Providing additional data [`config/data.php`](./config/data.php).
+* Registering web routes [`includes/routes/web.php`](./includes/routes/web.php) (starting from `v1.2.0`).
+* Registering event handlers [`includes/events/system.php`](./includes/events/system.php) (starting from `v1.2.0`).
+
+
+
+---
+
+
+## MVC
+
+### Creating a Model:
+```php
+<?php
+
+namespace App\Model;
+
+use MAKS\Velox\Backend\Model;
+
+class Person extends Model
+{
+    protected static ?string $table = 'persons';
+    protected static ?array $columns = ['id', 'first_name', 'last_name', 'age', ...];
+    protected static ?string $primaryKey = 'id';
+
+    public static function schema(): string
+    {
+        // return SQL to create the table
+    }
+}
+```
+
+### Working with the Model:
+
+```php
+<?php
+
+use App\Model\Person;
+
+// creating/manipulating models
+$person = new Person(); // set attributes later via setters or public assignment.
+$person = new Person(['first_name' => $value, ...]); // set attributes in constructor
+$person->get('first_name'); // get an attribute
+$person->set('last_name', $value); // set an attribute
+$person->getFirstName(); // case will be changed to 'snake_case' automatically.
+$person->setLastName($value); // case will be changed to 'snake_case' automatically.
+$person->firstName; // case will be changed to 'snake_case' automatically.
+$person->lastName = $value; // case will be changed to 'snake_case' automatically.
+$attributes = $person->getAttributes(); // returns all attributes.
+$person->save(); // persists the model in the database.
+$person->update(['first_name' => $value]); // updates the model and save changes in the database.
+$person->delete(); // deletes the model from the database.
+Person::create($attributes); // creates a new model and saves it in the database.
+Person::destroy($id); // destroys a model and deletes it from the database.
+
+// fetching models
+$count   = Person::count(); // returns the number of models in the database.
+$person  = Person::first();
+$person  = Person::last();
+$person  = Person::one(['first_name' => 'John']);
+$persons = Person::all(['last_name' => 'Doe'], $order, $offset, $limit);
+$person  = Person::find($id); // $id is the primary key of the model.
+$persons = Person::find('first_name', 'John', 'last_name', 'Doe' ...); // or
+$persons = Person::find(['first_name' => 'John', 'last_name' => 'Doe']);
+$persons = Person::where('first_name', '=', $value); // fetch using a where clause condition.
+$persons = Person::where('last_name', 'LIKE', '%Doe', [['AND', 'age', '>', 27], ...], 'age DESC', $limit, $offset);
+$persons = Person::fetch('SELECT * FROM @table WHERE `first_name` = ?', [$value]); // fetch using raw SQL query.
+
+```
+
+### Using the Model in the Controller:
+
+```php
+<?php
+
+namespace App\Controller;
+
+use MAKS\Velox\Backend\Controller;
+use App\Model\Person;
+
+class PersonsController extends Controller
+{
+    public function indexAction()
+    {
+        $persons = Person::all();
+
+        return $this->view->render('persons/index', [
+            'title' => 'Persons',
+            'persons' => $persons
+        ]);
+    }
+
+    // other CRUD actions ...
+
+    /** @route("/search", {GET}) */
+    public function searchAction()
+    {
+        // ...
+    }
+}
+```
+
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *CRUD operations (namely: `index`, `create`, `store`, `show`, `edit`, `update`, `destroy`) are registered and configured by default. To register your own routes automatically, use the `@route("<path>", {<http-verb>, ...})` annotation. See `Controller::registerRoutes()` DocBlock to learn more.*
+
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *To make the model available as property for the controller (`$this->model`), use `Controller::associateModel()`. See `Controller::registerRoutes()` DocBlock to learn more.*
+
+### Using the Model in a View:
+
+```html
+{# theme/pages/persons/index.phtml #}
+
+{! @extends 'theme/pages/persons/base' !}
+
+{! @block content !}
+    {! @super !}
+
+    <h1>{{ $title }}</h1>
+
+    {! @if (count($persons)) !}
+        <ul>
+            {! @foreach ($persons as $person) !}
+                <li>{{ $person->firsName }} {{ $person->lastName }}</li>
+            {! @endforeach !}
+        </ul>
+    {! @endif !}
+{! @endblock !}
+```
+
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Check out the [`Person`](./app/Model/Person.php) model and the [`PersonsController`](./app/Controller/PersonsController.php) to see a real life example.*
+
+
+---
+
+
+## Templating
+
+VELOX comes with its own templating engine. This templating engine is very intuitive and easy to get along with, if you have experience with any other templating engine, learning it would be a matter of minutes. Note that the use of this templating engine is optional. You can simply use raw PHP in your views.
+
+The following table lists all available tags and what they do:
+
+| Tag | Description |
+| --- | --- |
+| `{! @extends 'path/to/template' !}` | Extend a template, blocks of this template will be inherited. |
+| ```{! @include 'path/to/file' !}``` | Include a file, this will get rendered before inclusion (can't access context variables). |
+| `{! @embed 'path/to/file' !}` | Embed a file, this will be included as is (can access context variables). |
+| `{! @block name !}`<br>`{! @endblock !}` | Create a block to wrap some code. |
+| `{! @super !}` | Use it inside a block in an extended template to inherit parent block content. |
+| `{! @block(name) !}` | Print a block. Needs to be called at least once in order to render a block. |
+| `{! @foreach($vars as $var) !}`<br>`{! @endforeach !}` | Control structures (loops, if statements, ...). All PHP control structures are available (`if`, `else`, `elseif`, `do`, `while`, `for`, `foreach`, `continue`, `switch`, `break`, `return`, `require`, `include`) with the same syntax but simply prefixed with an `@` symbol if it's the first word in the tag. |
+| `{! $var = '' !}` | Variable assignments. Content can be a variable or any valid PHP expression. |
+| `{{ $var }}` | Print a variable. Content can be a variable or any PHP expression that can be casted to a string. |
+| `{{{ $var }}}` | Print a variable without escaping. Content can be a variable or any PHP expression that can be casted to a string. |
+| `{# This is a comment #}` | Comment something. This will be a PHP comment (will not be available in final HTML). |
+
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Take a look at [`persons`](themes/velox/pages/persons) views of [`PersonsController`](./app/Controller/PersonsController.php) in VELOX theme for a real life example.*
+
 
 ---
 
