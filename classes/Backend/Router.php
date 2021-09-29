@@ -471,7 +471,7 @@ class Router
 
             if (!isset($responses[$code]['func'])) {
                 try {
-                    echo View::render(Config::get('global.errorPages.' . $code), compact('path', 'method'));
+                    echo View::render((string)Config::get('global.errorPages.' . $code), compact('path', 'method'));
                     App::terminate(); // @codeCoverageIgnore
                 } catch (\Throwable $e) {
                     // this function will exit the script
