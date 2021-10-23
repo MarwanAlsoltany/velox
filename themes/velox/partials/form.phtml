@@ -6,6 +6,7 @@
                     ->open('div', ['class' => 'column is-two-thirds'])
                         ->comment('SIMPLE FORM')
                         ->open('form', ['method' => 'POST', 'class' => 'box'])
+                            ->node(Session::csrf()->html())
                             ->open('div', ['class' => 'field'])
                                 ->label('Message', ['class' => 'label'])
                                 ->open('div', ['class' => 'control has-icons-right'])
