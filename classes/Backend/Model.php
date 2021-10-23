@@ -115,9 +115,15 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
     public static function isMigrated(): bool
     {
         $table  = static::getTable();
-        $tables = static::getDatabase()
-            ->query('SHOW TABLES;')
-            ->fetchAll(Database::FETCH_COLUMN);
+        $tables = [$table];
+
+        try {
+            $tables = static::getDatabase()
+                ->query('SHOW TABLES;')
+                ->fetchAll(\PDO::FETCH_COLUMN);
+        } catch (\Exception $e) {
+            // ignore silently
+        }
 
         return in_array($table, $tables);
     }
