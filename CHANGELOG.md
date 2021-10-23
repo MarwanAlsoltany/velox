@@ -14,7 +14,6 @@ All notable changes to **VELOX** will be documented in this file.
     - Update `transactional()` method.
     - Update `prepare()` method.
     - Add `mock()` method.
-    - Fix some typos.
 - Update `Dumper` class:
     - Update `dumpException()` method.
 - Update `Model` class:
