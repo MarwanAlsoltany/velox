@@ -4,6 +4,26 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.3.1] - 2021-10-23](https://github.com/MarwanAlsoltany/velox/compare/v1.3.0...v1.3.1)
+
+- Update `PersonsController` class:
+    - Update `createTestData()` method to use static data instead of API call.
+- Update `Database` class:
+    - Update class properties data types.
+    - Update `instance()` method, to return a fake if DB config is invalid, to make the Database an optional requirement.
+    - Update `transactional()` method.
+    - Update `prepare()` method.
+    - Add `mock()` method.
+    - Fix some typos.
+- Update `Dumper` class:
+    - Update `dumpException()` method.
+- Update `Model` class:
+    - Update `isMigrated()` method.
+- Update `velox` theme:
+    - Add missing CSRF tokens in some views.
+
+<br />
+
 ## [[1.3.0] - 2021-09-29](https://github.com/MarwanAlsoltany/velox/compare/v1.2.5...v1.3.0)
 
 - Add `Session` class.
