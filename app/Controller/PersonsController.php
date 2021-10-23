@@ -29,7 +29,7 @@ class PersonsController extends Controller
     /**
      * @return string
      */
-    public function indexAction()
+    public function indexAction(): string
     {
         $persons = $this->model->all();
 
@@ -42,7 +42,7 @@ class PersonsController extends Controller
     /**
      * @return string
      */
-    public function createAction()
+    public function createAction(): string
     {
         return $this->view->render('persons/create', [
             'title' => 'Create a new Person',
@@ -50,9 +50,9 @@ class PersonsController extends Controller
     }
 
     /**
-     * @return string
+     * @return void
      */
-    public function storeAction()
+    public function storeAction(): void
     {
         $attributes = $this->globals->post->getAll();
 
@@ -63,14 +63,14 @@ class PersonsController extends Controller
             'username' => $attributes['username'] ?? '',
             'email'    => $attributes['email'] ?? '',
             'address'  => $attributes['address'] ?? '',
-            'company'  => $attributes['address'] ?? '',
+            'company'  => $attributes['company'] ?? '',
         ]);
 
         $person->save();
 
         $this->session->flash('A new person was created successfully!', 'notification');
 
-        return $this->router->redirect('/persons');
+        $this->router->redirect('/persons');
     }
 
     /**
@@ -79,7 +79,7 @@ class PersonsController extends Controller
      *
      * @return string
      */
-    public function showAction(string $path, ?string $id)
+    public function showAction(string $path, ?string $id): string
     {
         $person = $this->model->find($id);
         $others = $this->model->where('id', '<>', $id);
@@ -97,7 +97,7 @@ class PersonsController extends Controller
      *
      * @return string
      */
-    public function editAction(string $path, ?string $id)
+    public function editAction(string $path, ?string $id): string
     {
         $person = $this->model->find($id);
 
@@ -113,7 +113,7 @@ class PersonsController extends Controller
      *
      * @return void
      */
-    public function updateAction(string $path, ?string $id)
+    public function updateAction(string $path, ?string $id): void
     {
         $person = $this->model->find($id);
 
@@ -126,7 +126,7 @@ class PersonsController extends Controller
 
         $this->session->flash('Person with ID ' . $id . ' was updated successfully!', 'notification');
 
-        return $this->router->redirect('/persons');
+        $this->router->redirect('/persons');
     }
 
     /**
@@ -135,7 +135,7 @@ class PersonsController extends Controller
      *
      * @return void
      */
-    public function destroyAction(string $path, ?string $id)
+    public function destroyAction(string $path, ?string $id): void
     {
         $person = $this->model->find($id);
 
@@ -151,7 +151,7 @@ class PersonsController extends Controller
      *
      * @return void
      */
-    public function listAction()
+    public function listAction(): void
     {
         $this->router->forward('/persons');
     }
