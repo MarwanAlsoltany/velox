@@ -11,6 +11,7 @@
             <h1 class="title">Create a new Person</h1>
             <form action="{{ Path::resolveUrl('persons') }}" method="POST">
                 <input type="hidden" name="_method" value="POST">
+                {{{ Session::csrf() }}}
                 <div class="field">
                     <label class="label">Name</label>
                     <div class="control">
