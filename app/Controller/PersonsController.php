@@ -169,22 +169,92 @@ class PersonsController extends Controller
             array_map(fn ($person) => $person->delete(), Person::all());
         }
 
-        $json = file_get_contents('https://jsonplaceholder.typicode.com/users');
+        // this data is built using https://jsonplaceholder.typicode.com/users
+        $persons = [
+            [
+                'name' => 'Leanne Graham',
+                'age' => 28,
+                'username' => 'bret',
+                'email' => 'sincere@april.biz',
+                'address' => 'Kulas Light, Apt. 556, Gwenborough, 92998-3874',
+                'company' => 'Romaguera-Crona',
+            ],
+            [
+                'name' => 'Ervin Howell',
+                'age' => 40,
+                'username' => 'antonette',
+                'email' => 'shanna@melissa.tv',
+                'address' => 'Victor Plains, Suite 879, Wisokyburgh, 90566-7771',
+                'company' => 'Deckow-Crist',
+            ],
+            [
+                'name' => 'Clementine Bauch',
+                'age' => 42,
+                'username' => 'samantha',
+                'email' => 'nathan@yesenia.net',
+                'address' => 'Douglas Extension, Suite 847, McKenziehaven, 59590-4157',
+                'company' => 'Romaguera-Jacobson',
+            ],
+            [
+                'name' => 'Patricia Lebsack',
+                'age' => 63,
+                'username' => 'karianne',
+                'email' => 'julianne.oconner@kory.org',
+                'address' => 'Hoeger Mall, Apt. 692, South Elvis, 53919-4257',
+                'company' => 'Robel-Corkery',
+            ],
+            [
+                'name' => 'Chelsey Dietrich',
+                'age' => 21,
+                'username' => 'kamren',
+                'email' => 'lucio_hettinger@annie.ca',
+                'address' => 'Skiles Walks, Suite 351, Roscoeview, 33263',
+                'company' => 'Keebler LLC',
+            ],
+            [
+                'name' => 'Mrs. Dennis Schulist',
+                'age' => 48,
+                'username' => 'leopoldo_corkery',
+                'email' => 'karley_dach@jasper.info',
+                'address' => 'Norberto Crossing, Apt. 950, South Christy, 23505-1337',
+                'company' => 'Considine-Lockman',
+            ],
+            [
+                'name' => 'Kurtis Weissnat',
+                'age' => 33,
+                'username' => 'elwyn.skiles',
+                'email' => 'telly.hoeger@billy.biz',
+                'address' => 'Rex Trail, Suite 280, Howemouth, 58804-1099',
+                'company' => 'Johns Group',
+            ],
+            [
+                'name' => 'Nicholas Runolfsdottir V',
+                'age' => 27,
+                'username' => 'maxime_nienow',
+                'email' => 'sherwood@rosamond.me',
+                'address' => 'Ellsworth Summit, Suite 729, Aliyaview, 45169',
+                'company' => 'Abernathy Group',
+            ],
+            [
+                'name' => 'Glenna Reichert',
+                'age' => 65,
+                'username' => 'delphine',
+                'email' => 'chaim_mcdermott@dana.io',
+                'address' => 'Dayna Park, Suite 449, Bartholomebury, 76495-3109',
+                'company' => 'Yost and Sons',
+            ],
+            [
+                'name' => 'Clementina DuBuque',
+                'age' => 37,
+                'username' => 'moriah.stanton',
+                'email' => 'rey.padberg@karina.biz',
+                'address' => 'Kattie Turnpike, Suite 198, Lebsackbury, 31428-2261',
+                'company' => 'Hoeger LLC',
+            ],
+        ];
 
-        foreach (json_decode($json) as $person) {
-            $person = new Person([
-                'name' => $person->name,
-                'age' => rand(18, 67),
-                'username' => strtolower($person->username),
-                'email' => strtolower($person->email),
-                'address' => (function () use ($person) {
-                    $address = (array)$person->address;
-                    unset($address['geo']);
-                    return implode(', ', $address);
-                })(),
-                'company' => $person->company->name,
-            ]);
-
+        foreach ($persons as $person) {
+            $person = new Person($person);
             $person->save();
         }
     }
