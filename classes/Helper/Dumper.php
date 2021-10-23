@@ -141,7 +141,7 @@ class Dumper
         $accentColor   = self::$accentColor;
         $contrastColor = self::$contrastColor;
 
-        $style = ":root{--accent-color:{$accentColor};--contrast-color:{$contrastColor}}*,::after,::before{box-sizing:border-box}body{background:#fff;font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;margin:0}h1,h2,h3,h4,h5,h6{margin:0}h1,h2{color:var(--accent-color)}h1{font-size:32px}h2{font-size:28px}h3{color:#fff}.container{width:85vw;max-width:1200px;min-height:100vh;background:#fff;padding:7vh 3vw 10vh 3vw;margin:0 auto;overflow:hidden}.message{background:var(--accent-color);color:#fff;padding:2em 1em;margin:0 0 3em 0;}.code{overflow-y:scroll;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:14px;margin:0 0 3em 0;-ms-overflow-style: none;scrollbar-width: none}.code::-webkit-scrollbar{display:none}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}ul{padding:2em 1em;margin:1em 0;background:var(--contrast-color)}ul li{white-space:pre;list-style-type:none;font-family:monospace}ul li span.line{display:inline-block;color:#fff;text-align:right;padding:4px 8px;user-select:none}ul li.exception-line span.line{color:var(--accent-color);font-weight:bold}ul li.exception-line span.line+code>span>span:not(:first-child){padding-bottom:3px;border-bottom:2px solid var(--accent-color)}table{width:100%;border-collapse:collapse;border-spacing:0}table th{background:var(--contrast-color);color:#fff;text-align:left;padding-top:12px;padding-bottom:12px}table td,table th{border-bottom:1px solid rgba(0,0,0,0.15);padding:6px}table tr:nth-child(even){background-color:rgba(0,0,0,0.05)}table td.number{text-align:left}table td.line{text-align:left}table td.class,table td.function{font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:14px;font-weight:700}table td.arguments span{display:inline-block;background:rgba(0,0,0,.15);color:var(--accent-color);font-style:italic;padding:2px 4px;margin:0 4px 0 0;border-radius:4px}";
+        $style = ":root{--accent-color:{$accentColor};--contrast-color:{$contrastColor}}*,::after,::before{box-sizing:border-box}body{background:#fff;font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;margin:0}h1,h2,h3,h4,h5,h6{margin:0}h1,h2{color:var(--accent-color)}h1{font-size:32px}h2{font-size:28px}h3{color:#fff}.container{width:85vw;max-width:1200px;min-height:100vh;background:#fff;padding:7vh 3vw 10vh 3vw;margin:0 auto;overflow:hidden}.message{background:var(--accent-color);color:#fff;padding:2em 1em;margin:0 0 3em 0;}.code{overflow-y:scroll;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:14px;margin:0 0 3em 0;-ms-overflow-style: none;scrollbar-width: none}.code::-webkit-scrollbar{display:none}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}ul{padding:2em 1em;margin:1em 0;background:var(--contrast-color)}ul li{white-space:pre;list-style-type:none;font-family:monospace}ul li span.line{display:inline-block;color:#fff;text-align:right;padding:4px 8px;user-select:none}ul li.exception-line span.line{color:var(--accent-color);font-weight:bold}ul li.exception-line span.line+code>span>span:not(:first-child){padding-bottom:3px;border-bottom:2px solid var(--accent-color)}.external-link{color:var(--accent-color)}.table-container{overflow-x:scroll}table{width:100%;border-collapse:collapse;border-spacing:0}table th{background:var(--contrast-color);color:#fff;text-align:left;padding-top:12px;padding-bottom:12px}table td,table th{border-bottom:1px solid rgba(0,0,0,0.15);padding:6px}table tr:nth-child(even){background-color:rgba(0,0,0,0.05)}table td.number{text-align:left}table td.line{text-align:left}table td.class,table td.function{font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:14px;font-weight:700}table td.arguments{white-space:nowrap}table td.arguments span{display:inline-block;background:rgba(0,0,0,.15);color:var(--accent-color);font-style:italic;padding:2px 4px;margin:0 4px 0 0;border-radius:4px}";
 
         (new HTML(false))
             ->node('<!DOCTYPE html>')
@@ -160,50 +160,69 @@ class Dumper
                         ->close()
                         ->h2('Thrown in:')
                         ->execute(function (HTML $html) use ($file, $line, $lines) {
-                            if (isset($lines)) {
-                                $html->p("File: <code><b>{$file}</b></code>");
-                                $html->open('ul', ['class' => 'code']);
-                                for ($i = $line - 3; $i < $line + 4; $i++) {
-                                    if ($i > 0 && $i < count($lines)) {
-                                        $highlightedCode = highlight_string('<?php ' . $lines[$i], true);
-                                        $highlightedCode = preg_replace(
-                                            ['/\n/', '/<br ?\/?>/', '/&lt;\?php&nbsp;/'],
-                                            ['', '', ''],
-                                            $highlightedCode
-                                        );
-                                        if ($i == $line - 1) {
-                                            $arrow = str_pad('>', strlen("{$i}"), '=', STR_PAD_LEFT);
-                                            $html
-                                                ->open('li', ['class' => 'exception-line'])
-                                                    ->span($arrow, ['class' => 'line'])
-                                                    ->node($highlightedCode)
-                                                ->close();
-                                        } else {
-                                            $number = strval($i + 1);
-                                            $html
-                                                ->open('li')
-                                                    ->span($number, ['class' => 'line'])
-                                                    ->node($highlightedCode)
-                                                ->close();
-                                        }
+                            if (!isset($lines)) {
+                                return;
+                            }
+
+                            $html->open('p')
+                                ->node("File: <code><b>{$file}</b></code>")
+                                ->entity('nbsp')
+                                ->entity('nbsp')
+                                ->entity('nbsp')
+                                ->a('Open in <b>VS Code</b>', [
+                                    'href'  => sprintf('vscode://file/%s:%d', $file, $line),
+                                    'class' => 'external-link',
+                                ])
+                            ->close();
+                            $html->open('ul', ['class' => 'code']);
+                            for ($i = $line - 3; $i < $line + 4; $i++) {
+                                if ($i > 0 && $i < count($lines)) {
+                                    $highlightedCode = highlight_string('<?php ' . $lines[$i], true);
+                                    $highlightedCode = preg_replace(
+                                        ['/\n/', '/<br ?\/?>/', '/&lt;\?php&nbsp;/'],
+                                        ['', '', ''],
+                                        $highlightedCode
+                                    );
+                                    if ($i == $line - 1) {
+                                        $arrow = str_pad('>', strlen("{$i}"), '=', STR_PAD_LEFT);
+                                        $html
+                                            ->open('li', ['class' => 'exception-line'])
+                                                ->span($arrow, ['class' => 'line'])
+                                                ->node($highlightedCode)
+                                            ->close();
+                                    } else {
+                                        $number = strval($i + 1);
+                                        $html
+                                            ->open('li')
+                                                ->span($number, ['class' => 'line'])
+                                                ->node($highlightedCode)
+                                            ->close();
                                     }
                                 }
-                                $html->close();
                             }
+                            $html->close();
                         })
                         ->h2('Stack trace:')
                         ->execute(function (HTML $html) use ($trace, $traceString) {
-                            if (count($trace)) {
-                                $html->p('<i>Hover on fields with * to reveal more info.</i>');
-                                $html->open('table', ['class' => 'trace'])
+                            if (!count($trace)) {
+                                $html->pre($traceString);
+
+                                return;
+                            }
+
+                            $html->open('p')
+                                ->i('Hover on fields with * to reveal more info.')
+                            ->close()
+                            ->open('div', ['class' => 'table-container'])
+                                ->open('table')
                                     ->open('thead')
                                         ->open('tr')
                                             ->th('No.')
-                                            ->th('File *')
+                                            ->th('File&nbsp;*')
                                             ->th('Line')
                                             ->th('Class')
                                             ->th('Function')
-                                            ->th('Arguments *')
+                                            ->th('Arguments&nbsp;*')
                                         ->close()
                                     ->close()
                                     ->open('tbody')
@@ -219,18 +238,20 @@ class Dumper
                                                 ->td(strval($trace['function'] ?? ''), ['class' => 'function'])
                                                 ->open('td', ['class' => 'arguments'])
                                                 ->execute(function (HTML $html) use ($trace) {
-                                                    if (isset($trace['args'])) {
-                                                        foreach ($trace['args'] as $argument) {
-                                                            $html->span(gettype($argument), [
-                                                                'title' => htmlspecialchars(
-                                                                    Dumper::exportExpression($argument),
-                                                                    ENT_QUOTES,
-                                                                    'UTF-8'
-                                                                )
-                                                            ]);
-                                                        }
-                                                    } else {
+                                                    if (!isset($trace['args'])) {
                                                         $html->node('NULL');
+
+                                                        return;
+                                                    }
+
+                                                    foreach ($trace['args'] as $argument) {
+                                                        $html->span(gettype($argument), [
+                                                            'title' => htmlspecialchars(
+                                                                Dumper::exportExpression($argument),
+                                                                ENT_QUOTES,
+                                                                'UTF-8'
+                                                            )
+                                                        ]);
                                                     }
                                                 })
                                                 ->close()
@@ -238,15 +259,15 @@ class Dumper
                                         }
                                     })
                                     ->close()
-                                ->close();
-                            } else {
-                                $html->pre($traceString);
-                            }
+                                ->close()
+                            ->close();
                         })
                     ->close()
                 ->close()
             ->close()
         ->echo();
+
+        $GLOBALS['_DIE'][__METHOD__] = true;
 
         exit;
     }
