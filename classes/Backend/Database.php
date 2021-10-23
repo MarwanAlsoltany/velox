@@ -238,7 +238,9 @@ class Database extends \PDO
     {
         return new class () extends Database {
             protected function __construct()
-            {}
+            {
+                // constructor arguments are not used
+            }
             public static function getAvailableDrivers()
             {
                 static::fail();
