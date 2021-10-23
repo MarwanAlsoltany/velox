@@ -38,9 +38,9 @@ class Database extends \PDO
     protected array $cache;
 
     protected string $dsn;
-    protected string $username;
-    protected string $password;
-    protected array $options;
+    protected ?string $username;
+    protected ?string $password;
+    protected ?array $options;
 
 
     /**
@@ -51,11 +51,11 @@ class Database extends \PDO
         $this->dsn      = $dsn;
         $this->username = $username;
         $this->password = $password;
-        $this->options  = $options ?? [];
+        $this->options  = $options;
 
         $this->cache = [];
 
-        parent::__construct($dsn, $username, $password, $options ?? []);
+        parent::__construct($dsn, $username, $password, $options);
 
         $this->setAttribute(static::ATTR_ERRMODE, static::ERRMODE_EXCEPTION);
         $this->setAttribute(static::ATTR_DEFAULT_FETCH_MODE, static::FETCH_ASSOC);
@@ -69,7 +69,7 @@ class Database extends \PDO
      * Returns a singleton instance of the `Database` class based on connection credentials.
      * This method makes sure that a single connection is opened and reused for each connection credentials set (DSN, User, Password, ...).
      *
-     * @param string|null $dsn [optional] The DSN string. If not specified, it will be retrieved from the config.
+     * @param string|null $dsn The DSN string. If not specified, it will be retrieved from the config.
      * @param string|null $username [optional] The database username. If not specified, it will be retrieved from the config.
      * @param string|null $password [optional] The database password. If not specified, it will be retrieved from the config.
      * @param array|null $options [optional] PDO options. If not specified, it will be retrieved from the config.
@@ -91,17 +91,24 @@ class Database extends \PDO
      * Returns the singleton instance of the `Database` class using credentials found in "{database}" config.
      *
      * @return static
+     *
+     * @codeCoverageIgnore This method is overridden (mocked) in the unit tests.
      */
     public static function instance(): Database
     {
         $databaseConfig = Config::get('database', []);
 
-        return static::connect(
-            $databaseConfig['dsn'] ?? '',
-            $databaseConfig['username'] ?? null,
-            $databaseConfig['password'] ?? null,
-            $databaseConfig['options'] ?? null
-        );
+        try {
+            return static::connect(
+                $databaseConfig['dsn'] ?? '',
+                $databaseConfig['username'] ?? null,
+                $databaseConfig['password'] ?? null,
+                $databaseConfig['options'] ?? null
+            );
+        } catch (\PDOException $error) {
+            // connection can't be established (incorrect config), return a fake instance
+            return static::mock();
+        }
     }
 
     /**
@@ -140,12 +147,12 @@ class Database extends \PDO
      * Adds caching capabilities for prepared statement.
      * {@inheritDoc}
      */
-    public function prepare($query, $options = null)
+    public function prepare($query, $options = [])
     {
         $hash = md5($query);
 
         if (!isset($this->cache[$hash])) {
-            $this->cache[$hash] = parent::prepare($query, $options ?? []);
+            $this->cache[$hash] = parent::prepare($query, $options);
         }
 
         return $this->cache[$hash];
@@ -179,7 +186,7 @@ class Database extends \PDO
      * Serves as a wrapper method to execute some operations in transactional context with the ability to attempt retires.
      *
      * @param callable $callback The callback to execute inside the transaction. This callback will be bound to the `Database` class.
-     * @param int $retries The number of times to attempt the transaction.
+     * @param int $retries The number of times to attempt the transaction. Each retry will be delayed by 1-3 seconds.
      *
      * @return mixed The result of the callback.
      */
@@ -208,6 +215,8 @@ class Database extends \PDO
                         $error
                     );
                 }
+
+                sleep(rand(1, 3));
             } finally {
                 if ($this->inTransaction()) {
                     $this->rollBack();
@@ -216,5 +225,83 @@ class Database extends \PDO
         } while ($attempts < $retries);
 
         return $return;
+    }
+
+    /**
+     * Returns a fake instance of the `Database` class.
+     *
+     * @return Database This instance will throw an exception if a method is called.
+     *
+     * @codeCoverageIgnore
+     */
+    private static function mock()
+    {
+        return new class () extends Database {
+            protected function __construct()
+            {}
+            public static function getAvailableDrivers()
+            {
+                static::fail();
+            }
+            public function getAttribute($attribute)
+            {
+                static::fail();
+            }
+            public function setAttribute($attribute, $value)
+            {
+                static::fail();
+            }
+            public function exec($statement)
+            {
+                static::fail();
+            }
+            public function prepare($query, $options = [])
+            {
+                static::fail();
+            }
+            public function query($query, $fetchMode = null, ...$fetchModeArgs)
+            {
+                static::fail();
+            }
+            public function quote($string, $type = \PDO::PARAM_STR)
+            {
+                static::fail();
+            }
+            public function lastInsertId($name = null)
+            {
+                static::fail();
+            }
+            public function beginTransaction()
+            {
+                static::fail();
+            }
+            public function inTransaction()
+            {
+                static::fail();
+            }
+            public function commit()
+            {
+                static::fail();
+            }
+            public function rollBack()
+            {
+                static::fail();
+            }
+            public function errorCode()
+            {
+                static::fail();
+            }
+            public function errorInfo()
+            {
+                static::fail();
+            }
+            private static function fail(): void
+            {
+                throw new \Exception(
+                    'The app is currently running using a fake database, all database related operations will fail. ' .
+                    'Add valid database credentials using "config/database.php" to resolve this issue'
+                );
+            }
+        };
     }
 }
