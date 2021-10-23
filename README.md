@@ -419,7 +419,7 @@ class PersonsController extends Controller
 
 ![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *CRUD operations (namely: `index`, `create`, `store`, `show`, `edit`, `update`, `destroy`) are registered and configured by default. To register your own routes automatically, use the `@route("<path>", {<http-verb>, ...})` annotation. See `Controller::registerRoutes()` DocBlock to learn more.*
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *To make the model available as property for the controller (`$this->model`), use `Controller::associateModel()`. See `Controller::registerRoutes()` DocBlock to learn more.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *To make the model available as property for the controller (`$this->model`), use `Controller::associateModel()`. See `Controller::associateModel()` DocBlock to learn more.*
 
 ### Using the Model in a View:
 
@@ -457,17 +457,17 @@ The following table lists all available tags and what they do:
 
 | Tag | Description |
 | --- | --- |
-| `{! @extends 'path/to/template' !}` | Extend a template, blocks of this template will be inherited. |
-| ```{! @include 'path/to/file' !}``` | Include a file, this will get rendered before inclusion (can't access context variables). |
-| `{! @embed 'path/to/file' !}` | Embed a file, this will be included as is (can access context variables). |
-| `{! @block name !}`<br>`{! @endblock !}` | Create a block to wrap some code. |
-| `{! @super !}` | Use it inside a block in an extended template to inherit parent block content. |
-| `{! @block(name) !}` | Print a block. Needs to be called at least once in order to render a block. |
-| `{! @foreach($vars as $var) !}`<br>`{! @endforeach !}` | Control structures (loops, if statements, ...). All PHP control structures are available (`if`, `else`, `elseif`, `do`, `while`, `for`, `foreach`, `continue`, `switch`, `break`, `return`, `require`, `include`) with the same syntax but simply prefixed with an `@` symbol if it's the first word in the tag. |
-| `{! $var = '' !}` | Variable assignments. Content can be a variable or any valid PHP expression. |
-| `{{ $var }}` | Print a variable. Content can be a variable or any PHP expression that can be casted to a string. |
-| `{{{ $var }}}` | Print a variable without escaping. Content can be a variable or any PHP expression that can be casted to a string. |
-| `{# This is a comment #}` | Comment something. This will be a PHP comment (will not be available in final HTML). |
+| <code>{!&nbsp;@extends&nbsp;'path/to/template'&nbsp;!}</code> | Extend a template, blocks of this template will be inherited. |
+| <code>{!&nbsp;@include&nbsp;'path/to/file'&nbsp;!}</code> | Include a file, this will get rendered before inclusion (can't access context variables). |
+| <code>{!&nbsp;@embed&nbsp;'path/to/file'&nbsp;!}</code> | Embed a file, this will be included as is (can access context variables). |
+| <code>{!&nbsp;@block&nbsp;name&nbsp;!}</code><br><code>{!&nbsp;@endblock&nbsp;!}</code> | Create a block to wrap some code. |
+| <code>{!&nbsp;@super&nbsp;!}</code> | Use it inside a block in an extended template to inherit parent block content. |
+| <code>{!&nbsp;@block(name)&nbsp;!}</code> | Print a block. Needs to be called at least once in order to render a block. |
+| <code>{!&nbsp;@foreach&nbsp;($vars as $var)&nbsp;!}</code><br><code>{!&nbsp;@endforeach&nbsp;!}</code> | Control structures (loops, if statements, ...). All PHP control structures are available (`if`, `else`, `elseif`, `do`, `while`, `for`, `foreach`, `continue`, `switch`, `break`, `return`, `require`, `include`) with the same syntax but simply prefixed with an `@` symbol if it's the first word in the tag. |
+| <code>{!&nbsp;$var&nbsp;=&nbsp;''&nbsp;!}</code> | Variable assignments. Content can be a variable or any valid PHP expression. |
+| <code>{{&nbsp;$var&nbsp;}}</code> | Print a variable. Content can be a variable or any PHP expression that can be casted to a string. |
+| <code>{{{&nbsp;$var&nbsp;}}}</code> | Print a variable without escaping. Content can be a variable or any PHP expression that can be casted to a string. |
+| <code>{#&nbsp;This&nbsp;is&nbsp;a&nbsp;comment&nbsp;#}</code> | Comment something. This will be a PHP comment (will not be available in final HTML). |
 
 ![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Take a look at [`persons`](themes/velox/pages/persons) views of [`PersonsController`](./app/Controller/PersonsController.php) in VELOX theme for a real life example.*
 
@@ -518,5 +518,5 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [styleci-href]: https://github.styleci.io/repos/356515801
 [vscode-href]: https://open.vscode.dev/MarwanAlsoltany/velox
 [replit-href]: https://replit.com/@marwanalsoltany/velox
-[tweet-href]: https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FMarwanAlsoltany%2Fvelox&text=A%20CLI%20Tool%20for%20PHP%20that%20makes%20you%20more%20productive
+[tweet-href]: https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2FMarwanAlsoltany%2Fvelox&text=The%20fastest%20way%20to%20build%20simple%20websites%20using%20%23PHP%21
 [github-href]: https://github.com/MarwanAlsoltany/velox/stargazers
