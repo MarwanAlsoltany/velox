@@ -39,6 +39,15 @@ use MAKS\Velox\Helper\Misc;
 class Data
 {
     /**
+     * This event will be dispatched when the data is loaded.
+     * This event will be passed a reference to the data array.
+     *
+     * @var string
+     */
+    public const ON_LOAD = 'data.on.load';
+
+
+    /**
      * The currently loaded data.
      */
     protected static array $bag = [];
@@ -59,7 +68,7 @@ class Data
             $config['data'] = &static::$bag;
             Misc::setObjectProperty(new Config(), 'config', $config);
 
-            Event::dispatch('data.on.load', [&static::$bag]);
+            Event::dispatch(self::ON_LOAD, [&static::$bag]);
         }
     }
 
