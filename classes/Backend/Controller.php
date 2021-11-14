@@ -55,6 +55,15 @@ use MAKS\Velox\Helper\Misc;
 abstract class Controller
 {
     /**
+     * This event will be dispatched when a controller (or a subclass) is constructed.
+     * This event will not be passed any arguments, but its listener callback will be bound to the object (the controller class).
+     *
+     * @var string
+     */
+    public const ON_CONSTRUCT = 'controller.on.construct';
+
+
+    /**
      * Preconfigured CRUD routes.
      *
      * @since 1.3.0
@@ -146,7 +155,7 @@ abstract class Controller
             $this->doRegisterRoutes();
         }
 
-        Event::dispatch('controller.on.construct', null, $this);
+        Event::dispatch(self::ON_CONSTRUCT, null, $this);
     }
 
 
