@@ -42,6 +42,31 @@ use MAKS\Velox\Helper\Misc;
 class Config
 {
     /**
+     * This event will be dispatched when the config is loaded.
+     * This event will be passed a reference to the config array.
+     *
+     * @var string
+     */
+    public const ON_LOAD = 'config.on.load';
+
+    /**
+     * This event will be dispatched when the config is cached.
+     * This event will not be passed any arguments.
+     *
+     * @var string
+     */
+    public const ON_CACHE = 'config.on.cache';
+
+    /**
+     * This event will be dispatched when the config cache is cleared.
+     * This event will not be passed any arguments.
+     *
+     * @var string
+     */
+    public const ON_CLEAR_CACHE = 'config.on.clearCache';
+
+
+    /**
      * The default directory of the configuration files.
      *
      * @var string
@@ -163,7 +188,7 @@ class Config
 
             static::$config = self::parse(self::include($configDir));
 
-            Event::dispatch('config.on.load', [&static::$config]);
+            Event::dispatch(self::ON_LOAD, [&static::$config]);
         }
     }
 
@@ -191,7 +216,7 @@ class Config
 
         file_put_contents($configCacheFile, $configJson, LOCK_EX);
 
-        Event::dispatch('config.on.cache');
+        Event::dispatch(self::ON_CACHE);
 
         App::log(
             'Generated cache for system config, checksum (SHA-256: {checksum})',
@@ -215,7 +240,7 @@ class Config
             unlink($configCacheFile);
         }
 
-        Event::dispatch('config.on.clearCache');
+        Event::dispatch(self::ON_CLEAR_CACHE);
 
         App::log('Cleared config cache', null, 'system');
     }
