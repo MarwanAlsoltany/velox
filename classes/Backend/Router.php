@@ -70,6 +70,45 @@ use MAKS\Velox\Frontend\View;
 class Router
 {
     /**
+     * This event will be dispatched when a handler is registered.
+     * This event will be passed a reference to the route config array.
+     */
+    public const ON_REGISTER_HANDLER = 'router.on.registerHandler';
+
+    /**
+     * This event will be dispatched when a middleware is registered.
+     * This event will be passed a reference to the route config array.
+     *
+     * @var string
+     */
+    public const ON_REGISTER_MIDDLEWARE = 'router.on.registerMiddleware';
+
+    /**
+     * This event will be dispatched when the router is started.
+     * This event will be passed a reference to the router parameters.
+     *
+     * @var string
+     */
+    public const ON_START = 'router.on.start';
+
+    /**
+     * This event will be dispatched when a redirect is attempted.
+     * This event will be passed the redirection path/URL.
+     *
+     * @var string
+     */
+    public const BEFORE_REDIRECT = 'router.before.redirect';
+
+    /**
+     * This event will be dispatched when a forward is attempted.
+     * This event will be passed the forward path.
+     *
+     * @var string
+     */
+    public const BEFORE_FORWARD = 'router.before.forward';
+
+
+    /**
      * The default values of class parameters.
      *
      * @var array
@@ -154,7 +193,7 @@ class Router
 
         static::$routes[] = &$route;
 
-        Event::dispatch('router.on.register' . ucfirst($type), [&$route]);
+        Event::dispatch('router.on.register' . ucfirst(strtolower($type)), [&$route]);
 
         return new static();
     }
@@ -199,7 +238,7 @@ class Router
      */
     public static function redirect(string $to): void
     {
-        Event::dispatch('router.before.redirect', [$to]);
+        Event::dispatch(self::BEFORE_REDIRECT, [$to]);
 
         if (filter_var($to, FILTER_VALIDATE_URL)) {
             $header = sprintf('Location: %s', $to);
@@ -227,7 +266,7 @@ class Router
      */
     public static function forward(string $to): void
     {
-        Event::dispatch('router.before.forward', [$to]);
+        Event::dispatch(self::BEFORE_FORWARD, [$to]);
 
         $base = static::$base ?? '';
         $path = trim($base, '/') . '/' . ltrim($to, '/');
@@ -285,7 +324,7 @@ class Router
 
         Session::csrf()->check();
 
-        Event::dispatch('router.on.start', [&self::$params]);
+        Event::dispatch(self::ON_START, [&self::$params]);
 
         [$base, $allowMultiMatch, $caseMatters, $slashMatters] = static::getValidParameters($base, $allowMultiMatch, $caseMatters, $slashMatters);
 
