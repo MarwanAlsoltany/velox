@@ -65,7 +65,7 @@ class Engine
     /**
      * Template files file extension.
      */
-    protected string $templatesFileDirectory;
+    protected string $templatesFileExtension;
 
     /**
      * Template files cache directory.
@@ -89,13 +89,13 @@ class Engine
      */
     public function __construct(
         string $templatesDirectory     = './templates',
-        string $templatesFileDirectory = '.phtml',
+        string $templatesFileExtension = '.phtml',
         string $cacheDirectory         = './cache/',
         bool $cache                    = true,
         bool $debug                    = false
     ) {
         $this->templatesDirectory     = $templatesDirectory;
-        $this->templatesFileDirectory = $templatesFileDirectory;
+        $this->templatesFileExtension = $templatesFileExtension;
         $this->cacheDirectory         = $cacheDirectory;
         $this->cache                  = $cache;
 
@@ -283,7 +283,7 @@ class Engine
         return Path::normalize(
             $this->templatesDirectory,
             $file,
-            $this->templatesFileDirectory
+            $this->templatesFileExtension
         );
     }
 
@@ -300,7 +300,10 @@ class Engine
             return Path::normalize($this->cacheDirectory, md5('temporary'), '.tmp');
         }
 
-        $templatePath = strtr($file, [$this->templatesDirectory => '', $this->templatesFileDirectory => '']);
+        $templatePath = strtr($file, [
+            $this->templatesDirectory => '',
+            $this->templatesFileExtension => '',
+        ]);
         $templateName = Misc::transform($templatePath, 'snake');
         $cacheName    = $templateName . '_' . md5($file);
 
