@@ -13,45 +13,11 @@
 
 
 
-// Config::class
-// -------------
-// * 'config.on.load': This event will be dispatched when the config is loaded. It will be passed a reference to the config array.
-// * 'config.on.cache': This event will be dispatched when the config is cached. It will not be passed any arguments.
-// * 'config.on.clearCache': This event will be dispatched when the config cache is cleared. It will not be passed any arguments.
-
-
-// Controller::class
-// -----------------
-// * 'controller.on.construct': This event will be dispatched when a controller (or a subclass) is constructed. It will not be passed any arguments, but will be bound to the object (controller class).
-
-
-// Router::class
-// -------------
-// * 'router.on.registerHandler': This event will be dispatched when a handler is registered. It will be passed a reference to the route config array.
-// * 'router.on.registerMiddleware': This event will be dispatched when a middleware is registered. It will be passed a reference to the route config array.
-// * 'router.on.start': This event will be dispatched when the router is started. It will be passed a reference to the router parameters.
-// * 'router.before.redirect': This event will be dispatched when a redirect is attempted. It will be passed the redirection path/URL.
-// * 'router.before.forward': This event will be dispatched when a forward is attempted. It will be passed the forward path.
-
-
-// Data::class
-// -----------
-// * 'data.on.load': This event will be dispatched when the data is loaded. It will be passed a reference to the data array.
-
-
-// View::class
-// -----------
-// * 'view.before.render': This event will be dispatched when a view rendering is attempted. It will be passed a reference to the array that will be passed to the view as variables.
-// * 'view.on.cache': This event will be dispatched when a view is cached. It will not be passed any arguments.
-// * 'view.on.cacheClear': This event will be dispatched when a view cache is cleared. It will not be passed any arguments.
-
-
-
 // Examples
 // --------
-// * Checkout "/storage/logs/events.log" to see the result.
+// * Check out "/storage/logs/events.log" to see the result.
 
-Event::listen('config.on.load', function (&$config) {
+Event::listen(\MAKS\Velox\Backend\Config::ON_LOAD, function (&$config) {
     App::log('The config was loaded', null, 'events');
 
     Config::set('eventExecuted', true);
@@ -60,18 +26,18 @@ Event::listen('config.on.load', function (&$config) {
     }
 });
 
-Event::listen('controller.on.construct', function () {
+Event::listen(\MAKS\Velox\Backend\Controller::ON_CONSTRUCT, function () {
     /** @var \MAKS\Velox\Backend\Controller $this */
     $this->vars['__uid'] = uniqid();
 
     App::log('The "{class}" has been constructed', ['class' => get_class($this)], 'events');
 });
 
-Event::listen('router.on.registerHandler', function (&$route) {
+Event::listen(\MAKS\Velox\Backend\Router::ON_REGISTER_HANDLER, function (&$route) {
     App::log('The handler for the route "{route}" has been registered', ['route' => $route['expression']], 'events');
 });
 
-Event::listen('data.on.load', function (&$data) {
+Event::listen(\MAKS\Velox\Frontend\Data::ON_LOAD, function (&$data) {
     App::log('The data was loaded', null, 'events');
 
     Data::set('eventExecuted', true);
@@ -80,7 +46,25 @@ Event::listen('data.on.load', function (&$data) {
     }
 });
 
-Event::listen('view.before.render', function (&$variables) {
+Event::listen(\MAKS\Velox\Frontend\View::BEFORE_RENDER, function (&$variables) {
     $variables['__uid'] = uniqid();
     App::log('The UID "{uid}" was added to the view as "$__uid"', ['uid' => $variables['__uid']], 'events');
 });
+
+
+
+// Available events
+// ----------------
+// * Config::ON_LOAD
+// * Config::ON_CACHE
+// * Config::ON_CLEAR_CACHE
+// * Controller::ON_CONSTRUCT
+// * Router::ON_REGISTER_HANDLER
+// * Router::ON_REGISTER_MIDDLEWARE
+// * Router::ON_START
+// * Router::BEFORE_REDIRECT
+// * Router::BEFORE_FORWARD
+// * Data::ON_LOAD
+// * View::BEFORE_RENDER
+// * View::ON_CACHE
+// * View::ON_CACHE_CLEAR
