@@ -4,6 +4,27 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.3.2] - 2021-11-14](https://github.com/MarwanAlsoltany/velox/compare/v1.3.1...v1.3.2)
+
+- Update `Database` class.
+    - Fix `connect()` method DocBlock.
+- Update `Engine` class.
+    - Fix wrong property name `$templatesFileDirectory` -> `$templatesFileExtension`.
+- Update `Config` class:
+    - Add events as class constants.
+- Update `Controller` class:
+    - Add events as class constants.
+- Update `Router` class:
+    - Add events as class constants.
+- Update `Data` class:
+    - Add events as class constants.
+- Update `View` class:
+    - Add events as class constants.
+- Update `events/system.php`:
+    - Swap listened-on events with constants of the corresponding class.
+
+<br />
+
 ## [[1.3.1] - 2021-10-23](https://github.com/MarwanAlsoltany/velox/compare/v1.3.0...v1.3.1)
 
 - Update `PersonsController` class:
