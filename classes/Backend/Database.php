@@ -69,10 +69,10 @@ class Database extends \PDO
      * Returns a singleton instance of the `Database` class based on connection credentials.
      * This method makes sure that a single connection is opened and reused for each connection credentials set (DSN, User, Password, ...).
      *
-     * @param string|null $dsn The DSN string. If not specified, it will be retrieved from the config.
-     * @param string|null $username [optional] The database username. If not specified, it will be retrieved from the config.
-     * @param string|null $password [optional] The database password. If not specified, it will be retrieved from the config.
-     * @param array|null $options [optional] PDO options. If not specified, it will be retrieved from the config.
+     * @param string|null $dsn The DSN string.
+     * @param string|null $username [optional] The database username.
+     * @param string|null $password [optional] The database password.
+     * @param array|null $options [optional] PDO options.
      *
      * @return static
      */
