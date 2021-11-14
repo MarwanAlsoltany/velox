@@ -67,6 +67,31 @@ use MAKS\Velox\Helper\Misc;
 class View
 {
     /**
+     * This event will be dispatched before rendering a view.
+     * This event will be passed a reference to the array that will be passed to the view as variables.
+     *
+     * @var string
+     */
+    public const BEFORE_RENDER = 'view.before.render';
+
+    /**
+     * This event will be dispatched when a view is cached.
+     * This event will not be passed any arguments.
+     *
+     * @var string
+     */
+    public const ON_CACHE = 'view.on.cache';
+
+    /**
+     * This event will be dispatched when views cache is cleared.
+     * This event will not be passed any arguments.
+     *
+     * @var string
+     */
+    public const ON_CACHE_CLEAR = 'view.on.cacheClear';
+
+
+    /**
      * The default values of class parameters.
      *
      * @var array
@@ -296,7 +321,7 @@ class View
             return static::cache($page, $variables, $layout);
         }
 
-        Event::dispatch('view.before.render', [&$variables]);
+        Event::dispatch(self::BEFORE_RENDER, [&$variables]);
 
         static::section($section, static::page($page, $variables));
 
@@ -366,7 +391,7 @@ class View
 
             file_put_contents($cacheFile, $content, LOCK_EX);
 
-            Event::dispatch('view.on.cache');
+            Event::dispatch(self::ON_CACHE);
 
             App::log('Generated cache for the "{page}" page', ['page' => $page], 'system');
         }
@@ -402,7 +427,7 @@ class View
         $clear(Config::get('global.paths.storage') . '/cache/views/');
         $clear(Config::get('global.paths.storage') . '/temp/views/');
 
-        Event::dispatch('view.on.cacheClear');
+        Event::dispatch(self::ON_CACHE_CLEAR);
 
         App::log('Cleared views cache', null, 'system');
     }
