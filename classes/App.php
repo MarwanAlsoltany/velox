@@ -307,18 +307,27 @@ class App
      * This function is used instead of PHP `exit` to allow for testing `exit` without breaking the unit tests.
      *
      * @param int|string|null $status The exit status code/message.
+     * @param bool $noShutdown Whether to not execute the shutdown function or not.
      *
      * @return void This function never returns. It will terminate the script.
      * @throws \Exception If `EXIT_EXCEPTION` is defined and truthy.
      *
      * @since 1.2.5
      */
-    public static function terminate($status = null): void
+    public static function terminate($status = null, bool $noShutdown = true): void
     {
         if (defined('EXIT_EXCEPTION') && EXIT_EXCEPTION) {
             throw new \Exception(empty($status) ? 'Exit' : 'Exit: ' . $status);
         }
 
-        exit($status); // @codeCoverageIgnore
+        // @codeCoverageIgnoreStart
+        if ($noShutdown) {
+            // app shutdown function checks for this variable
+            // to determine if it should exit, see bootstrap/loader.php
+            Misc::setArrayValueByKey($GLOBALS, '_VELOX.TERMINATE', true);
+        }
+
+        exit($status);
+        // @codeCoverageIgnoreEnd
     }
 }
