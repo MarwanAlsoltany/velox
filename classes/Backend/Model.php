@@ -45,13 +45,15 @@ use MAKS\Velox\Helper\Misc;
  * $count = Model::count(); // returns the number of models in the database.
  * $model = Model::find($id); // $id is the primary key of the model.
  * $models = Model::find('age', 27, 'name', 'John', ...); // or Model::find(['name' => $value]);
- * $models = Model::where('name', '=', $name); // fetch using a where clause condition.
+ * $models = Model::findByName('John'); // fetches using an attribute, case will be changed to 'snake_case' automatically.
+ * $models = Model::where('name', '=', $name); // fetches using a where clause condition.
  * $models = Model::where('name', 'LIKE', 'John%', [['AND', 'age', '>', 27], ...], 'age DESC', $limit, $offset);
- * $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fetch using raw SQL query.
+ * $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fetches using raw SQL query.
  * ```
  *
  * @method mixed get*() Getter for model attribute, (`attribute_name` -> `getAttributeName()`).
- * @method mixed set*() Setter for model attribute, (`attribute_name` -> `setAttributeName($value)`).
+ * @method $this set*() Setter for model attribute, (`attribute_name` -> `setAttributeName($value)`).
+ * @method static[] findBy*() Finder by model attribute, (`attribute_name` -> `findByAttributeName($value)`).
  * @property mixed $* Public attribute for model attribute, (`attribute_name` -> `attributeName`).
  *
  * @since 1.3.0
@@ -856,16 +858,16 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
     }
 
     /**
-     * Defines magic getters and setter for model attributes.
-     * Examples: `model_id` has `getModelId()` and `setModelId()`
+     * Defines magic getters, setters, and finders for model attributes.
+     * Examples: `attribute_name` has `getAttributeName()`, `setAttributeName()`, and `findByAttributeName()` methods.
      */
     public function __call(string $method, array $arguments)
     {
-        if (preg_match('/^([gs]et)([a-z0-9_]+)$/i', $method, $matches)) {
-            $function = strtolower($matches[1]);
+        if (preg_match('/^([gs]et|findBy)([a-z0-9]+)$/i', $method, $matches)) {
+            $function  = Misc::transform($matches[1], 'camel');
             $attribute = Misc::transform($matches[2], 'snake');
 
-            return $this->{$function}($attribute, ...$arguments);
+            return $this->{$function === 'findBy' ? 'find' : $function}($attribute, ...$arguments);
         }
 
         throw new \Exception(sprintf('Call to undefined method %s::%s()', static::class, $method));
