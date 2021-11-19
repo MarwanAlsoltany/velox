@@ -379,7 +379,8 @@ $persons = Person::all(['last_name' => 'Doe'], $order, $offset, $limit);
 $person  = Person::find($id); // $id is the primary key of the model.
 $persons = Person::find('first_name', 'John', 'last_name', 'Doe' ...); // or
 $persons = Person::find(['first_name' => 'John', 'last_name' => 'Doe']);
-$persons = Person::where('first_name', '=', $value); // fetch using a where clause condition.
+$persons = Person::findByNameName('John'); // fetches using an attribute, case will be changed to 'snake_case' automatically.
+$persons = Person::where('first_name', '=', $value); // fetches using a where clause condition.
 $persons = Person::where('last_name', 'LIKE', '%Doe', [['AND', 'age', '>', 27], ...], 'age DESC', $limit, $offset);
 $persons = Person::fetch('SELECT * FROM @table WHERE `first_name` = ?', [$value]); // fetch using raw SQL query.
 
