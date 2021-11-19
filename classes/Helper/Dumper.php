@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Helper;
 
+use MAKS\Velox\App;
 use MAKS\Velox\Frontend\HTML;
 
 /**
@@ -68,10 +69,9 @@ class Dumper
      */
     public static function dd(...$variable): void
     {
-        $GLOBALS['_DIE'][__METHOD__] = true;
-
         self::dump(...$variable);
-        die;
+
+        App::terminate();
     }
 
     /**
@@ -124,7 +124,8 @@ class Dumper
     {
         if (self::isCli()) {
             echo $exception;
-            exit;
+
+            App::terminate();
         }
 
         self::setSyntaxHighlighting();
@@ -267,9 +268,7 @@ class Dumper
             ->close()
         ->echo();
 
-        $GLOBALS['_DIE'][__METHOD__] = true;
-
-        exit;
+        App::terminate();
     }
 
     /**
