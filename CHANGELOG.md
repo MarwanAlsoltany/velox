@@ -4,6 +4,19 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.3.3] - 2021-11-14](https://github.com/MarwanAlsoltany/velox/compare/v1.3.2...v1.3.3)
+
+- Update `App` class:
+    - Update `terminate()` method to allow for ignoring the shutdown function.
+- Update `Dumper` class:
+    - Swap usage of `exit` with `App::terminate()`.
+- Update `Model` class:
+    - Add `findBy*()` magic method.
+- Update `loader.php`:
+    - Update shutdown function.
+
+<br />
+
 ## [[1.3.2] - 2021-11-14](https://github.com/MarwanAlsoltany/velox/compare/v1.3.1...v1.3.2)
 
 - Update `Database` class.
