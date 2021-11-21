@@ -17,13 +17,7 @@ declare(strict_types=1);
  * @return \MAKS\Velox\App
  */
 function app() {
-    static $app = null;
-
-    if (!$app) {
-        $app = new \MAKS\Velox\App();
-    }
-
-    return $app;
+    return \MAKS\Velox\App::instance();
 }
 
 if (!function_exists('abort')) {
