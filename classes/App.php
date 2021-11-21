@@ -141,6 +141,23 @@ class App
 
 
     /**
+     * Returns the singleton instance of the `App` class.
+     *
+     * @return static
+     * @since v1.4.0
+     */
+    final public static function instance(): self
+    {
+        static $instance = null;
+
+        if ($instance === null) {
+            $instance = new static();
+        }
+
+        return $instance;
+    }
+
+    /**
      * Extends the class using the passed callback.
      *
      * @param string $name Method name.
