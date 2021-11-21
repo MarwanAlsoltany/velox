@@ -72,6 +72,8 @@ class Router
     /**
      * This event will be dispatched when a handler is registered.
      * This event will be passed a reference to the route config array.
+     *
+     * @var string
      */
     public const ON_REGISTER_HANDLER = 'router.on.registerHandler';
 
@@ -201,8 +203,11 @@ class Router
     /**
      * Registers a handler for a route.
      *
-     * @param string $expression A route like `/page`, `/page/{id}` (`id` is required), or `/page/{id?}` (`id` is optional). For more flexibility, pass en expression like `/page/([\d]+|[0-9]*)` (regex capture group).
-     * @param callable $handler A function to call if route has matched. It will be passed the current `$path`, the `$match` or `...$match` from the expression if there was any, and lastly the `$previous` result (the return of the last middleware or route with a matching expression) if `$allowMultiMatch` is set to `true`.
+     * @param string $expression A route like `/page`, `/page/{id}` (`id` is required), or `/page/{id?}` (`id` is optional), or `page*` (`*` is a wildcard for anything).
+     *      For more flexibility, pass an expression like `/page/([\d]+|[0-9]*)` (regex capture group).
+     * @param callable $handler A function to call if route has matched.
+     *      It will be passed the current `$path`, the `$match` or `...$match` from the expression if there was any, and lastly the `$previous` result
+     *      (the return of the last middleware or route with a matching expression) if `$allowMultiMatch` is set to `true`.
      * @param string|string[] $method [optional] Either a string or an array of the allowed method.
      *
      * @return static
@@ -214,11 +219,12 @@ class Router
 
     /**
      * Registers a middleware for a route. This method has no effect if `$allowMultiMatch` is set to `false`.
-     * Note that middlewares must be registered before routes in order to work correctly.
-     * This method is just an alias for `self::handle()`.
      *
-     * @param string $expression A route like `/page`, `/page/{id}` (`id` is required), or `/page/{id?}` (`id` is optional). For more flexibility, pass en expression like `/page/([\d]+|[0-9]*)` (regex capture group).
-     * @param callable $handler A function to call if route has matched. It will be passed the current `$path`, the `$match` or `...$match` from the expression if there was any, and lastly the `$previous` result (the return of the last middleware or route with a matching expression) if `$allowMultiMatch` is set to `true`.
+     * @param string $expression A route like `/page`, `/page/{id}` (`id` is required), or `/page/{id?}` (`id` is optional), or `page*` (`*` is a wildcard for anything).
+     *      For more flexibility, pass an expression like `/page/([\d]+|[0-9]*)` (regex capture group).
+     * @param callable $handler A function to call if route has matched.
+     *      It will be passed the current `$path`, the `$match` or `...$match` from the expression if there was any, and lastly the `$previous` result
+     *      (the return of the last middleware or route with a matching expression) if `$allowMultiMatch` is set to `true`.
      * @param string|string[] $method [optional] Either a string or an array of the allowed method.
      *
      * @return static
@@ -335,6 +341,9 @@ class Router
         $pathMatchFound  = false;
         $result = null;
 
+        // sort routes to make middleware come first
+        usort(static::$routes, fn ($route) => $route['type'] === 'middleware' ? 0 : 1);
+
         foreach (static::$routes as &$route) {
             $expression = $base === '/' ? $route['expression'] : sprintf('%s/%s', $base, ltrim($route['expression'], '/'));
 
@@ -438,6 +447,9 @@ class Router
                 $expression
             );
         }
+
+        $expression = strtr($expression, ['*' => '.*?']);
+
         return sprintf(
             '<^%s$>%s',
             (!$slashMatters && $expression !== '/' ? rtrim($expression, '/') : $expression),
