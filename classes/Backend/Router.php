@@ -95,7 +95,7 @@ class Router
 
     /**
      * This event will be dispatched when a redirect is attempted.
-     * This event will be passed the redirection path/URL.
+     * This event will be passed the redirection path/URL and the status code.
      *
      * @var string
      */
@@ -239,12 +239,13 @@ class Router
      * Note that this function will exit the script (code that comes after it will not be executed).
      *
      * @param string $to A route like `/page` or a URL like `http://domain.tld`.
+     * @param int $status [optional] The HTTP status code to send.
      *
      * @return void
      */
-    public static function redirect(string $to): void
+    public static function redirect(string $to, int $status = 302): void
     {
-        Event::dispatch(self::BEFORE_REDIRECT, [$to]);
+        Event::dispatch(self::BEFORE_REDIRECT, [$to, $status]);
 
         if (filter_var($to, FILTER_VALIDATE_URL)) {
             $header = sprintf('Location: %s', $to);
@@ -257,7 +258,7 @@ class Router
             $header = sprintf('Location: %s/%s', trim($base, '/'), trim($path, '/'));
         }
 
-        header($header, true, 302);
+        header($header, false, $status);
 
         App::terminate(); // @codeCoverageIgnore
     }
