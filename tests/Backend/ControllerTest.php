@@ -7,6 +7,7 @@ namespace MAKS\Velox\Tests\Backend;
 use MAKS\Velox\Tests\TestCase;
 use MAKS\Velox\Tests\Mocks\ControllerMock;
 use MAKS\Velox\Backend\Controller;
+use MAKS\Velox\Backend\Auth;
 use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Router;
@@ -18,6 +19,8 @@ use MAKS\Velox\Frontend\Data;
 use MAKS\Velox\Frontend\View;
 use MAKS\Velox\Frontend\HTML;
 use MAKS\Velox\Frontend\Path;
+use MAKS\Velox\Helper\Dumper;
+use MAKS\Velox\Helper\Misc;
 
 class ControllerTest extends TestCase
 {
@@ -42,6 +45,7 @@ class ControllerTest extends TestCase
     public function testControllerPropertiesContainExpectedValues()
     {
         $properties = [
+            'auth'     => Auth::class,
             'event'    => Event::class,
             'config'   => Config::class,
             'router'   => Router::class,
@@ -53,6 +57,8 @@ class ControllerTest extends TestCase
             'view'     => View::class,
             'html'     => HTML::class,
             'path'     => Path::class,
+            'dumper'   => Dumper::class,
+            'misc'     => Misc::class,
         ];
 
         foreach ($properties as $property => $class) {
@@ -65,6 +71,13 @@ class ControllerTest extends TestCase
         $this->assertIsArray($vars);
         $this->assertArrayHasKey('key', $vars);
         $this->assertEquals('value', $vars['key']);
+    }
+
+    public function testControllerThrowsAnExceptionOnCallsToUndefinedProperties()
+    {
+        $this->expectException(\Exception::class);
+
+        $this->controller->unknown;
     }
 
 
