@@ -341,8 +341,7 @@ class Router
         $pathMatchFound  = false;
         $result = null;
 
-        // sort routes to make middleware come first
-        usort(static::$routes, fn ($route) => $route['type'] === 'middleware' ? 0 : 1);
+        static::sort();
 
         foreach (static::$routes as &$route) {
             $expression = $base === '/' ? $route['expression'] : sprintf('%s/%s', $base, ltrim($route['expression'], '/'));
@@ -378,6 +377,26 @@ class Router
         unset($route);
 
         static::doEchoResponse($result, $routeMatchFound, $pathMatchFound);
+    }
+
+    /**
+     * Sorts registered routes to make middlewares come before handlers.
+     *
+     * @return void
+     */
+    private static function sort(): void
+    {
+        usort(static::$routes, function ($routeA, $routeB) {
+            if ($routeA['type'] === 'middleware' && $routeB['type'] !== 'middleware') {
+                return -1;
+            }
+
+            if ($routeA['type'] !== 'middleware' && $routeB['type'] === 'middleware') {
+                return 1;
+            }
+
+            return 0;
+        });
     }
 
     /**
