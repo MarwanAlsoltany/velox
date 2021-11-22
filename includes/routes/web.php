@@ -38,9 +38,10 @@ Router::handle('/contact', function ($path, $match, $previous) {
 $controller = new \App\Controller\DefaultController();
 Router::handle('/example', [$controller, 'exampleAction']);
 
-// the routes in PersonsController will be registered automatically
-// as it's using annotation to define routes, it just needs to be
+// the routes in the following controllers will be registered automatically
+// as it's using annotation to define routes, they just needs to be
 // instantiated once for the auto-registration to take effect.
+new \App\Controller\UsersController();
 new \App\Controller\PersonsController();
 
 
@@ -89,7 +90,11 @@ Router::handle('/production-exception', function () {
 
 
 
-// The /403, /404, /405, and /500 routes are for demonstration purposes only.
+// The /401, /403, /404, /405, and /500 routes are for demonstration purposes only.
+
+Router::get('/401', function () {
+    Auth::fail();
+});
 
 Router::get('/403', function () {
     // mimicking a 403 error,
