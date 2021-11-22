@@ -1,14 +1,12 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This file can be used to provide listeners for system events (events provided by VELOX classes).
- * ---------------------------------------------------------------------------------------------------------------------
- *  Note that you can in theory register listeners for these events anywhere in the project, but it's recommended to
- *  register them here to prepare listeners/bindings before the events are dispatched/triggered.
- * ---------------------------------------------------------------------------------------------------------------------
- *  You can freely add additional files in the '/includes/events/' directory. VELOX will load it for you.
- * ---------------------------------------------------------------------------------------------------------------------
+ * This file can be used to provide listeners for system events (events provided by VELOX classes).
+ *
+ * Note that you can in theory register listeners for these events anywhere in the project, but it's recommended to
+ * register them here to prepare listeners/bindings before the events are dispatched/triggered.
+ *
+ * You can freely add additional files in the '/includes/events/' directory. VELOX will load it for you.
  */
 
 
