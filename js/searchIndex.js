@@ -1,6 +1,16 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\START_TIME",
+            "name": "START_TIME",
+            "summary": "App\u0020start\u0020time.",
+            "url": "namespaces/default.html#constant_START_TIME"
+        },                {
+            "fqsen": "\\BASE_PATH",
+            "name": "BASE_PATH",
+            "summary": "App\u0020base\u0020path.",
+            "url": "namespaces/default.html#constant_BASE_PATH"
+        },                {
             "fqsen": "\\App",
             "name": "App",
             "summary": "Alias",
@@ -76,15 +86,245 @@ Search.appendIndex(
             "summary": "A\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020basic\u0020service\u002Dcontainer\u0020for\u0020VELOX.",
             "url": "classes/MAKS-Velox-App.html"
         },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-App.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A__get\u0028\u0029",
+            "name": "__get",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#method___get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A__call\u0028\u0029",
+            "name": "__call",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#method___call"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A__callStatic\u0028\u0029",
+            "name": "__callStatic",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#method___callStatic"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003Ainstance\u0028\u0029",
+            "name": "instance",
+            "summary": "Returns\u0020the\u0020singleton\u0020instance\u0020of\u0020the\u0020\u0060App\u0060\u0020class.",
+            "url": "classes/MAKS-Velox-App.html#method_instance"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003Aextend\u0028\u0029",
+            "name": "extend",
+            "summary": "Extends\u0020the\u0020class\u0020using\u0020the\u0020passed\u0020callback.",
+            "url": "classes/MAKS-Velox-App.html#method_extend"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003AextendStatic\u0028\u0029",
+            "name": "extendStatic",
+            "summary": "Extends\u0020the\u0020class\u0020using\u0020the\u0020passed\u0020callback.",
+            "url": "classes/MAKS-Velox-App.html#method_extendStatic"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003Alog\u0028\u0029",
+            "name": "log",
+            "summary": "Logs\u0020a\u0020message\u0020to\u0020a\u0020file\u0020and\u0020generates\u0020it\u0020if\u0020it\u0020does\u0020not\u0020exist.",
+            "url": "classes/MAKS-Velox-App.html#method_log"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003Aabort\u0028\u0029",
+            "name": "abort",
+            "summary": "Aborts\u0020the\u0020current\u0020request\u0020and\u0020sends\u0020a\u0020response\u0020with\u0020the\u0020specified\u0020HTTP\u0020status\u0020code,\u0020title,\u0020and\u0020message.",
+            "url": "classes/MAKS-Velox-App.html#method_abort"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003Aterminate\u0028\u0029",
+            "name": "terminate",
+            "summary": "Terminates\u0020\u0028exits\u0029\u0020the\u0020PHP\u0020script.",
+            "url": "classes/MAKS-Velox-App.html#method_terminate"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024event",
+            "name": "event",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_event"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024config",
+            "name": "config",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_config"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024router",
+            "name": "router",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_router"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024globals",
+            "name": "globals",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_globals"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024session",
+            "name": "session",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_session"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024database",
+            "name": "database",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_database"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024auth",
+            "name": "auth",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_auth"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024data",
+            "name": "data",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_data"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024view",
+            "name": "view",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_view"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024html",
+            "name": "html",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024path",
+            "name": "path",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_path"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024dumper",
+            "name": "dumper",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_dumper"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024misc",
+            "name": "misc",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_misc"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024methods",
+            "name": "methods",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_methods"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024staticMethods",
+            "name": "staticMethods",
+            "summary": "",
+            "url": "classes/MAKS-Velox-App.html#property_staticMethods"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Auth",
             "name": "Auth",
             "summary": "A\u0020class\u0020that\u0020serves\u0020as\u0020an\u0020authentication\u0020system\u0020for\u0020users.",
             "url": "classes/MAKS-Velox-Backend-Auth.html"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "The\u0020class\u0020singleton\u0020instance.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#property_instance"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003Aregister\u0028\u0029",
+            "name": "register",
+            "summary": "Registers\u0020a\u0020new\u0020user.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_register"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003Aunregister\u0028\u0029",
+            "name": "unregister",
+            "summary": "Unregisters\u0020a\u0020user.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_unregister"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003Alogin\u0028\u0029",
+            "name": "login",
+            "summary": "Logs\u0020in\u0020a\u0020user.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_login"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003Alogout\u0028\u0029",
+            "name": "logout",
+            "summary": "Logs\u0020out\u0020a\u0020user.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_logout"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003Aauthenticate\u0028\u0029",
+            "name": "authenticate",
+            "summary": "Authenticates\u0020an\u0020auth\u0020user\u0020model.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_authenticate"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003Acheck\u0028\u0029",
+            "name": "check",
+            "summary": "Checks\u0020if\u0020a\u0020user\u0020is\u0020logged\u0020in\u0020and\u0020logs\u0020the\u0020user\u0020out\u0020if\u0020the\u0020timeout\u0020has\u0020expired.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_check"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003A\u0024user",
+            "name": "user",
+            "summary": "Auth\u0020user\u0020model.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#property_user"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003Abasic\u0028\u0029",
+            "name": "basic",
+            "summary": "Serves\u0020as\u0020an\u0020HTTP\u0020Basic\u0020Authentication\u0020guard\u0020for\u0020the\u0020specified\u0020logins.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_basic"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003Afail\u0028\u0029",
+            "name": "fail",
+            "summary": "Renders\u0020401\u0020error\u0020page.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_fail"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003Ahash\u0028\u0029",
+            "name": "hash",
+            "summary": "Hashes\u0020a\u0020password.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_hash"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003Averify\u0028\u0029",
+            "name": "verify",
+            "summary": "Verifies\u0020a\u0020password.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_verify"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003AgetUserModel\u0028\u0029",
+            "name": "getUserModel",
+            "summary": "Returns\u0020an\u0020instance\u0020of\u0020the\u0020user\u0020model\u0020class\u0020specified\u0020in\u0020the\u0020config\u0020or\u0020falls\u0020back\u0020to\u0020the\u0020default\u0020one.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#method_getUserModel"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003AON_REGISTER",
+            "name": "ON_REGISTER",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020an\u0020auth\u0020user\u0020is\u0020registered.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#constant_ON_REGISTER"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003AAFTER_REGISTER",
+            "name": "AFTER_REGISTER",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020after\u0020an\u0020auth\u0020user\u0020is\u0020registered.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#constant_AFTER_REGISTER"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003AON_UNREGISTER",
+            "name": "ON_UNREGISTER",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020an\u0020auth\u0020user\u0020is\u0020unregistered.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#constant_ON_UNREGISTER"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003AON_LOGIN",
+            "name": "ON_LOGIN",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020an\u0020auth\u0020user\u0020is\u0020logged\u0020in.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#constant_ON_LOGIN"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Auth\u003A\u003AON_LOGOUT",
+            "name": "ON_LOGOUT",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020an\u0020auth\u0020user\u0020is\u0020logged\u0020out.",
+            "url": "classes/MAKS-Velox-Backend-Auth.html#constant_ON_LOGOUT"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Config",
             "name": "Config",
             "summary": "A\u0020class\u0020that\u0020loads\u0020everything\u0020from\u0020the\u0020\u0022\/config\u0022\u0020directory\u0020and\u0020make\u0020it\u0020as\u0020an\u0020array\u0020that\u0020is\u0020accessible\u0020via\u0020dot\u002Dnotation.",
             "url": "classes/MAKS-Velox-Backend-Config.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Config.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Config.html#method___toString"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003Ainclude\u0028\u0029",
             "name": "include",
@@ -96,10 +336,100 @@ Search.appendIndex(
             "summary": "Parses\u0020the\u0020configuration\u0020to\u0020replace\u0020reference\u0020of\u0020some\u0020\u0060\u007Bfilename.config.varName\u007D\u0060\u0020with\u0020actual\u0020value\u0020from\u0020the\u0020passed\u0020configuration.",
             "url": "classes/MAKS-Velox-Backend-Config.html#method_parse"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "Loads\u0020the\u0020configuration\u0020\u0028directly\u0020or\u0020when\u0020available\u0020from\u0020cache\u0029\u0020and\u0020sets\u0020class\u0020internal\u0020state.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#method_load"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003Acache\u0028\u0029",
+            "name": "cache",
+            "summary": "Caches\u0020the\u0020current\u0020configuration\u0020as\u0020JSON.\u0020Note\u0020that\u0020a\u0020new\u0020version\u0020will\u0020not\u0020be\u0020generated\u0020unless\u0020the\u0020cache\u0020is\u0020cleared.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#method_cache"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003AclearCache\u0028\u0029",
+            "name": "clearCache",
+            "summary": "Deletes\u0020the\u0020cached\u0020configuration\u0020JSON\u0020and\u0020resets\u0020class\u0020internal\u0020state.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#method_clearCache"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003Ahas\u0028\u0029",
+            "name": "has",
+            "summary": "Checks\u0020whether\u0020a\u0020value\u0020of\u0020a\u0020key\u0020exists\u0020in\u0020the\u0020configuration\u0020via\u0020dot\u002Dnotation.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#method_has"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Gets\u0020a\u0020value\u0020of\u0020a\u0020key\u0020from\u0020the\u0020configuration\u0020via\u0020dot\u002Dnotation.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#method_get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003Aset\u0028\u0029",
+            "name": "set",
+            "summary": "Sets\u0020a\u0020value\u0020of\u0020a\u0020key\u0020in\u0020the\u0020configuration\u0020via\u0020dot\u002Dnotation.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#method_set"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003AgetAll\u0028\u0029",
+            "name": "getAll",
+            "summary": "Returns\u0020the\u0020currently\u0020loaded\u0020configuration.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#method_getAll"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003AON_LOAD",
+            "name": "ON_LOAD",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020the\u0020config\u0020is\u0020loaded.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#constant_ON_LOAD"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003AON_CACHE",
+            "name": "ON_CACHE",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020the\u0020config\u0020is\u0020cached.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#constant_ON_CACHE"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003AON_CLEAR_CACHE",
+            "name": "ON_CLEAR_CACHE",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020the\u0020config\u0020cache\u0020is\u0020cleared.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#constant_ON_CLEAR_CACHE"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003ACONFIG_DIR",
+            "name": "CONFIG_DIR",
+            "summary": "The\u0020default\u0020directory\u0020of\u0020the\u0020configuration\u0020files.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#constant_CONFIG_DIR"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003ACONFIG_CACHE_FILE",
+            "name": "CONFIG_CACHE_FILE",
+            "summary": "The\u0020path\u0020of\u0020the\u0020cached\u0020configuration\u0020file.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#constant_CONFIG_CACHE_FILE"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003A\u0024config",
+            "name": "config",
+            "summary": "The\u0020currently\u0020loaded\u0020configuration.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#property_config"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Controller",
             "name": "Controller",
             "summary": "An\u0020abstract\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020base\u0020Controller\u0020that\u0020can\u0020be\u0020extended\u0020to\u0020make\u0020handlers\u0020for\u0020application\u0020router.",
             "url": "classes/MAKS-Velox-Backend-Controller.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Controller\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Controller.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Controller\u003A\u003A__get\u0028\u0029",
+            "name": "__get",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Controller.html#method___get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Controller\u003A\u003A__isset\u0028\u0029",
+            "name": "__isset",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Controller.html#method___isset"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Controller\u003A\u003AassociateModel\u0028\u0029",
+            "name": "associateModel",
+            "summary": "Controls\u0020which\u0020model\u0020should\u0020be\u0020used\u0020by\u0020current\u0020controller.",
+            "url": "classes/MAKS-Velox-Backend-Controller.html#method_associateModel"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Controller\u003A\u003AregisterRoutes\u0028\u0029",
+            "name": "registerRoutes",
+            "summary": "Whether\u0020or\u0020not\u0020to\u0020automatically\u0020register\u0020controller\u0020routes.",
+            "url": "classes/MAKS-Velox-Backend-Controller.html#method_registerRoutes"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Controller\u003A\u003AdoAssociateModel\u0028\u0029",
             "name": "doAssociateModel",
@@ -111,40 +441,200 @@ Search.appendIndex(
             "summary": "Registers\u0020all\u0020public\u0020methods\u0020which\u0020are\u0020suffixed\u0020with\u0020\u0060Action\u0060\u0020or\u0020\u0060Middleware\u0060\u0020as\u0020\u0060handler\u0060\u0020or\u0020\u0060middleware\u0060\u0020respectively.",
             "url": "classes/MAKS-Velox-Backend-Controller.html#method_doRegisterRoutes"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Controller\u003A\u003AON_CONSTRUCT",
+            "name": "ON_CONSTRUCT",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020a\u0020controller\u0020\u0028or\u0020a\u0020subclass\u0029\u0020is\u0020constructed.",
+            "url": "classes/MAKS-Velox-Backend-Controller.html#constant_ON_CONSTRUCT"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Controller\u003A\u003A\u0024crudRoutes",
             "name": "crudRoutes",
             "summary": "Preconfigured\u0020CRUD\u0020routes.",
             "url": "classes/MAKS-Velox-Backend-Controller.html#property_crudRoutes"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Controller\u003A\u003A\u0024vars",
+            "name": "vars",
+            "summary": "The\u0020passed\u0020variables\u0020array\u0020to\u0020the\u0020Controller.",
+            "url": "classes/MAKS-Velox-Backend-Controller.html#property_vars"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Controller\u003A\u003A\u0024model",
+            "name": "model",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Controller.html#property_model"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Database",
             "name": "Database",
             "summary": "A\u0020class\u0020that\u0020represents\u0020the\u0020database\u0020and\u0020handles\u0020database\u0020operations.",
             "url": "classes/MAKS-Velox-Backend-Database.html"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Database.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003Aconnect\u0028\u0029",
+            "name": "connect",
+            "summary": "Returns\u0020a\u0020singleton\u0020instance\u0020of\u0020the\u0020\u0060Database\u0060\u0020class\u0020based\u0020on\u0020connection\u0020credentials.",
+            "url": "classes/MAKS-Velox-Backend-Database.html#method_connect"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003Ainstance\u0028\u0029",
+            "name": "instance",
+            "summary": "Returns\u0020the\u0020singleton\u0020instance\u0020of\u0020the\u0020\u0060Database\u0060\u0020class\u0020using\u0020credentials\u0020found\u0020in\u0020\u0060\u007Bdatabase\u007D\u0060\u0020config.",
+            "url": "classes/MAKS-Velox-Backend-Database.html#method_instance"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003AgetStatementClass\u0028\u0029",
             "name": "getStatementClass",
             "summary": "Returns\u0020FQN\u0020for\u0020a\u0020custom\u0020\u0060PDOStatement\u0060\u0020class.",
             "url": "classes/MAKS-Velox-Backend-Database.html#method_getStatementClass"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003Aprepare\u0028\u0029",
+            "name": "prepare",
+            "summary": "Adds\u0020caching\u0020capabilities\u0020for\u0020prepared\u0020statement.",
+            "url": "classes/MAKS-Velox-Backend-Database.html#method_prepare"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003Aperform\u0028\u0029",
+            "name": "perform",
+            "summary": "A\u0020wrapper\u0020method\u0020to\u0020perform\u0020a\u0020query\u0020on\u0020the\u0020fly\u0020using\u0020either\u0020\u0060self\u003A\u003Aquery\u0028\u0029\u0060\u0020or\u0020\u0060self\u003A\u003Aprepare\u0028\u0029\u0060\u0020\u002B\u0020\u0060self\u003A\u003Aexecute\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Database.html#method_perform"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003Atransactional\u0028\u0029",
+            "name": "transactional",
+            "summary": "Serves\u0020as\u0020a\u0020wrapper\u0020method\u0020to\u0020execute\u0020some\u0020operations\u0020in\u0020transactional\u0020context\u0020with\u0020the\u0020ability\u0020to\u0020attempt\u0020retires.",
+            "url": "classes/MAKS-Velox-Backend-Database.html#method_transactional"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003Amock\u0028\u0029",
             "name": "mock",
             "summary": "Returns\u0020a\u0020fake\u0020instance\u0020of\u0020the\u0020\u0060Database\u0060\u0020class.",
             "url": "classes/MAKS-Velox-Backend-Database.html#method_mock"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003A\u0024connections",
+            "name": "connections",
+            "summary": "Current\u0020open\u0020database\u0020connections.",
+            "url": "classes/MAKS-Velox-Backend-Database.html#property_connections"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003A\u0024cache",
+            "name": "cache",
+            "summary": "A\u0020cache\u0020to\u0020hold\u0020prepared\u0020statements.",
+            "url": "classes/MAKS-Velox-Backend-Database.html#property_cache"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003A\u0024dsn",
+            "name": "dsn",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Database.html#property_dsn"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003A\u0024username",
+            "name": "username",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Database.html#property_username"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003A\u0024password",
+            "name": "password",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Database.html#property_password"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Database\u003A\u003A\u0024options",
+            "name": "options",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Database.html#property_options"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Event",
             "name": "Event",
             "summary": "A\u0020class\u0020that\u0020offers\u0020simple\u0020events\u0020handling\u0020functionality\u0020\u0028dispatching\u0020and\u0020listening\u0029.",
             "url": "classes/MAKS-Velox-Backend-Event.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003Adispatch\u0028\u0029",
+            "name": "dispatch",
+            "summary": "Dispatches\u0020the\u0020passed\u0020event\u0020by\u0020executing\u0020all\u0020attached\u0020callbacks\u0020and\u0020passes\u0020them\u0020the\u0020passed\u0020arguments.",
+            "url": "classes/MAKS-Velox-Backend-Event.html#method_dispatch"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003Alisten\u0028\u0029",
+            "name": "listen",
+            "summary": "Listens\u0020on\u0020the\u0020passed\u0020event\u0020and\u0020attaches\u0020the\u0020passed\u0020callback\u0020to\u0020it.",
+            "url": "classes/MAKS-Velox-Backend-Event.html#method_listen"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003AgetRegisteredEvents\u0028\u0029",
+            "name": "getRegisteredEvents",
+            "summary": "Returns\u0020array\u0020of\u0020all\u0020registered\u0020events\u0020as\u0020an\u0020array\u0020\u0060\u005B\u0027event.name\u0027\u0020\u003D\u003E\u0020\u005B...\u0024callbacks\u005D\u005D\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Event.html#method_getRegisteredEvents"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003A\u0024events",
+            "name": "events",
+            "summary": "Here\u0020live\u0020all\u0020bindings.",
+            "url": "classes/MAKS-Velox-Backend-Event.html#property_events"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Globals",
             "name": "Globals",
             "summary": "A\u0020class\u0020that\u0020serves\u0020as\u0020an\u0020abstraction\/wrapper\u0020to\u0020work\u0020with\u0020superglobals.",
             "url": "classes/MAKS-Velox-Backend-Globals.html"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003Ainstance\u0028\u0029",
+            "name": "instance",
+            "summary": "Initializes\u0020class\u0020internal\u0020state\u0020from\u0020superglobals\u0020and\u0020returns\u0020an\u0020instance\u0020o\u0020it.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#method_instance"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003Ainitialize\u0028\u0029",
+            "name": "initialize",
+            "summary": "Initializes\u0020class\u0020internal\u0020state\u0020from\u0020superglobals.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#method_initialize"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Gets\u0020a\u0020value\u0020from\u0020the\u0020specified\u0020superglobal.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#method_get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003Aset\u0028\u0029",
+            "name": "set",
+            "summary": "Sets\u0020a\u0020value\u0020in\u0020the\u0020specified\u0020superglobal.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#method_set"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003Acut\u0028\u0029",
+            "name": "cut",
+            "summary": "Cuts\u0020a\u0020value\u0020from\u0020the\u0020specified\u0020superglobal.\u0020The\u0020value\u0020will\u0020be\u0020returned\u0020and\u0020the\u0020key\u0020will\u0020be\u0020unset\u0020from\u0020the\u0020superglobal.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#method_cut"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003AgetAll\u0028\u0029",
+            "name": "getAll",
+            "summary": "Returns\u0020all\u0020superglobals.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#method_getAll"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003AgetValidNameOrFail\u0028\u0029",
             "name": "getValidNameOrFail",
             "summary": "Returns\u0020a\u0020valid\u0020superglobal\u0020name\u0020from\u0020the\u0020passed\u0020name.",
             "url": "classes/MAKS-Velox-Backend-Globals.html#method_getValidNameOrFail"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003A__get\u0028\u0029",
+            "name": "__get",
+            "summary": "Aliases\u0020getters\u0020and\u0020setter\u0020for\u0020class\u0020members.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#method___get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003A__call\u0028\u0029",
+            "name": "__call",
+            "summary": "Allows\u0020static\u0020methods\u0020handled\u0020by\u0020\u0060self\u003A\u003A__callStatic\u0028\u0029\u0060\u0020to\u0020be\u0020accessible\u0020via\u0020object\u0020operator\u0020\u0060\u002D\u003E\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#method___call"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003A__callStatic\u0028\u0029",
+            "name": "__callStatic",
+            "summary": "Aliases\u0020getters\u0020and\u0020setter\u0020for\u0020class\u0020members.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#method___callStatic"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003AGLOBALS",
+            "name": "GLOBALS",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#constant_GLOBALS"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003A\u0024globals",
+            "name": "globals",
+            "summary": "This\u0020array\u0020holds\u0020an\u0020anonymous\u0020class\u0020that\u0020acts\u0020as\u0020a\u0020wrapper\u0020for\u0020each\u0020superglobal.",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#property_globals"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003A\u0024isInitialized",
+            "name": "isInitialized",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Globals.html#property_isInitialized"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Globals\u003A\u003A\u0024_GET",
             "name": "_GET",
@@ -191,10 +681,135 @@ Search.appendIndex(
             "summary": "An\u0020abstract\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020base\u0020model\u0020that\u0020can\u0020be\u0020extended\u0020to\u0020create\u0020models.",
             "url": "classes/MAKS-Velox-Backend-Model.html"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Aschema\u0028\u0029",
+            "name": "schema",
+            "summary": "The\u0020SQL\u0020code\u0020to\u0020create\u0020the\u0020model\u0020table\u0020from.\u0020Has\u0020to\u0020match\u0020\u0060self\u003A\u003A\u0024table\u0060,\u0020\u0060self\u003A\u003A\u0024columns\u0060,\u0020and\u0020\u0060self\u003A\u003A\u0024primaryKey\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_schema"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Amigrate\u0028\u0029",
+            "name": "migrate",
+            "summary": "Migrates\u0020model\u0020table\u0020to\u0020the\u0020database.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_migrate"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AisMigrated\u0028\u0029",
+            "name": "isMigrated",
+            "summary": "Checks\u0020whether\u0020the\u0020model\u0020table\u0020is\u0020migrated\u0020to\u0020the\u0020database\u0020or\u0020not.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_isMigrated"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AgetDatabase\u0028\u0029",
+            "name": "getDatabase",
+            "summary": "Returns\u0020model\u0020database\u0020connection\u0020and\u0020sets\u0020\u0060static\u003A\u003A\u0024database\u0060\u0020with\u0020a\u0020default\u0020value\u0020if\u0020it\u0027s\u0020not\u0020set.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_getDatabase"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AgetTable\u0028\u0029",
+            "name": "getTable",
+            "summary": "Returns\u0020model\u0020table\u0020name\u0020and\u0020sets\u0020\u0060static\u003A\u003A\u0024table\u0060\u0020with\u0020a\u0020default\u0020value\u0020if\u0020it\u0027s\u0020not\u0020set.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_getTable"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AgetColumns\u0028\u0029",
+            "name": "getColumns",
+            "summary": "Returns\u0020model\u0020table\u0020columns\u0020and\u0020sets\u0020\u0060static\u003A\u003A\u0024columns\u0060\u0020with\u0020a\u0020default\u0020value\u0020if\u0020it\u0027s\u0020not\u0020set.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_getColumns"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AgetPrimaryKey\u0028\u0029",
+            "name": "getPrimaryKey",
+            "summary": "Returns\u0020model\u0020table\u0020primary\u0020key\u0020and\u0020sets\u0020\u0060static\u003A\u003A\u0024primaryKey\u0060\u0020with\u0020a\u0020default\u0020value\u0020if\u0020it\u0027s\u0020not\u0020set.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_getPrimaryKey"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AassertAttributeExists\u0028\u0029",
             "name": "assertAttributeExists",
             "summary": "Asserts\u0020that\u0020the\u0020model\u0020attribute\u0020name\u0020is\u0020valid.",
             "url": "classes/MAKS-Velox-Backend-Model.html#method_assertAttributeExists"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Gets\u0020and\u0020validates\u0020a\u0020specific\u0020model\u0020attribute.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Aset\u0028\u0029",
+            "name": "set",
+            "summary": "Sets\u0020and\u0020validates\u0020a\u0020specific\u0020model\u0020attribute.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_set"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AgetAttributes\u0028\u0029",
+            "name": "getAttributes",
+            "summary": "Gets\u0020all\u0020model\u0020attributes.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_getAttributes"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AsetAttributes\u0028\u0029",
+            "name": "setAttributes",
+            "summary": "Sets\u0020all\u0020or\u0020a\u0020subset\u0020of\u0020model\u0020attributes.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_setAttributes"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Acreate\u0028\u0029",
+            "name": "create",
+            "summary": "Creates\u0020an\u0020instance\u0020of\u0020the\u0020model.\u0020The\u0020model\u0020is\u0020not\u0020saved\u0020to\u0020the\u0020database\u0020unless\u0020\u0060self\u003A\u003Asave\u0028\u0029\u0060\u0020is\u0020called.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_create"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Asave\u0028\u0029",
+            "name": "save",
+            "summary": "Creates\/updates\u0020a\u0020model\u0020and\u0020saves\u0020it\u0020in\u0020database.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_save"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "Updates\u0020the\u0020given\u0020attributes\u0020of\u0020the\u0020model\u0020and\u0020saves\u0020them\u0020in\u0020the\u0020database.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_update"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Adelete\u0028\u0029",
+            "name": "delete",
+            "summary": "Deletes\u0020the\u0020model\u0020from\u0020the\u0020database.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_delete"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Adestroy\u0028\u0029",
+            "name": "destroy",
+            "summary": "Destroys\u0020\u0028deletes\u0029\u0020a\u0020model\u0020from\u0020the\u0020database\u0020if\u0020it\u0020exists.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_destroy"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Ahydrate\u0028\u0029",
+            "name": "hydrate",
+            "summary": "Hydrates\u0020models\u0020from\u0020an\u0020array\u0020of\u0020model\u0020attributes\u0020\u0028row\u0029.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_hydrate"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Afetch\u0028\u0029",
+            "name": "fetch",
+            "summary": "Executes\u0020a\u0020query\u0020\u0028a\u0020prepared\u0020statement\u0029\u0020and\u0020returns\u0020the\u0020result.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_fetch"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Aall\u0028\u0029",
+            "name": "all",
+            "summary": "Fetches\u0020all\u0020models.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_all"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Aone\u0028\u0029",
+            "name": "one",
+            "summary": "Fetches\u0020a\u0020single\u0020model\u0020object.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_one"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Afirst\u0028\u0029",
+            "name": "first",
+            "summary": "Fetches\u0020the\u0020first\u0020model\u0020object.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_first"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Alast\u0028\u0029",
+            "name": "last",
+            "summary": "Fetches\u0020the\u0020last\u0020model\u0020object.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_last"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Afind\u0028\u0029",
+            "name": "find",
+            "summary": "Finds\u0020a\u0020single\u0020or\u0020multiple\u0020models\u0020matching\u0020the\u0020passed\u0020condition.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_find"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Acount\u0028\u0029",
+            "name": "count",
+            "summary": "Returns\u0020the\u0020count\u0020of\u0020models\u0020matching\u0020the\u0020passed\u0020condition\u0020\u0028counting\u0020is\u0020done\u0020on\u0020the\u0020SQL\u0020end\u0020for\u0020better\u0020performance\u0029.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_count"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Awhere\u0028\u0029",
+            "name": "where",
+            "summary": "Finds\u0020a\u0020single\u0020or\u0020multiple\u0020models\u0020by\u0020the\u0020passed\u0020condition.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_where"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AbuildWhereClause\u0028\u0029",
             "name": "buildWhereClause",
@@ -216,6 +831,126 @@ Search.appendIndex(
             "summary": "Validates\u0020the\u0020passed\u0020operator.",
             "url": "classes/MAKS-Velox-Backend-Model.html#method_validateOperator"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Returns\u0020array\u0020representation\u0020of\u0020the\u0020model.\u0020All\u0020attributes\u0020will\u0020be\u0020converted\u0020to\u0020\u0060camelCase\u0060\u0020form.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_toArray"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AtoJson\u0028\u0029",
+            "name": "toJson",
+            "summary": "Returns\u0020JSON\u0020representation\u0020of\u0020the\u0020model.\u0020All\u0020attributes\u0020will\u0020be\u0020converted\u0020to\u0020\u0060camelCase\u0060\u0020form.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_toJson"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003Abootstrap\u0028\u0029",
+            "name": "bootstrap",
+            "summary": "Override\u0020this\u0020method\u0020to\u0020add\u0020your\u0020own\u0020bootstrap\u0020code\u0020to\u0020the\u0020modal.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_bootstrap"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__call\u0028\u0029",
+            "name": "__call",
+            "summary": "Defines\u0020magic\u0020getters,\u0020setters,\u0020and\u0020finders\u0020for\u0020model\u0020attributes.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___call"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__get\u0028\u0029",
+            "name": "__get",
+            "summary": "Makes\u0020attributes\u0020accessible\u0020via\u0020public\u0020property\u0020access\u0020notation.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__set\u0028\u0029",
+            "name": "__set",
+            "summary": "Makes\u0020attributes\u0020accessible\u0020via\u0020public\u0020property\u0020assignment\u0020notation.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___set"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__isset\u0028\u0029",
+            "name": "__isset",
+            "summary": "Makes\u0020attributes\u0020consumable\u0020via\u0020\u0060isset\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___isset"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__unset\u0028\u0029",
+            "name": "__unset",
+            "summary": "Makes\u0020attributes\u0020consumable\u0020via\u0020\u0060unset\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___unset"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__clone\u0028\u0029",
+            "name": "__clone",
+            "summary": "Makes\u0020the\u0020model\u0020safely\u0020cloneable\u0020via\u0020the\u0020\u0060clone\u0060\u0020keyword.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___clone"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__sleep\u0028\u0029",
+            "name": "__sleep",
+            "summary": "Makes\u0020the\u0020model\u0020safely\u0020consumable\u0020via\u0020\u0060serialize\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___sleep"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__wakeup\u0028\u0029",
+            "name": "__wakeup",
+            "summary": "Makes\u0020the\u0020model\u0020safely\u0020consumable\u0020via\u0020\u0060unserialize\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___wakeup"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__debugInfo\u0028\u0029",
+            "name": "__debugInfo",
+            "summary": "Makes\u0020the\u0020model\u0020more\u0020friendly\u0020presented\u0020when\u0020exported\u0020via\u0020\u0060var_dump\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___debugInfo"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "Makes\u0020the\u0020object\u0020quickly\u0020available\u0020as\u0020a\u0020JSON\u0020string.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method___toString"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AoffsetGet\u0028\u0029",
+            "name": "offsetGet",
+            "summary": "\u0060ArrayAccess\u003A\u003AoffsetGet\u0028\u0029\u0060\u0020interface\u0020implementation.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_offsetGet"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AoffsetSet\u0028\u0029",
+            "name": "offsetSet",
+            "summary": "\u0060ArrayAccess\u003A\u003AoffsetSet\u0028\u0029\u0060\u0020interface\u0020implementation.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_offsetSet"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AoffsetExists\u0028\u0029",
+            "name": "offsetExists",
+            "summary": "\u0060ArrayAccess\u003A\u003AoffsetExists\u0028\u0029\u0060\u0020interface\u0020implementation.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_offsetExists"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AoffsetUnset\u0028\u0029",
+            "name": "offsetUnset",
+            "summary": "\u0060ArrayAccess\u003A\u003AoffsetUnset\u0028\u0029\u0060\u0020interface\u0020implementation.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_offsetUnset"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003AgetIterator\u0028\u0029",
+            "name": "getIterator",
+            "summary": "\u0060IteratorAggregate\u003A\u003AgetIterator\u0028\u0029\u0060\u0020interface\u0020implementation.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#method_getIterator"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A\u0024table",
+            "name": "table",
+            "summary": "Model\u0020table\u0020name.\u0020If\u0020not\u0020set,\u0020an\u0020auto\u002Dgenerated\u0020name\u0020will\u0020be\u0020used\u0020instead.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#property_table"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A\u0024columns",
+            "name": "columns",
+            "summary": "Model\u0020table\u0020columns.\u0020If\u0020not\u0020set,\u0020the\u0020model\u0020will\u0020fall\u0020back\u0020to\u0020the\u0020default\u0020primary\u0020key\u0020\u0060\u005B\u0027id\u0027\u005D\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#property_columns"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A\u0024primaryKey",
+            "name": "primaryKey",
+            "summary": "Model\u0020table\u0020primary\u0020key.\u0020If\u0020not\u0020set,\u0020\u0060id\u0060\u0020will\u0020be\u0020used\u0020by\u0020default.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#property_primaryKey"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A\u0024database",
+            "name": "database",
+            "summary": "The\u0020database\u0020instance\/connection.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#property_database"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\u003A\u003A\u0024attributes",
+            "name": "attributes",
+            "summary": "Model\u0020attributes.\u0020Corresponds\u0020to\u0020table\u0020columns.",
+            "url": "classes/MAKS-Velox-Backend-Model.html#property_attributes"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Router",
             "name": "Router",
             "summary": "A\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020router\u0020and\u0020an\u0020entry\u0020point\u0020for\u0020the\u0020application.",
@@ -225,6 +960,41 @@ Search.appendIndex(
             "name": "registerRoute",
             "summary": "Registers\u0020a\u0020route.",
             "url": "classes/MAKS-Velox-Backend-Router.html#method_registerRoute"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Registers\u0020a\u0020handler\u0020for\u0020a\u0020route.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_handle"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003Amiddleware\u0028\u0029",
+            "name": "middleware",
+            "summary": "Registers\u0020a\u0020middleware\u0020for\u0020a\u0020route.\u0020This\u0020method\u0020has\u0020no\u0020effect\u0020if\u0020\u0060\u0024allowMultiMatch\u0060\u0020is\u0020set\u0020to\u0020\u0060false\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_middleware"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003Aredirect\u0028\u0029",
+            "name": "redirect",
+            "summary": "Redirects\u0020the\u0020request\u0020to\u0020another\u0020route.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_redirect"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003Aforward\u0028\u0029",
+            "name": "forward",
+            "summary": "Forwards\u0020the\u0020request\u0020to\u0020another\u0020route.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_forward"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AhandleRouteNotFound\u0028\u0029",
+            "name": "handleRouteNotFound",
+            "summary": "Registers\u0020404\u0020handler.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_handleRouteNotFound"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AhandleMethodNotAllowed\u0028\u0029",
+            "name": "handleMethodNotAllowed",
+            "summary": "Registers\u0020405\u0020handler.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_handleMethodNotAllowed"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003Astart\u0028\u0029",
+            "name": "start",
+            "summary": "Starts\u0020the\u0020router.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_start"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003Asort\u0028\u0029",
             "name": "sort",
@@ -256,25 +1026,255 @@ Search.appendIndex(
             "summary": "Echos\u0020the\u0020response\u0020according\u0020to\u0020the\u0020passed\u0020parameters.",
             "url": "classes/MAKS-Velox-Backend-Router.html#method_doEchoResponse"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AgetParsedQuery\u0028\u0029",
+            "name": "getParsedQuery",
+            "summary": "Returns\u0020query\u0020parameters.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_getParsedQuery"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AgetParsedUrl\u0028\u0029",
+            "name": "getParsedUrl",
+            "summary": "Returns\u0020components\u0020of\u0020the\u0020current\u0020URL.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_getParsedUrl"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AgetRequestMethod\u0028\u0029",
+            "name": "getRequestMethod",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_getRequestMethod"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AgetRegisteredRoutes\u0028\u0029",
+            "name": "getRegisteredRoutes",
+            "summary": "Returns\u0020all\u0020registered\u0020routes\u0020with\u0020their\u0020\u0060expression\u0060,\u0020\u0060handler\u0060,\u0020\u0060arguments\u0060,\u0020and\u0020\u0060method\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_getRegisteredRoutes"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A__callStatic\u0028\u0029",
+            "name": "__callStatic",
+            "summary": "Aliases\u0020\u0060self\u003A\u003Ahandle\u0028\u0029\u0060\u0020method\u0020with\u0020common\u0020HTTP\u0020verbs.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method___callStatic"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A__call\u0028\u0029",
+            "name": "__call",
+            "summary": "Allows\u0020static\u0020methods\u0020handled\u0020by\u0020\u0060self\u003A\u003A__callStatic\u0028\u0029\u0060\u0020to\u0020be\u0020accessible\u0020via\u0020object\u0020operator\u0020\u0060\u002D\u003E\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method___call"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AON_REGISTER_HANDLER",
+            "name": "ON_REGISTER_HANDLER",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020a\u0020handler\u0020is\u0020registered.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#constant_ON_REGISTER_HANDLER"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AON_REGISTER_MIDDLEWARE",
+            "name": "ON_REGISTER_MIDDLEWARE",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020a\u0020middleware\u0020is\u0020registered.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#constant_ON_REGISTER_MIDDLEWARE"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AON_START",
+            "name": "ON_START",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020the\u0020router\u0020is\u0020started.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#constant_ON_START"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003ABEFORE_REDIRECT",
+            "name": "BEFORE_REDIRECT",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020a\u0020redirect\u0020is\u0020attempted.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#constant_BEFORE_REDIRECT"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003ABEFORE_FORWARD",
+            "name": "BEFORE_FORWARD",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020a\u0020forward\u0020is\u0020attempted.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#constant_BEFORE_FORWARD"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003ADEFAULTS",
+            "name": "DEFAULTS",
+            "summary": "The\u0020default\u0020values\u0020of\u0020class\u0020parameters.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#constant_DEFAULTS"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003ASUPPORTED_METHODS",
+            "name": "SUPPORTED_METHODS",
+            "summary": "Supported\u0020HTTP\u0020methods.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#constant_SUPPORTED_METHODS"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A\u0024params",
             "name": "params",
             "summary": "The\u0020parameters\u0020the\u0020application\u0020started\u0020with.",
             "url": "classes/MAKS-Velox-Backend-Router.html#property_params"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A\u0024base",
+            "name": "base",
+            "summary": "The\u0020current\u0020base\u0020URL\u0020of\u0020the\u0020application.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#property_base"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A\u0024path",
+            "name": "path",
+            "summary": "The\u0020currently\u0020requested\u0020path.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#property_path"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A\u0024routes",
+            "name": "routes",
+            "summary": "The\u0020currently\u0020registered\u0020routes.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#property_routes"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A\u0024routeNotFoundCallback",
+            "name": "routeNotFoundCallback",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Router.html#property_routeNotFoundCallback"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A\u0024methodNotAllowedCallback",
+            "name": "methodNotAllowedCallback",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Router.html#property_methodNotAllowedCallback"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Session",
             "name": "Session",
             "summary": "A\u0020class\u0020that\u0020offers\u0020a\u0020simple\u0020interface\u0020to\u0020work\u0020with\u0020sessions.",
             "url": "classes/MAKS-Velox-Backend-Session.html"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Astart\u0028\u0029",
+            "name": "start",
+            "summary": "Starts\u0020the\u0020session\u0020if\u0020it\u0020is\u0020not\u0020already\u0020started.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method_start"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Adestroy\u0028\u0029",
+            "name": "destroy",
+            "summary": "Destroys\u0020all\u0020of\u0020the\u0020data\u0020associated\u0020with\u0020the\u0020current\u0020session.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method_destroy"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Aunset\u0028\u0029",
+            "name": "unset",
+            "summary": "Unsets\u0020the\u0020session\u0020superglobal\nThis\u0020method\u0020deletes\u0020\u0028truncates\u0029\u0020only\u0020the\u0020variables\u0020in\u0020the\u0020session,\u0020session\u0020still\u0020exists.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method_unset"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Aclear\u0028\u0029",
+            "name": "clear",
+            "summary": "Clears\u0020the\u0020session\u0020entirely.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method_clear"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Ahas\u0028\u0029",
+            "name": "has",
+            "summary": "Checks\u0020if\u0020a\u0020value\u0020exists\u0020in\u0020the\u0020session.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method_has"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Gets\u0020a\u0020value\u0020from\u0020the\u0020session.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method_get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Aset\u0028\u0029",
+            "name": "set",
+            "summary": "Sets\u0020a\u0020value\u0020in\u0020the\u0020session.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method_set"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Acut\u0028\u0029",
+            "name": "cut",
+            "summary": "Cuts\u0020a\u0020value\u0020from\u0020the\u0020session.\u0020The\u0020value\u0020will\u0020be\u0020returned\u0020and\u0020the\u0020key\u0020will\u0020be\u0020unset\u0020from\u0020the\u0020array.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method_cut"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Aflash\u0028\u0029",
+            "name": "flash",
+            "summary": "Writes\u0020a\u0020flash\u0020message\u0020to\u0020the\u0020session.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method_flash"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Acsrf\u0028\u0029",
+            "name": "csrf",
+            "summary": "Generates\u0020and\u0020checks\u0020CSRF\u0020tokens.",
+            "url": "classes/MAKS-Velox-Backend-Session.html#method_csrf"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\Data",
             "name": "Data",
             "summary": "A\u0020class\u0020that\u0020serves\u0020as\u0020an\u0020abstracted\u0020data\u0020bag\/store\u0020that\u0020is\u0020accessible\u0020via\u0020dot\u002Dnotation.",
             "url": "classes/MAKS-Velox-Frontend-Data.html"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Data\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "Loads\u0020the\u0020data\u0020from\u0020system\u0020configuration.",
+            "url": "classes/MAKS-Velox-Frontend-Data.html#method_load"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Data\u003A\u003Ahas\u0028\u0029",
+            "name": "has",
+            "summary": "Checks\u0020whether\u0020a\u0020value\u0020of\u0020a\u0020key\u0020exists\u0020in\u0020\u0060self\u003A\u003A\u0024bag\u0060\u0020via\u0020dot\u002Dnotation.",
+            "url": "classes/MAKS-Velox-Frontend-Data.html#method_has"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Data\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Gets\u0020a\u0020value\u0020of\u0020a\u0020key\u0020from\u0020\u0060self\u003A\u003A\u0024bag\u0060\u0020via\u0020dot\u002Dnotation.",
+            "url": "classes/MAKS-Velox-Frontend-Data.html#method_get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Data\u003A\u003Aset\u0028\u0029",
+            "name": "set",
+            "summary": "Sets\u0020a\u0020value\u0020of\u0020a\u0020key\u0020in\u0020\u0060self\u003A\u003A\u0024bag\u0060\u0020via\u0020dot\u002Dnotation.",
+            "url": "classes/MAKS-Velox-Frontend-Data.html#method_set"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Data\u003A\u003AgetAll\u0028\u0029",
+            "name": "getAll",
+            "summary": "Returns\u0020the\u0020currently\u0020loaded\u0020data.",
+            "url": "classes/MAKS-Velox-Frontend-Data.html#method_getAll"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Data\u003A\u003AON_LOAD",
+            "name": "ON_LOAD",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020the\u0020data\u0020is\u0020loaded.",
+            "url": "classes/MAKS-Velox-Frontend-Data.html#constant_ON_LOAD"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Data\u003A\u003A\u0024bag",
+            "name": "bag",
+            "summary": "The\u0020currently\u0020loaded\u0020data.",
+            "url": "classes/MAKS-Velox-Frontend-Data.html#property_bag"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\HTML",
             "name": "HTML",
             "summary": "A\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020fluent\u0020interface\u0020to\u0020write\u0020HTML\u0020in\u0020PHP.\u0020It\u0020also\u0020helps\u0020with\u0020creating\u0020HTML\u0020elements\u0020on\u0020the\u0020fly.",
             "url": "classes/MAKS-Velox-Frontend-HTML.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Aelement\u0028\u0029",
+            "name": "element",
+            "summary": "Creates\u0020a\u0020complete\u0020HTML\u0020element\u0020\u0028opening\u0020and\u0020closing\u0020tags\u0029\u0020constructed\u0020from\u0020the\u0020specified\u0020parameters\u0020and\u0020pass\u0020it\u0020to\u0020the\u0020buffer.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_element"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Aentity\u0028\u0029",
+            "name": "entity",
+            "summary": "Creates\u0020an\u0020HTML\u0020entity\u0020from\u0020the\u0020specified\u0020name\u0020and\u0020pass\u0020it\u0020to\u0020the\u0020buffer.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_entity"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Acomment\u0028\u0029",
+            "name": "comment",
+            "summary": "Creates\u0020an\u0020HTML\u0020comment\u0020from\u0020the\u0020specified\u0020text\u0020and\u0020pass\u0020it\u0020to\u0020the\u0020buffer.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_comment"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Anode\u0028\u0029",
+            "name": "node",
+            "summary": "Creates\u0020an\u0020arbitrary\u0020text\u002Dnode\u0020from\u0020the\u0020specified\u0020text\u0020and\u0020pass\u0020it\u0020to\u0020the\u0020buffer\u0020\u0028useful\u0020to\u0020add\u0020some\u0020special\u0020tags,\u0020\u0022\\\u003C\u0021DOCTYPE\u0020html\u003E\u0022\u0020for\u0020example\u0029.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_node"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Aopen\u0028\u0029",
+            "name": "open",
+            "summary": "Creates\u0020an\u0020HTML\u0020opening\u0020tag\u0020from\u0020the\u0020specified\u0020parameters\u0020and\u0020pass\u0020it\u0020to\u0020the\u0020buffer.\u0020Works\u0020in\u0020conjunction\u0020with\u0020\u0060self\u003A\u003Aclose\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_open"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Aclose\u0028\u0029",
+            "name": "close",
+            "summary": "Creates\u0020an\u0020HTML\u0020closing\u0020tag\u0020matching\u0020the\u0020last\u0020tag\u0020opened\u0020by\u0020\u0060self\u003A\u003Aopen\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_close"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "Takes\u0020a\u0020callback\u0020and\u0020executes\u0020it\u0020after\u0020binding\u0020\u0024this\u0020\u0028HTML\u0029\u0020to\u0020it,\u0020useful\u0020for\u0020example\u0020to\u0020execute\u0020any\u0020PHP\u0020code\u0020while\u0020creating\u0020the\u0020markup.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_execute"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Acondition\u0028\u0029",
+            "name": "condition",
+            "summary": "Takes\u0020a\u0020condition\u0020\u0028some\u0020boolean\u0020value\u0029\u0020to\u0020determine\u0020whether\u0020or\u0020not\u0020to\u0020create\u0020the\u0020very\u0020next\u0020element\u0020and\u0020pass\u0020it\u0020to\u0020the\u0020buffer.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_condition"
         },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003AisConditionTruthy\u0028\u0029",
             "name": "isConditionTruthy",
@@ -301,6 +1301,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/MAKS-Velox-Frontend-HTML.html#property_validate"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Areturn\u0028\u0029",
+            "name": "return",
+            "summary": "Returns\u0020the\u0020created\u0020HTML\u0020elements\u0020found\u0020in\u0020the\u0020buffer\u0020and\u0020empties\u0020it.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_return"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Aecho\u0028\u0029",
+            "name": "echo",
+            "summary": "Echos\u0020the\u0020created\u0020HTML\u0020elements\u0020found\u0020in\u0020the\u0020buffer\u0020and\u0020empties\u0020it.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_echo"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003Aminify\u0028\u0029",
+            "name": "minify",
+            "summary": "Minifies\u0020HTML\u0020buffers\u0020by\u0020removing\u0020all\u0020unnecessary\u0020whitespaces\u0020and\u0020comments.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method_minify"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003A__call\u0028\u0029",
+            "name": "__call",
+            "summary": "Makes\u0020HTML\u0020tags\u0020available\u0020as\u0020methods\u0020on\u0020the\u0020class.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method___call"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003A__callStatic\u0028\u0029",
+            "name": "__callStatic",
+            "summary": "Makes\u0020HTML\u0020tags\u0020available\u0020as\u0020static\u0020methods\u0020on\u0020the\u0020class.",
+            "url": "classes/MAKS-Velox-Frontend-HTML.html#method___callStatic"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\HTML\u003A\u003A\u0024conditions",
             "name": "conditions",
             "summary": "",
@@ -321,10 +1346,130 @@ Search.appendIndex(
             "summary": "A\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020path\u0020resolver\u0020for\u0020different\u0020paths\/URLs\u0020of\u0020the\u0020app.",
             "url": "classes/MAKS-Velox-Frontend-Path.html"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003Acurrent\u0028\u0029",
+            "name": "current",
+            "summary": "Returns\u0020the\u0020current\u0020path,\u0020or\u0020compares\u0020it\u0020with\u0020the\u0020passed\u0020parameter.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method_current"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003AcurrentUrl\u0028\u0029",
+            "name": "currentUrl",
+            "summary": "Returns\u0020the\u0020current\u0020URL,\u0020or\u0020compares\u0020it\u0020with\u0020the\u0020passed\u0020parameter.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method_currentUrl"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003Aresolve\u0028\u0029",
+            "name": "resolve",
+            "summary": "Resolves\u0020the\u0020passed\u0020path\u0020to\u0020the\u0020app\u0020root\u0020path\u0020and\u0020returns\u0020it.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method_resolve"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003AresolveUrl\u0028\u0029",
+            "name": "resolveUrl",
+            "summary": "Resolves\u0020the\u0020passed\u0020path\u0020to\u0020the\u0020base\u0020URL\u0020\u0028starting\u0020from\u0020app\u0020root\u0029\u0020and\u0020returns\u0020it.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method_resolveUrl"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003AresolveFromTheme\u0028\u0029",
+            "name": "resolveFromTheme",
+            "summary": "Resolves\u0020the\u0020passed\u0020path\u0020to\u0020the\u0020theme\u0020root\u0020path\u0020and\u0020returns\u0020it.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method_resolveFromTheme"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003AresolveUrlFromTheme\u0028\u0029",
+            "name": "resolveUrlFromTheme",
+            "summary": "Resolves\u0020the\u0020passed\u0020path\u0020to\u0020the\u0020base\u0020URL\u0020\u0028starting\u0020from\u0020active\u0020theme\u0020root\u0029\u0020and\u0020returns\u0020it.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method_resolveUrlFromTheme"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003AresolveFromAssets\u0028\u0029",
+            "name": "resolveFromAssets",
+            "summary": "Resolves\u0020the\u0020passed\u0020path\u0020to\u0020the\u0020assets\u0020directory\u0020and\u0020returns\u0020it.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method_resolveFromAssets"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003AresolveUrlFromAssets\u0028\u0029",
+            "name": "resolveUrlFromAssets",
+            "summary": "Resolves\u0020the\u0020passed\u0020path\u0020to\u0020the\u0020base\u0020URL\u0020\u0028starting\u0020from\u0020active\u0020theme\u0020assets\u0020root\u0029\u0020and\u0020returns\u0020it.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method_resolveUrlFromAssets"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003Anormalize\u0028\u0029",
+            "name": "normalize",
+            "summary": "Returns\u0020a\u0020normalized\u0020path\u0020based\u0020on\u0020OS.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method_normalize"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003A__callStatic\u0028\u0029",
+            "name": "__callStatic",
+            "summary": "Aliases\u0020\u0060self\u003A\u003Aresolve\u002A\u0028\u0029\u0060\u0020with\u0020a\u0020function\u0020of\u0020the\u0020same\u0020name\u0020without\u0020the\u0020\u0022resolve\u0022\u0020prefix.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method___callStatic"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003A__call\u0028\u0029",
+            "name": "__call",
+            "summary": "Allows\u0020static\u0020methods\u0020handled\u0020by\u0020\u0060self\u003A\u003A__callStatic\u0028\u0029\u0060\u0020to\u0020be\u0020accessible\u0020via\u0020object\u0020operator\u0020\u0060\u002D\u003E\u0060.",
+            "url": "classes/MAKS-Velox-Frontend-Path.html#method___call"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\View",
             "name": "View",
             "summary": "A\u0020class\u0020that\u0020renders\u0020view\u0020files\u0020\u0028Layouts,\u0020Pages,\u0020and\u0020Partials\u0029\u0020with\u0020the\u0020ability\u0020to\u0020include\u0020additional\u0020files\u0020and\u0020divide\u0020page\u0020content\u0020into\u0020sections\u0020and\u0020cache\u0020rendered\u0020views.",
             "url": "classes/MAKS-Velox-Frontend-View.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Asection\u0028\u0029",
+            "name": "section",
+            "summary": "Pushes\u0020content\u0020to\u0020the\u0020buffer\u0020of\u0020the\u0020section\u0020with\u0020the\u0020given\u0020name.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_section"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003AsectionReset\u0028\u0029",
+            "name": "sectionReset",
+            "summary": "Resets\u0020\u0028empties\u0029\u0020the\u0020buffer\u0020of\u0020the\u0020section\u0020with\u0020the\u0020given\u0020name.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_sectionReset"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003AsectionStart\u0028\u0029",
+            "name": "sectionStart",
+            "summary": "Starts\u0020capturing\u0020buffer\u0020of\u0020the\u0020section\u0020with\u0020the\u0020given\u0020name.\u0020Works\u0020in\u0020conjunction\u0020with\u0020\u0060self\u003A\u003AsectionEnd\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_sectionStart"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003AsectionEnd\u0028\u0029",
+            "name": "sectionEnd",
+            "summary": "Ends\u0020capturing\u0020buffer\u0020of\u0020the\u0020section\u0020with\u0020the\u0020given\u0020name.\u0020Works\u0020in\u0020conjunction\u0020with\u0020\u0060self\u003A\u003AsectionStart\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_sectionEnd"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Ayield\u0028\u0029",
+            "name": "yield",
+            "summary": "Returns\u0020content\u0020of\u0020the\u0020section\u0020with\u0020the\u0020given\u0020name.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_yield"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Ainclude\u0028\u0029",
+            "name": "include",
+            "summary": "Includes\u0020a\u0020file\u0020from\u0020the\u0020active\u0020theme\u0020directory.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_include"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Alayout\u0028\u0029",
+            "name": "layout",
+            "summary": "Renders\u0020a\u0020theme\u0020layout\u0020with\u0020the\u0020passed\u0020variables.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_layout"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Apage\u0028\u0029",
+            "name": "page",
+            "summary": "Renders\u0020a\u0020theme\u0020page\u0020with\u0020the\u0020passed\u0020variables.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_page"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Apartial\u0028\u0029",
+            "name": "partial",
+            "summary": "Renders\u0020a\u0020theme\u0020partial\u0020with\u0020the\u0020passed\u0020variables.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_partial"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Arender\u0028\u0029",
+            "name": "render",
+            "summary": "Renders\u0020a\u0020view\u0020\u0028a\u0020Page\u0020wrapped\u0020in\u0020a\u0020Layout\u0029\u0020with\u0020the\u0020passed\u0020variables,\u0020the\u0020Page\u0020content\u0020will\u0020be\u0020sent\u0020to\u0020\u0060\u007Bview.defaultSectionName\u007D\u0060\u0020section.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_render"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Acache\u0028\u0029",
+            "name": "cache",
+            "summary": "Renders\u0020a\u0020view\u0020with\u0020the\u0020passed\u0020variables\u0020and\u0020cache\u0020it\u0020as\u0020HTML,\u0020subsequent\u0020calls\u0020to\u0020this\u0020function\u0020will\u0020return\u0020the\u0020cached\u0020version.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_cache"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003AclearCache\u0028\u0029",
+            "name": "clearCache",
+            "summary": "Deletes\u0020all\u0020cached\u0020views\u0020generated\u0020by\u0020\u0060self\u003A\u003Acache\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_clearCache"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Acompile\u0028\u0029",
+            "name": "compile",
+            "summary": "Compiles\u0020a\u0020PHP\u0020file\u0020with\u0020the\u0020passed\u0020variables.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#method_compile"
         },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Arequire\u0028\u0029",
             "name": "require",
@@ -351,10 +1496,55 @@ Search.appendIndex(
             "summary": "Returns\u0020a\u0020normalized\u0020path\u0020to\u0020a\u0020file\u0020based\u0020on\u0020OS.",
             "url": "classes/MAKS-Velox-Frontend-View.html#method_resolvePath"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003ABEFORE_RENDER",
+            "name": "BEFORE_RENDER",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020before\u0020rendering\u0020a\u0020view.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#constant_BEFORE_RENDER"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003AON_CACHE",
+            "name": "ON_CACHE",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020a\u0020view\u0020is\u0020cached.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#constant_ON_CACHE"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003AON_CACHE_CLEAR",
+            "name": "ON_CACHE_CLEAR",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020views\u0020cache\u0020is\u0020cleared.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#constant_ON_CACHE_CLEAR"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003ADEFAULTS",
+            "name": "DEFAULTS",
+            "summary": "The\u0020default\u0020values\u0020of\u0020class\u0020parameters.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#constant_DEFAULTS"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003A\u0024sections",
+            "name": "sections",
+            "summary": "Sections\u0020buffer.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#property_sections"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003A\u0024stack",
+            "name": "stack",
+            "summary": "Sections\u0020stack.",
+            "url": "classes/MAKS-Velox-Frontend-View.html#property_stack"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper",
             "name": "Dumper",
             "summary": "A\u0020class\u0020that\u0020dumps\u0020variables\u0020and\u0020exception\u0020in\u0020a\u0020nice\u0020formatting.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003Add\u0028\u0029",
+            "name": "dd",
+            "summary": "Dumps\u0020a\u0020variable\u0020and\u0020dies.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_dd"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003Adump\u0028\u0029",
+            "name": "dump",
+            "summary": "Dumps\u0020a\u0020variable\u0020in\u0020a\u0020nice\u0020HTML\u0020block\u0020with\u0020syntax\u0020highlighting.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_dump"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AdumpException\u0028\u0029",
+            "name": "dumpException",
+            "summary": "Dumps\u0020an\u0020exception\u0020in\u0020a\u0020nice\u0020HTML\u0020page\u0020or\u0020as\u0020string\u0020and\u0020exits\u0020the\u0020script.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_dumpException"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AexportExpression\u0028\u0029",
             "name": "exportExpression",
@@ -386,6 +1576,26 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_isCli"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024accentColor",
+            "name": "accentColor",
+            "summary": "Accent\u0020color\u0020of\u0020exceptions\u0020page\u0020and\u0020dump\u0020block.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#property_accentColor"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024contrastColor",
+            "name": "contrastColor",
+            "summary": "Contrast\u0020color\u0020of\u0020exceptions\u0020page\u0020and\u0020dump\u0020block.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#property_contrastColor"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024syntaxHighlightColors",
+            "name": "syntaxHighlightColors",
+            "summary": "Colors\u0020of\u0020syntax\u0020tokens.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#property_syntaxHighlightColors"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024syntaxHighlightStyles",
+            "name": "syntaxHighlightStyles",
+            "summary": "Additional\u0020CSS\u0020styling\u0020of\u0020syntax\u0020tokens.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#property_syntaxHighlightStyles"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024syntaxHighlightTokens",
             "name": "syntaxHighlightTokens",
             "summary": "",
@@ -395,6 +1605,51 @@ Search.appendIndex(
             "name": "Misc",
             "summary": "A\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020holder\u0020for\u0020various\u0020miscellaneous\u0020utility\u0020function.",
             "url": "classes/MAKS-Velox-Helper-Misc.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003AgetArrayValueByKey\u0028\u0029",
+            "name": "getArrayValueByKey",
+            "summary": "Gets\u0020a\u0020value\u0020from\u0020an\u0020array\u0020via\u0020dot\u002Dnotation.",
+            "url": "classes/MAKS-Velox-Helper-Misc.html#method_getArrayValueByKey"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003AsetArrayValueByKey\u0028\u0029",
+            "name": "setArrayValueByKey",
+            "summary": "Sets\u0020a\u0020value\u0020of\u0020an\u0020array\u0020via\u0020dot\u002Dnotation.",
+            "url": "classes/MAKS-Velox-Helper-Misc.html#method_setArrayValueByKey"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003AcutArrayValueByKey\u0028\u0029",
+            "name": "cutArrayValueByKey",
+            "summary": "Cuts\u0020a\u0020value\u0020of\u0020an\u0020array\u0020via\u0020dot\u002Dnotation,\u0020the\u0020value\u0020will\u0020be\u0020returned\u0020and\u0020the\u0020key\u0020will\u0020be\u0020unset\u0020from\u0020the\u0020array.",
+            "url": "classes/MAKS-Velox-Helper-Misc.html#method_cutArrayValueByKey"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003AgetObjectProperty\u0028\u0029",
+            "name": "getObjectProperty",
+            "summary": "Gets\u0020a\u0020private,\u0020protected,\u0020or\u0020public\u0020property\u0020\u0028default,\u0020static,\u0020or\u0020constant\u0029\u0020of\u0020an\u0020object.",
+            "url": "classes/MAKS-Velox-Helper-Misc.html#method_getObjectProperty"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003AsetObjectProperty\u0028\u0029",
+            "name": "setObjectProperty",
+            "summary": "Sets\u0020a\u0020private,\u0020protected,\u0020or\u0020public\u0020property\u0020\u0028default\u0020or\u0020static\u0029\u0020of\u0020an\u0020object.",
+            "url": "classes/MAKS-Velox-Helper-Misc.html#method_setObjectProperty"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003AcallObjectMethod\u0028\u0029",
+            "name": "callObjectMethod",
+            "summary": "Calls\u0020a\u0020private,\u0020protected,\u0020or\u0020public\u0020method\u0020on\u0020an\u0020object.",
+            "url": "classes/MAKS-Velox-Helper-Misc.html#method_callObjectMethod"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003Ainterpolate\u0028\u0029",
+            "name": "interpolate",
+            "summary": "Interpolates\u0020context\u0020values\u0020into\u0020text\u0020placeholders.",
+            "url": "classes/MAKS-Velox-Helper-Misc.html#method_interpolate"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003Atransform\u0028\u0029",
+            "name": "transform",
+            "summary": "Transforms\u0020the\u0020case\/content\u0020of\u0020a\u0020string\u0020by\u0020applying\u0020a\u0020one\u0020or\u0020more\u0020of\u0020the\u002020\u0020available\u0020transformations.",
+            "url": "classes/MAKS-Velox-Helper-Misc.html#method_transform"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003Abacktrace\u0028\u0029",
+            "name": "backtrace",
+            "summary": "Returns\u0020the\u0020passed\u0020key\u0028s\u0029\u0020from\u0020the\u0020backtrace.",
+            "url": "classes/MAKS-Velox-Helper-Misc.html#method_backtrace"
         },                {
             "fqsen": "\\app\u0028\u0029",
             "name": "app",

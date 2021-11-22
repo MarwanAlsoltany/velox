@@ -173,6 +173,13 @@ Router::handle('/some-route', [$controller, 'someAction'], ['GET', 'POST']);
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/MAKS-Velox-Backend-Controller.html#constant_ON_CONSTRUCT">ON_CONSTRUCT</a>
+    <span>
+        &nbsp;= &#039;controller.on.construct&#039;                    </span>
+</dt>
+<dd>This event will be dispatched when a controller (or a subclass) is constructed.</dd>
+
                 <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MAKS-Velox-Backend-Controller.html#property_auth">$auth</a>
     <span>
@@ -264,6 +271,20 @@ Router::handle('/some-route', [$controller, 'someAction'], ['GET', 'POST']);
 </dt>
 <dd></dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/MAKS-Velox-Backend-Controller.html#property_model">$model</a>
+    <span>
+                &nbsp;: <a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a>|null            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/MAKS-Velox-Backend-Controller.html#property_vars">$vars</a>
+    <span>
+                &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd>The passed variables array to the Controller.</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/MAKS-Velox-Backend-Controller.html#property_crudRoutes">$crudRoutes</a>
     <span>
@@ -271,7 +292,42 @@ Router::handle('/some-route', [$controller, 'someAction'], ['GET', 'POST']);
 </dt>
 <dd>Preconfigured CRUD routes.</dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -private">
+                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Controller.html#method___construct">__construct()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd>Class constructor.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Controller.html#method___get">__get()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Controller.html#method___isset">__isset()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/MAKS-Velox-Backend-Controller.html#method_associateModel">associateModel()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Controls which model should be used by current controller.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/MAKS-Velox-Backend-Controller.html#method_registerRoutes">registerRoutes()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Whether or not to automatically register controller routes.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/MAKS-Velox-Backend-Controller.html#method_doAssociateModel">doAssociateModel()</a>
     <span>
                         &nbsp;: void    </span>
@@ -290,6 +346,42 @@ Router::handle('/some-route', [$controller, 'someAction'], ['GET', 'POST']);
 
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/MAKS-Velox-Backend-Controller.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ON_CONSTRUCT">
+        ON_CONSTRUCT
+        <a href="classes/MAKS-Velox-Backend-Controller.html#constant_ON_CONSTRUCT" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Controller.php"><a href="files/classes-backend-controller.html"><abbr title="classes/Backend/Controller.php">Controller.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">This event will be dispatched when a controller (or a subclass) is constructed.</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ON_CONSTRUCT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;controller.on.construct&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>This event will not be passed any arguments, but its listener callback will be bound to the object (the controller class).</p>
+</section>
+
+    
+    
+
+</article>
+            </section>
 
         
     <section class="phpdocumentor-properties">
@@ -756,6 +848,74 @@ Router::handle('/some-route', [$controller, 'someAction'], ['GET', 'POST']);
         class="
             phpdocumentor-element
             -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_model">
+        $model
+        <a href="classes/MAKS-Velox-Backend-Controller.html#property_model" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Controller.php"><a href="files/classes-backend-controller.html"><abbr title="classes/Backend/Controller.php">Controller.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">112</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$model</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_vars">
+        $vars
+        <a href="classes/MAKS-Velox-Backend-Controller.html#property_vars" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Controller.php"><a href="files/classes-backend-controller.html"><abbr title="classes/Backend/Controller.php">Controller.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">110</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The passed variables array to the Controller.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$vars</span>
+    </code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
             -private
                                                         "
 >
@@ -807,6 +967,252 @@ Router::handle('/some-route', [$controller, 'someAction'], ['GET', 'POST']);
             Methods
             <a href="classes/MAKS-Velox-Backend-Controller.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/MAKS-Velox-Backend-Controller.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Controller.php"><a href="files/classes-backend-controller.html"><abbr title="classes/Backend/Controller.php">Controller.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">120</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Class constructor.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$vars</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$vars</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[optional] Additional variables to pass to the controller.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___get">
+        __get()
+        <a href="classes/MAKS-Velox-Backend-Controller.html#method___get" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Controller.php"><a href="files/classes-backend-controller.html"><abbr title="classes/Backend/Controller.php">Controller.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">136</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">__get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$property</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$property</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___isset">
+        __isset()
+        <a href="classes/MAKS-Velox-Backend-Controller.html#method___isset" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Controller.php"><a href="files/classes-backend-controller.html"><abbr title="classes/Backend/Controller.php">Controller.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">147</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">__isset</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$property</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$property</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_associateModel">
+        associateModel()
+        <a href="classes/MAKS-Velox-Backend-Controller.html#method_associateModel" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Controller.php"><a href="files/classes-backend-controller.html"><abbr title="classes/Backend/Controller.php">Controller.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">166</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Controls which model should be used by current controller.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__name">associateModel</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"><p>This method should return a concrete class FQN of a model that extends <code class="prettyprint">Model::class</code>.</p>
+<p>This method returns <code class="prettyprint">null</code> by default.</p>
+<p>NOTE: If the model class does not exist, the controller will ignore it silently.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.3.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_registerRoutes">
+        registerRoutes()
+        <a href="classes/MAKS-Velox-Backend-Controller.html#method_registerRoutes" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Controller.php"><a href="files/classes-backend-controller.html"><abbr title="classes/Backend/Controller.php">Controller.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">191</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether or not to automatically register controller routes.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__name">registerRoutes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+        <section class="phpdocumentor-description"><p>NOTE: The controller class has to be instantiated at least once for this to work.</p>
+<p>Only public methods suffixed with the word <code class="prettyprint">Action</code> or <code class="prettyprint">Middleware</code> will be registered.
+The suffix will determine the route type (<code class="prettyprint">*Action</code> =&gt; <code class="prettyprint">handler</code>, <code class="prettyprint">*Middleware</code> =&gt; <code class="prettyprint">middleware</code>).
+The route will look like <code class="prettyprint">/controller-name/method-name</code> (names will be converted to slugs).
+The method will be <code class="prettyprint">GET</code> by default. See also <code class="prettyprint">self::$crudRoutes</code>.
+You can use the <code class="prettyprint">@route</code> annotation to overrides the default Route and Method.
+The <code class="prettyprint">@route</code> annotation can be used in DocBlock on a class method with the following syntax:</p>
+<ul>
+<li>Pattern: <code class="prettyprint">@route(&quot;&lt;path&gt;&quot;, {&lt;http-verb&gt;, ...})</code>
+</li>
+<li>Example: <code class="prettyprint">@route(&quot;/some-route&quot;, {GET, POST})</code>
+</li>
+</ul>
+<p>This method returns <code class="prettyprint">false</code> by default.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.3.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
                     <article
         class="phpdocumentor-element
             -method

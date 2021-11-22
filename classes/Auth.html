@@ -137,14 +137,1055 @@
 
 
 
+<h3 id="toc">
+    Table of Contents
+    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#constant_AFTER_REGISTER">AFTER_REGISTER</a>
+    <span>
+        &nbsp;= &#039;auth.after.register&#039;                    </span>
+</dt>
+<dd>This event will be dispatched after an auth user is registered.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#constant_ON_LOGIN">ON_LOGIN</a>
+    <span>
+        &nbsp;= &#039;auth.on.login&#039;                    </span>
+</dt>
+<dd>This event will be dispatched when an auth user is logged in.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#constant_ON_LOGOUT">ON_LOGOUT</a>
+    <span>
+        &nbsp;= &#039;auth.on.logout&#039;                    </span>
+</dt>
+<dd>This event will be dispatched when an auth user is logged out.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#constant_ON_REGISTER">ON_REGISTER</a>
+    <span>
+        &nbsp;= &#039;auth.on.register&#039;                    </span>
+</dt>
+<dd>This event will be dispatched when an auth user is registered.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#constant_ON_UNREGISTER">ON_UNREGISTER</a>
+    <span>
+        &nbsp;= &#039;auth.on.unregister&#039;                    </span>
+</dt>
+<dd>This event will be dispatched when an auth user is unregistered.</dd>
+
+                <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#property_instance">$instance</a>
+    <span>
+                &nbsp;: self            </span>
+</dt>
+<dd>The class singleton instance.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#property_user">$user</a>
+    <span>
+                &nbsp;: <a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a>            </span>
+</dt>
+<dd>Auth user model.</dd>
+
+                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method___construct">__construct()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd>Class constructor.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_authenticate">authenticate()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Authenticates an auth user model.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_basic">basic()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Serves as an HTTP Basic Authentication guard for the specified logins.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_check">check()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Checks if a user is logged in and logs the user out if the timeout has expired.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_fail">fail()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Renders 401 error page.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_instance">instance()</a>
+    <span>
+                        &nbsp;: static    </span>
+</dt>
+<dd>Returns the singleton instance of the class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_login">login()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Logs in a user.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_logout">logout()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Logs out a user.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_register">register()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Registers a new user.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_unregister">unregister()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Unregisters a user.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_user">user()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a>|null    </span>
+</dt>
+<dd>Returns the authenticated user model instance.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_getUserModel">getUserModel()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the user model class specified in the config or falls back to the default one.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_hash">hash()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Hashes a password.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/MAKS-Velox-Backend-Auth.html#method_verify">verify()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Verifies a password.</dd>
+
+        </dl>
 
 
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/Auth.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_AFTER_REGISTER">
+        AFTER_REGISTER
+        <a href="classes/MAKS-Velox-Backend-Auth.html#constant_AFTER_REGISTER" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">74</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">This event will be dispatched after an auth user is registered.</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">AFTER_REGISTER</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;auth.after.register&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>This event will be passed the user model object and its listener callback will be bound to the object (the auth class instance).</p>
+</section>
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ON_LOGIN">
+        ON_LOGIN
+        <a href="classes/MAKS-Velox-Backend-Auth.html#constant_ON_LOGIN" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">90</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">This event will be dispatched when an auth user is logged in.</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ON_LOGIN</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;auth.on.login&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>This event will be passed the user model object and its listener callback will be bound to the object (the auth class instance).</p>
+</section>
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ON_LOGOUT">
+        ON_LOGOUT
+        <a href="classes/MAKS-Velox-Backend-Auth.html#constant_ON_LOGOUT" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">98</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">This event will be dispatched when an auth user is logged out.</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ON_LOGOUT</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;auth.on.logout&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>This event will be passed the user model object and its listener callback will be bound to the object (the auth class instance).</p>
+</section>
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ON_REGISTER">
+        ON_REGISTER
+        <a href="classes/MAKS-Velox-Backend-Auth.html#constant_ON_REGISTER" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">66</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">This event will be dispatched when an auth user is registered.</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ON_REGISTER</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;auth.on.register&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>This event will be passed the user model object and its listener callback will be bound to the object (the auth class).
+This event is useful if the user model class has additional attributes other than the <code class="prettyprint">username</code> and <code class="prettyprint">password</code> that need to be set.</p>
+</section>
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_ON_UNREGISTER">
+        ON_UNREGISTER
+        <a href="classes/MAKS-Velox-Backend-Auth.html#constant_ON_UNREGISTER" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">82</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">This event will be dispatched when an auth user is unregistered.</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">ON_UNREGISTER</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;auth.on.unregister&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>This event will be passed the user model object and its listener callback will be bound to the object (the auth class instance).</p>
+</section>
+
+    
+    
+
+</article>
+            </section>
 
         
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/Auth.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+            -static                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="property_instance">
+        $instance
+        <a href="classes/MAKS-Velox-Backend-Auth.html#property_instance" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
+    </aside>
+
+        <p class="phpdocumentor-summary">The class singleton instance.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">self</span>
+    <span class="phpdocumentor-signature__name">$instance</span>
+    </code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_user">
+        $user
+        <a href="classes/MAKS-Velox-Backend-Auth.html#property_user" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">110</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Auth user model.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$user</span>
+    </code>
+
+    
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/Auth.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">118</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Class constructor.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$model</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$model</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[optional] The auth user model class to use.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
         
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_authenticate">
+        authenticate()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_authenticate" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">262</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Authenticates an auth user model.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">authenticate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$user</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$user</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The auth user model to authenticate.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>If the user could not be authenticated.</p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_basic">
+        basic()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_basic" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">315</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Serves as an HTTP Basic Authentication guard for the specified logins.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">basic</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logins</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$logins</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The login data, an associative array where key is the <code class="prettyprint">username</code> and value is the <code class="prettyprint">password</code>.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>Can't test methods that send headers.</p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_check">
+        check()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_check" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">279</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Checks if a user is logged in and logs the user out if the timeout has expired.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">check</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_fail">
+        fail()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_fail" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">350</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Renders 401 error page.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">fail</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>Can't test methods that send headers.</p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static            -final        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_instance">
+        instance()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_instance" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">138</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the singleton instance of the class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__final">final</span>    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">instance</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+
+        <section class="phpdocumentor-description"><p>NOTE: This method returns only the first instance of the class
+which is normally the one that was created during application bootstrap.</p>
+</section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">static</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_login">
+        login()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_login" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">215</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Logs in a user.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">login</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$username</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$password</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$username</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Auth user username.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$password</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Auth user password.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>True if the user was logged in successfully, false if the user is not registered or the password is incorrect.</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_logout">
+        logout()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_logout" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">244</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Logs out a user.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">logout</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_register">
+        register()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_register" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">155</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Registers a new user.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">register</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$username</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$password</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$username</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Auth user username.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$password</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Auth user password.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>True if the user was registered successfully, false if the user is already registered.</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unregister">
+        unregister()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_unregister" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">186</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unregisters a user.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">unregister</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$username</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$username</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Auth user username.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>True if the user was unregistered successfully, false if the user is not registered.</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_user">
+        user()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_user" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">297</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the authenticated user model instance.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">user</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a>|null</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a>|null</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The authenticated user or null if no user has logged in.</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getUserModel">
+        getUserModel()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_getUserModel" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">403</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the user model class specified in the config or falls back to the default one.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">getUserModel</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$model</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$model</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>[optional] The auth user model class to use.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Model.html"><abbr title="\MAKS\Velox\Backend\Model">Model</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hash">
+        hash()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_hash" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">374</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Hashes a password.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__name">hash</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$password</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$password</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The hashed password.</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_verify">
+        verify()
+        <a href="classes/MAKS-Velox-Backend-Auth.html#method_verify" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Auth.php"><a href="files/classes-backend-auth.html"><abbr title="classes/Backend/Auth.php">Auth.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">391</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Verifies a password.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                <span class="phpdocumentor-signature__name">verify</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$password</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$hash</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$password</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$hash</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+            </section>
+
         
     <script type="text/javascript">
         function loadExternalCodeSnippets(line) {
