@@ -34,7 +34,7 @@ use MAKS\Velox\Helper\Misc;
  * $model->save(); // persists the model in the database.
  * $model->update(['attribute_name' => $value]); // updates the model and save changes in the database.
  * $model->delete(); // deletes the model from the database.
- * Model::create($attributes); // creates a new model and saves it in the database.
+ * Model::create($attributes); // creates a new model instance, call save() on the instance to save it in the database.
  * Model::destroy($id); // destroys a model and deletes it from the database.
  *
  * // fetching models
@@ -51,13 +51,15 @@ use MAKS\Velox\Helper\Misc;
  * $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fetches using raw SQL query.
  * ```
  *
+ * @package Velox\Backend
+ * @since 1.3.0
+ * @api
+ *
  * @method mixed get*() Getter for model attribute, (`attribute_name` -> `getAttributeName()`).
  * @method $this set*() Setter for model attribute, (`attribute_name` -> `setAttributeName($value)`).
  * @method static[] findBy*() Finder by model attribute, (`attribute_name` -> `findByAttributeName($value)`).
- * @property mixed $* Public attribute for model attribute, (`attribute_name` -> `attributeName`).
  *
- * @since 1.3.0
- * @api
+ * @property mixed $* Public attribute for model attribute, (`attribute_name` -> `attributeName`).
  */
 abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
 {
@@ -835,12 +837,13 @@ abstract class Model implements \ArrayAccess, \Traversable, \IteratorAggregate
      */
     protected function bootstrap(): void
     {
-        //
+        // implemented as needed
     }
 
 
     /**
      * Class constructor.
+     *
      * Keep all constructor arguments optional when extending the class.
      * Or use `self::bootstrap()` instead.
      *
