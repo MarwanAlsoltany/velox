@@ -17,6 +17,10 @@ use MAKS\Velox\Backend\Session;
 /**
  * A class that serves as an abstraction/wrapper to work with superglobals.
  *
+ * @package Velox\Backend
+ * @since 1.0.0
+ * @api
+ *
  * @method static mixed getGet(string $key = null) Gets a value from $_GET. Dot-notation can be used for nested values.
  * @method static mixed getPost(string $key = null) Gets a value from $_POST. Dot-notation can be used for nested values.
  * @method static mixed getFiles(string $key = null) Gets a value from $_FILES. Dot-notation can be used for nested values.
@@ -50,8 +54,6 @@ use MAKS\Velox\Backend\Session;
  * @property object $request A class around the superglobal `$_REQUEST` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
  * @property object $server A class around the superglobal `$_SERVER` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
  * @property object $env A class around the superglobal `$_ENV` that has the methods `has($key)`, `get($key, $default)`, `set($key, $value)`, and `getAll()`.
- *
- * @since 1.0.0
  */
 final class Globals
 {
