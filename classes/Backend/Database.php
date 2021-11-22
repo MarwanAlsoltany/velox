@@ -22,6 +22,7 @@ namespace MAKS\Velox\Backend;
  * $database->perform('SELECT * FROM `users` WHERE `title` LIKE :title AND `id` > :id', ['title' => 'Dr.%', 'id' => 1])->fetchAll();
  * ```
  *
+ * @package Velox\Backend
  * @since 1.3.0
  * @api
  */
@@ -44,7 +45,14 @@ class Database extends \PDO
 
 
     /**
+     * Class constructor.
+     *
      * Adds some default options to the PDO connection.
+     *
+     * @param string $dsn
+     * @param string|null $username
+     * @param string|null $password
+     * @param array|null $options
      */
     protected function __construct(string $dsn, ?string $username = null, ?string $password = null, ?array $options = null)
     {
@@ -88,11 +96,11 @@ class Database extends \PDO
     }
 
     /**
-     * Returns the singleton instance of the `Database` class using credentials found in "{database}" config.
+     * Returns the singleton instance of the `Database` class using credentials found in `{database}` config.
      *
      * @return static
      *
-     * @codeCoverageIgnore This method is overridden (mocked) in the unit tests.
+     * @codeCoverageIgnore This method is overridden (mocked) in tests.
      */
     public static function instance(): Database
     {
@@ -112,7 +120,7 @@ class Database extends \PDO
     }
 
     /**
-     * Returns FQN for a custom PDOStatement class.
+     * Returns FQN for a custom `PDOStatement` class.
      *
      * @return string
      */
