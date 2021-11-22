@@ -47,7 +47,7 @@ class EngineTest extends TestCase
 
         $this->assertIsString($content);
         $this->assertNotEmpty($content);
-        $this->assertStringContainsString('<?php echo $title; ?>', $content);
+        $this->assertStringContainsString('<?php echo (string)($title); ?>', $content);
     }
 
     public function testEngineGetCompiledContentThrowsAnExceptionIfFileDoesNotExist(): void
@@ -63,7 +63,7 @@ class EngineTest extends TestCase
         $file = $this->engine->getCompiledFile('base');
 
         $this->assertFileExists($file);
-        $this->assertStringContainsString('<?php echo $title; ?>', file_get_contents($file));
+        $this->assertStringContainsString('<?php echo (string)($title); ?>', file_get_contents($file));
     }
 
     public function testEngineRenderMethod(): void
