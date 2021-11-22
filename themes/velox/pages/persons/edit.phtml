@@ -61,7 +61,7 @@
                 </div>
                 <div class="field is-grouped is-flex-shrink-1">
                     <div class="control">
-                        <form class="card-footer-item" action="{{ Path::resolveUrl('persons/' . $person->id) }}" method="POST">
+                        <form class="mb-3" action="{{ Path::resolveUrl('persons/' . $person->id) }}" method="POST">
                             <input type="hidden" name="_method" value="DELETE">
                             {{{ Session::csrf() }}}
                             <input class="button is-danger" type="submit" value="Delete">
