@@ -34,6 +34,7 @@ $namespaces = [
 $aliases = [
     // Alias   => FQN
     'App'      => \MAKS\Velox\App::class,
+    'Auth'     => \MAKS\Velox\Backend\Auth::class,
     'Event'    => \MAKS\Velox\Backend\Event::class,
     'Config'   => \MAKS\Velox\Backend\Config::class,
     'Router'   => \MAKS\Velox\Backend\Router::class,
