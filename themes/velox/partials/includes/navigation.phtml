@@ -28,11 +28,14 @@
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">More</a>
                 <div class="navbar-dropdown">
+                    <a href="<?= Path::resolveUrl('/auth') ?>" class="navbar-item">Auth&nbsp;<?= Auth::check() ? '' : HTML::sup('Needs Login', ['style' => 'color:tomato;font-size:75%;']) ?></a>
+                    <hr class="navbar-divider">
                     <a href="<?= Path::resolveUrl('/persons') ?>" class="navbar-item">CRUD</a>
                     <hr class="navbar-divider">
                     <a href="<?= Path::resolveUrl('/redirect') ?>" class="navbar-item">Redirect</a>
                     <a href="<?= Path::resolveUrl('/forward') ?>" class="navbar-item">Forward</a>
                     <hr class="navbar-divider">
+                    <a href="<?= Path::resolveUrl('/401') ?>" class="navbar-item">401</a>
                     <a href="<?= Path::resolveUrl('/403') ?>" class="navbar-item">403</a>
                     <a href="<?= Path::resolveUrl('/404') ?>" class="navbar-item">404</a>
                     <a href="<?= Path::resolveUrl('/405') ?>" class="navbar-item">405</a>
@@ -46,9 +49,22 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a href="<?= Path::resolveUrl('/learn-more') ?>" class="button is-primary is-light is-rounded">
-                        <strong>Learn more</strong>
-                    </a>
+                    <?php if (!Auth::check()): ?>
+                        <a href="<?= Path::resolveUrl('/login') ?>" class="button is-primary is-light is-rounded">
+                            <strong>Log in</strong>
+                        </a>
+                    <?php else: ?>
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a href="<?= Path::resolveUrl('/logout') ?>" class="navbar-link button is-primary is-light is-rounded">
+                                <strong>Log out</strong>
+                            </a>
+                            <div class="navbar-dropdown is-boxed">
+                                <p class="navbar-item">Logged in as&nbsp;<span class="tag is-primary"><?= Auth::user()->username ?></span></p>
+                                <hr class="navbar-divider">
+                                <a href="<?= Path::resolveUrl('/logout') ?>" class="navbar-item has-text-danger">Log out</a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
