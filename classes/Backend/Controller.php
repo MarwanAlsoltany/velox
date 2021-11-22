@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend;
 
+use MAKS\Velox\App;
 use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Router;
@@ -15,23 +16,11 @@ use MAKS\Velox\Frontend\Data;
 use MAKS\Velox\Frontend\View;
 use MAKS\Velox\Frontend\HTML;
 use MAKS\Velox\Frontend\Path;
+use MAKS\Velox\Helper\Dumper;
 use MAKS\Velox\Helper\Misc;
 
 /**
  * An abstract class that serves as a base Controller that can be extended to make handlers for application router.
- * This class has these properties:
- * - `$vars` passed as array to controller constructor.
- * - `$config`: Instance of the `Config` class.
- * - `$event`: Instance of the `Event` class.
- * - `$router`: Instance of the `Router` class.
- * - `$globals`: Instance of the `Globals` class.
- * - `$session`: Instance of the `Session` class.
- * - `$database`: Instance of the `Database` class.
- * - `$model`: Instance of the `Model` class.
- * - `$data`: Instance of the `Data` class.
- * - `$view`: Instance of the `View` class.
- * - `$html`: Instance of the `HTML` class.
- * - `$path`: Instance of the `Path` class.
  *
  * Example:
  * ```
@@ -48,6 +37,19 @@ use MAKS\Velox\Helper\Misc;
  * // use the created action as a handler for a route
  * Router::handle('/some-route', [$controller, 'someAction'], ['GET', 'POST']);
  * ```
+ *
+ * @property Event $event Instance of the `Event` class.
+ * @property Config $config Instance of the `Config` class.
+ * @property Router $router Instance of the `Router` class.
+ * @property Globals $globals Instance of the `Globals` class.
+ * @property Session $session Instance of the `Session` class.
+ * @property Database $database Instance of the `Database` class.
+ * @property Data $data Instance of the `Data` class.
+ * @property View $view Instance of the `View` class.
+ * @property HTML $html Instance of the `HTML` class.
+ * @property Path $path Instance of the `Path` class.
+ * @property Dumper $dumper Instance of the `Dumper` class.
+ * @property Misc $misc Instance of the `Misc` class.
  *
  * @since 1.0.0
  * @api
@@ -104,27 +106,7 @@ abstract class Controller
      */
     protected array $vars;
 
-    protected Event $event;
-
-    protected Config $config;
-
-    protected Router $router;
-
-    protected Globals $globals;
-
-    protected Session $session;
-
-    protected Database $database;
-
     protected ?Model $model;
-
-    protected Data $data;
-
-    protected View $view;
-
-    protected HTML $html;
-
-    protected Path $path;
 
 
     /**
@@ -134,18 +116,8 @@ abstract class Controller
      */
     public function __construct(array $vars = [])
     {
-        $this->vars     = $vars;
-        $this->event    = new Event();
-        $this->config   = new Config();
-        $this->router   = new Router();
-        $this->globals  = new Globals();
-        $this->session  = new Session();
-        $this->database = Database::instance();
-        $this->model    = null;
-        $this->data     = new Data();
-        $this->view     = new View();
-        $this->html     = new HTML();
-        $this->path     = new Path();
+        $this->vars  = $vars;
+        $this->model = null;
 
         if ($this->associateModel()) {
             $this->doAssociateModel();
@@ -156,6 +128,22 @@ abstract class Controller
         }
 
         Event::dispatch(self::ON_CONSTRUCT, null, $this);
+    }
+
+    public function __get(string $property)
+    {
+        if (isset(App::instance()->{$property})) {
+            return App::instance()->{$property};
+        }
+
+        $class = static::class;
+
+        throw new \Exception("Call to undefined property {$class}::${$property}");
+    }
+
+    public function __isset(string $property)
+    {
+        return isset(App::instance()->{$property});
     }
 
 
