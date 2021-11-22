@@ -11,6 +11,7 @@ use MAKS\Velox\Backend\Router;
 use MAKS\Velox\Backend\Globals;
 use MAKS\Velox\Backend\Session;
 use MAKS\Velox\Backend\Database;
+use MAKS\Velox\Backend\Auth;
 use MAKS\Velox\Backend\Model;
 use MAKS\Velox\Frontend\Data;
 use MAKS\Velox\Frontend\View;
@@ -44,6 +45,7 @@ use MAKS\Velox\Helper\Misc;
  * @property Globals $globals Instance of the `Globals` class.
  * @property Session $session Instance of the `Session` class.
  * @property Database $database Instance of the `Database` class.
+ * @property Auth $auth Instance of the `Auth` class.
  * @property Data $data Instance of the `Data` class.
  * @property View $view Instance of the `View` class.
  * @property HTML $html Instance of the `HTML` class.
