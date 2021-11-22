@@ -150,7 +150,7 @@ abstract class Controller
     /**
      * Controls which model should be used by current controller.
      *
-     * This method should return a concrete class FQN of a model that extends `Model:class`.
+     * This method should return a concrete class FQN of a model that extends `Model::class`.
      *
      * This method returns `null` by default.
      *
@@ -170,8 +170,9 @@ abstract class Controller
      *
      * NOTE: The controller class has to be instantiated at least once for this to work.
      *
-     * Only public methods suffixed with the word `Action` will be registered.
-     * The route will look like `/controller-name/method-name`.
+     * Only public methods suffixed with the word `Action` or `Middleware` will be registered.
+     * The suffix will determine the route type (`*Action` => `handler`, `*Middleware` => `middleware`).
+     * The route will look like `/controller-name/method-name` (names will be converted to slugs).
      * The method will be `GET` by default. See also `self::$crudRoutes`.
      * You can use the `@route` annotation to overrides the default Route and Method.
      * The `@route` annotation can be used in DocBlock on a class method with the following syntax:
@@ -229,13 +230,13 @@ abstract class Controller
             if (
                 $method->isAbstract() ||
                 $method->isStatic() ||
-                strpos($methodName, 'Action') === false
+                preg_match('/(Action|Middleware)$/', $methodName) === 0
             ) {
                 continue;
             }
 
             $controller  = Misc::transform(str_replace('Controller', '', $className), 'kebab', 'slug');
-            $handler     = Misc::transform(str_replace('Action', '', $methodName), 'kebab', 'slug');
+            $handler     = Misc::transform(str_replace(['Action', 'Middleware'], '', $methodName), 'kebab', 'slug');
 
             $routes = $this->crudRoutes;
 
@@ -258,10 +259,11 @@ abstract class Controller
                 ];
             }
 
+            $function   = preg_match('/(Middleware)$/', $methodName) ? 'middleware' : 'handle';
             $expression = Misc::interpolate($routes[$handler]['expression'], ['controller' => $controller]);
             $method     = $routes[$handler]['method'] ?? 'GET';
 
-            $this->router->handle($expression, [$this, $methodName], $method);
+            $this->router->{$function}($expression, [$this, $methodName], $method);
         }
     }
 }
