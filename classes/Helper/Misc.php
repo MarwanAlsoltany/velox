@@ -13,6 +13,9 @@ namespace MAKS\Velox\Helper;
 
 /**
  * A class that serves as a holder for various miscellaneous utility function.
+ *
+ * @package Velox\Helper
+ * @since 1.0.0
  */
 final class Misc
 {
@@ -90,6 +93,7 @@ final class Misc
      *
      * @param array $array The array to cut the value from.
      * @param string $key The dotted key representation.
+     * @param mixed $default [optional] The default fallback value.
      *
      * @return mixed The requested value if found otherwise the default parameter.
      */
