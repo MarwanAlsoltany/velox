@@ -1,9 +1,9 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This config file can be used to customize everything about the views. It is used by the "View::class"
- * ---------------------------------------------------------------------------------------------------------------------
+ * This config file can be used to customize everything about the views. It is used by the "View::class".
+ *
+ * @see \MAKS\Velox\Frontend\View
  */
 
 
