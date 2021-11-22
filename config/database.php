@@ -1,9 +1,9 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This config file contains database credentials, it is used by the "Database::class".
- * ---------------------------------------------------------------------------------------------------------------------
+ * This config file contains database credentials, it is used by the "Database::class".
+ *
+ * @see \MAKS\Velox\Backend\Database
  */
 
 
