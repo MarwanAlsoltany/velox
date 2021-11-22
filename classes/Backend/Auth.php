@@ -50,6 +50,7 @@ use MAKS\Velox\Frontend\View;
  * Auth::basic(['username' => 'password']);
  * ```
  *
+ * @package Velox\Backend
  * @since 1.4.0
  * @api
  */
@@ -309,7 +310,7 @@ class Auth
      *
      * @return void
      *
-     * @codeCoverageIgnore
+     * @codeCoverageIgnore Can't test methods that send headers.
      */
     public static function basic(array $logins = [])
     {
@@ -344,7 +345,7 @@ class Auth
      *
      * @return void
      *
-     * @codeCoverageIgnore
+     * @codeCoverageIgnore Can't test methods that send headers.
      */
     public static function fail(): void
     {
