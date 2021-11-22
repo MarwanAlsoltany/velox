@@ -82,6 +82,19 @@ if (!function_exists('config')) {
 
 
 
+if (!function_exists('auth')) {
+    /**
+     * Returns an instance of the `Auth` class.
+     *
+     * @return \MAKS\Velox\Backend\Auth
+     */
+    function auth() {
+        return app()->auth;
+    }
+}
+
+
+
 if (!function_exists('event')) {
     /**
      * Returns an instance of the `Event` class.
