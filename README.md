@@ -20,6 +20,7 @@ The fastest way to build simple websites using PHP!
 [![Total Downloads][downloads-icon]][downloads-href]
 [![License][license-icon]][license-href]
 [![Maintenance][maintenance-icon]][maintenance-href]
+[![Documentation][documentation-icon]][documentation-href]
 [![Scrutinizer Build Status][scrutinizer-icon]][scrutinizer-href]
 [![Scrutinizer Code Coverage][scrutinizer-coverage-icon]][scrutinizer-coverage-href]
 [![Scrutinizer Code Quality][scrutinizer-quality-icon]][scrutinizer-quality-href]
@@ -48,7 +49,8 @@ The fastest way to build simple websites using PHP!
 [MVC](#mvc)<br/>
 [Templating](#templating)<br/>
 [Authentication](#authentication)<br/>
-[Changelog](./CHANGELOG.md)
+[Changelog](./CHANGELOG.md)<br/>
+[Documentation](https://marwanalsoltany.com/velox)
 
 </p>
 </details>
@@ -64,6 +66,8 @@ The fastest way to build simple websites using PHP!
 </a>
 
 Check out the [Demo](https://velox.marwanalsoltany.repl.co) or play with the [REPL](https://replit.com/@MarwanAlsoltany/velox).
+
+Do you feel like reading? Check out the full API on the documentation website on [`marwanalsoltany.com/velox`](https://marwanalsoltany.com/velox).
 
 </div>
 
@@ -102,7 +106,7 @@ git clone https://github.com/MarwanAlsoltany/velox.git my-velox-app
 
 Download [VELOX](https://github.com/MarwanAlsoltany/velox/releases) as a `.zip` or `.tar.gz` and extract it in your server web root directory.
 
-![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *If you want to test out VELOX quickly and you don't have any web server available, use whatever installing method and run `php bin/app-serve` from inside VELOX directory. This command will spin up a development web server on `localhost:8000` (Note that you need to have atleast PHP installed on your system).*
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *If you want to test out VELOX quickly and you don't have any web server available, use whatever installing method and run `php bin/app-serve` from inside VELOX directory. This command will spin up a development web server on `localhost:8000` (Note that you need to have at least PHP installed on your system).*
 
 
 ---
@@ -501,6 +505,8 @@ The following table lists all available tags and what they do:
 Starting from `v1.4.0` VELOX comes shipped with a simple built-in authentication system. This system is very simple and easy to use.
 
 ```php
+<?php
+
 use MAKS\Velox\Backend\Auth;
 
 // instantiate the Auth class
@@ -558,6 +564,7 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [downloads-icon]: https://img.shields.io/packagist/dt/marwanalsoltany/velox.svg?style=flat&logo=packagist
 [license-icon]: https://img.shields.io/badge/license-MIT-red.svg?style=flat&logo=github
 [maintenance-icon]: https://img.shields.io/badge/maintained-yes-orange.svg?style=flat&logo=github
+[documentation-icon]: https://img.shields.io/website-up-down-blue-red/http/marwanalsoltany.com/velox.svg
 [scrutinizer-icon]: https://img.shields.io/scrutinizer/build/g/MarwanAlsoltany/velox/master?style=flat&logo=scrutinizer
 [scrutinizer-coverage-icon]: https://img.shields.io/scrutinizer/coverage/g/MarwanAlsoltany/velox.svg?style=flat&logo=scrutinizer
 [scrutinizer-quality-icon]: https://img.shields.io/scrutinizer/g/MarwanAlsoltany/velox.svg?style=flat&logo=scrutinizer
@@ -573,6 +580,7 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [downloads-href]: https://packagist.org/packages/marwanalsoltany/velox/stats
 [license-href]: ./LICENSE
 [maintenance-href]: https://github.com/MarwanAlsoltany/velox/graphs/commit-activity
+[documentation-href]: http://marwanalsoltany.com/velox
 [scrutinizer-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/build-status/master
 [scrutinizer-coverage-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/?branch=master
 [scrutinizer-quality-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/?branch=maste
