@@ -11,6 +11,7 @@
 
 
 class App extends \MAKS\Velox\App {}
+class Auth extends \MAKS\Velox\Backend\Auth {}
 class Event extends \MAKS\Velox\Backend\Event {}
 class Config extends \MAKS\Velox\Backend\Config {}
 class Router extends \MAKS\Velox\Backend\Router {}
