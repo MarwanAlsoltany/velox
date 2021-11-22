@@ -17,6 +17,7 @@ use MAKS\Velox\Backend\Router;
 use MAKS\Velox\Backend\Globals;
 use MAKS\Velox\Backend\Session;
 use MAKS\Velox\Backend\Database;
+use MAKS\Velox\Backend\Auth;
 use MAKS\Velox\Frontend\Data;
 use MAKS\Velox\Frontend\View;
 use MAKS\Velox\Frontend\HTML;
@@ -27,6 +28,7 @@ use MAKS\Velox\Helper\Misc;
 /**
  * A class that serves as a basic service-container for VELOX.
  * This class has most VELOX classes as public properties:
+ * - `$auth`: Instance of the `Auth` class.
  * - `$event`: Instance of the `Event` class.
  * - `$config`: Instance of the `Config` class.
  * - `$router`: Instance of the `Router` class.
@@ -69,6 +71,8 @@ class App
 
     public Database $database;
 
+    public Auth $auth;
+
     public Data $data;
 
     public View $view;
@@ -97,6 +101,7 @@ class App
         $this->globals  = new Globals();
         $this->session  = new Session();
         $this->database = Database::instance();
+        $this->auth     = Auth::instance();
         $this->data     = new Data();
         $this->view     = new View();
         $this->html     = new HTML();
@@ -262,7 +267,7 @@ class App
     /**
      * Aborts the current request and sends a response with the specified HTTP status code, title, and message.
      * An HTML page will be rendered with the specified title and message.
-     * The title for the most common HTTP status codes (`200`, `403`, `404`, `405`, `500`, `503`) is already configured.
+     * The title for the most common HTTP status codes (`200`, `401`, `403`, `404`, `405`, `500`, `503`) is already configured.
      *
      * @param int $code The HTTP status code.
      * @param string|null $title [optional] The title of the HTML page.
@@ -276,6 +281,7 @@ class App
     {
         $http = [
             200 => 'OK',
+            401 => 'Unauthorized',
             403 => 'Forbidden',
             404 => 'Not Found',
             405 => 'Not Allowed',
