@@ -17,6 +17,12 @@
 // --------
 // * Check out "/storage/logs/events.log" to see the result.
 
+Event::listen(\MAKS\Velox\Backend\Auth::ON_REGISTER, function ($user) {
+    App::log('A new user with username "{username}" has registered', [
+        'username' => $user->getUsername()
+    ], 'events');
+});
+
 Event::listen(\MAKS\Velox\Backend\Config::ON_LOAD, function (&$config) {
     App::log('The config was loaded', null, 'events');
 
@@ -55,6 +61,11 @@ Event::listen(\MAKS\Velox\Frontend\View::BEFORE_RENDER, function (&$variables) {
 
 // Available events
 // ----------------
+// * Auth::ON_REGISTER
+// * Auth::AFTER_REGISTER
+// * Auth::ON_UNREGISTER
+// * Auth::ON_LOGIN
+// * Auth::ON_LOGOUT
 // * Config::ON_LOAD
 // * Config::ON_CACHE
 // * Config::ON_CLEAR_CACHE
