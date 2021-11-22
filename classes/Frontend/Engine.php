@@ -497,7 +497,7 @@ class Engine
 
         return preg_replace(
             static::REGEX['print.unescaped'],
-            $comment . '<?php echo $1; ?>',
+            $comment . '<?php echo (string)($1); ?>',
             $code
         );
     }
@@ -515,7 +515,7 @@ class Engine
 
         return preg_replace(
             static::REGEX['print'],
-            $comment . '<?php echo htmlentities((string)$1, ENT_QUOTES, \'UTF-8\'); ?>',
+            $comment . '<?php echo htmlentities((string)($1), ENT_QUOTES, \'UTF-8\'); ?>',
             $code
         );
     }
