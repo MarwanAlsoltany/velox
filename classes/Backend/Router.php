@@ -53,19 +53,20 @@ use MAKS\Velox\Frontend\View;
  * Router::start();
  * ```
  *
- * @method static self get(string $expression, callable $handler)
- * @method static self head(string $expression, callable $handler)
- * @method static self post(string $expression, callable $handler)
- * @method static self put(string $expression, callable $handler)
- * @method static self patch(string $expression, callable $handler)
- * @method static self delete(string $expression, callable $handler)
- * @method static self connect(string $expression, callable $handler)
- * @method static self options(string $expression, callable $handler)
- * @method static self trace(string $expression, callable $handler)
- * @method static self any(string $expression, callable $handler)
- *
+ * @package Velox\Backend
  * @since 1.0.0
  * @api
+ *
+ * @method static self get(string $expression, callable $handler) Handles a `GET` request method.
+ * @method static self head(string $expression, callable $handler) Handles a `HEAD` request method.
+ * @method static self post(string $expression, callable $handler) Handles a `POST` request method.
+ * @method static self put(string $expression, callable $handler) Handles a `PUT` request method.
+ * @method static self patch(string $expression, callable $handler) Handles a `PATCH` request method.
+ * @method static self delete(string $expression, callable $handler) Handles a `DELETE` request method.
+ * @method static self connect(string $expression, callable $handler) Handles a `CONNECT` request method.
+ * @method static self options(string $expression, callable $handler) Handles a `OPTIONS` request method.
+ * @method static self trace(string $expression, callable $handler) Handles a `TRACE` request method.
+ * @method static self any(string $expression, callable $handler) Handles any request method.
  */
 class Router
 {
@@ -291,6 +292,8 @@ class Router
      * @param callable $handler The handler to use. It will be passed the current `$path` and the current `$method`.
      *
      * @return static
+     *
+     * @deprecated Since `v1.4.1`, will be removed in `v1.5.0`. Use `{global.errorPages.404}` config value instead.
      */
     public static function handleRouteNotFound(callable $handler)
     {
@@ -305,6 +308,8 @@ class Router
      * @param callable $handler The handler to use. It will be passed the current `$path`.
      *
      * @return static
+     *
+     * @deprecated Since `v1.4.1`, will be removed in `v1.5.0`. Use `{global.errorPages.405}` config value instead.
      */
     public static function handleMethodNotAllowed(callable $handler)
     {
