@@ -66,6 +66,8 @@ if (!function_exists('config')) {
      * @param mixed $value [optional] The value to set.
      *
      * @return mixed The requested value or null.
+     *
+     * @since 1.0.0
      */
     function config() {
         if (func_num_args() == 0) {
@@ -82,24 +84,13 @@ if (!function_exists('config')) {
 
 
 
-if (!function_exists('auth')) {
-    /**
-     * Returns an instance of the `Auth` class.
-     *
-     * @return \MAKS\Velox\Backend\Auth
-     */
-    function auth() {
-        return app()->auth;
-    }
-}
-
-
-
 if (!function_exists('event')) {
     /**
      * Returns an instance of the `Event` class.
      *
      * @return \MAKS\Velox\Backend\Event
+     *
+     * @since 1.2.0
      */
     function event() {
         return app()->event;
@@ -113,6 +104,8 @@ if (!function_exists('router')) {
      * Returns an instance of the `Router` class.
      *
      * @return \MAKS\Velox\Backend\Router
+     *
+     * @since 1.0.0
      */
     function router() {
         return app()->router;
@@ -128,6 +121,8 @@ if (!function_exists('handle')) {
      * @param string|string[] $method [optional] Either a string or an array of the allowed method.
      *
      * @return static
+     *
+     * @since 1.0.0
      */
     function handle() {
         return app()->router->handle(...func_get_args());
@@ -142,6 +137,8 @@ if (!function_exists('redirect')) {
      * @param string $to A route like `/page` or a URL like `http://domain.tld`.
      *
      * @return void
+     *
+     * @since 1.0.0
      */
     function redirect() {
         return app()->router->redirect(...func_get_args());
@@ -156,6 +153,8 @@ if (!function_exists('forward')) {
      * @param string $to A route like `/page`.
      *
      * @return void
+     *
+     * @since 1.0.0
      */
     function forward() {
         return app()->router->forward(...func_get_args());
@@ -169,6 +168,8 @@ if (!function_exists('globals')) {
      * Returns an instance of the `Globals` class.
      *
      * @return \MAKS\Velox\Backend\Globals
+     *
+     * @since 1.0.0
      */
     function globals() {
         return app()->globals;
@@ -182,6 +183,8 @@ if (!function_exists('session')) {
      * Returns an instance of the `Session` class.
      *
      * @return \MAKS\Velox\Backend\Session
+     *
+     * @since 1.3.0
      */
     function session() {
         return app()->session;
@@ -192,9 +195,11 @@ if (!function_exists('flash')) {
     /**
      * Returns an instance of the `Flash` class.
      *
-     * @see `\MAKS\Velox\Backend\Session::flash()`
+     * @see \MAKS\Velox\Backend\Session::flash()
      *
      * @return object
+     *
+     * @since 1.3.0
      */
     function flash() {
         return app()->session->flash();
@@ -205,9 +210,11 @@ if (!function_exists('csrf')) {
     /**
      * Returns an instance of the `CSRF` class.
      *
-     * @see `\MAKS\Velox\Backend\Session::csrf()`
+     * @see \MAKS\Velox\Backend\Session::csrf()
      *
      * @return object
+     *
+     * @since 1.3.0
      */
     function csrf() {
         return app()->session->csrf();
@@ -221,9 +228,26 @@ if (!function_exists('database')) {
      * Returns an instance of the `Database` class.
      *
      * @return \MAKS\Velox\Backend\Database
+     *
+     * @since 1.3.0
      */
     function database() {
         return app()->database;
+    }
+}
+
+
+
+if (!function_exists('auth')) {
+    /**
+     * Returns an instance of the `Auth` class.
+     *
+     * @return \MAKS\Velox\Backend\Auth
+     *
+     * @since 1.4.0
+     */
+    function auth() {
+        return app()->auth;
     }
 }
 
@@ -234,6 +258,8 @@ if (!function_exists('view')) {
      * Returns an instance of the `View` class.
      *
      * @return \MAKS\Velox\Frontend\View
+     *
+     * @since 1.0.0
      */
     function view() {
         return app()->view;
@@ -249,6 +275,8 @@ if (!function_exists('render')) {
      * @param string|null $layout [optional] The name of the Layout to use.
      *
      * @return string
+     *
+     * @since 1.0.0
      */
     function render() {
         return app()->view->render(...func_get_args());
@@ -263,6 +291,8 @@ if (!function_exists('render_layout')) {
      * @param array|null $variables [optional] An associative array of the variables to pass.
      *
      * @return string
+     *
+     * @since 1.0.0
      */
     function render_layout() {
         return app()->view->layout(...func_get_args());
@@ -277,6 +307,8 @@ if (!function_exists('render_page')) {
      * @param array|null $variables [optional] An associative array of the variables to pass.
      *
      * @return string
+     *
+     * @since 1.0.0
      */
     function render_page() {
         return app()->view->page(...func_get_args());
@@ -291,6 +323,8 @@ if (!function_exists('render_partial')) {
      * @param array|null $variables [optional] An associative array of the variables to pass.
      *
      * @return string
+     *
+     * @since 1.0.0
      */
     function render_partial() {
         return app()->view->partial(...func_get_args());
@@ -306,6 +340,8 @@ if (!function_exists('section_push')) {
      * @param string $content The content of the section.
      *
      * @return void
+     *
+     * @since 1.0.0
      */
     function section_push() {
         return app()->view->section(...func_get_args());
@@ -319,6 +355,8 @@ if (!function_exists('section_reset')) {
      * @param string|null $name The name of the section.
      *
      * @return void
+     *
+     * @since 1.0.0
      */
     function section_reset() {
         return app()->view->sectionReset(...func_get_args());
@@ -333,6 +371,8 @@ if (!function_exists('section_start')) {
      * @param string $name The name of the section.
      *
      * @return void
+     *
+     * @since 1.0.0
      */
     function section_start() {
         return app()->view->sectionStart(...func_get_args());
@@ -347,6 +387,8 @@ if (!function_exists('section_end')) {
      * @return void
      *
      * @throws \Exception If no section has been started.
+     *
+     * @since 1.0.0
      */
     function section_end() {
         return View::sectionEnd();
@@ -361,6 +403,8 @@ if (!function_exists('section_yield')) {
      * @param string $default [optional] The default value to yield if the section has no content or is an empty string.
      *
      * @return string
+     *
+     * @since 1.0.0
      */
     function section_yield() {
         return app()->view->yield(...func_get_args());
@@ -376,6 +420,8 @@ if (!function_exists('include_file')) {
      * @param array|null $variables [optional] An associative array of the variables to pass.
      *
      * @return void
+     *
+     * @since 1.0.0
      */
     function include_file() {
         return app()->view->include(...func_get_args());
@@ -389,6 +435,8 @@ if (!function_exists('data')) {
      * Returns an instance of the `Data` class.
      *
      * @return \MAKS\Velox\Frontend\Data
+     *
+     * @since 1.0.0
      */
     function data() {
         return app()->data;
@@ -402,6 +450,8 @@ if (!function_exists('data_has')) {
      * @param string $key The dotted key representation.
      *
      * @return bool
+     *
+     * @since 1.0.0
      */
     function data_has() {
         return app()->data->has(...func_get_args());
@@ -416,6 +466,8 @@ if (!function_exists('data_get')) {
      * @param mixed $default [optional] The default fallback value.
      *
      * @return mixed The requested value or null.
+     *
+     * @since 1.0.0
      */
     function data_get() {
         return app()->data->get(...func_get_args());
@@ -430,6 +482,8 @@ if (!function_exists('data_set')) {
      * @param mixed $value The value to set.
      *
      * @return void
+     *
+     * @since 1.0.0
      */
     function data_set() {
         return app()->data->set(...func_get_args());
@@ -443,6 +497,8 @@ if (!function_exists('html')) {
      * Returns an instance of the `HTML` class.
      *
      * @return \MAKS\Velox\Frontend\HTML
+     *
+     * @since 1.0.0
      */
     function html() {
         return app()->html;
@@ -456,6 +512,8 @@ if (!function_exists('path')) {
      * Returns an instance of the `Path` class.
      *
      * @return \MAKS\Velox\Frontend\Path
+     *
+     * @since 1.0.0
      */
     function path() {
         return app()->path;
@@ -469,6 +527,8 @@ if (!function_exists('app_path_current')) {
      * @param string|null $compareTo [optional] Some path on the server.
      *
      * @return string|bool If null is passed, the current path as string. Otherwise the result of comparing the current path with the passed parameter as boolean.
+     *
+     * @since 1.0.0
      */
     function app_path_current() {
         return app()->path->current(...func_get_args());
@@ -482,6 +542,8 @@ if (!function_exists('app_url_current')) {
      * @param string|null $compareTo [optional] Some URL on the server.
      *
      * @return string|bool If null is passed, the current URL as string. Otherwise the result of comparing the current URL with the passed parameter as boolean.
+     *
+     * @since 1.0.0
      */
     function app_url_current() {
         return app()->path->currentUrl(...func_get_args());
@@ -495,6 +557,8 @@ if (!function_exists('app_path')) {
      * @param string [optional] $path The path from app root.
      *
      * @return string An absolute path on the server starting from app root.
+     *
+     * @since 1.0.0
      */
     function app_path() {
         return app()->path->resolve(...func_get_args());
@@ -508,6 +572,8 @@ if (!function_exists('app_url')) {
      * @param string [optional] $path The path from app root.
      *
      * @return string An absolute path on the server (public URL) starting from app root.
+     *
+     * @since 1.0.0
      */
     function app_url() {
         return app()->path->resolveUrl(...func_get_args());
@@ -522,6 +588,8 @@ if (!function_exists('theme_path')) {
      * @param string [optional] $prefix The prefix to prefix the returned path with (base URL for example).
      *
      * @return string A relative path starting from app root to the root of the active theme directory.
+     *
+     * @since 1.0.0
      */
     function theme_path() {
         return app()->path->resolveFromTheme(...func_get_args());
@@ -535,6 +603,8 @@ if (!function_exists('theme_url')) {
      * @param string [optional] $path The path from theme root.
      *
      * @return string An absolute path on the server (public URL) starting from active theme root.
+     *
+     * @since 1.0.0
      */
     function theme_url() {
         return app()->path->resolveUrlFromTheme(...func_get_args());
@@ -549,6 +619,8 @@ if (!function_exists('assets_path')) {
      * @param string [optional] $prefix The prefix to prefix the returned path with (base URL for example).
      *
      * @return string A relative path starting from app root to the root of the assets directory of the active theme directory.
+     *
+     * @since 1.0.0
      */
     function assets_path() {
         return app()->path->resolveFromAssets(...func_get_args());
@@ -562,6 +634,8 @@ if (!function_exists('assets_url')) {
      * @param string [optional] $path The path from theme root assets root.
      *
      * @return string An absolute path on the server (public URL) starting from active theme root.
+     *
+     * @since 1.0.0
      */
     function assets_url() {
         return app()->path->resolveUrlFromAssets(...func_get_args());
@@ -577,6 +651,8 @@ if (!function_exists('dd')) {
      * @param mixed ...$variable
      *
      * @return void The result will simply get echoed.
+     *
+     * @since 1.0.0
      */
     function dd(...$variable) {
         app()->dumper->dd(...func_get_args());
@@ -590,6 +666,8 @@ if (!function_exists('dump')) {
      * @param mixed ...$variable
      *
      * @return void The result will simply get echoed.
+     *
+     * @since 1.0.0
      */
     function dump(...$variable) {
         app()->dumper->dump(...func_get_args());
@@ -603,6 +681,8 @@ if (!function_exists('dump_exception')) {
      * @param \Throwable $exception
      *
      * @return void The result will be echoed as HTML page or a string representation of the exception if the interface is CLI.
+     *
+     * @since 1.0.0
      */
     function dump_exception(Throwable $exception) {
         app()->dumper->dumpException(...func_get_args());
