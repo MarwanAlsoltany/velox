@@ -2,7 +2,7 @@
 
 /**
  * ---------------------------------------------------------------------------------------------------------------------
- *  This config file contains auth, it is used by the "Auth::class".
+ *  This config file contains authentication configuration, it is used by the "Auth::class".
  * ---------------------------------------------------------------------------------------------------------------------
  */
 
@@ -18,7 +18,7 @@ return [
         'model'   => null,
 
         // The timeout in seconds before the user is automatically logged out.
-        'timeout' => (12 * 60 * 60), // 12 hours
+        'timeout' => (1 * 60 * 60), // 1 hour
     ],
 
     // Password hashing config.
