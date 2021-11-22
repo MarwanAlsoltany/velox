@@ -1,0 +1,61 @@
+{! @extends 'velox/pages/users/index' !}
+
+
+{! @block content !}
+    <div class="columns is-centered">
+        <div class="column is-two-thirds-desktop">
+            <div class="content">
+                <h1>Create a new Account</h1>
+                <p>Already have an account? <a href="{{ Path::resolveUrl('login') }}">Login</a> to your account.</p>
+                <hr>
+            </div>
+            <form action="{{ Path::resolveUrl('register') }}" method="POST">
+                <input type="hidden" name="_method" value="POST">
+                {{{ Session::csrf() }}}
+                <div class="field">
+                    <label class="label">Username</label>
+                    <div class="control">
+                        <input
+                            class="input"
+                            type="text"
+                            name="username"
+                            value="{{ Globals::getPost('username') }}"
+                            placeholder="Username"
+                            minlength="3"
+                            pattern="[A-Za-z0-9-_.]+"
+                            onkeyup="this.value = this.value.replace(/([^A-Za-z0-9\-\_\.])+/, '')"
+                            required
+                        >
+                        <small class="has-text-grey-light">
+                            Username can contain
+                            <code>letters</code>,
+                            <code>numbers</code>
+                            and one of the following characters
+                            <code>.</code>
+                            <code>-</code>
+                            <code>_</code>
+                        </small>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input class="input" type="password" name="password" placeholder="******" required>
+                    </div>
+                </div>
+                <hr>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <input class="button is-primary" type="submit" value="Register">
+                    </div>
+                    <div class="control">
+                        <input class="button is-warning is-light" type="reset">
+                    </div>
+                    <div class="control">
+                        <a class="button is-light" href="javascript:window.history.back();">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{! @endblock !}

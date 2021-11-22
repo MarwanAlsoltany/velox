@@ -1,0 +1,43 @@
+{! Data::set('page.title', $title ?? 'Users') !}
+
+<main class="main">
+    {{{ View::partial('hero', [
+        'title' => 'Users',
+        'subtitle' => 'Auth Demo',
+        'class' => 'is-small is-primary is-bold'
+    ]) }}}
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    {! @block flashMessages !}
+                        <div class="block flash-messages">
+                            {{{ Session::flash() }}}
+                        </div>
+                    {! @endblock!}
+                    {! @block(flashMessages) !}
+
+                    {! @block content !}
+                        <div class="container">
+                            <div class="columns is-centered">
+                                <div class="column is-6-tablet is-5-desktop">
+                                    <div class="content">
+                                        <h1>Auth</h1>
+                                        <p>You are currently logged in as <span class="tag is-black">{{ $user->username }}</span></p>
+                                        <p>You won't see this page unless you are authenticated.</p>
+                                        <p>Try logging out and visiting the following URL: <code onclick="navigator.clipboard.writeText(this.innerText)">{{ Path::currentUrl() }}</code>.</p>
+                                        <p><a class="button is-primary" href="/logout">Log out</a></p>
+                                        <hr>
+                                        <p>Would you like to delete your account?</p>
+                                        <p><a class="button is-danger" href="/unregister">Unregister</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {! @endblock !}
+                    {! @block(content) !}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

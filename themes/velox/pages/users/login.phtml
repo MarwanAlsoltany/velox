@@ -1,0 +1,44 @@
+{! @extends 'velox/pages/users/index' !}
+
+
+{! @block content !}
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-6-tablet is-5-desktop">
+                <div class="content">
+                    <h1>{{ $title }}</h1>
+                    <p>Don't have an account? <a href="{{ Path::resolveUrl('register') }}">Register</a> a new one.</p>
+                </div>
+                <form class="box" action="{{ Path::resolveUrl('login') }}" method="POST">
+                    <input type="hidden" name="_method" value="POST">
+                    <input type="hidden" name="_token" value="{{ Session::csrf()->token() }}">
+                    <div class="field">
+                        <label for="" class="label">Username</label>
+                        <div class="control">
+                            <input
+                                class="input"
+                                type="text"
+                                name="username"
+                                value="{{ Globals::getPost('username') }}"
+                                placeholder="Username"
+                                minlength="3"
+                                pattern="[A-Za-z0-9-_.]+"
+                                onkeyup="this.value = this.value.replace(/([^A-Za-z0-9\-\_\.])+/, '')"
+                                required
+                            >
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="" class="label">Password</label>
+                        <div class="control">
+                            <input class="input" type="password" name="password" placeholder="*******" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <input class="button is-primary" type="submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{! @endblock !}
