@@ -33,6 +33,7 @@ use MAKS\Velox\Helper\Misc;
  * Data::set('someNewVar.someKey', 'someValue');
  * ```
  *
+ * @package Velox\Frontend
  * @since 1.0.0
  * @api
  */
