@@ -1,10 +1,12 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This config file can be used to edit/extend theme configuration.
- *  This file is mainly used by the "View::class" and the "Path::class".
- * ---------------------------------------------------------------------------------------------------------------------
+ * This config file can be used to edit/extend theme configuration.
+ *
+ * This file is mainly used by the "View::class" and the "Path::class".
+ *
+ * @see \MAKS\Velox\Frontend\View
+ * @see \MAKS\Velox\Frontend\Path
  */
 
 
