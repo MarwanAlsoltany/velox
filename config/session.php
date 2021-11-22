@@ -1,9 +1,9 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This config file contains session configuration, it is used by the "Session::class".
- * ---------------------------------------------------------------------------------------------------------------------
+ * This config file contains session configuration, it is used by the "Session::class".
+ *
+ * @see \MAKS\Velox\Backend\Session
  */
 
 
