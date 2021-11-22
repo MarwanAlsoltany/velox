@@ -1,9 +1,9 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This config file can be used to override "Router::class" default parameters.
- * ---------------------------------------------------------------------------------------------------------------------
+ * This config file can be used to override "Router::class" default parameters.
+ *
+ * @see \MAKS\Velox\Backend\Router
  */
 
 
