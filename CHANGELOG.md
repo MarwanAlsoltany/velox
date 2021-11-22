@@ -4,14 +4,63 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.4.0] - 2021-11-22](https://github.com/MarwanAlsoltany/velox/compare/v1.3.3...v1.4.0)
+
+- Add `Auth` class.
+- Add `UsersController` class.
+- Update `App` class:
+    - Add `instance()` method.
+    - Add `$auth` property.
+    - Update `abort()` method.
+- Update `Controller` class:
+    - Swap class properties with calls to the app class instance.
+    - Remove hard coded dependencies.
+    - Update `doRegisterRoutes()` method to allow for registering middlewares via annotations.
+- Update `Router` class:
+    - Add `sort()` method.
+    - Update `start()` method to sort routes when starting the router (middlewares now have priority over handlers).
+    - Update `getRouteRegex()` method to add support for the `*` wildcard in route expression.
+    - Update `redirect()` method to allow for setting the HTTP status code.
+- Update `Engine` class:
+    - Update `printVariables()` and `printUnescapedVariables()` methods to explicitly cast expressions to strings (`$varA ?? $varB` => `(string)($varA ?? $varB)`).
+- Update `Dumper` class:
+    - Update `dump()` method to fix some styling issues with dump block.
+- Update tests:
+    - Add `AuthTest` class.
+    - Update `AppTest` class.
+    - Update `ControllerTest` class.
+    - Update `EngineTest` class.
+- Update `loader.php`:
+    - Add `Auth` class to the list of aliased classes.
+- Update `intellisense.php`:
+    - Add alias for the `Auth` class.
+- Update `helpers.php`:
+    - Update `app()` function.
+    - Add `auth()` function.
+- Update `global.php` config file:
+    - Update `errorPages` config entry.
+- Add `auth.php` config file.
+- Update `routes/web.php`:
+    - Add instantiation for `UsersController`.
+    - Add `401` error page.
+- Update `system/events.php`:
+    - Add `Auth::ON_REGISTER` event listener.
+- Update `velox` theme:
+    - Add `401.phtml`.
+    - Add `UsersController` views.
+    - Update `persons/edit` view.
+    - Update navigation partial.
+
+<br />
+
 ## [[1.3.3] - 2021-11-14](https://github.com/MarwanAlsoltany/velox/compare/v1.3.2...v1.3.3)
 
 - Update `App` class:
     - Update `terminate()` method to allow for ignoring the shutdown function.
 - Update `Dumper` class:
-    - Swap usage of `exit` with `App::terminate()`.
+    - Swap usage of `exit` with `App::terminate()` for consistency.
 - Update `Model` class:
-    - Add `findBy*()` magic method.
+    - Add `findBy*()` magic method where `*` is an attribute name in PascalCase.
 - Update `loader.php`:
     - Update shutdown function.
 
