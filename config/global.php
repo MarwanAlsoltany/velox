@@ -37,6 +37,8 @@ return [
     'errorPages' => [
         // A view file for "500 Internal Server Error" responses, if an uncaught exception was thrown in production environment.
         '500' => 'error/500',
+        // A view file for "401 Unauthorized" responses, if a unauthenticated user requested a page that requires authentication.
+        '401' => 'error/401',
         // A view file for "403 Forbidden" responses, if request CSRF token is invalid.
         '403' => 'error/403',
         // A view file for "404 Not Found" responses, if requested route was not found.
