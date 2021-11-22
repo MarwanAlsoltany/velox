@@ -36,6 +36,7 @@ use MAKS\Velox\Helper\Misc;
  * Config::clearCache();
  * ```
  *
+ * @package Velox\Backend
  * @since 1.0.0
  * @api
  */
@@ -138,7 +139,7 @@ class Config
     }
 
     /**
-     * Parses the configuration to replace reference of some "{filename.config.varName}" with actual value from the passed configuration.
+     * Parses the configuration to replace reference of some `{filename.config.varName}` with actual value from the passed configuration.
      *
      * @param array $config
      *
