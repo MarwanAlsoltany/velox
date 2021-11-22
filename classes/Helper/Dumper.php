@@ -91,24 +91,31 @@ class Dumper
         $trace = self::getValidCallerTrace();
 
         $blocks = [
+            'wrapper' => $isCli ? '%s' : HTML::div('<style>.dump * {background:transparent;padding:0;}</style><div class="dump">%s</div>', [
+                'id' => 'dump'
+            ]),
             'traceBlock' => $isCli ? "\n// \e[33;1mTRACE:\e[0m \e[34;46m[{$trace}]\e[0m \n\n" : HTML::div($trace, [
                 'style' => "background:#fff;color:{$accentColor};font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;padding:4px 8px;margin-bottom:18px;"
             ]),
             'dumpBlock' => $isCli ? '%s' : HTML::div('%s', [
-                'style' => "display:table;background:{$contrastColor};color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:18px;padding:18px;margin:8px;"
+                'style' => "display:table;background:{$contrastColor};color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:18px;padding:18px;margin-bottom:8px;"
             ]),
             'timeBlock' => $isCli ? "\n\n// \e[36mSTART_TIME\e[0m + \e[35m%.2f\e[0mms \n\n\n" : HTML::div('START_TIME + %.2fms', [
-                'style' => "display:table;background:{$accentColor};color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:12px;font-weight:bold;padding:12px;margin:8px;"
+                'style' => "display:table;background:{$accentColor};color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:12px;font-weight:bold;padding:12px;margin-bottom:8px;"
             ]),
         ];
 
+        $html = '';
+
         foreach ($variable as $dump) {
             $highlightedDump = self::exportExpressionWithSyntaxHighlighting($dump, $blocks['traceBlock']);
-            printf($blocks['dumpBlock'], $highlightedDump);
+            $html .= sprintf($blocks['dumpBlock'], $highlightedDump);
         }
 
         $time = (microtime(true) - START_TIME) * 1000;
-        printf($blocks['timeBlock'], $time);
+        $html .= sprintf($blocks['timeBlock'], $time);
+
+        printf($blocks['wrapper'], $html);
     }
 
     /**
