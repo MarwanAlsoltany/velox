@@ -1,14 +1,13 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This file should be loaded in application entry point ("../index.php" for example).
- * ---------------------------------------------------------------------------------------------------------------------
- *  It takes care of:
- *      (1) Loading VELOX classes "../classes/" and "../app/".
- *      (2) Loading VELOX functions "../functions/".
- *      (3) Loading Composer "../vendor/" if available.
- *      (4) Loading additional paths defined in "./additional.php".
+ * This file should be loaded in application entry point ("../index.php" for example).
+ *
+ * It takes care of:
+ *  - Loading VELOX classes "../classes/" and "../app/".
+ *  - Loading VELOX functions "../functions/".
+ *  - Loading Composer "../vendor/" if available.
+ *  - Loading additional paths defined in "./additional.php".
  * ---------------------------------------------------------------------------------------------------------------------
  */
 
