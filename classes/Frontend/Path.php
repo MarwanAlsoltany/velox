@@ -44,14 +44,15 @@ use MAKS\Velox\Backend\Globals;
  * $url = Path::resolveUrlFromAssets('some/file.ext');
  * ```
  *
+ * @package Velox\Frontend
+ * @since 1.0.0
+ * @api
+ *
  * @method static string url(string $path = '/')
  * @method static string fromTheme(string $path = '/', string $prefix = '')
  * @method static string urlFromTheme(string $path = '/')
  * @method static string fromAssets(string $path = '/', string $prefix = '')
  * @method static string urlFromAssets(string $path = '/')
- *
- * @since 1.0.0
- * @api
  */
 final class Path
 {
@@ -258,7 +259,7 @@ final class Path
     }
 
     /**
-     * Allows static methods handled by self::__callStatic() to be accessible via object operator `->`.
+     * Allows static methods handled by `self::__callStatic()` to be accessible via object operator `->`.
      */
     public function __call(string $method, array $arguments)
     {
