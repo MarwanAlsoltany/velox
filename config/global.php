@@ -1,9 +1,7 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This config file contains some global variables that are used by almost all classes (app-wide config).
- * ---------------------------------------------------------------------------------------------------------------------
+ * This config file contains some global variables that are used by almost all classes (app-wide config).
  */
 
 
