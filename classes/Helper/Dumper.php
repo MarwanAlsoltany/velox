@@ -16,6 +16,9 @@ use MAKS\Velox\Frontend\HTML;
 
 /**
  * A class that dumps variables and exception in a nice formatting.
+ *
+ * @package Velox\Helper
+ * @since 1.0.0
  */
 class Dumper
 {
