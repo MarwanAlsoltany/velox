@@ -1,11 +1,13 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This config file can be used to provide some additional reuseable data that will be injected in the "Data::class".
- *  This data gets moved from the "Config::class" to the "Data::class" after the first call to some method on it.
- *  This file can be replaced with a directory with the same name and all files inside it will be loaded recursively.
- * ---------------------------------------------------------------------------------------------------------------------
+ * This config file can be used to provide some additional reuseable data that will be injected in the "Data::class".
+ *
+ * This data will be referenced in the "Data::class" after the first call to some method on it.
+ *
+ * This file can be replaced with a directory with the same name and all files inside it will be loaded recursively.
+ *
+ * @see \MAKS\Velox\Frontend\Data
  */
 
 
