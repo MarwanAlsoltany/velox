@@ -1,9 +1,7 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This config file is used with VELOX commands. Here you can enable/disable the commands or change their arguments.
- * ---------------------------------------------------------------------------------------------------------------------
+ * This config file is used with VELOX commands. Here you can enable/disable the commands or change their arguments.
  */
 
 
