@@ -37,6 +37,7 @@ use MAKS\Velox\Helper\Misc;
  * Session::destroy();
  * ```
  *
+ * @package Velox\Backend
  * @since 1.3.0
  * @api
  */
@@ -282,7 +283,7 @@ final class Session
      * - `html(): string`: Returns an HTML input element containing a CSRF token after storing it in the session.
      * The `html()` method will be called automatically if the object is casted to a string.
      *
-     * @param string $name [optional] The name of the CSRF token. Default to "{session.csrf.name}" configuration value.
+     * @param string $name [optional] The name of the CSRF token. Default to `{session.csrf.name}` configuration value.
      * If a token name other than the default is specified, validation of this token has to be implemented manually.
      *
      * @return object
