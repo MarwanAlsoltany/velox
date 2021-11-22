@@ -25,7 +25,9 @@ namespace MAKS\Velox\Backend;
  * Event::dispatch('some.event', [$arg1, $arg2]);
  * ```
  *
+ * @package Velox\Backend
  * @since 1.2.0
+ * @api
  */
 class Event
 {
@@ -36,7 +38,7 @@ class Event
 
 
     /**
-     * Dispatches the passed event by executing all attached callbacks after passing them the passed arguments.
+     * Dispatches the passed event by executing all attached callbacks and passes them the passed arguments.
      *
      * @param string $event Event name.
      * @param array $arguments [optional] Arguments array. Note that the arguments will be spread (`...$args`) on the callback.
