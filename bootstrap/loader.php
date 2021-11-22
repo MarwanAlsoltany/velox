@@ -1,18 +1,16 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This file should not be loaded directly in the application, "./autoload.php" takes care of loading it.
- * ---------------------------------------------------------------------------------------------------------------------
- *  It takes care of:
- *      (1) Setting application include paths.
- *      (2) Registering an autoloader.
- *      (3) Aliasing VELOX classes.
- *      (4) Setting error and exception handlers and the shutdown function.
- *      (5) Providing some helper functions for autoloading.
- * ---------------------------------------------------------------------------------------------------------------------
- *  If you ever wanted to extend VELOX functionality beyond basic stuff, you may want to do something here.
- * ---------------------------------------------------------------------------------------------------------------------
+ * This file should not be loaded directly in the application, "./autoload.php" takes care of loading it.
+ *
+ * It takes care of:
+ * - Setting application include paths.
+ * - Registering an autoloader.
+ * - Aliasing VELOX classes.
+ * - Setting error and exception handlers and the shutdown function.
+ * - Providing some helper functions for autoloading.
+ *
+ * If you ever wanted to extend VELOX functionality beyond basic stuff, you may want to do something here.
  */
 
 
