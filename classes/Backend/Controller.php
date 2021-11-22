@@ -39,6 +39,10 @@ use MAKS\Velox\Helper\Misc;
  * Router::handle('/some-route', [$controller, 'someAction'], ['GET', 'POST']);
  * ```
  *
+ * @package Velox\Backend
+ * @since 1.0.0
+ * @api
+ *
  * @property Event $event Instance of the `Event` class.
  * @property Config $config Instance of the `Config` class.
  * @property Router $router Instance of the `Router` class.
@@ -52,9 +56,6 @@ use MAKS\Velox\Helper\Misc;
  * @property Path $path Instance of the `Path` class.
  * @property Dumper $dumper Instance of the `Dumper` class.
  * @property Misc $misc Instance of the `Misc` class.
- *
- * @since 1.0.0
- * @api
  */
 abstract class Controller
 {
@@ -213,7 +214,7 @@ abstract class Controller
     }
 
     /**
-     * Registers all public methods which are suffixed with `Action` as routes.
+     * Registers all public methods which are suffixed with `Action` or `Middleware` as `handler` or `middleware` respectively.
      *
      * @return void
      *
