@@ -1,9 +1,9 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This config file contains authentication configuration, it is used by the "Auth::class".
- * ---------------------------------------------------------------------------------------------------------------------
+ * This config file contains authentication configuration, it is used by the "Auth::class".
+ *
+ * @see \MAKS\Velox\Backend\Auth
  */
 
 
