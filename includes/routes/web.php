@@ -1,14 +1,12 @@
 <?php
 
 /**
- * ---------------------------------------------------------------------------------------------------------------------
- *  This file can be used to provide handlers/middlewares for app routes.
- * ---------------------------------------------------------------------------------------------------------------------
- *  Note that you can move this file content to the "../../index.php" file, but it's recommend to use this file to
- *  allow other SAPIs to make use of it (the routes registration part).
- * ---------------------------------------------------------------------------------------------------------------------
- *  You can freely add additional files in the '/includes/routes/' directory. VELOX will load it for you.
- * ---------------------------------------------------------------------------------------------------------------------
+ * This file can be used to provide handlers/middlewares for app routes.
+ *
+ * Note that you can move this file content to the "../../index.php" file, but it's recommend to use this file to
+ * allow other SAPIs to make use of it (the routes registration part).
+ *
+ * You can freely add additional files in the '/includes/routes/' directory. VELOX will load it for you.
  */
 
 
