@@ -4,6 +4,13 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.4.1] - 2021-11-23](https://github.com/MarwanAlsoltany/velox/compare/v1.4.0...v1.4.1)
+
+- Improve documentation of ***class***, ***methods***, ***functions***, ***config files***, ...
+- Generate documentation for the full API on [`marwanalsoltany.com/velox`](https://marwanalsoltany.com/velox).
+
+<br />
+
 ## [[1.4.0] - 2021-11-22](https://github.com/MarwanAlsoltany/velox/compare/v1.3.3...v1.4.0)
 
 - Add `Auth` class.
