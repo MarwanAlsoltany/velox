@@ -61,6 +61,7 @@ use MAKS\Velox\Helper\Misc;
  * $html = View::partial('partialName', $vars);
  * ```
  *
+ * @package Velox\Frontend
  * @since 1.0.0
  * @api
  */
@@ -301,7 +302,7 @@ class View
     }
 
     /**
-     * Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to "{view.defaultSectionName}" section.
+     * Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to `{view.defaultSectionName}` section.
      *
      * @param string $page The name of the page.
      * @param array $variables [optional] An associative array of the variables to pass.
