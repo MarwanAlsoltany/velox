@@ -87,19 +87,19 @@ abstract class Controller
             'method' => 'POST',
         ],
         'show' => [
-            'expression' => '/{controller}/([0-9]+)',
+            'expression' => '/{controller}/([1-9][0-9]*)',
             'method' => 'GET',
         ],
         'edit' => [
-            'expression' => '/{controller}/([0-9]+)/edit',
+            'expression' => '/{controller}/([1-9][0-9]*)/edit',
             'method' => 'GET',
         ],
         'update' => [
-            'expression' => '/{controller}/([0-9]+)',
+            'expression' => '/{controller}/([1-9][0-9]*)',
             'method' => ['PUT', 'PATCH'],
         ],
         'destroy' => [
-            'expression' => '/{controller}/([0-9]+)',
+            'expression' => '/{controller}/([1-9][0-9]*)',
             'method' => 'DELETE',
         ],
     ];
