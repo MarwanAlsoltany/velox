@@ -54,6 +54,7 @@ use MAKS\Velox\Helper\Misc;
  *
  * @package Velox
  * @since 1.0.0
+ * @api
  *
  * @method static void handleException(\Throwable $expression) This method is available only at shutdown.
  * @method static void handleError(int $code, string $message, string $file, int $line) This method is available only at shutdown.
@@ -269,6 +270,8 @@ class App
     /**
      * Aborts the current request and sends a response with the specified HTTP status code, title, and message.
      * An HTML page will be rendered with the specified title and message.
+     * If a view file for the error page is set using `{global.errorPages.CODE}`,
+     * it will be rendered instead of the normal page and passed the `$code`, `$title`, and `$message` variables.
      * The title for the most common HTTP status codes (`200`, `401`, `403`, `404`, `405`, `500`, `503`) is already configured.
      *
      * @param int $code The HTTP status code.
@@ -291,39 +294,44 @@ class App
             503 => 'Service Unavailable',
         ];
 
-        http_response_code($code);
-
         $title    = htmlspecialchars($title ?? $code . ' ' . $http[$code] ?? '', ENT_QUOTES, 'UTF-8');
         $message  = htmlspecialchars($message ?? '', ENT_QUOTES, 'UTF-8');
 
-        (new HTML(false))
-            ->node('<!DOCTYPE html>')
-            ->open('html', ['lang' => 'en'])
-                ->open('head')
-                    ->title((string)$code)
-                    ->link(null, [
-                        'href' => 'https://cdn.jsdelivr.net/npm/bulma@latest/css/bulma.min.css',
-                        'rel' => 'stylesheet'
-                    ])
-                ->close()
-                ->open('body')
-                    ->open('section', ['class' => 'section is-large has-text-centered'])
-                        ->hr(null)
-                        ->h1($title, ['class' => 'title is-1 is-spaced has-text-danger'])
-                        ->condition(strlen($message))
-                        ->h4($message, ['class' => 'subtitle'])
-                        ->hr(null)
-                        ->a('Reload', ['class' => 'button is-warning is-light', 'href' => 'javascript:location.reload();'])
-                        ->entity('nbsp')
-                        ->entity('nbsp')
-                        ->a('Home', ['class' => 'button is-success is-light', 'href' => '/'])
-                        ->hr(null)
+        try {
+            $html = View::render(Config::get("global.errorPages.{$code}"), compact('code', 'title', 'message'));
+        } catch (\Throwable $e) {
+            $html = (new HTML(false))
+                ->node('<!DOCTYPE html>')
+                ->open('html', ['lang' => 'en'])
+                    ->open('head')
+                        ->title((string)$code)
+                        ->link(null, [
+                            'href' => 'https://cdn.jsdelivr.net/npm/bulma@latest/css/bulma.min.css',
+                            'rel' => 'stylesheet'
+                        ])
+                    ->close()
+                    ->open('body')
+                        ->open('section', ['class' => 'section is-large has-text-centered'])
+                            ->hr(null)
+                            ->h1($title, ['class' => 'title is-1 is-spaced has-text-danger'])
+                            ->condition(strlen($message))
+                            ->h4($message, ['class' => 'subtitle'])
+                            ->hr(null)
+                            ->a('Reload', ['class' => 'button is-warning is-light', 'href' => 'javascript:location.reload();'])
+                            ->entity('nbsp')
+                            ->entity('nbsp')
+                            ->a('Home', ['class' => 'button is-success is-light', 'href' => '/'])
+                            ->hr(null)
+                        ->close()
                     ->close()
                 ->close()
-            ->close()
-        ->echo();
+            ->return();
+        } finally {
+            http_response_code($code);
+            echo $html;
 
-        static::terminate();
+            static::terminate();
+        }
     }
 
 
