@@ -46,10 +46,10 @@ use MAKS\Velox\Helper\Misc;
  * ```
  * // create an instance
  * $app = new App();
- * // get an instance of the `Router` class via public property access notation
- * $app->router->handle('/dump', 'dd');
+ * // get an instance of the `Config` class via public property access notation
+ * $app->config;
  * // or via calling a method with the same name
- * $app->router()->handle('/dump', 'dd');
+ * $app->config()->get('global');
  * ```
  *
  * @package Velox
@@ -61,6 +61,23 @@ use MAKS\Velox\Helper\Misc;
  */
 class App
 {
+    /**
+     * This event will be dispatched on app termination. Note that this event can be dispatched multiple times in app life-cycle.
+     * This event will not be passed any arguments.
+     *
+     * @var string
+     */
+    public const ON_TERMINATE = 'app.on.terminate';
+
+    /**
+     * This event will be dispatched on app shutdown. Note that this event is dispatched only once in app life-cycle.
+     * This event will not be passed any arguments.
+     *
+     * @var string
+     */
+    public const ON_SHUTDOWN = 'app.on.shutdown';
+
+
     public Event $event;
 
     public Config $config;
@@ -349,6 +366,8 @@ class App
      */
     public static function terminate($status = null, bool $noShutdown = true): void
     {
+        Event::dispatch(self::ON_TERMINATE);
+
         if (defined('EXIT_EXCEPTION') && EXIT_EXCEPTION) {
             throw new \Exception(empty($status) ? 'Exit' : 'Exit: ' . $status);
         }
@@ -362,5 +381,23 @@ class App
 
         exit($status);
         // @codeCoverageIgnoreEnd
+    }
+
+    /**
+     * Shuts the app down by terminating it and executing shutdown function(s).
+     * The triggered shutdown functions can be normal shutdown functions registered,
+     * using `register_shutdown_function()` or the `self::ON_SHUTDOWN` event.
+     *
+     * @return void
+     *
+     * @since 1.4.2
+     *
+     * @codeCoverageIgnore
+     */
+    public static function shutdown(): void
+    {
+        Event::dispatch(self::ON_SHUTDOWN);
+
+        exit;
     }
 }
