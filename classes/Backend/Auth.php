@@ -354,14 +354,7 @@ class Auth
             'ip'  => Globals::getServer('REMOTE_ADDR'),
         ], 'system');
 
-        http_response_code(401);
-
-        try {
-            echo View::render((string)Config::get('global.errorPages.401'));
-            App::terminate();
-        } catch (\Throwable $e) {
-            App::abort(401, null, 'Wrong username or password!');
-        }
+        App::abort(401, null, 'You need to be logged in to view this page!');
     }
 
     /**
