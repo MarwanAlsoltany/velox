@@ -88,6 +88,7 @@ $errorHandler = function (int $code, string $message, string $file, int $line) {
 
 // exceptions handler, logs the exception and then dumps it and/or displays a nice page
 $exceptionHandler = function (\Throwable $exception) {
+    // explicitly set the status code in case it is not set
     http_response_code(500);
 
     // only keep the last buffer if nested
@@ -112,19 +113,25 @@ $exceptionHandler = function (\Throwable $exception) {
         \MAKS\Velox\Helper\Dumper::dumpException($exception);
     }
 
-    exit;
+    // terminate the app entirely without executing shutdown functions
+    \MAKS\Velox\App::terminate(null, false);
 };
 
 // shutdown function, makes errors and exceptions handlers available at shutdown
 $shutdownFunction = function () use ($errorHandler, $exceptionHandler) {
+    // die only if no shutdown is allowed
     if (\MAKS\Velox\Helper\Misc::getArrayValueByKey($GLOBALS, '_VELOX.TERMINATE', false)) {
         die;
     }
 
+    // add App runtime shutdown methods
     \MAKS\Velox\App::extendStatic('handleError', $errorHandler);
     \MAKS\Velox\App::extendStatic('handleException', $exceptionHandler);
 
-    \MAKS\Velox\App::shutdown();
+    // execute the shutdown event only if it is not already executed
+    if (\MAKS\Velox\Helper\Misc::getArrayValueByKey($GLOBALS, '_VELOX.SHUTDOWN', true)) {
+        \MAKS\Velox\App::shutdown();
+    }
 };
 
 
