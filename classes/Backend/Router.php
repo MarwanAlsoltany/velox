@@ -463,17 +463,22 @@ class Router
      */
     private static function getRouteRegex(string $expression, bool $slashMatters, bool $caseMatters): string
     {
-        $routePlaceholderRegex = '/{([a-z0-9_\-\.?]+)}/i';
-        if (preg_match($routePlaceholderRegex, $expression)) {
-            $routeMatchRegex = strpos($expression, '?}') !== false ? '(.*)?' : '(.+)';
-            $expression = preg_replace(
-                $routePlaceholderRegex,
-                $routeMatchRegex,
-                $expression
-            );
-        }
+        $asteriskRegex    = '/(?<!\()\*(?!\))/';
+        $placeholderRegex = '/{([a-zA-Z0-9_\-\.?]+)}/';
 
-        $expression = strtr($expression, ['*' => '.*?']);
+        // replace asterisk only if it's not a part of a regex capturing group
+        $expression = preg_replace($asteriskRegex, '.*?', $expression);
+
+        // replace placeholders with their corresponding regex
+        if (preg_match_all($placeholderRegex, $expression, $matches, PREG_SET_ORDER)) {
+            foreach ($matches as $match) {
+                $placeholder = $match[0];
+                $replacement = strpos($placeholder, '?') !== false ? '(.*)?' : '(.+)';
+                $expression  = strtr($expression, [
+                    $placeholder => $replacement
+                ]);
+            }
+        }
 
         return sprintf(
             '<^%s$>%s',
@@ -546,24 +551,19 @@ class Router
             http_response_code($code);
 
             if (!isset($responses[$code]['func'])) {
-                try {
-                    echo View::render((string)Config::get('global.errorPages.' . $code), compact('path', 'method'));
-                    App::terminate(); // @codeCoverageIgnore
-                } catch (\Throwable $e) {
-                    // this function will exit the script
-                    App::abort(
-                        $code,
-                        $responses[$code]['html']['title'],
-                        $responses[$code]['html']['message']
-                    );
-                }
+                // this function will exit the script
+                App::abort(
+                    $code,
+                    $responses[$code]['html']['title'],
+                    $responses[$code]['html']['message']
+                );
             }
 
             $result = ($responses[$code]['func'])(...$responses[$code]['args']);
         }
 
         http_response_code() || http_response_code($code);
-        echo($result);
+        echo $result;
     }
 
     /**
@@ -634,7 +634,7 @@ class Router
         // start the router if it's not started by the user
         static $isStarted = false;
         if (Config::get('router.allowAutoStart') && !$isStarted) {
-            register_shutdown_function(static function () use (&$isStarted) {
+            Event::listen(App::ON_SHUTDOWN, static function () use (&$isStarted) {
                 // @codeCoverageIgnoreStart
                 $isStarted = true;
                 // $params should be an array if the router has been started
