@@ -2,13 +2,14 @@
     "name": "marwanalsoltany/velox",
     "type": "project",
     "license": "MIT",
-    "description": "PHP Micro-Framework",
+    "description": "The minimal PHP micro-framework.",
     "keywords": [
         "php",
         "framework",
         "micro-framework",
         "mvc",
         "crud",
+        "auth",
         "static-website-generator"
     ],
     "authors": [
@@ -23,9 +24,10 @@
             "url": "https://ko-fi.com/marwanalsoltany"
         }
     ],
-    "homepage": "https://github.com/MarwanAlsoltany/velox#readme",
+    "homepage": "https://github.com/MarwanAlsoltany/velox/blob/master/README.md",
     "support": {
-        "docs": "https://github.com/MarwanAlsoltany/velox/blob/master/README.md",
+        "docs": "https://marwanalsoltany.github.io/velox",
+        "source": "https://github.com/MarwanAlsoltany/velox",
         "issues": "https://github.com/MarwanAlsoltany/velox/issues"
     },
     "require": {
@@ -51,7 +53,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.3-dev"
+            "dev-master": "1.4-dev"
         }
     },
     "scripts": {
