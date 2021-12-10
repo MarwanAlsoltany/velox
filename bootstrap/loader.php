@@ -98,25 +98,21 @@ $exceptionHandler = function (\Throwable $exception) {
     // enable logging in case it is disabled
     \MAKS\Velox\Backend\Config::set('global.logging.enabled', true);
 
-    // get global config
-    $globalConfig = \MAKS\Velox\Backend\Config::get('global');
+    // get app environment
+    $environment = \MAKS\Velox\Backend\Config::get('global.env');
 
     // log the exception
-    \MAKS\Velox\App::log("[ERROR: (env: {$globalConfig['env']})] {$exception}", null, 'system');
+    \MAKS\Velox\App::log("[ERROR: (env: {$environment})] {$exception}", null, 'system');
 
-    // if in development environment, dump detailed exceptions
-    if (!in_array(strtoupper($globalConfig['env']), ['PROD', 'PRODUCTION'])) {
-        \MAKS\Velox\Helper\Dumper::dumpException($exception);
-        exit;
-    }
-
-    // if in production environment, return a nice page without all the details
-    try {
-        echo \MAKS\Velox\Frontend\View::render($globalConfig['errorPages']['500']);
-        exit;
-    } catch (\Throwable $e) {
+    if (in_array(strtoupper($environment), ['PROD', 'PRODUCTION'])) {
+        // if in production environment, return a nice page without all the details
         \MAKS\Velox\App::abort(500, null, 'An error occurred, try again later.');
+    } else {
+        // if in development environment, dump a detailed exception
+        \MAKS\Velox\Helper\Dumper::dumpException($exception);
     }
+
+    exit;
 };
 
 // shutdown function, makes errors and exceptions handlers available at shutdown
@@ -127,6 +123,8 @@ $shutdownFunction = function () use ($errorHandler, $exceptionHandler) {
 
     \MAKS\Velox\App::extendStatic('handleError', $errorHandler);
     \MAKS\Velox\App::extendStatic('handleException', $exceptionHandler);
+
+    \MAKS\Velox\App::shutdown();
 };
 
 
