@@ -8,7 +8,6 @@
  *  - Loading VELOX functions "../functions/".
  *  - Loading Composer "../vendor/" if available.
  *  - Loading additional paths defined in "./additional.php".
- * ---------------------------------------------------------------------------------------------------------------------
  */
 
 
