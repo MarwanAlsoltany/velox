@@ -136,6 +136,21 @@ Search.appendIndex(
             "summary": "Terminates\u0020\u0028exits\u0029\u0020the\u0020PHP\u0020script.",
             "url": "classes/MAKS-Velox-App.html#method_terminate"
         },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003Ashutdown\u0028\u0029",
+            "name": "shutdown",
+            "summary": "Shuts\u0020the\u0020app\u0020down\u0020by\u0020terminating\u0020it\u0020and\u0020executing\u0020shutdown\u0020function\u0028s\u0029.",
+            "url": "classes/MAKS-Velox-App.html#method_shutdown"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003AON_TERMINATE",
+            "name": "ON_TERMINATE",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020on\u0020app\u0020termination.\u0020Note\u0020that\u0020this\u0020event\u0020can\u0020be\u0020dispatched\u0020multiple\u0020times\u0020in\u0020app\u0020life\u002Dcycle.",
+            "url": "classes/MAKS-Velox-App.html#constant_ON_TERMINATE"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\App\u003A\u003AON_SHUTDOWN",
+            "name": "ON_SHUTDOWN",
+            "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020on\u0020app\u0020shutdown.\u0020Note\u0020that\u0020this\u0020event\u0020is\u0020dispatched\u0020only\u0020once\u0020in\u0020app\u0020life\u002Dcycle.",
+            "url": "classes/MAKS-Velox-App.html#constant_ON_SHUTDOWN"
+        },                {
             "fqsen": "\\MAKS\\Velox\\App\u003A\u003A\u0024event",
             "name": "event",
             "summary": "",
@@ -1348,7 +1363,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003Acurrent\u0028\u0029",
             "name": "current",
-            "summary": "Returns\u0020the\u0020current\u0020path,\u0020or\u0020compares\u0020it\u0020with\u0020the\u0020passed\u0020parameter.",
+            "summary": "Returns\u0020the\u0020current\u0020path,\u0020or\u0020compares\u0020it\u0020with\u0020the\u0020passed\u0020parameter.\u0020Note\u0020that\u0020the\u0020path\u0020does\u0020not\u0020contain\u0020the\u0020query\u0020string.",
             "url": "classes/MAKS-Velox-Frontend-Path.html#method_current"
         },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\Path\u003A\u003AcurrentUrl\u0028\u0029",
@@ -1733,7 +1748,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\render\u0028\u0029",
             "name": "render",
-            "summary": "Renders\u0020a\u0020view\u0020\u0028a\u0020Page\u0020wrapped\u0020in\u0020a\u0020Layout\u0029\u0020with\u0020the\u0020passed\u0020variables,\u0020the\u0020Page\u0020content\u0020will\u0020be\u0020sent\u0020to\u0020\u0022\u007Bview.defaultSectionName\u007D\u0022\u0020section.",
+            "summary": "Renders\u0020a\u0020view\u0020\u0028a\u0020Page\u0020wrapped\u0020in\u0020a\u0020Layout\u0029\u0020with\u0020the\u0020passed\u0020variables,\u0020the\u0020Page\u0020content\u0020will\u0020be\u0020sent\u0020to\u0020\u0060\u007Bview.defaultSectionName\u007D\u0060\u0020section.",
             "url": "namespaces/default.html#function_render"
         },                {
             "fqsen": "\\render_layout\u0028\u0029",
@@ -1763,7 +1778,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\section_start\u0028\u0029",
             "name": "section_start",
-            "summary": "Starts\u0020capturing\u0020buffer\u0020of\u0020the\u0020section\u0020with\u0020the\u0020given\u0020name.\u0020Works\u0020in\u0020conjunction\u0020with\u0020\u0060self\u003A\u003AsectionEnd\u0028\u0029\u0060.",
+            "summary": "Ends\u0020capturing\u0020buffer\u0020of\u0020the\u0020section\u0020with\u0020the\u0020given\u0020name.\u0020Works\u0020in\u0020conjunction\u0020with\u0020\u0060self\u003A\u003AsectionStart\u0028\u0029\u0060.",
             "url": "namespaces/default.html#function_section_start"
         },                {
             "fqsen": "\\section_end\u0028\u0029",
@@ -1813,7 +1828,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\app_path_current\u0028\u0029",
             "name": "app_path_current",
-            "summary": "Returns\u0020the\u0020current\u0020path,\u0020or\u0020compares\u0020it\u0020with\u0020the\u0020passed\u0020parameter.",
+            "summary": "Returns\u0020the\u0020current\u0020path,\u0020or\u0020compares\u0020it\u0020with\u0020the\u0020passed\u0020parameter.\u0020Note\u0020that\u0020the\u0020path\u0020does\u0020not\u0020contain\u0020the\u0020query\u0020string.",
             "url": "namespaces/default.html#function_app_path_current"
         },                {
             "fqsen": "\\app_url_current\u0028\u0029",

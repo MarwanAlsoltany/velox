@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>VELOX Docs</title>
+    <title>VELOX Framework API Docs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -23,7 +23,7 @@
     </head>
 <body id="top">
     <header class="phpdocumentor-header phpdocumentor-section">
-    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VELOX Docs</a></h1>
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VELOX Framework API Docs</a></h1>
     <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
     <label class="phpdocumentor-header__menu-icon" for="menu-button">
         <i class="fas fa-bars"></i>
@@ -238,7 +238,7 @@
     <span>
                         &nbsp;: string    </span>
 </dt>
-<dd>Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to &quot;{view.defaultSectionName}&quot; section.</dd>
+<dd>Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to `{view.defaultSectionName}` section.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_render_layout">render_layout()</a>
@@ -280,7 +280,7 @@
     <span>
                         &nbsp;: void    </span>
 </dt>
-<dd>Starts capturing buffer of the section with the given name. Works in conjunction with `self::sectionEnd()`.</dd>
+<dd>Ends capturing buffer of the section with the given name. Works in conjunction with `self::sectionStart()`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_section_end">section_end()</a>
@@ -350,7 +350,7 @@
     <span>
                         &nbsp;: string|bool    </span>
 </dt>
-<dd>Returns the current path, or compares it with the passed parameter.</dd>
+<dd>Returns the current path, or compares it with the passed parameter. Note that the path does not contain the query string.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_app_url_current">app_url_current()</a>
@@ -469,7 +469,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -480,7 +480,9 @@
                 <span class="phpdocumentor-signature__name">abort</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
         <section class="phpdocumentor-description"><p>An HTML page will be rendered with the specified title and message.
-The title for the most comment HTTP status codes (<code class="prettyprint">200</code>, <code class="prettyprint">403</code>, <code class="prettyprint">404</code>, <code class="prettyprint">405</code>, <code class="prettyprint">500</code>, <code class="prettyprint">503</code>) is already configured.</p>
+If a view file for the error page is set using <code class="prettyprint">{global.errorPages.CODE}</code>,
+it will be rendered instead of the normal page and passed the <code class="prettyprint">$code</code>, <code class="prettyprint">$title</code>, and <code class="prettyprint">$message</code> variables.
+The title for the most common HTTP status codes (<code class="prettyprint">200</code>, <code class="prettyprint">401</code>, <code class="prettyprint">403</code>, <code class="prettyprint">404</code>, <code class="prettyprint">405</code>, <code class="prettyprint">500</code>, <code class="prettyprint">503</code>) is already configured.</p>
 </section>
 
     
@@ -514,7 +516,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
@@ -540,7 +542,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
                 <dd class="phpdocumentor-tag-list__definition">
                                                                 <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
                                                             
-                                                 <section class="phpdocumentor-description"><p>If <code class="prettyprint">UNIT_TESTING</code> is defined and truthy.</p>
+                                                 <section class="phpdocumentor-description"><p>If <code class="prettyprint">EXIT_EXCEPTION</code> is defined and truthy.</p>
 </section>
 
                                     </dd>
@@ -570,7 +572,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -614,7 +616,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">95</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
@@ -656,7 +658,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">110</span>
+    <span class="phpdocumentor-element-found-in__line">113</span>
 
     </aside>
 
@@ -698,7 +700,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">127</span>
+    <span class="phpdocumentor-element-found-in__line">133</span>
 
     </aside>
 
@@ -740,7 +742,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">143</span>
+    <span class="phpdocumentor-element-found-in__line">150</span>
 
     </aside>
 
@@ -784,7 +786,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">159</span>
+    <span class="phpdocumentor-element-found-in__line">166</span>
 
     </aside>
 
@@ -828,7 +830,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">174</span>
+    <span class="phpdocumentor-element-found-in__line">181</span>
 
     </aside>
 
@@ -870,7 +872,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">189</span>
+    <span class="phpdocumentor-element-found-in__line">196</span>
 
     </aside>
 
@@ -912,7 +914,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">204</span>
+    <span class="phpdocumentor-element-found-in__line">211</span>
 
     </aside>
 
@@ -962,7 +964,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">219</span>
+    <span class="phpdocumentor-element-found-in__line">226</span>
 
     </aside>
 
@@ -1012,7 +1014,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">234</span>
+    <span class="phpdocumentor-element-found-in__line">241</span>
 
     </aside>
 
@@ -1054,7 +1056,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">249</span>
+    <span class="phpdocumentor-element-found-in__line">256</span>
 
     </aside>
 
@@ -1096,7 +1098,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">264</span>
+    <span class="phpdocumentor-element-found-in__line">271</span>
 
     </aside>
 
@@ -1138,11 +1140,11 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">281</span>
+    <span class="phpdocumentor-element-found-in__line">288</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to &quot;{view.defaultSectionName}&quot; section.</p>
+        <p class="phpdocumentor-summary">Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to `{view.defaultSectionName}` section.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility"></span>
@@ -1180,7 +1182,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">297</span>
+    <span class="phpdocumentor-element-found-in__line">304</span>
 
     </aside>
 
@@ -1222,7 +1224,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">313</span>
+    <span class="phpdocumentor-element-found-in__line">320</span>
 
     </aside>
 
@@ -1264,7 +1266,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">329</span>
+    <span class="phpdocumentor-element-found-in__line">336</span>
 
     </aside>
 
@@ -1306,7 +1308,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">346</span>
+    <span class="phpdocumentor-element-found-in__line">353</span>
 
     </aside>
 
@@ -1350,7 +1352,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">361</span>
+    <span class="phpdocumentor-element-found-in__line">368</span>
 
     </aside>
 
@@ -1392,11 +1394,11 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">377</span>
+    <span class="phpdocumentor-element-found-in__line">382</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Starts capturing buffer of the section with the given name. Works in conjunction with `self::sectionEnd()`.</p>
+        <p class="phpdocumentor-summary">Ends capturing buffer of the section with the given name. Works in conjunction with `self::sectionStart()`.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility"></span>
@@ -1436,7 +1438,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">393</span>
+    <span class="phpdocumentor-element-found-in__line">398</span>
 
     </aside>
 
@@ -1490,7 +1492,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">409</span>
+    <span class="phpdocumentor-element-found-in__line">414</span>
 
     </aside>
 
@@ -1532,7 +1534,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">426</span>
+    <span class="phpdocumentor-element-found-in__line">431</span>
 
     </aside>
 
@@ -1576,7 +1578,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">441</span>
+    <span class="phpdocumentor-element-found-in__line">446</span>
 
     </aside>
 
@@ -1618,7 +1620,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">456</span>
+    <span class="phpdocumentor-element-found-in__line">461</span>
 
     </aside>
 
@@ -1660,7 +1662,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">472</span>
+    <span class="phpdocumentor-element-found-in__line">477</span>
 
     </aside>
 
@@ -1704,7 +1706,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">488</span>
+    <span class="phpdocumentor-element-found-in__line">493</span>
 
     </aside>
 
@@ -1746,7 +1748,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">503</span>
+    <span class="phpdocumentor-element-found-in__line">508</span>
 
     </aside>
 
@@ -1788,7 +1790,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">518</span>
+    <span class="phpdocumentor-element-found-in__line">523</span>
 
     </aside>
 
@@ -1830,11 +1832,11 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">533</span>
+    <span class="phpdocumentor-element-found-in__line">538</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Returns the current path, or compares it with the passed parameter.</p>
+        <p class="phpdocumentor-summary">Returns the current path, or compares it with the passed parameter. Note that the path does not contain the query string.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility"></span>
@@ -1874,7 +1876,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">548</span>
+    <span class="phpdocumentor-element-found-in__line">553</span>
 
     </aside>
 
@@ -1918,7 +1920,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">563</span>
+    <span class="phpdocumentor-element-found-in__line">568</span>
 
     </aside>
 
@@ -1962,7 +1964,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">578</span>
+    <span class="phpdocumentor-element-found-in__line">583</span>
 
     </aside>
 
@@ -2006,7 +2008,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">594</span>
+    <span class="phpdocumentor-element-found-in__line">599</span>
 
     </aside>
 
@@ -2050,7 +2052,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">609</span>
+    <span class="phpdocumentor-element-found-in__line">614</span>
 
     </aside>
 
@@ -2094,7 +2096,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">625</span>
+    <span class="phpdocumentor-element-found-in__line">630</span>
 
     </aside>
 
@@ -2138,7 +2140,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">640</span>
+    <span class="phpdocumentor-element-found-in__line">645</span>
 
     </aside>
 
@@ -2182,7 +2184,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">657</span>
+    <span class="phpdocumentor-element-found-in__line">662</span>
 
     </aside>
 
@@ -2236,7 +2238,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">672</span>
+    <span class="phpdocumentor-element-found-in__line">677</span>
 
     </aside>
 
@@ -2290,7 +2292,7 @@ The title for the most comment HTTP status codes (<code class="prettyprint">200<
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">687</span>
+    <span class="phpdocumentor-element-found-in__line">692</span>
 
     </aside>
 
