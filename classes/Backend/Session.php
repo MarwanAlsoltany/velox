@@ -331,14 +331,7 @@ final class Session
                     'ip'  => Globals::getServer('REMOTE_ADDR'),
                 ], 'system');
 
-                http_response_code(403);
-
-                try {
-                    echo View::render((string)Config::get('global.errorPages.403'));
-                    App::terminate();
-                } catch (\Throwable $e) {
-                    App::abort(403, null, 'Invalid CSRF token!');
-                }
+                App::abort(403, null, 'Invalid CSRF token!');
             }
             public function isValid(): bool
             {
