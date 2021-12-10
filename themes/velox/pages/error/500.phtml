@@ -1,7 +1,7 @@
-<?= Data::set('page.title', 'Internal Server Error') ?>
+<?= Data::set('page.title', $title ?? 'Internal Server Error') ?>
 
 <?= View::partial('hero', [
-    'title'=> '500 ¯\_( ͠❛ ͟ʖ͠❛ )_/¯',
-    'subtitle'=> 'An error occurred, try again later.',
+    'title' => ($code ?? 500) . ' ¯\_( ͠❛ ͟ʖ͠❛ )_/¯',
+    'subtitle' => $message ?? 'An error occurred, try again later.',
     'class' => 'is-danger is-large is-bold'
 ]) ?>

@@ -1,7 +1,10 @@
-<?= Data::set('page.title', 'Page Not Found') ?>
+<?= Data::set('page.title', $title ?? 'Not Found') ?>
 
 <?= View::partial('hero', [
-    'title'=> '404 ¯\_( ͡❛ ͟ʖ ͡❛)_/¯',
-    'subtitle'=> sprintf('The requested page “%s” was not found!', hse($path)),
+    'title' => ($code ?? 404) . ' ¯\_( ͠❛  ͟ʖ͡❛ )_/¯',
+    'subtitle' => $message ?? sprintf(
+        'The requested page “%s” was not found!',
+        hse(Globals::getServer('REQUEST_URI'))
+    ),
     'class' => 'is-info is-large is-bold'
 ]) ?>

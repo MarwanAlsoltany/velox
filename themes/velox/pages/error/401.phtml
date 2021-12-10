@@ -1,7 +1,7 @@
-<?= Data::set('page.title', 'Unauthorized') ?>
+<?= Data::set('page.title', $title ?? 'Unauthorized') ?>
 
 <?= View::partial('hero', [
-    'title'=> '401 ¯\_( ͠❛ ͟ʖ͠❛ )_/¯',
-    'subtitle'=> 'Unauthorized!',
+    'title' => ($code ?? 401) . ' ¯\_( ͠❛ ͟ʖ͠❛ )_/¯',
+    'subtitle' => $message ?? 'Unauthorized!',
     'class' => 'is-link is-large is-bold'
 ]) ?>

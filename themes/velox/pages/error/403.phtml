@@ -1,7 +1,7 @@
-<?= Data::set('page.title', 'Forbidden') ?>
+<?= Data::set('page.title', $title ?? 'Forbidden') ?>
 
 <?= View::partial('hero', [
-    'title'=> '403 ¯\_( ͠❛ ͜ʖ͠❛ )_/¯',
-    'subtitle'=> 'Invalid CSRF Token!',
+    'title' => ($code ?? 403) . ' ¯\_( ͠❛ ͜ʖ͠❛ )_/¯',
+    'subtitle' => $message ?? 'Invalid CSRF Token!',
     'class' => 'is-danger is-large is-bold'
 ]) ?>

@@ -1,7 +1,11 @@
-<?= Data::set('page.title', 'Method Not Allowed') ?>
+<?= Data::set('page.title', $title ?? 'Not Allowed') ?>
 
 <?= View::partial('hero', [
-    'title'=> '405 ¯\_( ͡❛ ͜ʖ ͡❛)_/¯',
-    'subtitle'=> sprintf('The requested route “%s” exists. But the request method “%s” is not allowed!', hse($path), hse($method)),
+    'title'=> ($code ?? 405) . ' ¯\_( ͠❛ ͜ʖ ͡❛)_/¯',
+    'subtitle'=> $message ?? sprintf(
+        'The requested route “%s” exists. But the request method “%s” is not allowed!',
+        hse(Globals::getServer('REQUEST_URI')),
+        hse(Globals::getServer('REQUEST_METHOD'))
+    ),
     'class' => 'is-warning is-large is-bold'
 ]) ?>
