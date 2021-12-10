@@ -553,7 +553,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003Adispatch\u0028\u0029",
             "name": "dispatch",
-            "summary": "Dispatches\u0020the\u0020passed\u0020event\u0020by\u0020executing\u0020all\u0020attached\u0020listeners\u0020and\u0020passes\u0020them\u0020the\u0020passed\u0020arguments.",
+            "summary": "Dispatches\u0020the\u0020passed\u0020event\u0020by\u0020executing\u0020all\u0020attached\u0020callbacks\u0020and\u0020passes\u0020them\u0020the\u0020passed\u0020arguments.",
             "url": "classes/MAKS-Velox-Backend-Event.html#method_dispatch"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003Alisten\u0028\u0029",
@@ -561,29 +561,9 @@ Search.appendIndex(
             "summary": "Listens\u0020on\u0020the\u0020passed\u0020event\u0020and\u0020attaches\u0020the\u0020passed\u0020callback\u0020to\u0020it.",
             "url": "classes/MAKS-Velox-Backend-Event.html#method_listen"
         },                {
-            "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003AisDispatched\u0028\u0029",
-            "name": "isDispatched",
-            "summary": "Checks\u0020whether\u0020an\u0020event\u0020has\u0020already\u0020been\u0020dispatched\u0020or\u0020not.",
-            "url": "classes/MAKS-Velox-Backend-Event.html#method_isDispatched"
-        },                {
-            "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003AhasListeners\u0028\u0029",
-            "name": "hasListeners",
-            "summary": "Checks\u0020whether\u0020an\u0020event\u0020has\u0020any\u0020listeners\u0020or\u0020not.",
-            "url": "classes/MAKS-Velox-Backend-Event.html#method_hasListeners"
-        },                {
-            "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003Acreate\u0028\u0029",
-            "name": "create",
-            "summary": "Creates\u0020an\u0020event\u0020object\u0020and\u0020adds\u0020it\u0020to\u0020the\u0020registered\u0020events.",
-            "url": "classes/MAKS-Velox-Backend-Event.html#method_create"
-        },                {
-            "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003Aget\u0028\u0029",
-            "name": "get",
-            "summary": "Returns\u0020an\u0020event\u0020object\u0020by\u0020its\u0020name.",
-            "url": "classes/MAKS-Velox-Backend-Event.html#method_get"
-        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003AgetRegisteredEvents\u0028\u0029",
             "name": "getRegisteredEvents",
-            "summary": "Returns\u0020array\u0020of\u0020all\u0020registered\u0020events\u0020as\u0020an\u0020array\u0020\u0060\u005B\u0027event.name\u0027\u0020\u003D\u003E\u0020\u0024eventObject\u005D\u0060.",
+            "summary": "Returns\u0020array\u0020of\u0020all\u0020registered\u0020events\u0020as\u0020an\u0020array\u0020\u0060\u005B\u0027event.name\u0027\u0020\u003D\u003E\u0020\u005B...\u0024callbacks\u005D\u005D\u0060.",
             "url": "classes/MAKS-Velox-Backend-Event.html#method_getRegisteredEvents"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Event\u003A\u003A\u0024events",
@@ -1011,6 +991,16 @@ Search.appendIndex(
             "summary": "Forwards\u0020the\u0020request\u0020to\u0020another\u0020route.",
             "url": "classes/MAKS-Velox-Backend-Router.html#method_forward"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AhandleRouteNotFound\u0028\u0029",
+            "name": "handleRouteNotFound",
+            "summary": "Registers\u0020404\u0020handler.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_handleRouteNotFound"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AhandleMethodNotAllowed\u0028\u0029",
+            "name": "handleMethodNotAllowed",
+            "summary": "Registers\u0020405\u0020handler.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_handleMethodNotAllowed"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003Astart\u0028\u0029",
             "name": "start",
             "summary": "Starts\u0020the\u0020router.",
@@ -1135,6 +1125,16 @@ Search.appendIndex(
             "name": "routes",
             "summary": "The\u0020currently\u0020registered\u0020routes.",
             "url": "classes/MAKS-Velox-Backend-Router.html#property_routes"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A\u0024routeNotFoundCallback",
+            "name": "routeNotFoundCallback",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Router.html#property_routeNotFoundCallback"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A\u0024methodNotAllowedCallback",
+            "name": "methodNotAllowedCallback",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Router.html#property_methodNotAllowedCallback"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Session",
             "name": "Session",
