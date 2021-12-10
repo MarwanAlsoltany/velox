@@ -17,7 +17,6 @@ use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Model;
 use MAKS\Velox\Backend\Globals;
 use MAKS\Velox\Backend\Session;
-use MAKS\Velox\Frontend\View;
 
 /**
  * A class that serves as an authentication system for users.
