@@ -16,11 +16,17 @@ use App\Model\Person;
 
 class PersonsController extends Controller
 {
+    /**
+     * {@inheritDoc}
+     */
     protected function associateModel(): ?string
     {
         return Person::class;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function registerRoutes(): bool
     {
         return true;
@@ -147,7 +153,7 @@ class PersonsController extends Controller
     }
 
     /**
-     * @route ("/persons/list", {GET})
+     * @route("/persons/list", {GET})
      *
      * @return void
      */
@@ -169,87 +175,86 @@ class PersonsController extends Controller
             array_map(fn ($person) => $person->delete(), Person::all());
         }
 
-        // this data is built using https://jsonplaceholder.typicode.com/users
         $persons = [
             [
-                'name' => 'Leanne Graham',
+                'name' => 'Todd Riley',
+                'age' => 32,
+                'username' => 'todd.riley',
+                'email' => 'todd.riley@domain.tld',
+                'address' => 'Andre Street 3, 69841 Santiago City, Country',
+                'company' => 'Wesley Benson and Sons',
+            ],
+            [
+                'name' => 'Clarence Graham',
+                'age' => 49,
+                'username' => 'clarence.graham',
+                'email' => 'clarence.graham@domain.tld',
+                'address' => 'Troy Street 62, 69572 Holloway City, Country',
+                'company' => 'Lena Sanchez LLC',
+            ],
+            [
+                'name' => 'Nannie Obrien',
                 'age' => 28,
-                'username' => 'bret',
-                'email' => 'sincere@april.biz',
-                'address' => 'Kulas Light, Apt. 556, Gwenborough, 92998-3874',
-                'company' => 'Romaguera-Crona',
+                'username' => 'nannie.obrien',
+                'email' => 'nannie.obrien@domain.tld',
+                'address' => 'Barbara Street 64, 32953 Crawford City, Country',
+                'company' => 'Aiden Sanchez Inc.',
             ],
             [
-                'name' => 'Ervin Howell',
-                'age' => 40,
-                'username' => 'antonette',
-                'email' => 'shanna@melissa.tv',
-                'address' => 'Victor Plains, Suite 879, Wisokyburgh, 90566-7771',
-                'company' => 'Deckow-Crist',
+                'name' => 'Stanley Holt',
+                'age' => 61,
+                'username' => 'stanley.holt',
+                'email' => 'stanley.holt@domain.tld',
+                'address' => 'Nicholas Street 89, 99114 Owens City, Country',
+                'company' => 'Olive Brock LLC',
             ],
             [
-                'name' => 'Clementine Bauch',
-                'age' => 42,
-                'username' => 'samantha',
-                'email' => 'nathan@yesenia.net',
-                'address' => 'Douglas Extension, Suite 847, McKenziehaven, 59590-4157',
-                'company' => 'Romaguera-Jacobson',
+                'name' => 'Jeanette Cunningham',
+                'age' => 23,
+                'username' => 'jeanette.cunningham',
+                'email' => 'jeanette.cunningham@domain.tld',
+                'address' => 'Josephine Street 52, 99445 Hall City, Country',
+                'company' => 'Leona Johnston Inc.',
             ],
             [
-                'name' => 'Patricia Lebsack',
-                'age' => 63,
-                'username' => 'karianne',
-                'email' => 'julianne.oconner@kory.org',
-                'address' => 'Hoeger Mall, Apt. 692, South Elvis, 53919-4257',
-                'company' => 'Robel-Corkery',
+                'name' => 'Tyler Cruz',
+                'age' => 52,
+                'username' => 'tyler.cruz',
+                'email' => 'tyler.cruz@domain.tld',
+                'address' => 'Floyd Street 23, 26375 Mason City, Sint Country',
+                'company' => 'Abbie Coleman LLC',
             ],
             [
-                'name' => 'Chelsey Dietrich',
-                'age' => 21,
-                'username' => 'kamren',
-                'email' => 'lucio_hettinger@annie.ca',
-                'address' => 'Skiles Walks, Suite 351, Roscoeview, 33263',
-                'company' => 'Keebler LLC',
-            ],
-            [
-                'name' => 'Mrs. Dennis Schulist',
-                'age' => 48,
-                'username' => 'leopoldo_corkery',
-                'email' => 'karley_dach@jasper.info',
-                'address' => 'Norberto Crossing, Apt. 950, South Christy, 23505-1337',
-                'company' => 'Considine-Lockman',
-            ],
-            [
-                'name' => 'Kurtis Weissnat',
-                'age' => 33,
-                'username' => 'elwyn.skiles',
-                'email' => 'telly.hoeger@billy.biz',
-                'address' => 'Rex Trail, Suite 280, Howemouth, 58804-1099',
-                'company' => 'Johns Group',
-            ],
-            [
-                'name' => 'Nicholas Runolfsdottir V',
+                'name' => 'Walter Stewart',
                 'age' => 27,
-                'username' => 'maxime_nienow',
-                'email' => 'sherwood@rosamond.me',
-                'address' => 'Ellsworth Summit, Suite 729, Aliyaview, 45169',
-                'company' => 'Abernathy Group',
+                'username' => 'walter.stewart',
+                'email' => 'walter.stewart@domain.tld',
+                'address' => 'Della Street 100, 62204 Huff City, Country',
+                'company' => 'Antonio Potter Ltd.',
             ],
             [
-                'name' => 'Glenna Reichert',
+                'name' => 'Eric Lee',
+                'age' => 41,
+                'username' => 'eric.lee',
+                'email' => 'eric.lee@domain.tld',
+                'address' => 'Paul Street 13, 72687 Spencer City, Country',
+                'company' => 'Sylvia Schneider Corp',
+            ],
+            [
+                'name' => 'Ruth Harmon',
+                'age' => 29,
+                'username' => 'ruth.harmon',
+                'email' => 'ruth.harmon@domain.tld',
+                'address' => 'Beatrice Street 99, 38186 Perez City, Country',
+                'company' => 'Andrew Poole LLC',
+            ],
+            [
+                'name' => 'Jim Craig',
                 'age' => 65,
-                'username' => 'delphine',
-                'email' => 'chaim_mcdermott@dana.io',
-                'address' => 'Dayna Park, Suite 449, Bartholomebury, 76495-3109',
-                'company' => 'Yost and Sons',
-            ],
-            [
-                'name' => 'Clementina DuBuque',
-                'age' => 37,
-                'username' => 'moriah.stanton',
-                'email' => 'rey.padberg@karina.biz',
-                'address' => 'Kattie Turnpike, Suite 198, Lebsackbury, 31428-2261',
-                'company' => 'Hoeger LLC',
+                'username' => 'jim.craig',
+                'email' => 'jim.craig@domain.tld',
+                'address' => 'Kate Street 76, 54801 Harris City, Country',
+                'company' => 'Owen Ferguson Ltd.',
             ],
         ];
 
