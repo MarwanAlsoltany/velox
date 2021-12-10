@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor configVersion="3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpdoc.org">
+    <!--
+        NOTE:
+        As per https://www.phpdoc.org/ recommendation, to not install phpDocumetor using Composer.
+        To generate documetation, download the "phpDocumentor.phar" using "wget https://phpdoc.org/phpDocumentor.phar"
+        in the root of the project, then run "php phpDocumentor.phar" to generate documentation under build/phpdoc.
+    -->
+    <title>VELOX Framework API Docs</title>
+    <paths>
+        <output>build/phpdoc</output>
+        <cache>build/phpdoc/.cache</cache>
+    </paths>
+    <version number="3.0.0">
+        <folder>latest</folder>
+        <api>
+            <source dsn=".">
+                <path>classes</path>
+                <path>functions</path>
+                <path>config</path>
+                <path>includes</path>
+                <path>bin</path>
+                <path>bootstrap</path>
+            </source>
+            <output>api</output>
+            <ignore hidden="true" symlinks="true">
+                <path>tests/**/*</path>
+            </ignore>
+            <extensions>
+                <extension>php</extension>
+            </extensions>
+            <default-package-name>Root</default-package-name>
+            <include-source>true</include-source>
+            <markers>
+                <marker>TODO</marker>
+                <marker>FIXME</marker>
+            </markers>
+        </api>
+    </version>
+</phpdocumentor>
