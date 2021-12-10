@@ -15,7 +15,6 @@ use MAKS\Velox\App;
 use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Globals;
-use MAKS\Velox\Frontend\View;
 
 /**
  * A class that serves as a router and an entry point for the application.
@@ -631,12 +630,12 @@ class Router
         // prevent overwriting constructor in subclasses to allow to use
         // "return new static()" without caring about dependencies.
 
+        static $isListening = false;
+
         // start the router if it's not started by the user
-        static $isStarted = false;
-        if (Config::get('router.allowAutoStart') && !$isStarted) {
-            Event::listen(App::ON_SHUTDOWN, static function () use (&$isStarted) {
+        if (Config::get('router.allowAutoStart') && !$isListening) {
+            Event::listen(App::ON_SHUTDOWN, static function () {
                 // @codeCoverageIgnoreStart
-                $isStarted = true;
                 // $params should be an array if the router has been started
                 if (self::$params === null && PHP_SAPI !== 'cli') {
                     try {
@@ -647,6 +646,8 @@ class Router
                 }
                 // @codeCoverageIgnoreEnd
             });
+
+            $isListening = true;
         }
     }
 
