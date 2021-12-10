@@ -65,9 +65,9 @@ The fastest way to build simple websites using PHP!
 <img src="https://user-images.githubusercontent.com/7969982/133680020-48b64343-eb6e-4519-b1ba-adc86737c184.jpeg" alt="VELOX Demo" width="768" />
 </a>
 
-Check out the [Demo](https://velox.marwanalsoltany.repl.co) or play with the [REPL](https://replit.com/@MarwanAlsoltany/velox).
+Check out the [**Demo**](https://velox.marwanalsoltany.repl.co) or play with the [**REPL**](https://replit.com/@MarwanAlsoltany/velox).
 
-Do you feel like reading? Check out the full API on the documentation website on [`marwanalsoltany.com/velox`](https://marwanalsoltany.com/velox).
+Do you feel like reading? Check out the full API on the documentation website on [`marwanalsoltany.github.io/velox`](https://marwanalsoltany.github.io/velox).
 
 </div>
 
@@ -165,7 +165,7 @@ Router::handle('/', function () {
 Router::start();
 ```
 
-Additionally, you can add middlewares using `Router::middleware()` and/or set up handlers for `404` and `405` responses using `Router::handleRouteNotFound()` `Router::handleMethodNotAllowed()` respectively.
+Additionally, you can add middlewares using `Router::middleware()` and/or set up handlers for `404` and `405` responses using `{global.errorPages.CODE}` config value.
 
 Alternatively, you can extract the *"routes registration part"* in its own file and let VELOX know about it using [`bootstrap/additional.php`](./bootstrap/additional.php).
 Starting from `v1.2.0` VELOX does that by default, the file [`includes/routes/web.php`](./includes/routes/web.php) is where you should register your routes. The router will also start automatically if not started explicitly.
@@ -580,7 +580,7 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [downloads-href]: https://packagist.org/packages/marwanalsoltany/velox/stats
 [license-href]: ./LICENSE
 [maintenance-href]: https://github.com/MarwanAlsoltany/velox/graphs/commit-activity
-[documentation-href]: http://marwanalsoltany.com/velox
+[documentation-href]: https://marwanalsoltany.github.io/velox
 [scrutinizer-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/build-status/master
 [scrutinizer-coverage-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/?branch=master
 [scrutinizer-quality-href]: https://scrutinizer-ci.com/g/MarwanAlsoltany/velox/?branch=maste
