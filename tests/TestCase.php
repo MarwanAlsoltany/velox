@@ -14,8 +14,24 @@ class TestCase extends BaseTestCase
         parent::__construct();
 
         defined('EXIT_EXCEPTION') || define('EXIT_EXCEPTION', 1);
+
+        $this->prepareNeededSuperglobals();
     }
 
+
+    /**
+     * Prepares superglobals needed for testing.
+     *
+     * @return void
+     */
+    private function prepareNeededSuperglobals(): void
+    {
+        $_SERVER['HTTPS'] = 'on';
+        $_SERVER['HTTP_HOST'] = 'velox.test';
+        $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.1';
+        $_SERVER['REQUEST_URI'] = '/';
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+    }
 
     public function setUp(): void
     {
