@@ -136,6 +136,16 @@ class AppTest extends TestCase
         $this->app->abort(404, 'This is a test message!');
     }
 
+    public function testAbortMethodWithErrorCodesThatDoNotHaveAViewFile()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessageMatches('/(exit)/i');
+        $this->expectOutputRegex('/(503 Service Unavailable)/');
+        $this->expectOutputRegex('/(This is a test message!)/');
+
+        $this->app->abort(503, 'This is a test message!');
+    }
+
     public function testTerminateMethod()
     {
         $this->expectException(\Exception::class);
