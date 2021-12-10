@@ -4,10 +4,48 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.4.2] - 2021-12-10](https://github.com/MarwanAlsoltany/velox/compare/v1.4.1...v1.4.2)
+
+- Update `App` class:
+    - Add events as class constants.
+    - Add `shutdown()` method.
+    - Update `terminate()` method.
+    - Update `abort()` method.
+- Update `Auth` class:
+    - Update `fail()` method.
+- Update `Controller` class:
+    - Update `$crudRoutes` ID regex to make them start from `1` instead of `0`.
+- Update `Router` class:
+    - Update `__construct()` method.
+    - Update `getRouteRegex()` method to fix issues with route placeholder.
+- Update `Session` class:
+    - Update `csrf()` method.
+- Update `Path` class:
+    - Update `current()` method to strip query string from the returned path.
+- Update `PersonsController` class:
+    - Update `createTestData()` method.
+- Update `UsersController` class:
+    - Update `registerAction()` method.
+    - Update `loginAction()` method.
+- Update `system/events.php`:
+    - Add `App::ON_SHUTDOWN` event listener.
+- Update `velox` theme:
+    - Update error pages (`401`, `403`, `404`, `405`, `500`).
+- Update `composer.json`:
+    - Update `description`.
+    - Update `keywords`.
+    - Update `support`.
+    - Update `branch-alias`.
+- Update tests:
+    - Add `TestCase` class.
+    - Add `AppTest` class.
+
+<br />
+
 ## [[1.4.1] - 2021-11-23](https://github.com/MarwanAlsoltany/velox/compare/v1.4.0...v1.4.1)
 
-- Improve documentation of ***class***, ***methods***, ***functions***, ***config files***, ...
-- Generate documentation for the full API on [`marwanalsoltany.com/velox`](https://marwanalsoltany.com/velox).
+- Improve DocBlocks of ***classes***, ***methods***, ***functions***, ***config files***, ...
+- Generate documentation for the full API on [`marwanalsoltany.github.io/velox`](https://marwanalsoltany.github.io/velox).
 
 <br />
 
