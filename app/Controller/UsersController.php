@@ -15,11 +15,17 @@ use MAKS\Velox\Backend\Controller;
 
 class UsersController extends Controller
 {
+    /**
+     * {@inheritDoc}
+     */
     protected function associateModel(): ?string
     {
         return $this->config->get('auth.user.model');
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function registerRoutes(): bool
     {
         return true;
@@ -56,7 +62,7 @@ class UsersController extends Controller
         $success = $this->auth->register($username, $password);
 
         if (!$success) {
-            $this->session->flash('Username already taken!', 'notification');
+            $this->session->flash('Username already taken!', 'notification', true);
 
             return $this->view->render('users/register', [
                 'title' => 'Register',
@@ -113,7 +119,7 @@ class UsersController extends Controller
         if ($success) {
             return $this->router->redirect('/auth');
         } else {
-            $this->session->flash('Wrong username or password!', 'notification');
+            $this->session->flash('Wrong username or password!', 'notification', true);
 
             return $this->view->render('users/login', [
                 'title' => 'Log in',
