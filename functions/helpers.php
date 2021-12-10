@@ -24,7 +24,9 @@ if (!function_exists('abort')) {
     /**
      * Aborts the current request and sends a response with the specified HTTP status code, title, and message.
      * An HTML page will be rendered with the specified title and message.
-     * The title for the most comment HTTP status codes (`200`, `403`, `404`, `405`, `500`, `503`) is already configured.
+     * If a view file for the error page is set using `{global.errorPages.CODE}`,
+     * it will be rendered instead of the normal page and passed the `$code`, `$title`, and `$message` variables.
+     * The title for the most common HTTP status codes (`200`, `401`, `403`, `404`, `405`, `500`, `503`) is already configured.
      *
      * @param int $code The HTTP status code.
      * @param string|null $title [optional] The title of the HTML page.
@@ -45,9 +47,10 @@ if (!function_exists('terminate')) {
      * This function is used instead of PHP `exit` to allow for testing `exit` without breaking the unit tests.
      *
      * @param int|string|null $status The exit status code/message.
+     * @param bool $noShutdown Whether to not execute the shutdown function or not.
      *
      * @return void This function never returns. It will terminate the script.
-     * @throws \Exception If `UNIT_TESTING` is defined and truthy.
+     * @throws \Exception If `EXIT_EXCEPTION` is defined and truthy.
      *
      * @since 1.2.5
      */
@@ -116,8 +119,11 @@ if (!function_exists('handle')) {
     /**
      * Registers a handler for a route.
      *
-     * @param string $expression A route like `/page`, `/page/{id}` (`id` is required), or `/page/{id?}` (`id` is optional). For more flexibility, pass en expression like `/page/([\d]+|[0-9]*)` (regex capture group).
-     * @param callable $handler A function to call if route has matched. It will be passed the current `$path`, the `$match` or `...$match` from the expression if there was any, and lastly the `$previous` result (the return of the last middleware or route with a matching expression) if `$allowMultiMatch` is set to `true`.
+     * @param string $expression A route like `/page`, `/page/{id}` (`id` is required), or `/page/{id?}` (`id` is optional), or `page*` (`*` is a wildcard for anything).
+     *      For more flexibility, pass an expression like `/page/([\d]+|[0-9]*)` (regex capture group).
+     * @param callable $handler A function to call if route has matched.
+     *      It will be passed the current `$path`, the `$match` or `...$match` from the expression if there was any, and lastly the `$previous` result
+     *      (the return of the last middleware or route with a matching expression) if `$allowMultiMatch` is set to `true`.
      * @param string|string[] $method [optional] Either a string or an array of the allowed method.
      *
      * @return static
@@ -135,6 +141,7 @@ if (!function_exists('redirect')) {
      * Note that this function will exit the script (code that comes after it will not be executed).
      *
      * @param string $to A route like `/page` or a URL like `http://domain.tld`.
+     * @param int $status [optional] The HTTP status code to send.
      *
      * @return void
      *
@@ -268,10 +275,10 @@ if (!function_exists('view')) {
 
 if (!function_exists('render')) {
     /**
-     * Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to "{view.defaultSectionName}" section.
+     * Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to `{view.defaultSectionName}` section.
      *
      * @param string $page The name of the page.
-     * @param array|null $variables [optional] An associative array of the variables to pass.
+     * @param array $variables [optional] An associative array of the variables to pass.
      * @param string|null $layout [optional] The name of the Layout to use.
      *
      * @return string
@@ -288,7 +295,7 @@ if (!function_exists('render_layout')) {
      * Renders a theme layout with the passed variables.
      *
      * @param string $name The name of the layout.
-     * @param array|null $variables [optional] An associative array of the variables to pass.
+     * @param array $variables [optional] An associative array of the variables to pass.
      *
      * @return string
      *
@@ -304,7 +311,7 @@ if (!function_exists('render_page')) {
      * Renders a theme page with the passed variables.
      *
      * @param string $name The name of the page.
-     * @param array|null $variables [optional] An associative array of the variables to pass.
+     * @param array $variables [optional] An associative array of the variables to pass.
      *
      * @return string
      *
@@ -320,7 +327,7 @@ if (!function_exists('render_partial')) {
      * Renders a theme partial with the passed variables.
      *
      * @param string $name The name of the partial.
-     * @param array|null $variables [optional] An associative array of the variables to pass.
+     * @param array $variables [optional] An associative array of the variables to pass.
      *
      * @return string
      *
@@ -352,7 +359,7 @@ if (!function_exists('section_reset')) {
     /**
      * Resets (empties) the buffer of the section with the given name.
      *
-     * @param string|null $name The name of the section.
+     * @param string $name The name of the section.
      *
      * @return void
      *
@@ -365,10 +372,8 @@ if (!function_exists('section_reset')) {
 
 if (!function_exists('section_start')) {
     /**
-     * Starts capturing buffer of the section with the given name. Works in conjunction with `self::sectionEnd()`.
+     * Ends capturing buffer of the section with the given name. Works in conjunction with `self::sectionStart()`.
      * Note that a section will not be rendered unless it's yielded.
-     *
-     * @param string $name The name of the section.
      *
      * @return void
      *
@@ -522,7 +527,7 @@ if (!function_exists('path')) {
 
 if (!function_exists('app_path_current')) {
     /**
-     * Returns the current path, or compares it with the passed parameter.
+     * Returns the current path, or compares it with the passed parameter. Note that the path does not contain the query string.
      *
      * @param string|null $compareTo [optional] Some path on the server.
      *
