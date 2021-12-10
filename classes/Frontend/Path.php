@@ -57,7 +57,7 @@ use MAKS\Velox\Backend\Globals;
 final class Path
 {
     /**
-     * Returns the current path, or compares it with the passed parameter.
+     * Returns the current path, or compares it with the passed parameter. Note that the path does not contain the query string.
      *
      * @param string|null $compareTo [optional] Some path on the server.
      *
@@ -65,7 +65,7 @@ final class Path
      */
     public static function current(?string $compareTo = null)
     {
-        $path = Globals::getServer('REQUEST_URI');
+        $path = strtok(Globals::getServer('REQUEST_URI'), '?');
 
         if ($compareTo) {
             return $path === $compareTo;
