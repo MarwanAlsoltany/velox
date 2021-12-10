@@ -390,6 +390,7 @@ class App
      *
      * @return void
      *
+     * @internal This method is to be used by the framework and not the user.
      * @since 1.4.2
      *
      * @codeCoverageIgnore
@@ -397,6 +398,8 @@ class App
     public static function shutdown(): void
     {
         Event::dispatch(self::ON_SHUTDOWN);
+
+        Misc::setArrayValueByKey($GLOBALS, '_VELOX.SHUTDOWN', false);
 
         exit;
     }
