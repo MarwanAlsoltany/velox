@@ -248,7 +248,7 @@ class View
      * Renders a theme layout with the passed variables.
      *
      * @param string $name The name of the layout.
-     * @param array $variables An associative array of the variables to pass.
+     * @param array $variables [optional] An associative array of the variables to pass.
      *
      * @return string
      */
@@ -267,7 +267,7 @@ class View
      * Renders a theme page with the passed variables.
      *
      * @param string $name The name of the page.
-     * @param array $variables An associative array of the variables to pass.
+     * @param array $variables [optional] An associative array of the variables to pass.
      *
      * @return string
      */
@@ -286,7 +286,7 @@ class View
      * Renders a theme partial with the passed variables.
      *
      * @param string $name The name of the partial.
-     * @param array $variables An associative array of the variables to pass.
+     * @param array $variables [optional] An associative array of the variables to pass.
      *
      * @return string
      */
