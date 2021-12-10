@@ -15,6 +15,13 @@
 // --------
 // * Check out "/storage/logs/events.log" to see the result.
 
+Event::listen(\MAKS\Velox\App::ON_SHUTDOWN, function () {
+    App::log('App has shutdown at "{date}" and took "{time}" to process the request', [
+        'date' => (new DateTime('now'))->format('Y-m-d H:i:s'),
+        'time' => sprintf('%.2fms', (microtime(true) - START_TIME) * 1000),
+    ], 'events');
+});
+
 Event::listen(\MAKS\Velox\Backend\Auth::ON_REGISTER, function ($user) {
     App::log('A new user with username "{username}" has registered', [
         'username' => $user->getUsername()
@@ -59,6 +66,8 @@ Event::listen(\MAKS\Velox\Frontend\View::BEFORE_RENDER, function (&$variables) {
 
 // Available events
 // ----------------
+// * App::ON_TERMINATE
+// * App::ON_SHUTDOWN
 // * Auth::ON_REGISTER
 // * Auth::AFTER_REGISTER
 // * Auth::ON_UNREGISTER
