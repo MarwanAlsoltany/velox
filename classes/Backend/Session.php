@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace MAKS\Velox\Backend;
 
 use MAKS\Velox\App;
-use MAKS\Velox\Frontend\View;
 use MAKS\Velox\Frontend\HTML;
 use MAKS\Velox\Helper\Misc;
 
