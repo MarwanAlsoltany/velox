@@ -4,6 +4,18 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.4.3] - 2021-12-10](https://github.com/MarwanAlsoltany/velox/compare/v1.4.2...v1.4.3)
+
+- Update `App` class:
+    - Update `shutdown()` method to fix an issue preventing functions registered via `register_shutdown_function()` from executing.
+- Update `Router` class:
+    - Update` __construct()` method to fix an issue where shutdown function is registered multiple times.
+- Update `loader.php`:
+    - Update exception handler function.
+    - Update shutdown function.
+
+<br />
+
 ## [[1.4.2] - 2021-12-10](https://github.com/MarwanAlsoltany/velox/compare/v1.4.1...v1.4.2)
 
 - Update `App` class:
