@@ -23,6 +23,18 @@ namespace MAKS\Velox\Backend;
  *
  * // dispatching an event
  * Event::dispatch('some.event', [$arg1, $arg2]);
+ *
+ * // check if an event has listeners
+ * Event::hasListener('some.event');
+ *
+ * // check if an event is dispatched
+ * Event::isDispatch('some.event');
+ *
+ * // get a registered or a new event object
+ * Event::get('some.event');
+ *
+ * // get a all registered events
+ * Event::getRegisteredEvents();
  * ```
  *
  * @package Velox\Backend
@@ -38,30 +50,37 @@ class Event
 
 
     /**
-     * Dispatches the passed event by executing all attached callbacks and passes them the passed arguments.
+     * Dispatches the passed event by executing all attached listeners and passes them the passed arguments.
      *
      * @param string $event Event name.
-     * @param array $arguments [optional] Arguments array. Note that the arguments will be spread (`...$args`) on the callback.
+     * @param array $arguments [optional] Arguments array.
+     *      Note that the arguments will be spread (`...$args`) on the callback and an additional argument of the event name will be appended to the arguments.
      * @param object|null $callbackThis [optional] The object the callback should be bound to.
      *
      * @return void
      */
     public static function dispatch(string $event, ?array $arguments = null, ?object $callbackThis = null): void
     {
-        if (isset(static::$events[$event]) && count(static::$events[$event])) {
-            $callbacks = &static::$events[$event];
-            foreach ($callbacks as $callback) {
-                $parameters = array_merge(array_values($arguments ?? []), [$event]);
+        if (static::hasListener($event) === false) {
+            static::get($event)->dispatched = true;
 
-                if ($callbackThis) {
-                    $callback->call($callbackThis, ...$parameters);
-                    continue;
-                }
+            return;
+        }
 
-                $callback(...$parameters);
+        $callbacks = &static::get($event)->listeners;
+        foreach ($callbacks as $callback) {
+            $parameters = array_merge(array_values($arguments ?? []), [$event]);
+
+            if ($callbackThis) {
+                $callback->call($callbackThis, ...$parameters);
+                continue;
             }
-        } else {
-            static::$events[$event] = [];
+
+            $callback(...$parameters);
+        }
+
+        if (static::isDispatched($event) === false) {
+            static::get($event)->dispatched = true;
         }
     }
 
@@ -75,16 +94,80 @@ class Event
      */
     public static function listen(string $event, callable $callback): void
     {
-        static::$events[$event][] = \Closure::fromCallable($callback);
+        static::get($event)->listeners[] = \Closure::fromCallable($callback);
     }
 
     /**
-     * Returns array of all registered events as an array `['event.name' => [...$callbacks]]`.
+     * Checks whether an event has already been dispatched or not.
      *
-     * @return array
+     * @param string $event Event name.
+     *
+     * @return bool
+     *
+     * @since 1.5.0
+     */
+    public static function isDispatched(string $event): bool
+    {
+        return static::get($event)->dispatched === true;
+    }
+
+    /**
+     * Checks whether an event has any listeners or not.
+     *
+     * @param string $event Event name.
+     *
+     * @return bool
+     *
+     * @since 1.5.0
+     */
+    public static function hasListener(string $event): bool
+    {
+        return empty(static::get($event)->listeners) === false;
+    }
+
+    /**
+     * Returns an event object by its name or creates it if it does not exist.
+     * The event object consists of the following properties:
+     * - `name`: The event name.
+     * - `dispatched`: A boolean flag indicating whether the event has been dispatched or not.
+     * - `listeners`: An array of callbacks.
+     *
+     * @param string $event Event name.
+     *
+     * @return object
+     *
+     * @since 1.5.0
+     */
+    public static function get(string $event): object
+    {
+        return static::$events[$event] ?? static::create($event);
+    }
+
+    /**
+     * Returns array of all registered events as an array `['event.name' => $eventObject, ...]`.
+     *
+     * @return object[]
      */
     public static function getRegisteredEvents(): array
     {
         return static::$events;
+    }
+
+    /**
+     * Creates an event object and adds it to the registered events.
+     *
+     * @param string $event Event name.
+     *
+     * @return object
+     *
+     * @since 1.5.0
+     */
+    protected static function create(string $event): object
+    {
+        return static::$events[$event] = (object)[
+            'name'       => $event,
+            'dispatched' => false,
+            'listeners'  => [],
+        ];
     }
 }
