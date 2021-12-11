@@ -36,18 +36,6 @@ use MAKS\Velox\Backend\Globals;
  *      return View::render('another-page');
  * });
  *
- * // register handler for 404
- * Router::handleRouteNotFound(function ($path) {
- *      // forward the request to some route.
- *      Router::forward('/');
- * });
- *
- * // register handler for 405
- * Router::handleMethodNotAllowed(function ($path, $method) {
- *      // redirect the request to some URL.
- *      Router::redirect('/some-page');
- * });
- *
  * // start the application
  * Router::start();
  * ```
@@ -161,16 +149,6 @@ class Router
      */
     protected static array $routes = [];
 
-    /**
-     * @var callable|null
-     */
-    protected static $routeNotFoundCallback = null;
-
-    /**
-     * @var callable|null
-     */
-    protected static $methodNotAllowedCallback = null;
-
 
     /**
      * Registers a route.
@@ -283,38 +261,6 @@ class Router
         static::start(...self::$params);
 
         App::terminate(); // @codeCoverageIgnore
-    }
-
-    /**
-     * Registers 404 handler.
-     *
-     * @param callable $handler The handler to use. It will be passed the current `$path` and the current `$method`.
-     *
-     * @return static
-     *
-     * @deprecated Since `v1.4.1`, will be removed in `v1.5.0`. Use `{global.errorPages.404}` config value instead.
-     */
-    public static function handleRouteNotFound(callable $handler)
-    {
-        static::$routeNotFoundCallback = $handler;
-
-        return new static();
-    }
-
-    /**
-     * Registers 405 handler.
-     *
-     * @param callable $handler The handler to use. It will be passed the current `$path`.
-     *
-     * @return static
-     *
-     * @deprecated Since `v1.4.1`, will be removed in `v1.5.0`. Use `{global.errorPages.405}` config value instead.
-     */
-    public static function handleMethodNotAllowed(callable $handler)
-    {
-        static::$methodNotAllowedCallback = $handler;
-
-        return new static();
     }
 
     /**
@@ -526,39 +472,25 @@ class Router
             $path   = static::$path;
             $method = static::getRequestMethod();
 
-            App::log("Responded with {$code} to the request for '{$path}' with method '{$method}'", null, 'system');
-
             $responses = [
                 404 => [
-                    'func' => &static::$routeNotFoundCallback,
-                    'args' => [$path],
-                    'html' => [
-                        'title'   => sprintf('%d Not Found', $code),
-                        'message' => sprintf('The "%s" route is not found!', $path),
-                    ]
+                    'title'   => sprintf('%d Not Found', $code),
+                    'message' => sprintf('The "%s" route is not found!', $path),
                 ],
                 405 => [
-                    'func' => &static::$methodNotAllowedCallback,
-                    'args' => [$path, $method],
-                    'html' => [
-                        'title'   => sprintf('%d Not Allowed', $code),
-                        'message' => sprintf('The "%s" route is found, but the request method "%s" is not allowed!', $path, $method),
-                    ]
+                    'title'   => sprintf('%d Not Allowed', $code),
+                    'message' => sprintf('The "%s" route is found, but the request method "%s" is not allowed!', $path, $method),
                 ],
             ];
 
-            http_response_code($code);
+            App::log("Responded with {$code} to the request for '{$path}' with method '{$method}'", null, 'system');
 
-            if (!isset($responses[$code]['func'])) {
-                // this function will exit the script
-                App::abort(
-                    $code,
-                    $responses[$code]['html']['title'],
-                    $responses[$code]['html']['message']
-                );
-            }
-
-            $result = ($responses[$code]['func'])(...$responses[$code]['args']);
+            // this function will exit the script
+            App::abort(
+                $code,
+                $responses[$code]['title'],
+                $responses[$code]['message']
+            );
         }
 
         http_response_code() || http_response_code($code);
@@ -632,10 +564,10 @@ class Router
 
         static $isListening = false;
 
-        // start the router if it's not started by the user
+        // start the router if it's not started explicitly
+        // @codeCoverageIgnoreStart
         if (Config::get('router.allowAutoStart') && !$isListening) {
             Event::listen(App::ON_SHUTDOWN, static function () {
-                // @codeCoverageIgnoreStart
                 // $params should be an array if the router has been started
                 if (self::$params === null && PHP_SAPI !== 'cli') {
                     try {
@@ -644,11 +576,11 @@ class Router
                         App::handleException($exception);
                     }
                 }
-                // @codeCoverageIgnoreEnd
             });
 
             $isListening = true;
         }
+        // @codeCoverageIgnoreEnd
     }
 
     /**
