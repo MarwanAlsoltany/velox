@@ -155,51 +155,9 @@ class RouterTest extends TestCase
         $this->router->start('/', true, true, true);
     }
 
-    public function testRouterHandleMethodNotAllowedMethod()
-    {
-        $this->setTestObjectProperty($this->router, 'routes', []);
-
-        Globals::setServer('REQUEST_URI', '/405');
-        Globals::setServer('REQUEST_METHOD', 'GET');
-
-        $this->router->handleMethodNotAllowed(function () { return 'Test works!'; });
-        $this->router->handle('/405', fn () => 'Test', 'POST');
-
-        $callback = $this->getTestObjectProperty($this->router, 'methodNotAllowedCallback');
-
-        $this->assertIsCallable($callback);
-        $this->assertEquals('Test works!', $callback());
-
-        $this->expectOutputString('Test works!');
-
-        $this->router->start('/', true, true, false);
-    }
-
-    public function testRouterHandleRouteNotFoundMethod()
-    {
-        $this->setTestObjectProperty($this->router, 'routes', []);
-
-        Globals::setServer('REQUEST_URI', '/404');
-        Globals::setServer('REQUEST_METHOD', 'GET');
-
-        $this->router->handleRouteNotFound(function () { return 'Test works!'; });
-        $this->router->handle('/', fn () => 'Test', 'POST');
-
-        $callback = $this->getTestObjectProperty($this->router, 'routeNotFoundCallback');
-
-        $this->assertIsCallable($callback);
-        $this->assertEquals('Test works!', $callback());
-
-        $this->expectOutputString('Test works!');
-
-        $this->router->start('/', false, false, true);
-    }
-
     public function testRouter404And405FallbackPages()
     {
         $this->setTestObjectProperty($this->router, 'routes', []);
-        $this->setTestObjectProperty($this->router, 'methodNotAllowedCallback', null);
-        $this->setTestObjectProperty($this->router, 'routeNotFoundCallback', null);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessageMatches('/(exit)/i');
