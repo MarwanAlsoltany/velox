@@ -54,5 +54,9 @@ class EventTest extends TestCase
         $this->assertArrayHasKey('test.event.1', $events);
         $this->assertArrayHasKey('test.event.2', $events);
         $this->assertArrayHasKey('test.event.3', $events);
+        $this->assertIsObject($events['test.event.0']);
+        $this->assertObjectHasAttribute('name', $events['test.event.0']);
+        $this->assertObjectHasAttribute('dispatched', $events['test.event.0']);
+        $this->assertObjectHasAttribute('listeners', $events['test.event.0']);
     }
 }
