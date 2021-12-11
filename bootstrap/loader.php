@@ -8,6 +8,7 @@
  * - Registering an autoloader.
  * - Aliasing VELOX classes.
  * - Setting error and exception handlers and the shutdown function.
+ * - Setting the default timezone.
  * - Providing some helper functions for autoloading.
  *
  * If you ever wanted to extend VELOX functionality beyond basic stuff, you may want to do something here.
@@ -142,6 +143,7 @@ spl_autoload_register($loader, true, false);
 set_error_handler($errorHandler);
 set_exception_handler($exceptionHandler);
 register_shutdown_function($shutdownFunction);
+date_default_timezone_set(\MAKS\Velox\Backend\Config::get('global.timezone'));
 
 
 
