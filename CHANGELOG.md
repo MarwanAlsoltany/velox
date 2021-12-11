@@ -4,6 +4,34 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.5.0] - 2021-12-11](https://github.com/MarwanAlsoltany/velox/compare/v1.4.3...v1.5.0)
+
+- Update `Event` class:
+    - Update `dispatch()` method.
+    - Update `listen()` method.
+    - Add `isDispatched()` method.
+    - Add `hasListener()` method.
+    - Add `get()` method.
+    - Add `create()` method.
+- Update `Router` class:
+    - Remove `$routeNotFoundCallback` property.
+    - Remove `$methodNotAllowedCallback` property.
+    - Remove `handleRouteNotFound()` deprecated method.
+    - Remove `handleMethodNotAllowed()` deprecated method.
+- Update `loader.php`:
+    - Add default timezone setting.
+- Update `global.php` config file:
+    - Update `timezone` config entry.
+- Update `composer.json`:
+    - Update `branch-alias`.
+    - Add `blend` as a development dependency.
+    - Add `document` script.
+- Update tests:
+  - Update `RouterTest` class.
+  - Update `EventTest` class.
+
+<br />
+
 ## [[1.4.3] - 2021-12-10](https://github.com/MarwanAlsoltany/velox/compare/v1.4.2...v1.4.3)
 
 - Update `App` class:
@@ -49,8 +77,8 @@ All notable changes to **VELOX** will be documented in this file.
     - Update `support`.
     - Update `branch-alias`.
 - Update tests:
-    - Add `TestCase` class.
-    - Add `AppTest` class.
+    - Update `TestCase` class.
+    - Update `AppTest` class.
 
 <br />
 
