@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>    VELOX Framework API Docs &raquo; Deprecated elements
-</title>
+    <title>VELOX Framework API Docs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -55,6 +54,22 @@
 <aside class="phpdocumentor-column -four phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/velox.html">Velox</a></h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/velox-backend.html">Backend</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/velox-frontend.html">Frontend</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/velox-helper.html">Helper</a>
+                
+            </li>
+            </ul>
+
                                     <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/maks.html">MAKS</a></h4>
     <ul class="phpdocumentor-list">
                     <li>
@@ -101,17 +116,116 @@
 
             <div class="phpdocumentor-column -eight phpdocumentor-content">
                     <ul class="phpdocumentor-breadcrumbs">
-        <li><a href="">Home</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/velox.html">Velox</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/velox-frontend.html">Frontend</a></li>
     </ul>
 
-    <div class="phpdocumentor-row">
-        <h2 class="phpdocumentor-content__title">Deprecated</h2>
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    Engine
+
+        <span class="phpdocumentor-element__extends">
+        extends <abbr title="\MAKS\Velox\Frontend\Engine">Engine</abbr>
+    </span>
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Root.html">Root</a></li>
+                            </ul>
+        </div>
+    
+    
+    </h2>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="bootstrap/intellisense-v2.x.x.php"><a href="files/bootstrap-intellisense-v2-x-x.html"><abbr title="bootstrap/intellisense-v2.x.x.php">intellisense-v2.x.x.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">44</span>
+
+    </aside>
+
+            <p class="phpdocumentor-summary">`MAKS\Velox\Frontend\Engine` is deprecated since `v1.5.0` and will be removed in `v2.0.0`, use `Velox\Frontend\Engine` instead.</p>
+
+
+
+
+
+
+
+
+
+
+
 
         
-                    <div class="phpdocumentor-admonition phpdocumentor-admonition--success">
-                No deprecated elements have been found in this project.
-            </div>
-            </div>
+
+        
+
+        
+        
+    <script type="text/javascript">
+        function loadExternalCodeSnippets(line) {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                pre.setAttribute('data-line', line)
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        var modals = document.querySelectorAll("[data-modal]");
+
+        modals.forEach(function (trigger) {
+            trigger.addEventListener("click", function (event) {
+                //event.preventDefault();
+                const modal = document.getElementById(trigger.dataset.modal);
+                modal.classList.add("phpdocumentor-modal__open");
+                loadExternalCodeSnippets(trigger.dataset.line)
+                const exits = modal.querySelectorAll("[data-exit-button]");
+                exits.forEach(function (exit) {
+                    exit.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        modal.classList.remove("phpdocumentor-modal__open");
+                    });
+                });
+            });
+        });
+    </script>
+
+    </article>
                 <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
@@ -125,7 +239,7 @@
 </section>
             </div>
         </div>
-        <a href="reports/deprecated.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Velox-Frontend-Engine.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
