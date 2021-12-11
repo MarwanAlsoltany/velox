@@ -38,6 +38,7 @@
         "ext-pdo": "*"
     },
     "require-dev": {
+        "marwanalsoltany/blend": "^1.0",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
@@ -53,13 +54,15 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.4-dev"
+            "dev-master": "1.5-dev"
         }
     },
     "scripts": {
         "test": "phpunit",
+        "document": "[ -f ./phpDocumentor.phar ] && php phpDocumentor.phar",
         "build": [
-            "@test"
+            "@test",
+            "@document"
         ],
         "build-dev": [
             "composer run-script build --dev --verbose",
