@@ -31,7 +31,12 @@ return [
     'baseUrl' => null,
 
 
+    // VELOX default timezone, this will be used by all date/time functions.
+    'timezone' => 'Europe/Berlin',
+
+
     // VELOX error pages, view files to render for HTTP errors.
+    // The view set here will also be rendered when calling "App::abort($code)" instead of the default page.
     'errorPages' => [
         // A view file for "500 Internal Server Error" responses, if an uncaught exception was thrown in production environment.
         '500' => 'error/500',
