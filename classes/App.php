@@ -78,6 +78,12 @@ class App
     public const ON_SHUTDOWN = 'app.on.shutdown';
 
 
+    /**
+     * The class singleton instance.
+     */
+    private static self $instance;
+
+
     public Event $event;
 
     public Config $config;
@@ -114,6 +120,10 @@ class App
      */
     public function __construct()
     {
+        if (empty(static::$instance)) {
+            static::$instance = $this;
+        }
+
         $this->event    = new Event();
         $this->config   = new Config();
         $this->router   = new Router();
@@ -127,7 +137,9 @@ class App
         $this->path     = new Path();
         $this->dumper   = new Dumper();
         $this->misc     = new Misc();
+
         $this->methods  = [];
+        static::$staticMethods = [];
     }
 
     public function __get(string $property)
@@ -167,19 +179,20 @@ class App
     /**
      * Returns the singleton instance of the `App` class.
      *
+     * NOTE: This method returns only the first instance of the class
+     * which is normally the one that was created during application bootstrap.
+     *
      * @return static
      *
      * @since 1.4.0
      */
     final public static function instance(): self
     {
-        static $instance = null;
-
-        if ($instance === null) {
-            $instance = new static();
+        if (empty(static::$instance)) {
+            static::$instance = new static();
         }
 
-        return $instance;
+        return static::$instance;
     }
 
     /**
