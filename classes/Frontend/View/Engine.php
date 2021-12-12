@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace MAKS\Velox\Frontend;
+namespace MAKS\Velox\Frontend\View;
 
 use MAKS\Velox\Frontend\Path;
 use MAKS\Velox\Helper\Misc;
