@@ -81,7 +81,7 @@ class App
     /**
      * The class singleton instance.
      */
-    private static self $instance;
+    protected static self $instance;
 
 
     public Event $event;
