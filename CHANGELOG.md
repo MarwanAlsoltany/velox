@@ -10,11 +10,11 @@ All notable changes to **VELOX** will be documented in this file.
     - Add `$instance` property.
     - Update `instance()` method.
 - Update `Engine` class:
-    - Update class namespace form `MAKS\Velox\Frontend\Engine` to `MAKS\Velox\Frontend\View\Engine`. This shouldn't introduce any problems as this class is marked as `@internal`.
+    - Update class namespace (`MAKS\Velox\Frontend\Engine` -> `MAKS\Velox\Frontend\View\Engine`). This shouldn't introduce any problems as this class is marked as `@internal`.
 - Update `Model` class:
     - Refactor the class by extracting parts of it to `Model\DBAL` and `Model\Base`.
-- Add `Model\DBAL` class.
-- Add `Model\Base` class.
+    - Add `Model\DBAL` class.
+    - Add `Model\Base` class.
 - Update tests:
   - Update `EngineTest` class.
   - Update `ModelTest` class.
@@ -54,7 +54,7 @@ All notable changes to **VELOX** will be documented in this file.
 - Update `App` class:
     - Update `shutdown()` method to fix an issue preventing functions registered via `register_shutdown_function()` from executing.
 - Update `Router` class:
-    - Update` __construct()` method to fix an issue where shutdown function is registered multiple times.
+    - Update ` __construct()` method to fix an issue where shutdown function is registered multiple times.
 - Update `loader.php`:
     - Update exception handler function.
     - Update shutdown function.
