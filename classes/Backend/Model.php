@@ -55,11 +55,11 @@ use MAKS\Velox\Helper\Misc;
  * @since 1.3.0
  * @api
  *
- * @method mixed get*() Getter for model attribute, (`attribute_name` -> `getAttributeName()`).
- * @method $this set*() Setter for model attribute, (`attribute_name` -> `setAttributeName($value)`).
- * @method static[] findBy*() Finder by model attribute, (`attribute_name` -> `findByAttributeName($value)`).
+ * @method mixed getAttributeName*() Getter for model attribute, (`attribute_name` -> `getAttributeName()`).
+ * @method $this setAttributeName*() Setter for model attribute, (`attribute_name` -> `setAttributeName($value)`).
+ * @method static[] findByAttributeName*() Finder by model attribute, (`attribute_name` -> `findByAttributeName($value)`).
  *
- * @property mixed $* Public attribute for model attribute, (`attribute_name` -> `attributeName`).
+ * @property mixed $attributeName* Public property for model attribute, (`attribute_name` -> `attributeName`).
  */
 abstract class Model extends Model\Base
 {
