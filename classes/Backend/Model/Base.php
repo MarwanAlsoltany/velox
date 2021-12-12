@@ -83,10 +83,9 @@ abstract class Base extends DBAL implements \ArrayAccess, \Traversable, \Iterato
     }
 
     /**
-     * Gets and validates a specific model attribute.
+     * Gets the specified model attribute.
      *
-     * @param string $name Attribute name.
-     * @param mixed $value Attribute value.
+     * @param string $name Attribute name as specified in `$columns`.
      *
      * @return mixed Attribute value.
      *
@@ -100,9 +99,9 @@ abstract class Base extends DBAL implements \ArrayAccess, \Traversable, \Iterato
     }
 
     /**
-     * Sets and validates a specific model attribute.
+     * Sets the specified model attribute.
      *
-     * @param string $name Attribute name.
+     * @param string $name Attribute name as specified in `$columns`.
      * @param mixed $value Attribute value.
      *
      * @return $this
