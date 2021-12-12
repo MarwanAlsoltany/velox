@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Tests\Frontend;
 
 use MAKS\Velox\Tests\TestCase;
-use MAKS\Velox\Frontend\Engine;
+use MAKS\Velox\Frontend\View\Engine;
 
 class EngineTest extends TestCase
 {
