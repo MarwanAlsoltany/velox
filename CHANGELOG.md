@@ -4,6 +4,23 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.5.1] - 2021-12-12](https://github.com/MarwanAlsoltany/velox/compare/v1.5.0...v1.5.1)
+
+- Update `App` class:
+    - Add `$instance` property.
+    - Update `instance()` method.
+- Update `Engine` class:
+    - Update class namespace form `MAKS\Velox\Frontend\Engine` to `MAKS\Velox\Frontend\View\Engine`. This shouldn't introduce any problems as this class is marked as `@internal`.
+- Update `Model` class:
+    - Refactor the class by extracting parts of it to `Model\DBAL` and `Model\Base`.
+- Add `Model\DBAL` class.
+- Add `Model\Base` class.
+- Update tests:
+  - Update `EngineTest` class.
+  - Update `ModelTest` class.
+
+<br />
+
 ## [[1.5.0] - 2021-12-11](https://github.com/MarwanAlsoltany/velox/compare/v1.4.3...v1.5.0)
 
 - Update `Event` class:
