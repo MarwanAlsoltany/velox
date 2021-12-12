@@ -14,9 +14,9 @@ namespace MAKS\Velox\Frontend;
 use MAKS\Velox\App;
 use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
-use MAKS\Velox\Frontend\Engine;
 use MAKS\Velox\Frontend\HTML;
 use MAKS\Velox\Frontend\Path;
+use MAKS\Velox\Frontend\View\Engine;
 use MAKS\Velox\Helper\Misc;
 
 /**
