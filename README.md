@@ -225,7 +225,6 @@ The following table lists all available classes with their description:
 | <hr> | <hr> |
 | [`Frontend\Data`](./classes/Frontend/Data.php) | A class that serves as an abstracted data bag/store that is accessible via dot-notation. |
 | [`Frontend\View`](./classes/Frontend/View.php) | A class that renders view files (Layouts, Pages, and Partials) with the ability to include additional files, divide page content into sections and cache rendered views. |
-| [`Frontend\Engine`](./classes/Frontend/Engine.php) | A class that serves as a templating engine for view files. |
 | [`Frontend\HTML`](./classes/Frontend/HTML.php) | A class that serves as a fluent interface to write HTML in PHP. It also helps with creating HTML elements on the fly. |
 | [`Frontend\Path`](./classes/Frontend/Path.php) | A class that serves as a path resolver for different paths/URLs of the app. |
 | <hr> | <hr> |
@@ -423,6 +422,7 @@ class PersonsController extends Controller
 
     /**
      * Persons search action.
+     *
      * @route("/persons/search", {GET})
      */
     public function searchAction()
