@@ -286,9 +286,9 @@ class ModelTest extends TestCase
         $this->createModelTestData(2);
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessageMatches('/(Got .+ as an argument at index .+, which is invalid or unsupported SQL operator)/');
+        $this->expectExceptionMessageMatches('/(Got \'.+\' as an argument in query at index \(.+\), which is an invalid or unsupported SQL operator)/');
 
-        $this->model->where('age', '!=', 27);
+        $this->model->where('age', '!==', 27);
     }
 
     public function testModelWhereMethodThrowsAnExceptionWhenSuppliedWithInvalidAdditionalCondition(): void
@@ -296,7 +296,7 @@ class ModelTest extends TestCase
         $this->createModelTestData(2);
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessageMatches('/(The passed condition .+ at index .+, is invalid)/');
+        $this->expectExceptionMessageMatches('/(The passed condition \[.+\] in query at index \(.+\) is invalid)/');
 
         $this->model->where('name', 'LIKE', '%Doe', [[]], 'age', 1, 1);
     }
@@ -458,6 +458,22 @@ class ModelTest extends TestCase
             $this->assertIsString($key);
             $this->assertNotEmpty($value);
         }
+    }
+
+    public function testModelDBALMigrateMethodThrowsAnExceptionIfCalledInAnAbstractContext(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessageMatches('/(Cannot migrate an abstract class)/');
+
+        Model\DBAL::migrate();
+    }
+
+    public function testModelDBALFetchMethodThrowsAnExceptionIfCalledInAnAbstractContext(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessageMatches('/(Cannot fetch for an abstract class)/');
+
+        Model\DBAL::fetch('SELECT * FROM @table WHERE `name` LIKE :name', [':name' => '%Doe']);
     }
 
 
