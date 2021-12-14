@@ -11,7 +11,8 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend;
 
-use MAKS\Velox\Backend\{Database, Model\Element};
+use MAKS\Velox\Backend\Database;
+use MAKS\Velox\Backend\Model\Element;
 use MAKS\Velox\Helper\Misc;
 
 /**
