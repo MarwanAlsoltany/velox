@@ -34,8 +34,8 @@ All notable changes to **VELOX** will be documented in this file.
     - Update class namespace (`MAKS\Velox\Frontend\Engine` -> `MAKS\Velox\Frontend\View\Engine`). This shouldn't introduce any problems as this class is marked as `@internal`.
 - Update `Model` class:
     - Refactor the class by extracting parts of it to `Model\DBAL` and `Model\Base`.
-    - Add `Model\DBAL` class.
-    - Add `Model\Base` class.
+- Add `Model\DBAL` class.
+- Add `Model\Base` class.
 - Update tests:
   - Update `EngineTest` class.
   - Update `ModelTest` class.
