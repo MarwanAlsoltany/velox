@@ -13,6 +13,7 @@ namespace MAKS\Velox\Helper;
 
 use MAKS\Velox\App;
 use MAKS\Velox\Frontend\HTML;
+use MAKS\Velox\Helper\Misc;
 
 /**
  * A class that dumps variables and exception in a nice formatting.
@@ -24,18 +25,43 @@ class Dumper
 {
     /**
      * Accent color of exceptions page and dump block.
+     *
+     * @var string
      */
     public static string $accentColor = '#ff3a60';
 
     /**
      * Contrast color of exceptions page and dump block.
+     *
+     * @var string
      */
     public static string $contrastColor = '#030035';
 
     /**
+     * Dumper CSS styles.
+     * The array contains styles for:
+     * - `exceptionPage`
+     * - `traceBlock`
+     * - `dumpBlock`
+     * - `timeBlock`
+     *
+     * Currently set dumper colors can be inject in CSS using the `%accentColor%` and `%contrastColor%` placeholders.
+     *
+     * @var array
+     *
+     * @since 1.5.2
+     */
+    public static array $styles = [
+        'exceptionPage' => ":root{--accent-color:%accentColor%;--contrast-color:%contrastColor%}*,::after,::before{box-sizing:border-box}body{background:#fff;font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;margin:0}h1,h2,h3,h4,h5,h6{margin:0}h1,h2{color:var(--accent-color)}h1{font-size:32px}h2{font-size:28px}h3{color:#fff}.container{width:85vw;max-width:1200px;min-height:100vh;background:#fff;padding:7vh 3vw 10vh 3vw;margin:0 auto;overflow:hidden}.message{background:var(--accent-color);color:#fff;padding:2em 1em;margin:0 0 3em 0;}.code{overflow-y:scroll;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:14px;margin:0 0 3em 0;-ms-overflow-style: none;scrollbar-width: none}.code::-webkit-scrollbar{display:none}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}ul{padding:2em 1em;margin:1em 0;background:var(--contrast-color)}ul li{white-space:pre;list-style-type:none;font-family:monospace}ul li span.line{display:inline-block;color:#fff;text-align:right;padding:4px 8px;user-select:none}ul li.exception-line span.line{color:var(--accent-color);font-weight:bold}ul li.exception-line span.line+code>span>span:not(:first-child){padding-bottom:3px;border-bottom:2px solid var(--accent-color)}.external-link{color:var(--accent-color)}.table-container{overflow-x:scroll}table{width:100%;border-collapse:collapse;border-spacing:0}table th{background:var(--contrast-color);color:#fff;text-align:left;padding-top:12px;padding-bottom:12px}table td,table th{border-bottom:1px solid rgba(0,0,0,0.15);padding:6px}table tr:nth-child(even){background-color:rgba(0,0,0,0.05)}table td.number{text-align:left}table td.line{text-align:left}table td.class,table td.function{font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:14px;font-weight:700}table td.arguments{white-space:nowrap}table td.arguments span{display:inline-block;background:rgba(0,0,0,.15);color:var(--accent-color);font-style:italic;padding:2px 4px;margin:0 4px 0 0;border-radius:4px}",
+        'traceBlock'    => "background:#fff;color:%accentColor%;font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;padding:4px 8px;margin-bottom:18px;",
+        'dumpBlock'     => "display:table;background:%contrastColor%;color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:18px;padding:18px;margin-bottom:8px;",
+        'timeBlock'     => "display:table;background:%accentColor%;color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:12px;font-weight:bold;padding:12px;margin-bottom:8px;",
+    ];
+
+    /**
      * Colors of syntax tokens.
      *
-     * @var string[]
+     * @var array
      */
     public static array $syntaxHighlightColors = [
         'comment' => '#aeaeae',
@@ -48,7 +74,7 @@ class Dumper
     /**
      * Additional CSS styling of syntax tokens.
      *
-     * @var string[]
+     * @var array
      */
     public static array $syntaxHighlightStyles = [
         'comment' => 'font-weight: lighter;',
@@ -58,6 +84,11 @@ class Dumper
         'html'    => '',
     ];
 
+    /**
+     * PHP highlighting syntax tokens.
+     *
+     * @var string[]
+     */
     private static array $syntaxHighlightTokens = ['comment', 'keyword', 'string', 'default', 'html'];
 
 
@@ -86,39 +117,34 @@ class Dumper
      */
     public static function dump(...$variable): void
     {
-        self::setSyntaxHighlighting();
-        $accentColor   = self::$accentColor;
-        $contrastColor = self::$contrastColor;
+        $trace  = self::getValidCallerTrace();
+        $blocks = self::getDumpingBlocks();
 
-        $isCli = self::isCli();
-        $trace = self::getValidCallerTrace();
+        $dump = '';
 
-        $blocks = [
-            'wrapper' => $isCli ? '%s' : HTML::div('<style>.dump * {background:transparent;padding:0;}</style><div class="dump">%s</div>', [
-                'id' => 'dump'
-            ]),
-            'traceBlock' => $isCli ? "\n// \e[33;1mTRACE:\e[0m \e[34;46m[{$trace}]\e[0m \n\n" : HTML::div($trace, [
-                'style' => "background:#fff;color:{$accentColor};font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;padding:4px 8px;margin-bottom:18px;"
-            ]),
-            'dumpBlock' => $isCli ? '%s' : HTML::div('%s', [
-                'style' => "display:table;background:{$contrastColor};color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:18px;padding:18px;margin-bottom:8px;"
-            ]),
-            'timeBlock' => $isCli ? "\n\n// \e[36mSTART_TIME\e[0m + \e[35m%.2f\e[0mms \n\n\n" : HTML::div('START_TIME + %.2fms', [
-                'style' => "display:table;background:{$accentColor};color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:12px;font-weight:bold;padding:12px;margin-bottom:8px;"
-            ]),
-        ];
-
-        $html = '';
-
-        foreach ($variable as $dump) {
-            $highlightedDump = self::exportExpressionWithSyntaxHighlighting($dump, $blocks['traceBlock']);
-            $html .= sprintf($blocks['dumpBlock'], $highlightedDump);
+        foreach ($variable as $var) {
+            $trace = sprintf($blocks['traceBlock'], $trace);
+            $highlightedDump = self::exportExpressionWithSyntaxHighlighting($var, $trace);
+            $dump .= sprintf($blocks['dumpBlock'], $highlightedDump);
         }
 
         $time = (microtime(true) - START_TIME) * 1000;
-        $html .= sprintf($blocks['timeBlock'], $time);
+        $dump .= sprintf($blocks['timeBlock'], $time);
 
-        printf($blocks['wrapper'], $html);
+        if (self::isCli()) {
+            echo $dump;
+
+            return;
+        }
+
+        // @codeCoverageIgnoreStart
+        (new HTML(false))
+            ->open('div', ['id' => 'dump'])
+                ->style('.dump * {background:transparent;padding:0;}')
+                ->div($dump)
+            ->close()
+        ->echo();
+        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -149,10 +175,14 @@ class Dumper
         $filename    = basename($file);
         $lines       = file_exists($file) ? file($file) : null;
 
-        $accentColor   = self::$accentColor;
-        $contrastColor = self::$contrastColor;
-
-        $style = ":root{--accent-color:{$accentColor};--contrast-color:{$contrastColor}}*,::after,::before{box-sizing:border-box}body{background:#fff;font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;margin:0}h1,h2,h3,h4,h5,h6{margin:0}h1,h2{color:var(--accent-color)}h1{font-size:32px}h2{font-size:28px}h3{color:#fff}.container{width:85vw;max-width:1200px;min-height:100vh;background:#fff;padding:7vh 3vw 10vh 3vw;margin:0 auto;overflow:hidden}.message{background:var(--accent-color);color:#fff;padding:2em 1em;margin:0 0 3em 0;}.code{overflow-y:scroll;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:14px;margin:0 0 3em 0;-ms-overflow-style: none;scrollbar-width: none}.code::-webkit-scrollbar{display:none}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}ul{padding:2em 1em;margin:1em 0;background:var(--contrast-color)}ul li{white-space:pre;list-style-type:none;font-family:monospace}ul li span.line{display:inline-block;color:#fff;text-align:right;padding:4px 8px;user-select:none}ul li.exception-line span.line{color:var(--accent-color);font-weight:bold}ul li.exception-line span.line+code>span>span:not(:first-child){padding-bottom:3px;border-bottom:2px solid var(--accent-color)}.external-link{color:var(--accent-color)}.table-container{overflow-x:scroll}table{width:100%;border-collapse:collapse;border-spacing:0}table th{background:var(--contrast-color);color:#fff;text-align:left;padding-top:12px;padding-bottom:12px}table td,table th{border-bottom:1px solid rgba(0,0,0,0.15);padding:6px}table tr:nth-child(even){background-color:rgba(0,0,0,0.05)}table td.number{text-align:left}table td.line{text-align:left}table td.class,table td.function{font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:14px;font-weight:700}table td.arguments{white-space:nowrap}table td.arguments span{display:inline-block;background:rgba(0,0,0,.15);color:var(--accent-color);font-style:italic;padding:2px 4px;margin:0 4px 0 0;border-radius:4px}";
+        $style = Misc::interpolate(
+            static::$styles['exceptionPage'],
+            [
+                'accentColor'   => static::$accentColor,
+                'contrastColor' => static::$contrastColor
+            ],
+            '%%'
+        );
 
         (new HTML(false))
             ->node('<!DOCTYPE html>')
@@ -175,16 +205,18 @@ class Dumper
                                 return;
                             }
 
-                            $html->open('p')
-                                ->node("File: <code><b>{$file}</b></code>")
-                                ->entity('nbsp')
-                                ->entity('nbsp')
-                                ->entity('nbsp')
-                                ->a('Open in <b>VS Code</b>', [
-                                    'href'  => sprintf('vscode://file/%s:%d', $file, $line),
-                                    'class' => 'external-link',
-                                ])
-                            ->close();
+                            $html
+                                ->open('p')
+                                    ->node("File: <code><b>{$file}</b></code>")
+                                    ->entity('nbsp')
+                                    ->entity('nbsp')
+                                    ->entity('nbsp')
+                                    ->a('Open in <b>VS Code</b>', [
+                                        'href'  => sprintf('vscode://file/%s:%d', $file, $line),
+                                        'class' => 'external-link',
+                                    ])
+                                ->close();
+
                             $html->open('ul', ['class' => 'code']);
                             for ($i = $line - 3; $i < $line + 4; $i++) {
                                 if ($i > 0 && $i < count($lines)) {
@@ -213,6 +245,7 @@ class Dumper
                             }
                             $html->close();
                         })
+
                         ->h2('Stack trace:')
                         ->execute(function (HTML $html) use ($trace, $traceString) {
                             if (!count($trace)) {
@@ -223,8 +256,9 @@ class Dumper
 
                             $html->open('p')
                                 ->i('Hover on fields with * to reveal more info.')
-                            ->close()
-                            ->open('div', ['class' => 'table-container'])
+                            ->close();
+
+                            $html->open('div', ['class' => 'table-container'])
                                 ->open('table')
                                     ->open('thead')
                                         ->open('tr')
@@ -334,6 +368,8 @@ class Dumper
      */
     private static function exportExpressionWithSyntaxHighlighting($expression, ?string $phpReplacement = ''): string
     {
+        self::setSyntaxHighlighting();
+
         $export = self::exportExpression($expression);
 
         $code = highlight_string('<?php ' . $export, true);
@@ -364,6 +400,40 @@ class Dumper
         return $ansi;
     }
 
+    /**
+     * Returns an array containing HTML/ANSI wrapping blocks.
+     * Available blocks are: `traceBlock`, `dumpBlock`, and `timeBlock`.
+     * All this blocks will contain a placeholder for a `*printf()` function to inject content.
+     *
+     * @return void
+     */
+    private static function getDumpingBlocks(): array
+    {
+        $isCli = self::isCli();
+
+        $colors = [
+            'accentColor'   => static::$accentColor,
+            'contrastColor' => static::$contrastColor,
+        ];
+
+        return [
+            'traceBlock' => $isCli ? "\n// \e[33;1mTRACE:\e[0m \e[34;46m[%s]\e[0m \n\n" : HTML::div('%s', [
+                'style' => Misc::interpolate(static::$styles['traceBlock'], $colors, '%%')
+            ]),
+            'dumpBlock' => $isCli ? '%s' : HTML::div('%s', [
+                'style' => Misc::interpolate(static::$styles['dumpBlock'], $colors, '%%')
+            ]),
+            'timeBlock' => $isCli ? "\n\n// \e[36mSTART_TIME\e[0m + \e[35m%.2f\e[0mms \n\n\n" : HTML::div('START_TIME + %.2fms', [
+                'style' => Misc::interpolate(static::$styles['timeBlock'], $colors, '%%')
+            ]),
+        ];
+    }
+
+    /**
+     * Returns the last caller trace before `dd()` or `dump()` if the format of `file:line`.
+     *
+     * @return string
+     */
     private static function getValidCallerTrace(): string
     {
         $trace = 'Trace: N/A';
@@ -383,6 +453,12 @@ class Dumper
         return $trace;
     }
 
+    /**
+     * Converts a hex color to the closest standard ANSI color code.
+     * Standard ANSI colors include: black, red, green, yellow, blue, magenta, cyan and white.
+     *
+     * @return int
+     */
     private static function getAnsiCodeFromHexColor(string $color): int
     {
         $colors = [
@@ -434,6 +510,10 @@ class Dumper
     }
 
     /**
+     * Sets PHP syntax highlighting colors according to current class state.
+     *
+     * @return void
+     *
      * @codeCoverageIgnore
      */
     private static function setSyntaxHighlighting(): void
@@ -455,6 +535,11 @@ class Dumper
         }
     }
 
+    /**
+     * Checks whether the script is currently running in CLI mode or not.
+     *
+     * @return bool
+     */
     private static function isCli(): bool
     {
         return PHP_SAPI === 'cli';
