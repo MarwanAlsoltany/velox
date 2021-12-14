@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend;
 
-use MAKS\Velox\Backend\Database;
+use MAKS\Velox\Backend\{Database, Model\Element};
 use MAKS\Velox\Helper\Misc;
 
 /**
@@ -55,13 +55,13 @@ use MAKS\Velox\Helper\Misc;
  * @since 1.3.0
  * @api
  *
- * @method mixed getAttributeName*() Getter for model attribute, (`attribute_name` -> `getAttributeName()`).
- * @method $this setAttributeName*() Setter for model attribute, (`attribute_name` -> `setAttributeName($value)`).
- * @method static[] findByAttributeName*() Finder by model attribute, (`attribute_name` -> `findByAttributeName($value)`).
+ * @method mixed getSomeAttribute() Getter for model attribute, (`attribute_name` -> `getAttributeName()`).
+ * @method $this setSomeAttribute($value) Setter for model attribute, (`attribute_name` -> `setAttributeName($value)`).
+ * @method static[] findBySomeAttribute($value) Finder by model attribute, (`attribute_name` -> `findByAttributeName($value)`).
  *
  * @property mixed $attributeName* Public property for model attribute, (`attribute_name` -> `attributeName`).
  */
-abstract class Model extends Model\Base
+abstract class Model extends Element
 {
     /**
      * Creates an instance of the model. The model is not saved to the database unless `self::save()` is called.
