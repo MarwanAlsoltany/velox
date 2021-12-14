@@ -16,9 +16,9 @@ use MAKS\Velox\Helper\Misc;
 
 /**
  * An abstract class that serves as a DBAL for models.
+ * NOTE: This class is not meant to be used directly.
  *
  * @since 1.5.1
- * @internal
  */
 abstract class DBAL
 {
