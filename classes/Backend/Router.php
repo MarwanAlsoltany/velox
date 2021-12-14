@@ -128,6 +128,24 @@ class Router
         'TRACE'
     ];
 
+    /**
+     * Route type handler.
+     *
+     * @var string
+     *
+     * @since 1.5.2
+     */
+    protected const HANDLER_ROUTE = 'HANDLER';
+
+    /**
+     * Route type handler.
+     *
+     * @var string
+     *
+     * @since 1.5.2
+     */
+    protected const MIDDLEWARE_ROUTE = 'MIDDLEWARE';
+
 
     /**
      * The parameters the application started with.
@@ -192,7 +210,7 @@ class Router
      */
     public static function handle(string $expression, callable $handler, $method = 'GET')
     {
-        return static::registerRoute('handler', $expression, $handler, [], $method);
+        return static::registerRoute(static::HANDLER_ROUTE, $expression, $handler, [], $method);
     }
 
     /**
@@ -209,7 +227,7 @@ class Router
      */
     public static function middleware(string $expression, callable $handler, $method = 'GET')
     {
-        return static::registerRoute('middleware', $expression, $handler, [], $method);
+        return static::registerRoute(static::MIDDLEWARE_ROUTE, $expression, $handler, [], $method);
     }
 
     /**
@@ -292,7 +310,7 @@ class Router
         $pathMatchFound  = false;
         $result = null;
 
-        static::sort();
+        self::sort();
 
         foreach (static::$routes as &$route) {
             $expression = $base === '/' ? $route['expression'] : sprintf('%s/%s', $base, ltrim($route['expression'], '/'));
@@ -338,11 +356,11 @@ class Router
     private static function sort(): void
     {
         usort(static::$routes, function ($routeA, $routeB) {
-            if ($routeA['type'] === 'middleware' && $routeB['type'] !== 'middleware') {
+            if ($routeA['type'] === static::MIDDLEWARE_ROUTE && $routeB['type'] !== static::MIDDLEWARE_ROUTE) {
                 return -1;
             }
 
-            if ($routeA['type'] !== 'middleware' && $routeB['type'] === 'middleware') {
+            if ($routeA['type'] !== static::MIDDLEWARE_ROUTE && $routeB['type'] === static::MIDDLEWARE_ROUTE) {
                 return 1;
             }
 
@@ -360,7 +378,7 @@ class Router
      *
      * @return array
      */
-    private static function getValidParameters(?string $base, ?bool $allowMultiMatch, ?bool $caseMatters, ?bool $slashMatters): array
+    protected static function getValidParameters(?string $base, ?bool $allowMultiMatch, ?bool $caseMatters, ?bool $slashMatters): array
     {
         $routerConfig = Config::get('router');
 
@@ -384,15 +402,12 @@ class Router
      *
      * @return string
      */
-    private static function getRoutePath(bool $slashMatters): string
+    protected static function getRoutePath(bool $slashMatters): string
     {
         $url = static::getParsedUrl();
 
-        $path = '/';
-        if (isset($url['path'])) {
-            $path = $url['path'];
-            $path = !$slashMatters && $path !== '/' ? rtrim($path, '/') : $path;
-        }
+        $path = $url['path'] ?? '/';
+        $path = !$slashMatters && $path !== '/' ? rtrim($path, '/') : $path;
 
         return urldecode($path);
     }
@@ -406,7 +421,7 @@ class Router
      *
      * @return string
      */
-    private static function getRouteRegex(string $expression, bool $slashMatters, bool $caseMatters): string
+    protected static function getRouteRegex(string $expression, bool $slashMatters, bool $caseMatters): string
     {
         $asteriskRegex    = '/(?<!\()\*(?!\))/';
         $placeholderRegex = '/{([a-zA-Z0-9_\-\.?]+)}/';
@@ -441,7 +456,7 @@ class Router
      *
      * @return array
      */
-    private static function getRouteArguments(array $current, array $matches, $result): array
+    protected static function getRouteArguments(array $current, array $matches, $result): array
     {
         $arguments = array_merge($current, $matches);
         $arguments = array_filter($arguments);
@@ -463,7 +478,7 @@ class Router
      *
      * @return void
      */
-    private static function doEchoResponse($result, bool $routeMatchFound, bool $pathMatchFound): void
+    protected static function doEchoResponse($result, bool $routeMatchFound, bool $pathMatchFound): void
     {
         $code = 200;
 
@@ -498,6 +513,27 @@ class Router
     }
 
     /**
+     * Returns the current request method via `$_SERVER` or `$_POST['_method']`.
+     *
+     * @return string
+     */
+    protected static function getRequestMethod(): string
+    {
+        $method = Globals::cutPost('_method') ?? '';
+        $methods = static::SUPPORTED_METHODS;
+        $methodAllowed = in_array(
+            strtoupper($method),
+            array_map('strtoupper', $methods)
+        );
+
+        if ($methodAllowed) {
+            Globals::setServer('REQUEST_METHOD', $method);
+        }
+
+        return Globals::getServer('REQUEST_METHOD');
+    }
+
+    /**
      * Returns query parameters.
      *
      * @return array
@@ -520,27 +556,11 @@ class Router
     {
         $uri = Globals::getServer('REQUEST_URI');
 
-        // remove double slashes as they make parse_url() fail
+        // remove double slashes as they make parse_url() behave unexpectedly
         $url = preg_replace('/(\/+)/', '/', $uri);
         $url = parse_url($url);
 
         return $url;
-    }
-
-    protected static function getRequestMethod(): string
-    {
-        $method = Globals::cutPost('_method') ?? '';
-        $methods = static::SUPPORTED_METHODS;
-        $methodAllowed = in_array(
-            strtoupper($method),
-            array_map('strtoupper', $methods)
-        );
-
-        if ($methodAllowed) {
-            Globals::setServer('REQUEST_METHOD', $method);
-        }
-
-        return Globals::getServer('REQUEST_METHOD');
     }
 
     /**
