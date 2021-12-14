@@ -4,6 +4,27 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.5.2] - 2021-12-14](https://github.com/MarwanAlsoltany/velox/compare/v1.5.1...v1.5.2)
+
+- Update `App` class:
+    - Update `abort()` method.
+- Update `Dumper` class:
+    - Add `$styles` property.
+    - Add `getDumpingBlocks()` method.
+    - Refactor `dump()` method.
+    - Update `dumpException()` method.
+    - Update `exportExpressionWithSyntaxHighlighting()` method.
+- Update `Router` class:
+    - Add `HANDLER_ROUTE` class constant.
+    - Add `MIDDLEWARE_ROUTE` class constant.
+    - Change visibility of `getValidParameters()`, `getRoutePath()`, `getRouteRegex()`, `getRouteArguments()`, `doEchoResponse(`) methods from private to protected.
+- Update `Element` class:
+    - Rename class from `Base` to `Element`. This shouldn't introduce any problems as the `Base` class was marked as `@internal`.
+    - Fix `set()` method return type hint.
+    - Fix `setAttributes()` method return type hint.
+
+<br />
+
 ## [[1.5.1] - 2021-12-12](https://github.com/MarwanAlsoltany/velox/compare/v1.5.0...v1.5.1)
 
 - Update `App` class:
