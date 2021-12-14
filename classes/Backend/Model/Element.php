@@ -12,14 +12,15 @@ declare(strict_types=1);
 namespace MAKS\Velox\Backend\Model;
 
 use MAKS\Velox\Helper\Misc;
+use MAKS\Velox\Backend\Model\DBAL;
 
 /**
  * An abstract class that holds the base functionality of a model.
+ * NOTE: This class is not meant to be used directly.
  *
  * @since 1.5.1
- * @internal
  */
-abstract class Base extends DBAL implements \ArrayAccess, \Traversable, \IteratorAggregate
+abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \IteratorAggregate
 {
     /**
      * Model attributes. Corresponds to table columns.
@@ -108,7 +109,7 @@ abstract class Base extends DBAL implements \ArrayAccess, \Traversable, \Iterato
      *
      * @throws \Exception If the attribute does not exists.
      */
-    public function set(string $name, $value): Base
+    public function set(string $name, $value): self
     {
         $this->assertAttributeExists($name);
 
@@ -134,7 +135,7 @@ abstract class Base extends DBAL implements \ArrayAccess, \Traversable, \Iterato
      *
      * @return $this
      */
-    public function setAttributes(array $attributes): Base
+    public function setAttributes(array $attributes): self
     {
         foreach ($attributes as $key => $value) {
             in_array($key, $this->getColumns()) && $this->set($key, $value);
