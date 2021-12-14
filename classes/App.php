@@ -328,7 +328,7 @@ class App
         $message  = htmlspecialchars($message ?? '', ENT_QUOTES, 'UTF-8');
 
         try {
-            $html = View::render(Config::get("global.errorPages.{$code}"), compact('code', 'title', 'message'));
+            $html = View::render((string)Config::get("global.errorPages.{$code}"), compact('code', 'title', 'message'));
         } catch (\Throwable $e) {
             $html = (new HTML(false))
                 ->node('<!DOCTYPE html>')
