@@ -6,7 +6,7 @@
         To generate documetation, download the "phpDocumentor.phar" using "wget https://phpdoc.org/phpDocumentor.phar"
         in the root of the project, then run "php phpDocumentor.phar" to generate documentation under build/phpdoc.
     -->
-    <title>VELOX Framework API Docs</title>
+    <title>VELOX API Docs</title>
     <paths>
         <output>build/phpdoc</output>
         <cache>build/phpdoc/.cache</cache>
@@ -29,12 +29,13 @@
             <extensions>
                 <extension>php</extension>
             </extensions>
-            <default-package-name>Root</default-package-name>
-            <include-source>true</include-source>
+            <default-package-name>Velox</default-package-name>
+            <include-source>false</include-source>
             <markers>
                 <marker>TODO</marker>
                 <marker>FIXME</marker>
             </markers>
         </api>
     </version>
+    <template name="default"/>
 </phpdocumentor>
