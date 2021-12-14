@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>VELOX Framework API Docs</title>
+    <title>VELOX API Docs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -23,7 +23,7 @@
     </head>
 <body id="top">
     <header class="phpdocumentor-header phpdocumentor-section">
-    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VELOX Framework API Docs</a></h1>
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VELOX API Docs</a></h1>
     <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
     <label class="phpdocumentor-header__menu-icon" for="menu-button">
         <i class="fas fa-bars"></i>
@@ -65,8 +65,6 @@
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
-                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="packages/Root.html">Root</a></h4>
-
                                     <h4 class="phpdocumentor-sidebar__root-namespace"><a href="packages/Velox.html">Velox</a></h4>
     <ul class="phpdocumentor-list">
                     <li>
@@ -124,7 +122,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
@@ -173,6 +171,13 @@
 <dd>Contrast color of exceptions page and dump block.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#property_styles">$styles</a>
+    <span>
+                &nbsp;: array&lt;string|int, mixed&gt;            </span>
+</dt>
+<dd>Dumper CSS styles.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#property_syntaxHighlightColors">$syntaxHighlightColors</a>
     <span>
                 &nbsp;: array&lt;string|int, mixed&gt;            </span>
@@ -191,7 +196,7 @@
     <span>
                 &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
-<dd></dd>
+<dd>PHP highlighting syntax tokens.</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#method_dd">dd()</a>
@@ -233,28 +238,35 @@
     <span>
                         &nbsp;: int    </span>
 </dt>
-<dd></dd>
+<dd>Converts a hex color to the closest standard ANSI color code.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#method_getDumpingBlocks">getDumpingBlocks()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Returns an array containing HTML/ANSI wrapping blocks.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#method_getValidCallerTrace">getValidCallerTrace()</a>
     <span>
                         &nbsp;: string    </span>
 </dt>
-<dd></dd>
+<dd>Returns the last caller trace before `dd()` or `dump()` if the format of `file:line`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#method_isCli">isCli()</a>
     <span>
                         &nbsp;: bool    </span>
 </dt>
-<dd></dd>
+<dd>Checks whether the script is currently running in CLI mode or not.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#method_setSyntaxHighlighting">setSyntaxHighlighting()</a>
     <span>
                         &nbsp;: void    </span>
 </dt>
-<dd></dd>
+<dd>Sets PHP syntax highlighting colors according to current class state.</dd>
 
         </dl>
 
@@ -284,7 +296,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -297,8 +309,7 @@
      = <span class="phpdocumentor-signature__default-value">&#039;#ff3a60&#039;</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
-
+    
     
 
 </article>
@@ -318,7 +329,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -331,9 +342,72 @@
      = <span class="phpdocumentor-signature__default-value">&#039;#030035&#039;</span></code>
 
     
-        <section class="phpdocumentor-description"></section>
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+            -static                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="property_styles">
+        $styles
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#property_styles" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">54</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Dumper CSS styles.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$styles</span>
+     = <span class="phpdocumentor-signature__default-value">[&#039;exceptionPage&#039; =&gt; &quot;:root{--accent-color:%accentColor%;--contrast-color:%contrastColor%}*,::after,::before{box-sizing:border-box}body{background:#fff;font-family:-apple-system,&#039;Fira Sans&#039;,Ubuntu,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;margin:0}h1,h2,h3,h4,h5,h6{margin:0}h1,h2{color:var(--accent-color)}h1{font-size:32px}h2{font-size:28px}h3{color:#fff}.container{width:85vw;max-width:1200px;min-height:100vh;background:#fff;padding:7vh 3vw 10vh 3vw;margin:0 auto;overflow:hidden}.message{background:var(--accent-color);color:#fff;padding:2em 1em;margin:0 0 3em 0;}.code{overflow-y:scroll;font-family:&#039;Fira Code&#039;,&#039;Ubuntu Mono&#039;,Courier,monospace;font-size:14px;margin:0 0 3em 0;-ms-overflow-style: none;scrollbar-width: none}.code::-webkit-scrollbar{display:none}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}ul{padding:2em 1em;margin:1em 0;background:var(--contrast-color)}ul li{white-space:pre;list-style-type:none;font-family:monospace}ul li span.line{display:inline-block;color:#fff;text-align:right;padding:4px 8px;user-select:none}ul li.exception-line span.line{color:var(--accent-color);font-weight:bold}ul li.exception-line span.line+code&gt;span&gt;span:not(:first-child){padding-bottom:3px;border-bottom:2px solid var(--accent-color)}.external-link{color:var(--accent-color)}.table-container{overflow-x:scroll}table{width:100%;border-collapse:collapse;border-spacing:0}table th{background:var(--contrast-color);color:#fff;text-align:left;padding-top:12px;padding-bottom:12px}table td,table th{border-bottom:1px solid rgba(0,0,0,0.15);padding:6px}table tr:nth-child(even){background-color:rgba(0,0,0,0.05)}table td.number{text-align:left}table td.line{text-align:left}table td.class,table td.function{font-family:&#039;Fira Code&#039;,&#039;Ubuntu Mono&#039;,Courier,monospace;font-size:14px;font-weight:700}table td.arguments{white-space:nowrap}table td.arguments span{display:inline-block;background:rgba(0,0,0,.15);color:var(--accent-color);font-style:italic;padding:2px 4px;margin:0 4px 0 0;border-radius:4px}&quot;, &#039;traceBlock&#039; =&gt; &quot;background:#fff;color:%accentColor%;font-family:-apple-system,&#039;Fira Sans&#039;,Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;padding:4px 8px;margin-bottom:18px;&quot;, &#039;dumpBlock&#039; =&gt; &quot;display:table;background:%contrastColor%;color:#fff;font-family:&#039;Fira Code&#039;,&#039;Ubuntu Mono&#039;,Courier,monospace;font-size:18px;padding:18px;margin-bottom:8px;&quot;, &#039;timeBlock&#039; =&gt; &quot;display:table;background:%accentColor%;color:#fff;font-family:&#039;Fira Code&#039;,&#039;Ubuntu Mono&#039;,Courier,monospace;font-size:12px;font-weight:bold;padding:12px;margin-bottom:8px;&quot;]</span></code>
+
+        <section class="phpdocumentor-description"><p>The array contains styles for:</p>
+<ul>
+<li>
+<code class="prettyprint">exceptionPage</code>
+</li>
+<li>
+<code class="prettyprint">traceBlock</code>
+</li>
+<li>
+<code class="prettyprint">dumpBlock</code>
+</li>
+<li>
+<code class="prettyprint">timeBlock</code>
+</li>
+</ul>
+<p>Currently set dumper colors can be inject in CSS using the <code class="prettyprint">%accentColor%</code> and <code class="prettyprint">%contrastColor%</code> placeholders.</p>
+</section>
 
     
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.5.2</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
 
 </article>
                     <article
@@ -352,7 +426,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
@@ -385,7 +459,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">53</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -418,21 +492,20 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">PHP highlighting syntax tokens.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
     <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$syntaxHighlightTokens</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;comment&#039;, &#039;keyword&#039;, &#039;string&#039;, &#039;default&#039;, &#039;html&#039;]</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -456,7 +529,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -514,7 +587,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">87</span>
+    <span class="phpdocumentor-element-found-in__line">118</span>
 
     </aside>
 
@@ -559,7 +632,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">133</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 
     </aside>
 
@@ -617,7 +690,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">291</span>
+    <span class="phpdocumentor-element-found-in__line">325</span>
 
     </aside>
 
@@ -660,7 +733,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">335</span>
+    <span class="phpdocumentor-element-found-in__line">369</span>
 
     </aside>
 
@@ -712,16 +785,18 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">386</span>
+    <span class="phpdocumentor-element-found-in__line">462</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Converts a hex color to the closest standard ANSI color code.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">getAnsiCodeFromHexColor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$color</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
 
-        <section class="phpdocumentor-description"></section>
+        <section class="phpdocumentor-description"><p>Standard ANSI colors include: black, red, green, yellow, blue, magenta, cyan and white.</p>
+</section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -749,6 +824,42 @@
             -private
                                     -static                    "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getDumpingBlocks">
+        getDumpingBlocks()
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#method_getDumpingBlocks" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">410</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an array containing HTML/ANSI wrapping blocks.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">getDumpingBlocks</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>Available blocks are: <code class="prettyprint">traceBlock</code>, <code class="prettyprint">dumpBlock</code>, and <code class="prettyprint">timeBlock</code>.
+All this blocks will contain a placeholder for a <code class="prettyprint">*printf()</code> function to inject content.</p>
+</section>
+
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                    -static                    "
+>
     <h4 class="phpdocumentor-element__name" id="method_getValidCallerTrace">
         getValidCallerTrace()
         <a href="classes/MAKS-Velox-Helper-Dumper.html#method_getValidCallerTrace" class="headerlink"><i class="fas fa-link"></i></a>
@@ -756,17 +867,17 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">367</span>
+    <span class="phpdocumentor-element-found-in__line">437</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns the last caller trace before `dd()` or `dump()` if the format of `file:line`.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">getValidCallerTrace</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
@@ -789,17 +900,17 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">458</span>
+    <span class="phpdocumentor-element-found-in__line">543</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Checks whether the script is currently running in CLI mode or not.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">isCli</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
     
     
 
@@ -822,11 +933,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">439</span>
+    <span class="phpdocumentor-element-found-in__line">519</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Sets PHP syntax highlighting colors according to current class state.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">setSyntaxHighlighting</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>

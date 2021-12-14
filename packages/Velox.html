@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>VELOX Framework API Docs</title>
+    <title>VELOX API Docs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -23,7 +23,7 @@
     </head>
 <body id="top">
     <header class="phpdocumentor-header phpdocumentor-section">
-    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VELOX Framework API Docs</a></h1>
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VELOX API Docs</a></h1>
     <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
     <label class="phpdocumentor-header__menu-icon" for="menu-button">
         <i class="fas fa-bars"></i>
@@ -65,8 +65,6 @@
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
-                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="packages/Root.html">Root</a></h4>
-
                                     <h4 class="phpdocumentor-sidebar__root-namespace"><a href="packages/Velox.html">Velox</a></h4>
     <ul class="phpdocumentor-list">
                     <li>
@@ -124,16 +122,2715 @@
 
 <dl class="phpdocumentor-table-of-contents">
     
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/App.html"><abbr title="\App">App</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Auth.html"><abbr title="\Auth">Auth</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Event.html"><abbr title="\Event">Event</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Config.html"><abbr title="\Config">Config</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Router.html"><abbr title="\Router">Router</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Globals.html"><abbr title="\Globals">Globals</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Session.html"><abbr title="\Session">Session</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Database.html"><abbr title="\Database">Database</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/View.html"><abbr title="\View">View</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Data.html"><abbr title="\Data">Data</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Path.html"><abbr title="\Path">Path</abbr></a></dt>
+        <dd>Alias</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/HTML.html"><abbr title="\HTML">HTML</abbr></a></dt>
+        <dd>Alias</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MAKS-Velox-App.html"><abbr title="\MAKS\Velox\App">App</abbr></a></dt>
         <dd>A class that serves as a basic service-container for VELOX.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MAKS-Velox-Backend-Model-DBAL.html"><abbr title="\MAKS\Velox\Backend\Model\DBAL">DBAL</abbr></a></dt>
+        <dd>An abstract class that serves as a DBAL for models.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/MAKS-Velox-Backend-Model-Element.html"><abbr title="\MAKS\Velox\Backend\Model\Element">Element</abbr></a></dt>
+        <dd>An abstract class that holds the base functionality of a model.</dd>
     
     </dl>
 
 
+<h3 id="toc">
+    Table of Contents
+    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/default.html#constant_BASE_PATH">BASE_PATH</a>
+    <span>
+        &nbsp;= dirname(__DIR__)                    </span>
+</dt>
+<dd>App base path.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="namespaces/default.html#constant_START_TIME">START_TIME</a>
+    <span>
+        &nbsp;= microtime(	rue)                    </span>
+</dt>
+<dd>App start time.</dd>
+
+                        <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_require_recursive">require_recursive()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Requires a directory recursively.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_class_alias_recursive">class_alias_recursive()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Aliases classes in a directory to the root namespace recursively. Note that namespaces have to follow PSR-4.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_app">app()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-App.html"><abbr title="\MAKS\Velox\App">App</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `App` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_abort">abort()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Aborts the current request and sends a response with the specified HTTP status code, title, and message.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_terminate">terminate()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Terminates (exits) the PHP script.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_config">config()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd>Gets or sets a value of a key from the configuration via dot-notation (0 param -&gt; the Config class instance, 1 param -&gt; get by key, 2 params -&gt; set by key).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_event">event()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Backend-Event.html"><abbr title="\MAKS\Velox\Backend\Event">Event</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `Event` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_router">router()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Backend-Router.html"><abbr title="\MAKS\Velox\Backend\Router">Router</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `Router` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_handle">handle()</a>
+    <span>
+                        &nbsp;: static    </span>
+</dt>
+<dd>Registers a handler for a route.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_redirect">redirect()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Redirects the request to another route.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_forward">forward()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Forwards the request to another route.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_globals">globals()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Backend-Globals.html"><abbr title="\MAKS\Velox\Backend\Globals">Globals</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `Globals` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_session">session()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Backend-Session.html"><abbr title="\MAKS\Velox\Backend\Session">Session</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `Session` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_flash">flash()</a>
+    <span>
+                        &nbsp;: object    </span>
+</dt>
+<dd>Returns an instance of the `Flash` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_csrf">csrf()</a>
+    <span>
+                        &nbsp;: object    </span>
+</dt>
+<dd>Returns an instance of the `CSRF` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_database">database()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Backend-Database.html"><abbr title="\MAKS\Velox\Backend\Database">Database</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `Database` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_auth">auth()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Backend-Auth.html"><abbr title="\MAKS\Velox\Backend\Auth">Auth</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `Auth` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_view">view()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Frontend-View.html"><abbr title="\MAKS\Velox\Frontend\View">View</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `View` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_render">render()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to `{view.defaultSectionName}` section.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_render_layout">render_layout()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Renders a theme layout with the passed variables.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_render_page">render_page()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Renders a theme page with the passed variables.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_render_partial">render_partial()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Renders a theme partial with the passed variables.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_section_push">section_push()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Pushes content to the buffer of the section with the given name.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_section_reset">section_reset()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Resets (empties) the buffer of the section with the given name.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_section_start">section_start()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Ends capturing buffer of the section with the given name. Works in conjunction with `self::sectionStart()`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_section_end">section_end()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Ends capturing buffer of the section with the given name. Works in conjunction with `self::sectionStart()`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_section_yield">section_yield()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Returns content of the section with the given name.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_include_file">include_file()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Includes a file from the active theme directory.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_data">data()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Frontend-Data.html"><abbr title="\MAKS\Velox\Frontend\Data">Data</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `Data` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_data_has">data_has()</a>
+    <span>
+                        &nbsp;: bool    </span>
+</dt>
+<dd>Checks whether a value of a key exists in `self::$bag` via dot-notation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_data_get">data_get()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd>Gets a value of a key from `self::$bag` via dot-notation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_data_set">data_set()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Sets a value of a key in `self::$bag` via dot-notation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_html">html()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Frontend-HTML.html"><abbr title="\MAKS\Velox\Frontend\HTML">HTML</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `HTML` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_path">path()</a>
+    <span>
+                        &nbsp;: <a href="classes/MAKS-Velox-Frontend-Path.html"><abbr title="\MAKS\Velox\Frontend\Path">Path</abbr></a>    </span>
+</dt>
+<dd>Returns an instance of the `Path` class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_app_path_current">app_path_current()</a>
+    <span>
+                        &nbsp;: string|bool    </span>
+</dt>
+<dd>Returns the current path, or compares it with the passed parameter. Note that the path does not contain the query string.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_app_url_current">app_url_current()</a>
+    <span>
+                        &nbsp;: string|bool    </span>
+</dt>
+<dd>Returns the current URL, or compares it with the passed parameter.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_app_path">app_path()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Resolves the passed path to the app root path and returns it.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_app_url">app_url()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Resolves the passed path to the base URL (starting from app root) and returns it.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_theme_path">theme_path()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Resolves the passed path to the theme root path and returns it.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_theme_url">theme_url()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Resolves the passed path to the base URL (starting from active theme root) and returns it.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_assets_path">assets_path()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Resolves the passed path to the assets directory and returns it.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_assets_url">assets_url()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Resolves the passed path to the base URL (starting from active theme assets root) and returns it.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_dd">dd()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Dumps a variable and dies.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_dump">dump()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Dumps a variable in a nice HTML block with syntax highlighting.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_dump_exception">dump_exception()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>Dumps an exception in a nice HTML page or as string and exits the script.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_he">he()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Encodes the passed text with `htmlentities()`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_hd">hd()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Decodes the passed text with `html_entity_decode()`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_hse">hse()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Encodes the passed text with `htmlspecialchars()`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_hsd">hsd()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Decodes the passed text with `htmlspecialchars_decode()`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_st">st()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Strips the passed text with `strip_tags()`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_nb">nb()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Turns `\n` to `&lt;br&gt;` in the passed text with `nl2br()`.</dd>
+
+    </dl>
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="packages/Velox.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_BASE_PATH">
+        BASE_PATH
+        <a href="namespaces/default.html#constant_BASE_PATH" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
 
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="bootstrap/autoload.php"><a href="files/bootstrap-autoload.html"><abbr title="bootstrap/autoload.php">autoload.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">App base path.</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">BASE_PATH</span>
+    = <span class="phpdocumentor-signature__default-value">dirname(__DIR__)</span>
+</code>
+
+
+    
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_START_TIME">
+        START_TIME
+        <a href="namespaces/default.html#constant_START_TIME" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="bootstrap/autoload.php"><a href="files/bootstrap-autoload.html"><abbr title="bootstrap/autoload.php">autoload.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">App start time.</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__type">float</span>
+    <span class="phpdocumentor-signature__name">START_TIME</span>
+    = <span class="phpdocumentor-signature__default-value">microtime(	rue)</span>
+</code>
+
+
+    
+    
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-functions">
+        <h3 class="phpdocumentor-elements__header" id="functions">
+            Functions
+            <a href="packages/Velox.html#functions" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_require_recursive">
+        require_recursive()
+        <a href="namespaces/default.html#function_require_recursive" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="bootstrap/loader.php"><a href="files/bootstrap-loader.html"><abbr title="bootstrap/loader.php">loader.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">168</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Requires a directory recursively.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">require_recursive</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$directory</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$directory</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>If something was included, it returns true, otherwise false.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_class_alias_recursive">
+        class_alias_recursive()
+        <a href="namespaces/default.html#function_class_alias_recursive" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="bootstrap/loader.php"><a href="files/bootstrap-loader.html"><abbr title="bootstrap/loader.php">loader.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">205</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Aliases classes in a directory to the root namespace recursively. Note that namespaces have to follow PSR-4.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">class_alias_recursive</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$directory</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$namespacePrefix</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$directory</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The path to a directory. If the passed parameter is not a directory, this function will skip it.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$namespacePrefix</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The prefix for classes namespace.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>If something was aliased, it returns true, otherwise false.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_app">
+        app()
+        <a href="namespaces/default.html#function_app" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `App` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">app</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-App.html"><abbr title="\MAKS\Velox\App">App</abbr></a></span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-App.html"><abbr title="\MAKS\Velox\App">App</abbr></a></span>
+            &mdash;
         
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_abort">
+        abort()
+        <a href="namespaces/default.html#function_abort" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">39</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Aborts the current request and sends a response with the specified HTTP status code, title, and message.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">abort</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>An HTML page will be rendered with the specified title and message.
+If a view file for the error page is set using <code class="prettyprint">{global.errorPages.CODE}</code>,
+it will be rendered instead of the normal page and passed the <code class="prettyprint">$code</code>, <code class="prettyprint">$title</code>, and <code class="prettyprint">$message</code> variables.
+The title for the most common HTTP status codes (<code class="prettyprint">200</code>, <code class="prettyprint">401</code>, <code class="prettyprint">403</code>, <code class="prettyprint">404</code>, <code class="prettyprint">405</code>, <code class="prettyprint">500</code>, <code class="prettyprint">503</code>) is already configured.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.2.5</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_terminate">
+        terminate()
+        <a href="namespaces/default.html#function_terminate" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">57</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Terminates (exits) the PHP script.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">terminate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>This function is used instead of PHP <code class="prettyprint">exit</code> to allow for testing <code class="prettyprint">exit</code> without breaking the unit tests.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>If <code class="prettyprint">EXIT_EXCEPTION</code> is defined and truthy.</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.2.5</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>This function never returns. It will terminate the script.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_config">
+        config()
+        <a href="namespaces/default.html#function_config" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Gets or sets a value of a key from the configuration via dot-notation (0 param -&gt; the Config class instance, 1 param -&gt; get by key, 2 params -&gt; set by key).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">config</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The requested value or null.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_event">
+        event()
+        <a href="namespaces/default.html#function_event" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">98</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `Event` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">event</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Event.html"><abbr title="\MAKS\Velox\Backend\Event">Event</abbr></a></span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.2.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Event.html"><abbr title="\MAKS\Velox\Backend\Event">Event</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_router">
+        router()
+        <a href="namespaces/default.html#function_router" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">113</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `Router` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">router</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Router.html"><abbr title="\MAKS\Velox\Backend\Router">Router</abbr></a></span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Router.html"><abbr title="\MAKS\Velox\Backend\Router">Router</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_handle">
+        handle()
+        <a href="namespaces/default.html#function_handle" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">133</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Registers a handler for a route.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">handle</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">static</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_redirect">
+        redirect()
+        <a href="namespaces/default.html#function_redirect" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">150</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Redirects the request to another route.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">redirect</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>Note that this function will exit the script (code that comes after it will not be executed).</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_forward">
+        forward()
+        <a href="namespaces/default.html#function_forward" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">166</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Forwards the request to another route.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">forward</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>Note that this function will exit the script (code that comes after it will not be executed).</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_globals">
+        globals()
+        <a href="namespaces/default.html#function_globals" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">181</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `Globals` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">globals</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Globals.html"><abbr title="\MAKS\Velox\Backend\Globals">Globals</abbr></a></span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Globals.html"><abbr title="\MAKS\Velox\Backend\Globals">Globals</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_session">
+        session()
+        <a href="namespaces/default.html#function_session" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">196</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `Session` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">session</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Session.html"><abbr title="\MAKS\Velox\Backend\Session">Session</abbr></a></span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.3.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Session.html"><abbr title="\MAKS\Velox\Backend\Session">Session</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_flash">
+        flash()
+        <a href="namespaces/default.html#function_flash" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">211</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `Flash` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">flash</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="classes/MAKS-Velox-Backend-Session.html#method_flash"><abbr title="\MAKS\Velox\Backend\Session::flash()">Session::flash()</abbr></a></span>
+                                        
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.3.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">object</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_csrf">
+        csrf()
+        <a href="namespaces/default.html#function_csrf" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">226</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `CSRF` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">csrf</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">object</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="classes/MAKS-Velox-Backend-Session.html#method_csrf"><abbr title="\MAKS\Velox\Backend\Session::csrf()">Session::csrf()</abbr></a></span>
+                                        
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.3.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">object</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_database">
+        database()
+        <a href="namespaces/default.html#function_database" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">241</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `Database` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">database</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Database.html"><abbr title="\MAKS\Velox\Backend\Database">Database</abbr></a></span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.3.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Database.html"><abbr title="\MAKS\Velox\Backend\Database">Database</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_auth">
+        auth()
+        <a href="namespaces/default.html#function_auth" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">256</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `Auth` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">auth</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Auth.html"><abbr title="\MAKS\Velox\Backend\Auth">Auth</abbr></a></span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.4.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Backend-Auth.html"><abbr title="\MAKS\Velox\Backend\Auth">Auth</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_view">
+        view()
+        <a href="namespaces/default.html#function_view" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">271</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `View` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">view</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Frontend-View.html"><abbr title="\MAKS\Velox\Frontend\View">View</abbr></a></span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Frontend-View.html"><abbr title="\MAKS\Velox\Frontend\View">View</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_render">
+        render()
+        <a href="namespaces/default.html#function_render" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">288</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Renders a view (a Page wrapped in a Layout) with the passed variables, the Page content will be sent to `{view.defaultSectionName}` section.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">render</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_render_layout">
+        render_layout()
+        <a href="namespaces/default.html#function_render_layout" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">304</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Renders a theme layout with the passed variables.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">render_layout</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_render_page">
+        render_page()
+        <a href="namespaces/default.html#function_render_page" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">320</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Renders a theme page with the passed variables.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">render_page</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_render_partial">
+        render_partial()
+        <a href="namespaces/default.html#function_render_partial" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">336</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Renders a theme partial with the passed variables.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">render_partial</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_section_push">
+        section_push()
+        <a href="namespaces/default.html#function_section_push" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">353</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Pushes content to the buffer of the section with the given name.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">section_push</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>Note that a section will not be rendered unless it's yielded.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_section_reset">
+        section_reset()
+        <a href="namespaces/default.html#function_section_reset" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">368</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Resets (empties) the buffer of the section with the given name.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">section_reset</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_section_start">
+        section_start()
+        <a href="namespaces/default.html#function_section_start" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">382</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Ends capturing buffer of the section with the given name. Works in conjunction with `self::sectionStart()`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">section_start</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>Note that a section will not be rendered unless it's yielded.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_section_end">
+        section_end()
+        <a href="namespaces/default.html#function_section_end" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">398</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Ends capturing buffer of the section with the given name. Works in conjunction with `self::sectionStart()`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">section_end</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>Note that a section will not be rendered unless it's yielded.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>If no section has been started.</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_section_yield">
+        section_yield()
+        <a href="namespaces/default.html#function_section_yield" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">414</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns content of the section with the given name.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">section_yield</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_include_file">
+        include_file()
+        <a href="namespaces/default.html#function_include_file" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">431</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Includes a file from the active theme directory.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">include_file</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+        <section class="phpdocumentor-description"><p>Can also be used as a mean of extending a layout if it was put at the end of it.</p>
+</section>
+
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_data">
+        data()
+        <a href="namespaces/default.html#function_data" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">446</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `Data` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">data</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Frontend-Data.html"><abbr title="\MAKS\Velox\Frontend\Data">Data</abbr></a></span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Frontend-Data.html"><abbr title="\MAKS\Velox\Frontend\Data">Data</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_data_has">
+        data_has()
+        <a href="namespaces/default.html#function_data_has" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">461</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Checks whether a value of a key exists in `self::$bag` via dot-notation.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">data_has</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_data_get">
+        data_get()
+        <a href="namespaces/default.html#function_data_get" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">477</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Gets a value of a key from `self::$bag` via dot-notation.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">data_get</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The requested value or null.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_data_set">
+        data_set()
+        <a href="namespaces/default.html#function_data_set" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">493</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets a value of a key in `self::$bag` via dot-notation.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">data_set</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_html">
+        html()
+        <a href="namespaces/default.html#function_html" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">508</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `HTML` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">html</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Frontend-HTML.html"><abbr title="\MAKS\Velox\Frontend\HTML">HTML</abbr></a></span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Frontend-HTML.html"><abbr title="\MAKS\Velox\Frontend\HTML">HTML</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_path">
+        path()
+        <a href="namespaces/default.html#function_path" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">523</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an instance of the `Path` class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">path</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Frontend-Path.html"><abbr title="\MAKS\Velox\Frontend\Path">Path</abbr></a></span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/MAKS-Velox-Frontend-Path.html"><abbr title="\MAKS\Velox\Frontend\Path">Path</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_app_path_current">
+        app_path_current()
+        <a href="namespaces/default.html#function_app_path_current" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">538</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the current path, or compares it with the passed parameter. Note that the path does not contain the query string.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">app_path_current</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|bool</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string|bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>If null is passed, the current path as string. Otherwise the result of comparing the current path with the passed parameter as boolean.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_app_url_current">
+        app_url_current()
+        <a href="namespaces/default.html#function_app_url_current" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">553</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the current URL, or compares it with the passed parameter.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">app_url_current</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|bool</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string|bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>If null is passed, the current URL as string. Otherwise the result of comparing the current URL with the passed parameter as boolean.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_app_path">
+        app_path()
+        <a href="namespaces/default.html#function_app_path" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">568</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Resolves the passed path to the app root path and returns it.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">app_path</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>An absolute path on the server starting from app root.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_app_url">
+        app_url()
+        <a href="namespaces/default.html#function_app_url" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">583</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Resolves the passed path to the base URL (starting from app root) and returns it.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">app_url</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>An absolute path on the server (public URL) starting from app root.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_theme_path">
+        theme_path()
+        <a href="namespaces/default.html#function_theme_path" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">599</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Resolves the passed path to the theme root path and returns it.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">theme_path</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>A relative path starting from app root to the root of the active theme directory.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_theme_url">
+        theme_url()
+        <a href="namespaces/default.html#function_theme_url" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">614</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Resolves the passed path to the base URL (starting from active theme root) and returns it.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">theme_url</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>An absolute path on the server (public URL) starting from active theme root.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_assets_path">
+        assets_path()
+        <a href="namespaces/default.html#function_assets_path" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">630</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Resolves the passed path to the assets directory and returns it.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">assets_path</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>A relative path starting from app root to the root of the assets directory of the active theme directory.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_assets_url">
+        assets_url()
+        <a href="namespaces/default.html#function_assets_url" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">645</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Resolves the passed path to the base URL (starting from active theme assets root) and returns it.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">assets_url</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>An absolute path on the server (public URL) starting from active theme root.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_dd">
+        dd()
+        <a href="namespaces/default.html#function_dd" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">662</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Dumps a variable and dies.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">dd</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$variable</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$variable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The result will simply get echoed.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_dump">
+        dump()
+        <a href="namespaces/default.html#function_dump" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">677</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Dumps a variable in a nice HTML block with syntax highlighting.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">dump</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$variable</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$variable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The result will simply get echoed.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_dump_exception">
+        dump_exception()
+        <a href="namespaces/default.html#function_dump_exception" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/helpers.php"><a href="files/functions-helpers.html"><abbr title="functions/helpers.php">helpers.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">692</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Dumps an exception in a nice HTML page or as string and exits the script.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">dump_exception</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Throwable">Throwable</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$exception</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$exception</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Throwable">Throwable</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.0.0</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The result will be echoed as HTML page or a string representation of the exception if the interface is CLI.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_he">
+        he()
+        <a href="namespaces/default.html#function_he" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/html.php"><a href="files/functions-html.html"><abbr title="functions/html.php">html.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">22</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Encodes the passed text with `htmlentities()`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">he</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$text</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_hd">
+        hd()
+        <a href="namespaces/default.html#function_hd" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/html.php"><a href="files/functions-html.html"><abbr title="functions/html.php">html.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">35</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Decodes the passed text with `html_entity_decode()`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">hd</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$text</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_hse">
+        hse()
+        <a href="namespaces/default.html#function_hse" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/html.php"><a href="files/functions-html.html"><abbr title="functions/html.php">html.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">48</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Encodes the passed text with `htmlspecialchars()`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">hse</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$text</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_hsd">
+        hsd()
+        <a href="namespaces/default.html#function_hsd" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/html.php"><a href="files/functions-html.html"><abbr title="functions/html.php">html.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">61</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Decodes the passed text with `htmlspecialchars_decode()`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">hsd</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$text</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_st">
+        st()
+        <a href="namespaces/default.html#function_st" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/html.php"><a href="files/functions-html.html"><abbr title="functions/html.php">html.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">74</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Strips the passed text with `strip_tags()`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">st</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$text</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_nb">
+        nb()
+        <a href="namespaces/default.html#function_nb" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="functions/html.php"><a href="files/functions-html.html"><abbr title="functions/html.php">html.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">87</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Turns `\n` to `&lt;br&gt;` in the passed text with `nl2br()`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">nb</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$text</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+            </section>
+
     </article>
                 <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">

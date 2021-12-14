@@ -101,68 +101,40 @@
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/maks.html">MAKS</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/maks-velox.html">Velox</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/maks-velox-backend.html">Backend</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/maks-velox-backend-model.html">Model</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Model
+    Element
 
         <span class="phpdocumentor-element__extends">
-        extends <a href="classes/MAKS-Velox-Backend-Model-Element.html"><abbr title="\MAKS\Velox\Backend\Model\Element">Element</abbr></a>
+        extends <a href="classes/MAKS-Velox-Backend-Model-DBAL.html"><abbr title="\MAKS\Velox\Backend\Model\DBAL">DBAL</abbr></a>
     </span>
     
             <div class="phpdocumentor-element__package">
             in package
             <ul class="phpdocumentor-breadcrumbs">
                                     <li class="phpdocumentor-breadcrumb"><a href="packages/Velox.html">Velox</a></li>
-                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Velox-Backend.html">Backend</a></li>
                             </ul>
         </div>
     
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <abbr title="\ArrayAccess">ArrayAccess</abbr>,                             <abbr title="\Traversable">Traversable</abbr>,                             <abbr title="\IteratorAggregate">IteratorAggregate</abbr>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model/Element.php"><a href="files/classes-backend-model-element.html"><abbr title="classes/Backend/Model/Element.php">Element.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">23</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">An abstract class that serves as a base model that can be extended to create models.</p>
+            <p class="phpdocumentor-summary">An abstract class that holds the base functionality of a model.</p>
 
-    <section class="phpdocumentor-description"><p>Example:</p>
-<pre class="prettyprint"><code class="prettyprint">// Attributes has to match the attribute name (column name) unless otherwise specified.
-
-// creating/manipulating models
-$model = new Model(); // set attributes later via setters or public assignment.
-$model = new Model(['attribute_name' =&gt; $value]);
-$model-&gt;get('attribute_name');
-$model-&gt;set('attribute_name', $value);
-$model-&gt;getAttributeName(); // case will be changed to 'snake_case' automatically.
-$model-&gt;setAttributeName($value); // case will be changed to 'snake_case' automatically.
-$model-&gt;anotherAttribute; // case will be changed to 'snake_case' automatically.
-$model-&gt;anotherAttribute = $value; // case will be changed to 'snake_case' automatically.
-$attributes = $model-&gt;getAttributes(); // returns all attributes.
-$model-&gt;save(); // persists the model in the database.
-$model-&gt;update(['attribute_name' =&gt; $value]); // updates the model and save changes in the database.
-$model-&gt;delete(); // deletes the model from the database.
-Model::create($attributes); // creates a new model instance, call save() on the instance to save it in the database.
-Model::destroy($id); // destroys a model and deletes it from the database.
-
-// fetching models
-$model = Model::first();
-$model = Model::last();
-$model = Model::one();
-$models = Model::all(['name' =&gt; 'John'], 'age DESC', $offset, $limit);
-$count = Model::count(); // returns the number of models in the database.
-$model = Model::find($id); // $id is the primary key of the model.
-$models = Model::find('age', 27, 'name', 'John', ...); // or Model::find(['name' =&gt; $value]);
-$models = Model::findByName('John'); // fetches using an attribute, case will be changed to 'snake_case' automatically.
-$models = Model::where('name', '=', $name); // fetches using a where clause condition.
-$models = Model::where('name', 'LIKE', 'John%', [['AND', 'age', '&gt;', 27], ...], 'age DESC', $limit, $offset);
-$models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fetches using raw SQL query.
-</code></pre>
+    <section class="phpdocumentor-description"><p>NOTE: This class is not meant to be used directly.</p>
 </section>
 
 
@@ -175,7 +147,7 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
                     <span class="phpdocumentor-tag__name">since</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">1.3.0</span>
+                                            <span class="phpdocumentor-tag-link">1.5.1</span>
                                                                                 
                                              
                                     </dd>
@@ -184,6 +156,21 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
 
 
 
+<h3 id="interfaces_class_traits">
+    Interfaces, Classes and Traits
+    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\ArrayAccess">ArrayAccess</abbr></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Traversable">Traversable</abbr></dt>
+        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\IteratorAggregate">IteratorAggregate</abbr></dt>
+        <dd></dd>
+    
+    
+    </dl>
 
 
 <h3 id="toc">
@@ -192,14 +179,7 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#property_attributeName*">$attributeName*</a>
-    <span>
-                &nbsp;: mixed            </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+                <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/MAKS-Velox-Backend-Model-Element.html#property_attributes">$attributes</a>
     <span>
                 &nbsp;: array&lt;string|int, mixed&gt;            </span>
@@ -235,13 +215,6 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
 <dd>Model table name. If not set, an auto-generated name will be used instead.</dd>
 
                 <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method___call">__call()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Defines magic getters, setters, and finders for model attributes.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Backend-Model-Element.html#method___clone">__clone()</a>
     <span>
                         &nbsp;: mixed    </span>
@@ -254,13 +227,6 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
                         &nbsp;: mixed    </span>
 </dt>
 <dd>Class constructor.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method___debugInfo">__debugInfo()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Makes the model more friendly presented when exported via `var_dump()`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Backend-Model-Element.html#method___get">__get()</a>
@@ -291,13 +257,6 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
 <dd>Makes the model safely consumable via `serialize()`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method___toString">__toString()</a>
-    <span>
-                        &nbsp;: mixed    </span>
-</dt>
-<dd>Makes the object quickly available as a JSON string.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Backend-Model-Element.html#method___unset">__unset()</a>
     <span>
                         &nbsp;: mixed    </span>
@@ -305,67 +264,11 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
 <dd>Makes attributes consumable via `unset()`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_all">all()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, static&gt;|array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Fetches all models.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_count">count()</a>
-    <span>
-                        &nbsp;: int    </span>
-</dt>
-<dd>Returns the count of models matching the passed condition (counting is done on the SQL end for better performance).</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_create">create()</a>
-    <span>
-                        &nbsp;: static    </span>
-</dt>
-<dd>Creates an instance of the model. The model is not saved to the database unless `self::save()` is called.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_delete">delete()</a>
-    <span>
-                        &nbsp;: int    </span>
-</dt>
-<dd>Deletes the model from the database.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_destroy">destroy()</a>
-    <span>
-                        &nbsp;: int    </span>
-</dt>
-<dd>Destroys (deletes) a model from the database if it exists.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Backend-Model-DBAL.html#method_fetch">fetch()</a>
     <span>
                         &nbsp;: array&lt;string|int, static&gt;|array&lt;string|int, array&lt;string|int, mixed&gt;&gt;    </span>
 </dt>
 <dd>Executes a query (a prepared statement) and returns the result.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_find">find()</a>
-    <span>
-                        &nbsp;: static|array&lt;string|int, static&gt;|null|array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Finds a single or multiple models matching the passed condition.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_findBySomeAttribute">findBySomeAttribute()</a>
-    <span>
-                        &nbsp;: <a href=""><abbr title=""></abbr></a>    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_first">first()</a>
-    <span>
-                        &nbsp;: static|null    </span>
-</dt>
-<dd>Fetches the first model object.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Backend-Model-Element.html#method_get">get()</a>
@@ -410,13 +313,6 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
 <dd>Returns model table primary key and sets `static::$primaryKey` with a default value and returns it if it&#039;s not set.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_getSomeAttribute">getSomeAttribute()</a>
-    <span>
-                        &nbsp;: <a href=""><abbr title=""></abbr></a>    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Backend-Model-DBAL.html#method_getTable">getTable()</a>
     <span>
                         &nbsp;: string    </span>
@@ -424,25 +320,11 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
 <dd>Returns model table name and sets `static::$table` with a default value and returns it if it&#039;s not set.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_hydrate">hydrate()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, static&gt;    </span>
-</dt>
-<dd>Hydrates models from an array of model attributes (row).</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Backend-Model-DBAL.html#method_isMigrated">isMigrated()</a>
     <span>
                         &nbsp;: bool    </span>
 </dt>
 <dd>Checks whether the model table is migrated to the database or not.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_last">last()</a>
-    <span>
-                        &nbsp;: static|null    </span>
-</dt>
-<dd>Fetches the last model object.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Backend-Model-DBAL.html#method_migrate">migrate()</a>
@@ -480,20 +362,6 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
 <dd>`ArrayAccess::offsetUnset()` interface implementation.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_one">one()</a>
-    <span>
-                        &nbsp;: static|null    </span>
-</dt>
-<dd>Fetches a single model object.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_save">save()</a>
-    <span>
-                        &nbsp;: static    </span>
-</dt>
-<dd>Creates/updates a model and saves it in database.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Backend-Model-DBAL.html#method_schema">schema()</a>
     <span>
                         &nbsp;: string    </span>
@@ -513,34 +381,6 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
                         &nbsp;: $this    </span>
 </dt>
 <dd>Sets all or a subset of model attributes.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_setSomeAttribute">setSomeAttribute()</a>
-    <span>
-                        &nbsp;: <a href=""><abbr title=""></abbr></a>    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_toArray">toArray()</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Returns array representation of the model. All attributes will be converted to `camelCase` form.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_toJson">toJson()</a>
-    <span>
-                        &nbsp;: string    </span>
-</dt>
-<dd>Returns JSON representation of the model. All attributes will be converted to `camelCase` form.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/MAKS-Velox-Backend-Model.html#method_update">update()</a>
-    <span>
-                        &nbsp;: static    </span>
-</dt>
-<dd>Updates the given attributes of the model and saves them in the database.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Backend-Model-DBAL.html#method_where">where()</a>
@@ -601,43 +441,8 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
-            <a href="classes/MAKS-Velox-Backend-Model.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/MAKS-Velox-Backend-Model-Element.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_attributeName*">
-        $attributeName*
-        <a href="classes/MAKS-Velox-Backend-Model.html#property_attributeName*" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">0</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">$attributeName*</span>
-    </code>
-
-        <section class="phpdocumentor-description"><p>Public property for model attribute, (<code class="prettyprint">attribute_name</code> -&gt; <code class="prettyprint">attributeName</code>).</p>
-</section>
-
-        <section class="phpdocumentor-description"></section>
-
-    
-
-</article>
                     <article
         class="
             phpdocumentor-element
@@ -817,62 +622,8 @@ $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fet
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/MAKS-Velox-Backend-Model.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/MAKS-Velox-Backend-Model-Element.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method___call">
-        __call()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method___call" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">404</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Defines magic getters, setters, and finders for model attributes.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__call</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$arguments</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-        <section class="phpdocumentor-description"><p>Examples: <code class="prettyprint">attribute_name</code> has <code class="prettyprint">getAttributeName()</code>, <code class="prettyprint">setAttributeName()</code>, and <code class="prettyprint">findByAttributeName()</code> methods.</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$method</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$arguments</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
-    
-</article>
                     <article
         class="phpdocumentor-element
             -method
@@ -946,39 +697,6 @@ Or use <code class="prettyprint">self::bootstrap()</code> instead.</p>
             </dd>
             </dl>
 
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method___debugInfo">
-        __debugInfo()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method___debugInfo" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">419</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Makes the model more friendly presented when exported via `var_dump()`.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__debugInfo</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    
-    
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
@@ -1170,39 +888,6 @@ Or use <code class="prettyprint">self::bootstrap()</code> instead.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___toString">
-        __toString()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method___toString" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">427</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Makes the object quickly available as a JSON string.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__toString</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method___unset">
         __unset()
         <a href="classes/MAKS-Velox-Backend-Model-Element.html#method___unset" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1239,254 +924,6 @@ Or use <code class="prettyprint">self::bootstrap()</code> instead.</p>
     <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
         
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_all">
-        all()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_all" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">226</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Fetches all models.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">all</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$conditions</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$order</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$limit</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, static&gt;|array&lt;string|int, mixed&gt;</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$conditions</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Fetch conditions (like: <code class="prettyprint">['id' =&gt; $id, ...]</code>). Conditions are combined by logical <code class="prettyprint">AND</code>.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$order</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>[optional] SQL order expression (like: <code class="prettyprint">id</code> or <code class="prettyprint">id ASC</code>).</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$limit</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>[optional] To how many items the result should be limited.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$offset</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>[optional] From which item the result should start.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, static&gt;|array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>Examples:</p>
-<ul>
-<li>PHP: <code class="prettyprint">Model::all(['name' =&gt; 'Doe', 'job' =&gt; 'Developer'],'age DESC', 3, 15)</code>.</li>
-<li>SQL: <code class="prettyprint">SELECT * FROM `users` WHERE `name` = &quot;Doe&quot; AND `job` = `Developer` ORDER BY age DESC LIMIT 3 OFFSET 15</code>.</li>
-</ul>
-</section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_count">
-        count()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_count" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">352</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Returns the count of models matching the passed condition (counting is done on the SQL end for better performance).</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">count</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$conditions</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$conditions</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>[optional] Query conditions (like: <code class="prettyprint">['id' =&gt; 1, ...]</code>). Conditions are combined by logical <code class="prettyprint">AND</code>.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_create">
-        create()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_create" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">73</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Creates an instance of the model. The model is not saved to the database unless `self::save()` is called.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">create</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$attributes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$attributes</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The attributes of the model.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">static</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_delete">
-        delete()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_delete" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">162</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Deletes the model from the database.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">delete</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>The number of affected rows during the SQL operation.</p>
-</section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_destroy">
-        destroy()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_destroy" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">184</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Destroys (deletes) a model from the database if it exists.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">destroy</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$primaryKey</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$primaryKey</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|int</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">int</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>The number of affected rows during the SQL operation.</p>
-</section>
-
     
 </article>
                     <article
@@ -1572,138 +1009,6 @@ Or use <code class="prettyprint">self::bootstrap()</code> instead.</p>
     <span class="phpdocumentor-signature__response_type">array&lt;string|int, static&gt;|array&lt;string|int, array&lt;string|int, mixed&gt;&gt;</span>
             &mdash;
             <section class="phpdocumentor-description"><p>The result as an array of objects or array of arrays depending on the passed parameters.</p>
-</section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_find">
-        find()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_find" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">309</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Finds a single or multiple models matching the passed condition.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">find</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed|array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__variadic-operator">...</span><span class="phpdocumentor-signature__argument__name">$condition</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static|array&lt;string|int, static&gt;|null|array&lt;string|int, mixed&gt;</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$condition</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed|array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Can either be the primary key or a set of condition(s) (like: <code class="prettyprint">id</code>, or <code class="prettyprint">'name', 'Doe', 'age', 35</code>, or <code class="prettyprint">['name' =&gt; $name]</code>).</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">static|array&lt;string|int, static&gt;|null|array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>Depends on the number of conditions (1 = single, &gt;1 = multiple).</p>
-<p>Examples:</p>
-<ul>
-<li>Find by primary key (ID): <code class="prettyprint">Model::find(1)</code>.</li>
-<li>Find by specific value: <code class="prettyprint">Model::find('name', 'Doe', 'age', 35, ...)</code> or <code class="prettyprint">Model::find(['name' =&gt; $name, 'age' =&gt; 35], ...)</code>.</li>
-</ul>
-</section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_findBySomeAttribute">
-        findBySomeAttribute()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_findBySomeAttribute" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">0</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">findBySomeAttribute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span></code>
-
-        <section class="phpdocumentor-description"><p>Finder by model attribute, (<code class="prettyprint">attribute_name</code> -&gt; <code class="prettyprint">findByAttributeName($value)</code>).</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$value</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_first">
-        first()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_first" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">280</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Fetches the first model object.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">first</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static|null</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">static|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>Examples: <code class="prettyprint">Model::first()</code>.</p>
 </section>
 
     
@@ -1942,40 +1247,6 @@ Or use <code class="prettyprint">self::bootstrap()</code> instead.</p>
         class="phpdocumentor-element
             -method
             -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getSomeAttribute">
-        getSomeAttribute()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_getSomeAttribute" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">0</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getSomeAttribute</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span></code>
-
-        <section class="phpdocumentor-description"><p>Getter for model attribute, (<code class="prettyprint">attribute_name</code> -&gt; <code class="prettyprint">getAttributeName()</code>).</p>
-</section>
-
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
                                     -static                    "
 >
     <h4 class="phpdocumentor-element__name" id="method_getTable">
@@ -2003,58 +1274,6 @@ Or use <code class="prettyprint">self::bootstrap()</code> instead.</p>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
         
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_hydrate">
-        hydrate()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_hydrate" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">201</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Hydrates models from an array of model attributes (row).</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">hydrate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$models</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, static&gt;</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$models</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, static&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>Array of hydrated objects.</p>
-<p>Example:</p>
-<ul>
-<li>
-<code class="prettyprint">Model::hydrate([$arrayOfModelAttributes, ...])</code>
-</li>
-</ul>
-</section>
-
     
 </article>
                     <article
@@ -2091,41 +1310,6 @@ Or use <code class="prettyprint">self::bootstrap()</code> instead.</p>
     <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
         
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_last">
-        last()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_last" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">292</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Fetches the last model object.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">last</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static|null</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">static|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>Example: <code class="prettyprint">Model::last()</code>.</p>
-</section>
-
     
 </article>
                     <article
@@ -2365,102 +1549,6 @@ Or use <code class="prettyprint">self::bootstrap()</code> instead.</p>
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
->
-    <h4 class="phpdocumentor-element__name" id="method_one">
-        one()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_one" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">268</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Fetches a single model object.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">one</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$conditions</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static|null</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$conditions</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>[optional] Query conditions (like: <code class="prettyprint">['id' =&gt; 1, ...]</code>). Conditions are combined by logical <code class="prettyprint">AND</code>.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">static|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>Examples:</p>
-<ul>
-<li>Fetching the first items: <code class="prettyprint">Model::one()</code>.</li>
-<li>Fetching an item according to a condition: <code class="prettyprint">Model::one(['name' =&gt; $name])</code>.</li>
-</ul>
-</section>
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_save">
-        save()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_save" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">88</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Creates/updates a model and saves it in database.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">save</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$attributes</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$attributes</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">[]</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Model attributes.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">static</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
                         -abstract            -static                    "
 >
     <h4 class="phpdocumentor-element__name" id="method_schema">
@@ -2603,162 +1691,6 @@ Or use <code class="prettyprint">self::bootstrap()</code> instead.</p>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">$this</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_setSomeAttribute">
-        setSomeAttribute()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_setSomeAttribute" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">0</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">setSomeAttribute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span></code>
-
-        <section class="phpdocumentor-description"><p>Setter for model attribute, (<code class="prettyprint">attribute_name</code> -&gt; <code class="prettyprint">setAttributeName($value)</code>).</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$value</span>
-                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href=""><abbr title=""></abbr></a></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_toArray">
-        toArray()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_toArray" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">375</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Returns array representation of the model. All attributes will be converted to `camelCase` form.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_toJson">
-        toJson()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_toJson" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">391</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Returns JSON representation of the model. All attributes will be converted to `camelCase` form.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">toJson</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_update">
-        update()
-        <a href="classes/MAKS-Velox-Backend-Model.html#method_update" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="classes/Backend/Model.php"><a href="files/classes-backend-model.html"><abbr title="classes/Backend/Model.php">Model.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">131</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Updates the given attributes of the model and saves them in the database.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">update</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$attributes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$attributes</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The attributes to update.</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">static</span>
             &mdash;
         
     
@@ -3311,7 +2243,7 @@ Or use <code class="prettyprint">self::bootstrap()</code> instead.</p>
 </section>
             </div>
         </div>
-        <a href="classes/MAKS-Velox-Backend-Model.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/MAKS-Velox-Backend-Model-Element.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

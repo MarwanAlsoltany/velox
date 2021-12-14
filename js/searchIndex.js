@@ -706,6 +706,196 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/MAKS-Velox-Backend-Globals.html#property__ENV"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL",
+            "name": "DBAL",
+            "summary": "An\u0020abstract\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020DBAL\u0020for\u0020models.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003AgetDatabase\u0028\u0029",
+            "name": "getDatabase",
+            "summary": "Returns\u0020model\u0020database\u0020connection\u0020and\u0020sets\u0020\u0060static\u003A\u003A\u0024database\u0060\u0020with\u0020a\u0020default\u0020value\u0020if\u0020it\u0027s\u0020not\u0020set.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_getDatabase"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003AgetTable\u0028\u0029",
+            "name": "getTable",
+            "summary": "Returns\u0020model\u0020table\u0020name\u0020and\u0020sets\u0020\u0060static\u003A\u003A\u0024table\u0060\u0020with\u0020a\u0020default\u0020value\u0020and\u0020returns\u0020it\u0020if\u0020it\u0027s\u0020not\u0020set.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_getTable"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003AgetColumns\u0028\u0029",
+            "name": "getColumns",
+            "summary": "Returns\u0020model\u0020table\u0020columns\u0020and\u0020sets\u0020\u0060static\u003A\u003A\u0024columns\u0060\u0020with\u0020a\u0020default\u0020value\u0020and\u0020returns\u0020it\u0020if\u0020it\u0027s\u0020not\u0020set.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_getColumns"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003AgetPrimaryKey\u0028\u0029",
+            "name": "getPrimaryKey",
+            "summary": "Returns\u0020model\u0020table\u0020primary\u0020key\u0020and\u0020sets\u0020\u0060static\u003A\u003A\u0024primaryKey\u0060\u0020with\u0020a\u0020default\u0020value\u0020and\u0020returns\u0020it\u0020if\u0020it\u0027s\u0020not\u0020set.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_getPrimaryKey"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003Aschema\u0028\u0029",
+            "name": "schema",
+            "summary": "The\u0020SQL\u0020code\u0020to\u0020create\u0020the\u0020model\u0020table\u0020from.\u0020Has\u0020to\u0020match\u0020\u0060self\u003A\u003A\u0024table\u0060,\u0020\u0060self\u003A\u003A\u0024columns\u0060,\u0020and\u0020\u0060self\u003A\u003A\u0024primaryKey\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_schema"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003Amigrate\u0028\u0029",
+            "name": "migrate",
+            "summary": "Migrates\u0020model\u0020table\u0020to\u0020the\u0020database.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_migrate"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003AisMigrated\u0028\u0029",
+            "name": "isMigrated",
+            "summary": "Checks\u0020whether\u0020the\u0020model\u0020table\u0020is\u0020migrated\u0020to\u0020the\u0020database\u0020or\u0020not.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_isMigrated"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003Afetch\u0028\u0029",
+            "name": "fetch",
+            "summary": "Executes\u0020a\u0020query\u0020\u0028a\u0020prepared\u0020statement\u0029\u0020and\u0020returns\u0020the\u0020result.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_fetch"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003Awhere\u0028\u0029",
+            "name": "where",
+            "summary": "Finds\u0020a\u0020single\u0020or\u0020multiple\u0020models\u0020by\u0020the\u0020passed\u0020condition.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_where"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003AbuildWhereClause\u0028\u0029",
+            "name": "buildWhereClause",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_buildWhereClause"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003AbuildNestedQuery\u0028\u0029",
+            "name": "buildNestedQuery",
+            "summary": "Builds\u0020a\u0020nested\u0020query.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_buildNestedQuery"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003AvalidateCondition\u0028\u0029",
+            "name": "validateCondition",
+            "summary": "Validates\u0020the\u0020passed\u0020condition.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_validateCondition"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003AvalidateOperator\u0028\u0029",
+            "name": "validateOperator",
+            "summary": "Validates\u0020the\u0020passed\u0020operator.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#method_validateOperator"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003A\u0024table",
+            "name": "table",
+            "summary": "Model\u0020table\u0020name.\u0020If\u0020not\u0020set,\u0020an\u0020auto\u002Dgenerated\u0020name\u0020will\u0020be\u0020used\u0020instead.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#property_table"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003A\u0024columns",
+            "name": "columns",
+            "summary": "Model\u0020table\u0020columns.\u0020If\u0020not\u0020set,\u0020the\u0020model\u0020will\u0020fall\u0020back\u0020to\u0020the\u0020default\u0020primary\u0020key\u0020\u0060\u005B\u0027id\u0027\u005D\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#property_columns"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003A\u0024primaryKey",
+            "name": "primaryKey",
+            "summary": "Model\u0020table\u0020primary\u0020key.\u0020If\u0020not\u0020set,\u0020\u0060id\u0060\u0020will\u0020be\u0020used\u0020by\u0020default.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#property_primaryKey"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\DBAL\u003A\u003A\u0024database",
+            "name": "database",
+            "summary": "The\u0020database\u0020instance\/connection.",
+            "url": "classes/MAKS-Velox-Backend-Model-DBAL.html#property_database"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element",
+            "name": "Element",
+            "summary": "An\u0020abstract\u0020class\u0020that\u0020holds\u0020the\u0020base\u0020functionality\u0020of\u0020a\u0020model.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003Abootstrap\u0028\u0029",
+            "name": "bootstrap",
+            "summary": "Override\u0020this\u0020method\u0020to\u0020add\u0020your\u0020own\u0020bootstrap\u0020code\u0020to\u0020the\u0020modal.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_bootstrap"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003AassertAttributeExists\u0028\u0029",
+            "name": "assertAttributeExists",
+            "summary": "Asserts\u0020that\u0020the\u0020model\u0020attribute\u0020name\u0020is\u0020valid.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_assertAttributeExists"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Gets\u0020the\u0020specified\u0020model\u0020attribute.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003Aset\u0028\u0029",
+            "name": "set",
+            "summary": "Sets\u0020the\u0020specified\u0020model\u0020attribute.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_set"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003AgetAttributes\u0028\u0029",
+            "name": "getAttributes",
+            "summary": "Gets\u0020all\u0020model\u0020attributes.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_getAttributes"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003AsetAttributes\u0028\u0029",
+            "name": "setAttributes",
+            "summary": "Sets\u0020all\u0020or\u0020a\u0020subset\u0020of\u0020model\u0020attributes.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_setAttributes"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003A__get\u0028\u0029",
+            "name": "__get",
+            "summary": "Makes\u0020attributes\u0020accessible\u0020via\u0020public\u0020property\u0020access\u0020notation.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method___get"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003A__set\u0028\u0029",
+            "name": "__set",
+            "summary": "Makes\u0020attributes\u0020accessible\u0020via\u0020public\u0020property\u0020assignment\u0020notation.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method___set"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003A__isset\u0028\u0029",
+            "name": "__isset",
+            "summary": "Makes\u0020attributes\u0020consumable\u0020via\u0020\u0060isset\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method___isset"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003A__unset\u0028\u0029",
+            "name": "__unset",
+            "summary": "Makes\u0020attributes\u0020consumable\u0020via\u0020\u0060unset\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method___unset"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003A__clone\u0028\u0029",
+            "name": "__clone",
+            "summary": "Makes\u0020the\u0020model\u0020safely\u0020cloneable\u0020via\u0020the\u0020\u0060clone\u0060\u0020keyword.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method___clone"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003A__sleep\u0028\u0029",
+            "name": "__sleep",
+            "summary": "Makes\u0020the\u0020model\u0020safely\u0020consumable\u0020via\u0020\u0060serialize\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method___sleep"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003AoffsetGet\u0028\u0029",
+            "name": "offsetGet",
+            "summary": "\u0060ArrayAccess\u003A\u003AoffsetGet\u0028\u0029\u0060\u0020interface\u0020implementation.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_offsetGet"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003AoffsetSet\u0028\u0029",
+            "name": "offsetSet",
+            "summary": "\u0060ArrayAccess\u003A\u003AoffsetSet\u0028\u0029\u0060\u0020interface\u0020implementation.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_offsetSet"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003AoffsetExists\u0028\u0029",
+            "name": "offsetExists",
+            "summary": "\u0060ArrayAccess\u003A\u003AoffsetExists\u0028\u0029\u0060\u0020interface\u0020implementation.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_offsetExists"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003AoffsetUnset\u0028\u0029",
+            "name": "offsetUnset",
+            "summary": "\u0060ArrayAccess\u003A\u003AoffsetUnset\u0028\u0029\u0060\u0020interface\u0020implementation.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_offsetUnset"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003AgetIterator\u0028\u0029",
+            "name": "getIterator",
+            "summary": "\u0060IteratorAggregate\u003A\u003AgetIterator\u0028\u0029\u0060\u0020interface\u0020implementation.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#method_getIterator"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Model\\Element\u003A\u003A\u0024attributes",
+            "name": "attributes",
+            "summary": "Model\u0020attributes.\u0020Corresponds\u0020to\u0020table\u0020columns.",
+            "url": "classes/MAKS-Velox-Backend-Model-Element.html#property_attributes"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Model",
             "name": "Model",
             "summary": "An\u0020abstract\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020base\u0020model\u0020that\u0020can\u0020be\u0020extended\u0020to\u0020create\u0020models.",
@@ -861,6 +1051,11 @@ Search.appendIndex(
             "summary": "Echos\u0020the\u0020response\u0020according\u0020to\u0020the\u0020passed\u0020parameters.",
             "url": "classes/MAKS-Velox-Backend-Router.html#method_doEchoResponse"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AgetRequestMethod\u0028\u0029",
+            "name": "getRequestMethod",
+            "summary": "Returns\u0020the\u0020current\u0020request\u0020method\u0020via\u0020\u0060\u0024_SERVER\u0060\u0020or\u0020\u0060\u0024_POST\u005B\u0027_method\u0027\u005D\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_getRequestMethod"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AgetParsedQuery\u0028\u0029",
             "name": "getParsedQuery",
             "summary": "Returns\u0020query\u0020parameters.",
@@ -870,11 +1065,6 @@ Search.appendIndex(
             "name": "getParsedUrl",
             "summary": "Returns\u0020components\u0020of\u0020the\u0020current\u0020URL.",
             "url": "classes/MAKS-Velox-Backend-Router.html#method_getParsedUrl"
-        },                {
-            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AgetRequestMethod\u0028\u0029",
-            "name": "getRequestMethod",
-            "summary": "",
-            "url": "classes/MAKS-Velox-Backend-Router.html#method_getRequestMethod"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AgetRegisteredRoutes\u0028\u0029",
             "name": "getRegisteredRoutes",
@@ -930,6 +1120,16 @@ Search.appendIndex(
             "name": "SUPPORTED_METHODS",
             "summary": "Supported\u0020HTTP\u0020methods.",
             "url": "classes/MAKS-Velox-Backend-Router.html#constant_SUPPORTED_METHODS"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AHANDLER_ROUTE",
+            "name": "HANDLER_ROUTE",
+            "summary": "Route\u0020type\u0020handler.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#constant_HANDLER_ROUTE"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AMIDDLEWARE_ROUTE",
+            "name": "MIDDLEWARE_ROUTE",
+            "summary": "Route\u0020type\u0020handler.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#constant_MIDDLEWARE_ROUTE"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003A\u0024params",
             "name": "params",
@@ -1381,24 +1581,29 @@ Search.appendIndex(
             "summary": "Dumps\u0020an\u0020expression\u0020using\u0020\u0060var_export\u0028\u0029\u0060\u0020or\u0020\u0060print_r\u0028\u0029\u0060\u0020with\u0020syntax\u0020highlighting.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_exportExpressionWithSyntaxHighlighting"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AgetDumpingBlocks\u0028\u0029",
+            "name": "getDumpingBlocks",
+            "summary": "Returns\u0020an\u0020array\u0020containing\u0020HTML\/ANSI\u0020wrapping\u0020blocks.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_getDumpingBlocks"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AgetValidCallerTrace\u0028\u0029",
             "name": "getValidCallerTrace",
-            "summary": "",
+            "summary": "Returns\u0020the\u0020last\u0020caller\u0020trace\u0020before\u0020\u0060dd\u0028\u0029\u0060\u0020or\u0020\u0060dump\u0028\u0029\u0060\u0020if\u0020the\u0020format\u0020of\u0020\u0060file\u003Aline\u0060.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_getValidCallerTrace"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AgetAnsiCodeFromHexColor\u0028\u0029",
             "name": "getAnsiCodeFromHexColor",
-            "summary": "",
+            "summary": "Converts\u0020a\u0020hex\u0020color\u0020to\u0020the\u0020closest\u0020standard\u0020ANSI\u0020color\u0020code.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_getAnsiCodeFromHexColor"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AsetSyntaxHighlighting\u0028\u0029",
             "name": "setSyntaxHighlighting",
-            "summary": "",
+            "summary": "Sets\u0020PHP\u0020syntax\u0020highlighting\u0020colors\u0020according\u0020to\u0020current\u0020class\u0020state.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_setSyntaxHighlighting"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AisCli\u0028\u0029",
             "name": "isCli",
-            "summary": "",
+            "summary": "Checks\u0020whether\u0020the\u0020script\u0020is\u0020currently\u0020running\u0020in\u0020CLI\u0020mode\u0020or\u0020not.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_isCli"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024accentColor",
@@ -1410,6 +1615,11 @@ Search.appendIndex(
             "name": "contrastColor",
             "summary": "Contrast\u0020color\u0020of\u0020exceptions\u0020page\u0020and\u0020dump\u0020block.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#property_contrastColor"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024styles",
+            "name": "styles",
+            "summary": "Dumper\u0020CSS\u0020styles.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#property_styles"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024syntaxHighlightColors",
             "name": "syntaxHighlightColors",
@@ -1423,7 +1633,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024syntaxHighlightTokens",
             "name": "syntaxHighlightTokens",
-            "summary": "",
+            "summary": "PHP\u0020highlighting\u0020syntax\u0020tokens.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#property_syntaxHighlightTokens"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Misc",
