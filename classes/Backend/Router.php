@@ -297,9 +297,9 @@ class Router
     {
         self::$params = func_get_args();
 
-        Session::csrf()->check();
-
         Event::dispatch(self::ON_START, [&self::$params]);
+
+        Session::csrf()->check();
 
         [$base, $allowMultiMatch, $caseMatters, $slashMatters] = static::getValidParameters($base, $allowMultiMatch, $caseMatters, $slashMatters);
 
@@ -345,7 +345,7 @@ class Router
 
         unset($route);
 
-        static::doEchoResponse($result, $routeMatchFound, $pathMatchFound);
+        static::respond($result, $routeMatchFound, $pathMatchFound);
     }
 
     /**
@@ -366,6 +366,49 @@ class Router
 
             return 0;
         });
+    }
+
+    /**
+     * Echos the response according to the passed parameters.
+     *
+     * @param mixed $result
+     * @param bool $routeMatchFound
+     * @param bool $pathMatchFound
+     *
+     * @return void
+     */
+    protected static function respond($result, bool $routeMatchFound, bool $pathMatchFound): void
+    {
+        $code = 200;
+
+        if (!$routeMatchFound) {
+            $code   = $pathMatchFound ? 405 : 404;
+            $path   = static::$path;
+            $method = static::getRequestMethod();
+
+            $responses = [
+                404 => [
+                    'title'   => sprintf('%d Not Found', $code),
+                    'message' => sprintf('The "%s" route is not found!', $path),
+                ],
+                405 => [
+                    'title'   => sprintf('%d Not Allowed', $code),
+                    'message' => sprintf('The "%s" route is found, but the request method "%s" is not allowed!', $path, $method),
+                ],
+            ];
+
+            App::log("Responded with {$code} to the request for '{$path}' with method '{$method}'", null, 'system');
+
+            // this function will exit the script
+            App::abort(
+                $code,
+                $responses[$code]['title'],
+                $responses[$code]['message']
+            );
+        }
+
+        http_response_code() || http_response_code($code);
+        echo $result;
     }
 
     /**
@@ -467,49 +510,6 @@ class Router
         }
 
         return $arguments;
-    }
-
-    /**
-     * Echos the response according to the passed parameters.
-     *
-     * @param mixed $result
-     * @param bool $routeMatchFound
-     * @param bool $pathMatchFound
-     *
-     * @return void
-     */
-    protected static function doEchoResponse($result, bool $routeMatchFound, bool $pathMatchFound): void
-    {
-        $code = 200;
-
-        if (!$routeMatchFound) {
-            $code   = $pathMatchFound ? 405 : 404;
-            $path   = static::$path;
-            $method = static::getRequestMethod();
-
-            $responses = [
-                404 => [
-                    'title'   => sprintf('%d Not Found', $code),
-                    'message' => sprintf('The "%s" route is not found!', $path),
-                ],
-                405 => [
-                    'title'   => sprintf('%d Not Allowed', $code),
-                    'message' => sprintf('The "%s" route is found, but the request method "%s" is not allowed!', $path, $method),
-                ],
-            ];
-
-            App::log("Responded with {$code} to the request for '{$path}' with method '{$method}'", null, 'system');
-
-            // this function will exit the script
-            App::abort(
-                $code,
-                $responses[$code]['title'],
-                $responses[$code]['message']
-            );
-        }
-
-        http_response_code() || http_response_code($code);
-        echo $result;
     }
 
     /**
