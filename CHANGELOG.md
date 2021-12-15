@@ -4,6 +4,19 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.5.3] - 2021-12-15](https://github.com/MarwanAlsoltany/velox/compare/v1.5.2...v1.5.3)
+
+- Update `Engine` class:
+    - Update `getCompiledContent()` method.
+    - Update `printVariables()` method to print escaped and unescaped variables.
+    - Remove `printUnescapedVariables()` method.
+    - Refactor `wrapControlStructures()` method.
+- Update `Router` class:
+    - Update `start()` method to allow for `ON_START` event to be dispatched when CSRF check fails.
+    - Rename `doEchoResponse()` method to `respond()`.
+
+<br />
+
 ## [[1.5.2] - 2021-12-14](https://github.com/MarwanAlsoltany/velox/compare/v1.5.1...v1.5.2)
 
 - Update `App` class:
