@@ -61,7 +61,7 @@ The fastest way to build simple websites using PHP!
 
 <br/>
 
-<a href="https://replit.com/@MarwanAlsoltany/velox">
+<a href="https://velox.marwanalsoltany.repl.co">
 <img src="https://user-images.githubusercontent.com/7969982/133680020-48b64343-eb6e-4519-b1ba-adc86737c184.jpeg" alt="VELOX Demo" width="768" />
 </a>
 
