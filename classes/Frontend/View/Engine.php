@@ -16,7 +16,7 @@ use MAKS\Velox\Helper\Misc;
 
 /**
  * A class that serves as a templating engine for view files.
- * This templating engine is regular expression based.
+ * This templating engine is based on regular expression.
  *
  * Templating tags:
  * - Create a block `{! @block name !}` ... `{! @endblock !}`, use `{! @super !}` to inherit parent block.
@@ -180,7 +180,6 @@ class Engine
         $code = $this->importIncludes($code);
         $code = $this->extractBlocks($code);
         $code = $this->injectBlocks($code);
-        $code = $this->printUnescapedVariables($code);
         $code = $this->printVariables($code);
         $code = $this->wrapPhp($code);
         $code = $this->wrapComments($code);
@@ -488,25 +487,7 @@ class Engine
     }
 
     /**
-     * Echos unescaped variables in template code.
-     *
-     * @param string $code
-     *
-     * @return string
-     */
-    final protected function printUnescapedVariables(string $code): string
-    {
-        $comment = $this->isDebug() ? '<!-- unescapedVariable::(\'$1\') [ECHO] -->' : '';
-
-        return preg_replace(
-            static::REGEX['print.unescaped'],
-            $comment . '<?php echo (string)($1); ?>',
-            $code
-        );
-    }
-
-    /**
-     * Echos escaped variables in template code.
+     * Echos escaped and unescaped variables in template code.
      *
      * @param string $code
      *
@@ -514,13 +495,21 @@ class Engine
      */
     final protected function printVariables(string $code): string
     {
-        $comment = $this->isDebug() ? '<!-- escapedVariable::(\'$1\') [ECHO] -->' : '';
+        $comment = $this->isDebug() ? '<!-- %s::(\'$1\') [ECHO] -->' : '';
 
-        return preg_replace(
-            static::REGEX['print'],
-            $comment . '<?php echo htmlentities((string)($1), ENT_QUOTES, \'UTF-8\'); ?>',
+        $code = preg_replace(
+            static::REGEX['print.unescaped'],
+            sprintf($comment, 'unescapedVariable') . '<?php echo (string)($1); ?>',
             $code
         );
+
+        $code = preg_replace(
+            static::REGEX['print'],
+            sprintf($comment, 'escapedVariable') . '<?php echo htmlentities((string)($1), ENT_QUOTES, \'UTF-8\'); ?>',
+            $code
+        );
+
+        return $code;
     }
 
     /**
@@ -570,12 +559,14 @@ class Engine
             if (substr($code, 0, 1) !== ':') {
                 $code = ltrim($code, '@ ') . ':';
             }
-        } else {
-            // if code ends with a closing control structure or anything else
-            // check if it ends ';' and add ';' if it does not
-            if (substr($code, -1) !== ';') {
-                $code = ltrim($code, '@ ') . ';';
-            }
+
+            return $code;
+        }
+
+        // if code ends with a closing control structure or anything else
+        // check if it ends ';' and add ';' if it does not
+        if (substr($code, -1) !== ';') {
+            $code = ltrim($code, '@ ') . ';';
         }
 
         return $code;
