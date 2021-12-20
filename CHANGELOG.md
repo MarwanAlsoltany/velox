@@ -4,6 +4,25 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.5.4] - 2021-12-20](https://github.com/MarwanAlsoltany/velox/compare/v1.5.3...v1.5.4)
+
+- Update `App` class:
+    - Remove `__get()` magic method.
+- Update `Database` class:
+    - Update `mock()` method.
+- Update `View` class:
+    - Refactor class by extracting parts of it to `View/Compiler`.
+- Add `Compiler` class.
+- Update `Session` class:
+    - Refactor class by extracting parts of it to `Session/Flash` and `Session/CSRF`.
+- Add `Flash` class.
+- Add `Csrf` class.
+- Update tests:
+    - Update `AppTest` class.
+    - Update `EngineTest` class.
+
+<br />
+
 ## [[1.5.3] - 2021-12-15](https://github.com/MarwanAlsoltany/velox/compare/v1.5.2...v1.5.3)
 
 - Update `Engine` class:
