@@ -142,13 +142,6 @@ class App
         static::$staticMethods = [];
     }
 
-    public function __get(string $property)
-    {
-        $class = static::class;
-
-        throw new \Exception("Call to undefined property {$class}::${$property}");
-    }
-
     public function __call(string $method, array $arguments)
     {
         $class = static::class;
