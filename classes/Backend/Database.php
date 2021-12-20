@@ -245,21 +245,10 @@ class Database extends \PDO
     private static function mock()
     {
         return new class () extends Database {
+            // only methods that raise an error or throw an exception are overridden
             protected function __construct()
             {
                 // constructor arguments are not used
-            }
-            public static function getAvailableDrivers()
-            {
-                static::fail();
-            }
-            public function getAttribute($attribute)
-            {
-                static::fail();
-            }
-            public function setAttribute($attribute, $value)
-            {
-                static::fail();
             }
             public function exec($statement)
             {
@@ -273,19 +262,7 @@ class Database extends \PDO
             {
                 static::fail();
             }
-            public function quote($string, $type = \PDO::PARAM_STR)
-            {
-                static::fail();
-            }
-            public function lastInsertId($name = null)
-            {
-                static::fail();
-            }
             public function beginTransaction()
-            {
-                static::fail();
-            }
-            public function inTransaction()
             {
                 static::fail();
             }
@@ -294,14 +271,6 @@ class Database extends \PDO
                 static::fail();
             }
             public function rollBack()
-            {
-                static::fail();
-            }
-            public function errorCode()
-            {
-                static::fail();
-            }
-            public function errorInfo()
             {
                 static::fail();
             }
