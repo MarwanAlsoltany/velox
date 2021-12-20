@@ -21,7 +21,8 @@ return [
     'password' => '',
 
     // Database DSN (Data Source Name) of the connection.
-    // Keep untouched, it will be populated from the provided values above.
+    // Populate the DSN using the the provided credentials above.
+    // See https://www.php.net/manual/en/pdo.drivers.php for more info about drivers DSN.
     'dsn'      => '{database.driver}:host={database.host};port={database.port};dbname={database.dbname};charset={database.charset}',
 
 
