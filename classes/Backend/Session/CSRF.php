@@ -92,7 +92,7 @@ class CSRF
     {
         $this->token = empty($this->token) ? bin2hex(random_bytes(64)) : $this->token;
 
-        Session::get($this->name, $this->token);
+        Session::set($this->name, $this->token);
 
         return $this->token;
     }
