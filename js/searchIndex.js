@@ -91,11 +91,6 @@ Search.appendIndex(
             "summary": "Class\u0020constructor.",
             "url": "classes/MAKS-Velox-App.html#method___construct"
         },                {
-            "fqsen": "\\MAKS\\Velox\\App\u003A\u003A__get\u0028\u0029",
-            "name": "__get",
-            "summary": "",
-            "url": "classes/MAKS-Velox-App.html#method___get"
-        },                {
             "fqsen": "\\MAKS\\Velox\\App\u003A\u003A__call\u0028\u0029",
             "name": "__call",
             "summary": "",
@@ -1026,6 +1021,11 @@ Search.appendIndex(
             "summary": "Sorts\u0020registered\u0020routes\u0020to\u0020make\u0020middlewares\u0020come\u0020before\u0020handlers.",
             "url": "classes/MAKS-Velox-Backend-Router.html#method_sort"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003Arespond\u0028\u0029",
+            "name": "respond",
+            "summary": "Echos\u0020the\u0020response\u0020according\u0020to\u0020the\u0020passed\u0020parameters.",
+            "url": "classes/MAKS-Velox-Backend-Router.html#method_respond"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AgetValidParameters\u0028\u0029",
             "name": "getValidParameters",
             "summary": "Returns\u0020valid\u0020parameters\u0020for\u0020\u0060self\u003A\u003Astart\u0028\u0029\u0060\u0020by\u0020validating\u0020the\u0020passed\u0020parameters\u0020and\u0020adding\u0020the\u0020deficiency\u0020from\u0020router\u0020config.",
@@ -1045,11 +1045,6 @@ Search.appendIndex(
             "name": "getRouteArguments",
             "summary": "Returns\u0020valid\u0020arguments\u0020for\u0020route\u0020handler\u0020in\u0020the\u0020order\u0020that\u0020the\u0020handler\u0020expect.",
             "url": "classes/MAKS-Velox-Backend-Router.html#method_getRouteArguments"
-        },                {
-            "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AdoEchoResponse\u0028\u0029",
-            "name": "doEchoResponse",
-            "summary": "Echos\u0020the\u0020response\u0020according\u0020to\u0020the\u0020passed\u0020parameters.",
-            "url": "classes/MAKS-Velox-Backend-Router.html#method_doEchoResponse"
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Router\u003A\u003AgetRequestMethod\u0028\u0029",
             "name": "getRequestMethod",
@@ -1208,7 +1203,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Session\u003A\u003Acsrf\u0028\u0029",
             "name": "csrf",
-            "summary": "Generates\u0020and\u0020checks\u0020CSRF\u0020tokens.",
+            "summary": "Returns\u0020an\u0020instance\u0020of\u0020the\u0020CSRF\u0020class.",
             "url": "classes/MAKS-Velox-Backend-Session.html#method_csrf"
         },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\Data",
@@ -1491,26 +1486,6 @@ Search.appendIndex(
             "summary": "Deletes\u0020all\u0020cached\u0020views\u0020generated\u0020by\u0020\u0060self\u003A\u003Acache\u0028\u0029\u0060.",
             "url": "classes/MAKS-Velox-Frontend-View.html#method_clearCache"
         },                {
-            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Acompile\u0028\u0029",
-            "name": "compile",
-            "summary": "Compiles\u0020a\u0020PHP\u0020file\u0020with\u0020the\u0020passed\u0020variables.",
-            "url": "classes/MAKS-Velox-Frontend-View.html#method_compile"
-        },                {
-            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Arequire\u0028\u0029",
-            "name": "require",
-            "summary": "Requires\u0020a\u0020PHP\u0020file\u0020and\u0020pass\u0020it\u0020the\u0020passed\u0020variables.",
-            "url": "classes/MAKS-Velox-Frontend-View.html#method_require"
-        },                {
-            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003Aparse\u0028\u0029",
-            "name": "parse",
-            "summary": "Parses\u0020a\u0020file\u0020through\u0020the\u0020templating\u0020engine\u0020and\u0020returns\u0020a\u0020path\u0020to\u0020the\u0020compiled\u0020file.",
-            "url": "classes/MAKS-Velox-Frontend-View.html#method_parse"
-        },                {
-            "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003AfindOrInherit\u0028\u0029",
-            "name": "findOrInherit",
-            "summary": "Finds\u0020a\u0020file\u0020in\u0020the\u0020active\u0020theme\u0020or\u0020inherit\u0020it\u0020from\u0020parent\u0020theme.",
-            "url": "classes/MAKS-Velox-Frontend-View.html#method_findOrInherit"
-        },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\View\u003A\u003AresolveCachePath\u0028\u0029",
             "name": "resolveCachePath",
             "summary": "Returns\u0020a\u0020normalized\u0020path\u0020of\u0020a\u0020page\u0020from\u0020the\u0020cache\u0020directory.",
@@ -1703,7 +1678,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\config\u0028\u0029",
             "name": "config",
-            "summary": "Gets\u0020or\u0020sets\u0020a\u0020value\u0020of\u0020a\u0020key\u0020from\u0020the\u0020configuration\u0020via\u0020dot\u002Dnotation\u0020\u00280\u0020param\u0020\u002D\u003E\u0020the\u0020Config\u0020class\u0020instance,\u00201\u0020param\u0020\u002D\u003E\u0020get\u0020by\u0020key,\u00202\u0020params\u0020\u002D\u003E\u0020set\u0020by\u0020key\u0029.",
+            "summary": "Gets\u0020or\u0020sets\u0020a\u0020value\u0020of\u0020a\u0020key\u0020from\u0020the\u0020configuration\u0020via\u0020dot\u002Dnotation\u0020\u00280\u0020param\u0020\u002D\u003E\u0020the\u0020\u0060Config\u0060\u0020class\u0020instance,\u00201\u0020param\u0020\u002D\u003E\u0020get\u0020by\u0020key,\u00202\u0020params\u0020\u002D\u003E\u0020set\u0020by\u0020key\u0029.",
             "url": "namespaces/default.html#function_config"
         },                {
             "fqsen": "\\event\u0028\u0029",
@@ -1931,6 +1906,131 @@ Search.appendIndex(
             "summary": "Turns\u0020\u0060\\n\u0060\u0020to\u0020\u0060\u003Cbr\u003E\u0060\u0020in\u0020the\u0020passed\u0020text\u0020with\u0020\u0060nl2br\u0028\u0029\u0060.",
             "url": "namespaces/default.html#function_nb"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF",
+            "name": "CSRF",
+            "summary": "A\u0020class\u0020that\u0020offers\u0020a\u0020simple\u0020interface\u0020to\u0020protect\u0020against\u0020Cross\u002DSite\u0020Request\u0020Forgery.",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "Returns\u0020the\u0020HTML\u0020input\u0020element\u0020containing\u0020the\u0020CSRF\u0020token.",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html#method___toString"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF\u003A\u003Ahtml\u0028\u0029",
+            "name": "html",
+            "summary": "Returns\u0020an\u0020HTML\u0020input\u0020element\u0020containing\u0020a\u0020CSRF\u0020token\u0020after\u0020storing\u0020it\u0020in\u0020the\u0020session.",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html#method_html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF\u003A\u003A\u0024token",
+            "name": "token",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html#property_token"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF\u003A\u003Acheck\u0028\u0029",
+            "name": "check",
+            "summary": "Checks\u0020whether\u0020the\u0020request\u0020token\u0020matches\u0020the\u0020token\u0020stored\u0020in\u0020the\u0020session.",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html#method_check"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF\u003A\u003Afail\u0028\u0029",
+            "name": "fail",
+            "summary": "Renders\u0020403\u0020error\u0020page.",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html#method_fail"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF\u003A\u003AisValid\u0028\u0029",
+            "name": "isValid",
+            "summary": "Validate\u0020the\u0020request\u0020token\u0020with\u0020the\u0020token\u0020stored\u0020in\u0020the\u0020session.",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html#method_isValid"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF\u003A\u003AisWhitelisted\u0028\u0029",
+            "name": "isWhitelisted",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html#method_isWhitelisted"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF\u003A\u003AisIdentical\u0028\u0029",
+            "name": "isIdentical",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html#method_isIdentical"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\CSRF\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Session-CSRF.html#property_name"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\Flash",
+            "name": "Flash",
+            "summary": "A\u0020class\u0020that\u0020offers\u0020a\u0020simple\u0020interface\u0020to\u0020write\u0020flash\u0020messages.",
+            "url": "classes/MAKS-Velox-Backend-Session-Flash.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\Flash\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Session-Flash.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\Flash\u003A\u003A__invoke\u0028\u0029",
+            "name": "__invoke",
+            "summary": "Makes\u0020the\u0020class\u0020callable\u0020as\u0020a\u0020function,\u0020the\u0020call\u0020is\u0020forwarded\u0020to\u0020\u0060self\u003A\u003Amessage\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Session-Flash.html#method___invoke"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\Flash\u003A\u003A__call\u0028\u0029",
+            "name": "__call",
+            "summary": "Aliases\u0020some\u0020magic\u0020methods\u0020for\u0020\u0060self\u003A\u003Amessage\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Backend-Session-Flash.html#method___call"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\Flash\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "Returns\u0020the\u0020HTML\u0020containing\u0020the\u0020flash\u0020messages.",
+            "url": "classes/MAKS-Velox-Backend-Session-Flash.html#method___toString"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\Flash\u003A\u003Amessage\u0028\u0029",
+            "name": "message",
+            "summary": "Writes\u0020a\u0020flash\u0020message\u0020to\u0020the\u0020session.",
+            "url": "classes/MAKS-Velox-Backend-Session-Flash.html#method_message"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\Flash\u003A\u003Arender\u0028\u0029",
+            "name": "render",
+            "summary": "Renders\u0020the\u0020flash\u0020messages\u0020using\u0020the\u0020default\u0020callback\u0020or\u0020the\u0020passed\u0020one.",
+            "url": "classes/MAKS-Velox-Backend-Session-Flash.html#method_render"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\Flash\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Session-Flash.html#property_name"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session\\Flash\u003A\u003A\u0024messages",
+            "name": "messages",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Backend-Session-Flash.html#property_messages"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Compiler",
+            "name": "Compiler",
+            "summary": "A\u0020class\u0020that\u0020offers\u0020some\u0020utility\u0020functions\u0020to\u0020require,\u0020parse,\u0020and\u0020compile\u0020view\u0020files.",
+            "url": "classes/MAKS-Velox-Frontend-View-Compiler.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Compiler\u003A\u003Acompile\u0028\u0029",
+            "name": "compile",
+            "summary": "Compiles\u0020a\u0020PHP\u0020file\u0020with\u0020the\u0020passed\u0020variables.",
+            "url": "classes/MAKS-Velox-Frontend-View-Compiler.html#method_compile"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Compiler\u003A\u003Arequire\u0028\u0029",
+            "name": "require",
+            "summary": "Requires\u0020a\u0020PHP\u0020file\u0020and\u0020pass\u0020it\u0020the\u0020passed\u0020variables.",
+            "url": "classes/MAKS-Velox-Frontend-View-Compiler.html#method_require"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Compiler\u003A\u003Aparse\u0028\u0029",
+            "name": "parse",
+            "summary": "Parses\u0020a\u0020file\u0020through\u0020the\u0020templating\u0020engine\u0020and\u0020returns\u0020a\u0020path\u0020to\u0020the\u0020compiled\u0020file.",
+            "url": "classes/MAKS-Velox-Frontend-View-Compiler.html#method_parse"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Compiler\u003A\u003Aresolve\u0028\u0029",
+            "name": "resolve",
+            "summary": "Resolves\u0020a\u0020file\u0020from\u0020the\u0020active\u0020theme\u0020or\u0020inherits\u0020it\u0020from\u0020a\u0020parent\u0020theme.",
+            "url": "classes/MAKS-Velox-Frontend-View-Compiler.html#method_resolve"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -1955,6 +2055,11 @@ Search.appendIndex(
             "name": "Model",
             "summary": "",
             "url": "namespaces/maks-velox-backend-model.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Session",
+            "name": "Session",
+            "summary": "",
+            "url": "namespaces/maks-velox-backend-session.html"
         },                {
             "fqsen": "\\MAKS\\Velox\\Frontend",
             "name": "Frontend",
