@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend;
 
-use MAKS\Velox\App;
-use MAKS\Velox\Frontend\HTML;
-use MAKS\Velox\Helper\Misc;
+use MAKS\Velox\Backend\Session\Flash;
+use MAKS\Velox\Backend\Session\CSRF;
+use MAKS\Velox\Backend\Config;
 
 /**
  * A class that offers a simple interface to work with sessions.
@@ -34,6 +34,12 @@ use MAKS\Velox\Helper\Misc;
  *
  * // destroy a session
  * Session::destroy();
+ *
+ * // get an instance of the Flash class
+ * $flash = Session::flash();
+ *
+ * // get an instance of the CSRF class
+ * $flash = Session::csrf();
  * ```
  *
  * @package Velox\Backend
@@ -178,91 +184,20 @@ final class Session
 
     /**
      * Writes a flash message to the session.
-     *
      * This method can be invoked without arguments, in that case a `Flash` object will be returned.
-     * The `Flash` object has the following methods:
-     * - `message(string $type, string $text, bool $now = false): static`: Writes a flash message to the session.
-     * - `render(?callable $callback = null): ?string`: Renders the flash messages using the default callback or the passed one (callback will be passed: `$text`, `$type`).
-     * The `render()` method will be called automatically if the object is casted to a string.
-     *
-     * The `Flash` object consists also of magic methods with the following signature:
-     * - `{type}(string $text, bool $now = false)`
-     * Where `{type}` is a message type like [`success`, `info`, `warning`, `error`] or any other value.
-     * The `{type}` will also be used as a CSS class if the default rendering callback is used (camelCase will be changed to kebab-case automatically).
      *
      * @param string $type [optional] Message type.
      * @param string $text [optional] Message text.
      * @param bool $now [optional] Whether to write and make the message available for rendering immediately or wait for the next request.
      *
-     * @return object
+     * @return Flash
      */
-    public static function flash(string $text = '', string $type = '', bool $now = false): object
+    public static function flash(string $text = '', string $type = '', bool $now = false): Flash
     {
-        self::start();
-
         static $flash = null;
 
         if ($flash === null) {
-            $flash = new class () {
-                private string $name = '_flash';
-                private array $messages = [];
-                public function __construct()
-                {
-                    $this->messages = Globals::getSession($this->name) ?? [];
-
-                    Globals::setSession($this->name, []);
-                }
-                public function __invoke()
-                {
-                    return $this->message(...func_get_args());
-                }
-                public function __call(string $method, array $arguments)
-                {
-                    return $this->message(
-                        Misc::transform($method, 'kebab'),
-                        $arguments[0] ?? '',
-                        $arguments[1] ?? false
-                    );
-                }
-                public function __toString()
-                {
-                    return $this->render();
-                }
-                public function message(string $type, string $text, bool $now = false)
-                {
-                    if ($now) {
-                        $this->messages[md5(uniqid($text))] = [
-                            'type' => $type,
-                            'text' => $text
-                        ];
-
-                        return $this;
-                    }
-
-                    Globals::setSession($this->name . '.' . md5(uniqid($text)), [
-                        'type' => $type,
-                        'text' => $text
-                    ]);
-
-                    return $this;
-                }
-                public function render(?callable $callback = null): string
-                {
-                    $callback = $callback ?? function ($text, $type) {
-                        return HTML::div($text, [
-                            'class' => 'flash-message ' . $type
-                        ]);
-                    };
-
-                    $html = '';
-
-                    foreach ($this->messages as $message) {
-                        $html .= $callback($message['text'], $message['type']);
-                    }
-
-                    return $html;
-                }
-            };
+            $flash = new Flash();
         }
 
         if (strlen(trim($text))) {
@@ -273,91 +208,15 @@ final class Session
     }
 
     /**
-     * Generates and checks CSRF tokens.
-     *
-     * This method will return a `CSRF` object.
-     * The `CSRF` object has the following methods:
-     * - `isValid(): bool`: Validate the request token with the token stored in the session.
-     * - `token(): string`: Generates a CSRF token, stores it in the session and returns it.
-     * - `html(): string`: Returns an HTML input element containing a CSRF token after storing it in the session.
-     * The `html()` method will be called automatically if the object is casted to a string.
+     * Returns an instance of the CSRF class.
      *
      * @param string $name [optional] The name of the CSRF token. Default to `{session.csrf.name}` configuration value.
      * If a token name other than the default is specified, validation of this token has to be implemented manually.
      *
-     * @return object
+     * @return CSRF
      */
-    public static function csrf(?string $name = null): object
+    public static function csrf(?string $name = null): CSRF
     {
-        self::start();
-
-        return new class ($name) {
-            private string $name;
-            private string $token;
-            public function __construct(?string $name = null)
-            {
-                $this->name  = $name ?? Config::get('session.csrf.name', '_token');
-                $this->token = Globals::getSession($this->name) ?? '';
-            }
-            public function __toString()
-            {
-                return $this->html();
-            }
-            public function token(): string
-            {
-                $this->token = empty($this->token) ? bin2hex(random_bytes(64)) : $this->token;
-
-                Globals::setSession($this->name, $this->token);
-
-                return $this->token;
-            }
-            public function html(): string
-            {
-                return HTML::input(null, [
-                    'type'  => 'hidden',
-                    'name'  => $this->name,
-                    'value' => $this->token()
-                ]);
-            }
-            public function check(): void
-            {
-                if ($this->isValid()) {
-                    return;
-                }
-
-                App::log('Responded with 403 to the request for "{uri}". CSRF is detected. Client IP address {ip}', [
-                    'uri' => Globals::getServer('REQUEST_URI'),
-                    'ip'  => Globals::getServer('REMOTE_ADDR'),
-                ], 'system');
-
-                App::abort(403, null, 'Invalid CSRF token!');
-            }
-            public function isValid(): bool
-            {
-                if ($this->isWhitelisted() || $this->isIdentical()) {
-                    return true;
-                }
-
-                Globals::cutSession($this->name);
-
-                return false;
-            }
-            private function isWhitelisted(): bool
-            {
-                $method = Globals::getServer('REQUEST_METHOD');
-                $client = Globals::getServer('REMOTE_HOST') ?? Globals::getServer('REMOTE_ADDR');
-
-                return (
-                    in_array($client, Config::get('session.csrf.whitelisted', [])) ||
-                    !in_array($method, Config::get('session.csrf.methods', []))
-                );
-            }
-            private function isIdentical(): bool
-            {
-                $token = Globals::cutPost($this->name) ?? Globals::cutGet($this->name) ?? '';
-
-                return empty($this->token) || hash_equals($this->token, $token);
-            }
-        };
+        return new CSRF($name);
     }
 }
