@@ -16,7 +16,7 @@ use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Frontend\HTML;
 use MAKS\Velox\Frontend\Path;
-use MAKS\Velox\Frontend\View\Engine;
+use MAKS\Velox\Frontend\View\Compiler;
 use MAKS\Velox\Helper\Misc;
 
 /**
@@ -228,7 +228,8 @@ class View
 
     /**
      * Includes a file from the active theme directory.
-     * Can also be used as a mean of extending a layout if it was put at the end of it.
+     * Can also be used as a mean of extending a layout if it was put at the end of it because the compilation is done
+     * from top to bottom and from the deepest nested element to the upper most (imperative approach, there is no preprocessing).
      *
      * @param string $file The path of the file starting from theme root.
      * @param array|null $variables [optional] An associative array of the variables to pass.
@@ -241,7 +242,7 @@ class View
 
         $include = self::resolvePath($path, $file);
 
-        self::require($include, $variables);
+        Compiler::require($include, $variables);
     }
 
     /**
@@ -260,7 +261,7 @@ class View
 
         $layout = self::resolvePath($path, $name);
 
-        return static::compile($layout, __FUNCTION__, $variables);
+        return Compiler::compile($layout, __FUNCTION__, $variables);
     }
 
     /**
@@ -279,7 +280,7 @@ class View
 
         $page = self::resolvePath($path, $name);
 
-        return static::compile($page, __FUNCTION__, $variables);
+        return Compiler::compile($page, __FUNCTION__, $variables);
     }
 
     /**
@@ -298,7 +299,7 @@ class View
 
         $partial = self::resolvePath($path, $name);
 
-        return static::compile($partial, __FUNCTION__, $variables);
+        return Compiler::compile($partial, __FUNCTION__, $variables);
     }
 
     /**
@@ -431,139 +432,6 @@ class View
         Event::dispatch(self::ON_CACHE_CLEAR);
 
         App::log('Cleared views cache', null, 'system');
-    }
-
-    /**
-     * Compiles a PHP file with the passed variables.
-     *
-     * @param string $file An absolute path to the file that should be compiled.
-     * @param string $type The type of the file (just a name to make for friendly exceptions).
-     * @param array|null [optional] An associative array of the variables to pass.
-     *
-     * @return string
-     *
-     * @throws \Exception If failed to compile the file.
-     */
-    protected static function compile(string $file, string $type, ?array $variables = null): string
-    {
-        ob_start();
-
-        try {
-            self::require($file, $variables);
-        } catch (\Exception $error) {
-            // clean started buffer before throwing the exception
-            ob_end_clean();
-
-            throw $error;
-        }
-
-        $buffer = ob_get_contents();
-        ob_end_clean();
-
-        if ($buffer === false) {
-            $name = basename($file, Config::get('view.fileExtension'));
-            throw new \Exception("Something went wrong when trying to compile the {$type} with the name '{$name}' in {$file}");
-        }
-
-        return trim($buffer);
-    }
-
-    /**
-     * Requires a PHP file and pass it the passed variables.
-     *
-     * @param string $file An absolute path to the file that should be compiled.
-     * @param array|null $variables [optional] An associative array of the variables to pass.
-     *
-     * @return void
-     *
-     * @throws \Exception If the file could not be loaded.
-     */
-    private static function require(string $file, ?array $variables = null): void
-    {
-        $file = self::findOrInherit($file);
-
-        if (!file_exists($file)) {
-            throw new \Exception(
-                "Could not load the file with the path '{$file}' nor fall back to a parent. Check if the file exists!"
-            );
-        }
-
-        $_file = static::parse($file);
-        unset($file);
-
-        if ($variables !== null) {
-            extract($variables, EXTR_OVERWRITE);
-            unset($variables);
-        }
-
-        require($_file);
-        unset($_file);
-    }
-
-    /**
-     * Parses a file through the templating engine and returns a path to the compiled file.
-     *
-     * @param string $file The file to parse.
-     *
-     * @return string
-     */
-    private static function parse(string $file): string
-    {
-        if (!Config::get('view.engine.enabled', true)) {
-            return $file;
-        }
-
-        static $engine = null;
-
-        if ($engine === null) {
-            $engine = new Engine(
-                Config::get('global.paths.themes') . '/',
-                Config::get('view.fileExtension') ?? self::DEFAULTS['fileExtension'],
-                Config::get('global.paths.storage') . '/temp/views/',
-                Config::get('view.engine.cache') ?? self::DEFAULTS['engine']['cache'],
-                Config::get('view.engine.debug') ?? self::DEFAULTS['engine']['debug']
-            );
-        }
-
-        $file = $engine->getCompiledFile(strtr($file, [
-            Path::normalize(Config::get('global.paths.themes'), '') => ''
-        ]));
-
-        return $file;
-    }
-
-    /**
-     * Finds a file in the active theme or inherit it from parent theme.
-     *
-     * @param string $file
-     *
-     * @return string
-     */
-    private static function findOrInherit(string $file): string
-    {
-        if (file_exists($file)) {
-            return $file;
-        }
-
-        if (Config::get('view.inherit')) {
-            $active = Config::get('theme.active');
-            $parent = Config::get('theme.parent');
-            $themes = Config::get('global.paths.themes');
-            $nameWrapper = basename($themes) . DIRECTORY_SEPARATOR . '%s';
-
-            foreach ((array)$parent as $substitute) {
-                $fallbackFile = strtr($file, [
-                    sprintf($nameWrapper, $active) => sprintf($nameWrapper, $substitute)
-                ]);
-
-                if (file_exists($fallbackFile)) {
-                    $file = $fallbackFile;
-                    break;
-                }
-            }
-        }
-
-        return $file;
     }
 
     /**
