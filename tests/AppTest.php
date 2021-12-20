@@ -33,13 +33,6 @@ class AppTest extends TestCase
         $this->assertEquals($this->app->instance(), App::instance());
     }
 
-    public function testAppThrowsAnExceptionForCallsToUndefinedProperties()
-    {
-        $this->expectException(\Exception::class);
-
-        $this->app->unknown;
-    }
-
     public function testThrowsAnExceptionForCallsToUndefinedMethods()
     {
         $this->expectException(\Exception::class);
