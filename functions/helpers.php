@@ -63,12 +63,12 @@ if (!function_exists('terminate')) {
 
 if (!function_exists('config')) {
     /**
-     * Gets or sets a value of a key from the configuration via dot-notation (0 param -> the Config class instance, 1 param -> get by key, 2 params -> set by key).
+     * Gets or sets a value of a key from the configuration via dot-notation (0 param -> the `Config` class instance, 1 param -> get by key, 2 params -> set by key).
      *
      * @param string $key [optional] The dotted key representation.
      * @param mixed $value [optional] The value to set.
      *
-     * @return mixed The requested value or null.
+     * @return mixed|\MAKS\Velox\Backend\Config The requested value or null or the `Config` object if no parameters are given.
      *
      * @since 1.0.0
      */
