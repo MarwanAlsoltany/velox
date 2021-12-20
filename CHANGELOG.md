@@ -15,8 +15,8 @@ All notable changes to **VELOX** will be documented in this file.
 - Add `Compiler` class.
 - Update `Session` class:
     - Refactor class by extracting parts of it to `Session/Flash` and `Session/CSRF`.
-- Add `Flash` class.
-- Add `Csrf` class.
+    - Add `Flash` class.
+    - Add `Csrf` class.
 - Update tests:
     - Update `AppTest` class.
     - Update `EngineTest` class.
