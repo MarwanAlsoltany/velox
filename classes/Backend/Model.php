@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend;
 
+use MAKS\Velox\Backend\Exception;
 use MAKS\Velox\Backend\Database;
 use MAKS\Velox\Backend\Model\Element;
 use MAKS\Velox\Helper\Misc;
@@ -52,7 +53,7 @@ use MAKS\Velox\Helper\Misc;
  * $models = Model::fetch('SELECT * FROM @table WHERE `name` = ?', [$name]); // fetches using raw SQL query.
  * ```
  *
- * @package Velox\Backend
+ * @package Velox\Backend\Model
  * @since 1.3.0
  * @api
  *
@@ -411,7 +412,10 @@ abstract class Model extends Element
             return $this->{$function === 'findBy' ? 'find' : $function}($attribute, ...$arguments);
         }
 
-        throw new \Exception(sprintf('Call to undefined method %s::%s()', static::class, $method));
+        Exception::throw(
+            'UndefinedMethodException:BadMethodCallException',
+            sprintf('Call to undefined method %s::%s', static::class, $method)
+        );
     }
 
     /**
