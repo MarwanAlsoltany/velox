@@ -297,7 +297,21 @@ class Config
      *
      * @return array
      */
-    public static function getAll(): ?array
+    public static function getAll(): array
+    {
+        static::load();
+
+        return static::getReference();
+    }
+
+    /**
+     * Returns a referenced to the current configuration array.
+     *
+     * @return array
+     *
+     * @since 1.5.5
+     */
+    public static function &getReference(): array
     {
         static::load();
 
