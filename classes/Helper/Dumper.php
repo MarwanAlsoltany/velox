@@ -52,7 +52,7 @@ class Dumper
      * @since 1.5.2
      */
     public static array $styles = [
-        'exceptionPage' => ":root{--accent-color:%accentColor%;--contrast-color:%contrastColor%}*,::after,::before{box-sizing:border-box}body{background:#fff;font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;margin:0}h1,h2,h3,h4,h5,h6{margin:0}h1,h2{color:var(--accent-color)}h1{font-size:32px}h2{font-size:28px}h3{color:#fff}.container{width:85vw;max-width:1200px;min-height:100vh;background:#fff;padding:7vh 3vw 10vh 3vw;margin:0 auto;overflow:hidden}.message{background:var(--accent-color);color:#fff;padding:2em 1em;margin:0 0 3em 0;}.code{overflow-y:scroll;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:14px;margin:0 0 3em 0;-ms-overflow-style: none;scrollbar-width: none}.code::-webkit-scrollbar{display:none}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}ul{padding:2em 1em;margin:1em 0;background:var(--contrast-color)}ul li{white-space:pre;list-style-type:none;font-family:monospace}ul li span.line{display:inline-block;color:#fff;text-align:right;padding:4px 8px;user-select:none}ul li.exception-line span.line{color:var(--accent-color);font-weight:bold}ul li.exception-line span.line+code>span>span:not(:first-child){padding-bottom:3px;border-bottom:2px solid var(--accent-color)}.external-link{color:var(--accent-color)}.table-container{overflow-x:scroll}table{width:100%;border-collapse:collapse;border-spacing:0}table th{background:var(--contrast-color);color:#fff;text-align:left;padding-top:12px;padding-bottom:12px}table td,table th{border-bottom:1px solid rgba(0,0,0,0.15);padding:6px}table tr:nth-child(even){background-color:rgba(0,0,0,0.05)}table td.number{text-align:left}table td.line{text-align:left}table td.class,table td.function{font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:14px;font-weight:700}table td.arguments{white-space:nowrap}table td.arguments span{display:inline-block;background:rgba(0,0,0,.15);color:var(--accent-color);font-style:italic;padding:2px 4px;margin:0 4px 0 0;border-radius:4px}",
+        'exceptionPage' => ":root{--light:#fff;--dark:#000;--accent-color:%accentColor%;--contrast-color:%contrastColor%;--font-normal:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;--font-mono:'Fira Code','Ubuntu Mono',Courier,monospace;--font-base-size:16px;--container-width:85vw;--container-max-width:1364px}@media (max-width:992px){:root{--font-base-size:14px;--container-width:100%;--container-max-width:100vw}}*,::after,::before{box-sizing:border-box;scrollbar-width:thin;scrollbar-color:var(--accent-color) rgba(0,0,0,.15)}::-webkit-scrollbar{width:8px;height:8px;opacity:1;-webkit-appearance:none}::-webkit-scrollbar-thumb{background:var(--accent-color);border-radius:4px}::-webkit-scrollbar-track,::selection{background:rgba(0,0,0,.15)}body{background:var(--light);color:var(--dark);font-family:var(--font-normal);font-size:var(--font-base-size);line-height:1.5;margin:0}h1,h2,h3,h4,h5,h6{margin:0}h1{color:var(--accent-color);font-size:2rem}h2{color:var(--accent-color);font-size:1.75rem}h3{color:var(--light)}p{font-size:1rem;margin:1rem 0}a{color:var(--accent-color)}a:hover{text-decoration:underline}ul{padding:1.5rem 1rem;margin:1rem 0}li{white-space:pre;list-style-type:none}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.monospace,code{font-family:var(--font-mono);word-wrap:break-word;word-break:break-all}.container{width:var(--container-width);max-width:var(--container-max-width);min-height:100vh;background:var(--light);padding:7vh calc((var(--container-max-width) * .03)) 10vh;margin:0 auto;overflow:hidden}.capture-section,.info-section,.trace-section{margin-bottom:3rem}.message{background:var(--accent-color);color:var(--light);padding:2rem 1rem 1rem 1rem}.scrollable{overflow-x:scroll}.code{display:block;width:max-content;min-width:100%;background:var(--contrast-color);font-family:var(--font-mono);font-size:.875rem;margin:0;overflow-y:scroll;-ms-overflow-style:none;scrollbar-width:none;cursor:initial}.code::-webkit-scrollbar{display:none}.code *{background:0 0}.code-line{display:inline-block;width:calc(3ch + (2 * .75ch));background:rgba(255,255,255,.25);color:var(--light);text-align:right;padding:.25rem .75ch;margin:0 1.5ch 0 0;user-select:none}.code-line.exception-line{color:var(--accent-color);font-weight:700}.code-line.exception-line+code>span>span:not(:first-child){padding-bottom:3px;border-bottom:2px solid var(--accent-color)}.button{display:inline-block;vertical-align:baseline;background:var(--accent-color);color:var(--light);font-size:1rem;text-decoration:none;padding:.5rem 1rem;margin:0 0 1rem 0;border:none;border-radius:2.5rem;cursor:pointer}.button:hover{background:var(--contrast-color);text-decoration:inherit}.button:last-child{margin-bottom:0}.table{width:100%;border-collapse:collapse;border-spacing:0}.table .table-cell{padding:.75rem}.table .table-head .table-cell{background:var(--contrast-color);color:var(--light);text-align:left;padding-top:.75rem;padding-bottom:.75rem}.table-cell.compact{width:1%}.table-row{background:var(--light);border-top:1px solid rgba(0,0,0,.15)}.table .table-row:hover{background:rgba(0,0,0,.065)!important}.table .table-row.additional .table-cell{padding:0}.table .table-row.odd,.table .table-row.odd+.additional{background:var(--light)}.table .table-row.even,.table .table-row.even+.additional{background:rgba(0,0,0,.035)}.table .table-row.even+.additional,.table .table-row.odd+.additional{border-top:none}.pop-up{cursor:help}.line,.number{text-align:center}.class,.function{font-size:.875rem;font-weight:700}.arguments{white-space:nowrap}.argument{display:inline-block;background:rgba(0,0,0,.125);color:var(--accent-color);font-size:.875rem;font-style:italic;padding:.125rem .5rem;margin:0 .25rem 0 0;border-radius:2.5rem}.argument:hover{background:var(--accent-color);color:var(--contrast-color)}.accordion{cursor:pointer;position:relative}.accordion-summary{width:1.5rem;height:1.5rem;background:var(--accent-color);color:var(--light);line-height:1.5rem;text-align:center;list-style:none;border-radius:50%;position:absolute;top:-2.2925rem;left:1.425rem;user-select:none;cursor:pointer}.accordion-summary:hover{background:var(--contrast-color)}.accordion-details{padding:0}",
         'traceBlock'    => "background:#fff;color:%accentColor%;font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;padding:4px 8px;margin-bottom:18px;",
         'dumpBlock'     => "display:table;background:%contrastColor%;color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:18px;padding:18px;margin-bottom:8px;",
         'timeBlock'     => "display:table;background:%accentColor%;color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:12px;font-weight:bold;padding:12px;margin-bottom:8px;",
@@ -117,13 +117,13 @@ class Dumper
      */
     public static function dump(...$variable): void
     {
-        $trace  = self::getValidCallerTrace();
+        $caller = self::getValidCallerTrace();
         $blocks = self::getDumpingBlocks();
 
         $dump = '';
 
         foreach ($variable as $var) {
-            $trace = sprintf($blocks['traceBlock'], $trace);
+            $trace = sprintf($blocks['traceBlock'], $caller);
             $highlightedDump = self::exportExpressionWithSyntaxHighlighting($var, $trace);
             $dump .= sprintf($blocks['dumpBlock'], $highlightedDump);
         }
@@ -139,8 +139,8 @@ class Dumper
 
         // @codeCoverageIgnoreStart
         (new HTML(false))
-            ->open('div', ['id' => 'dump'])
-                ->style('.dump * {background:transparent;padding:0;}')
+            ->open('div', ['id' => $id = 'dump-' . uniqid()])
+                ->style("#{$id} * { background: transparent; padding: 0; }")
                 ->div($dump)
             ->close()
         ->echo();
@@ -166,14 +166,15 @@ class Dumper
 
         self::setSyntaxHighlighting();
 
+        $reflection  = new \ReflectionClass($exception);
         $file        = $exception->getFile();
         $line        = $exception->getLine();
         $message     = $exception->getMessage();
         $trace       = $exception->getTrace();
         $traceString = $exception->getTraceAsString();
-        $name        = get_class($exception);
-        $filename    = basename($file);
-        $lines       = file_exists($file) ? file($file) : null;
+        $name        = $reflection->getName();
+        $shortName   = $reflection->getShortName();
+        $fileName    = basename($file);
 
         $style = Misc::interpolate(
             static::$styles['exceptionPage'],
@@ -183,105 +184,86 @@ class Dumper
             ],
             '%%'
         );
+        $favicon = '<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="512" height="512"><circle cx="256" cy="256" r="256" fill="#F00" /></svg>';
 
-        (new HTML(false))
-            ->node('<!DOCTYPE html>')
-            ->open('html', ['lang' => 'en'])
-                ->open('head')
-                    ->title('Oops, something went wrong')
-                    ->style($style)
-                ->close()
-                ->open('body')
-                    ->open('div', ['class' => 'container'])
-                        ->h1("Uncaught {$name}")
-                        ->p("<code><b>{$name}</b></code> was thrown on line <code><b>{$line}</b></code> of file <code><b>{$filename}</b></code> which prevented further execution of the code.")
-                        ->open('div', ['class' => 'message'])
-                            ->h3($name)
-                            ->p((string)htmlspecialchars($message, ENT_QUOTES, 'UTF-8'))
-                        ->close()
-                        ->h2('Thrown in:')
-                        ->execute(function (HTML $html) use ($file, $line, $lines) {
-                            if (!isset($lines)) {
-                                return;
-                            }
+        function highlight($file, $line = null) {
+            return (new HTML(false))
+                ->open('div', ['class' => 'code-highlight'])
+                    ->open('ul', ['class' => 'code'])
+                        ->execute(function (HTML $html) use ($file, $line) {
+                            $file   = (string)$file;
+                            $line   = (int)$line;
+                            $lines  = file_exists($file) ? file($file) : [];
+                            $count  = count($lines);
+                            $offset = $line === 0 ? $count : 5;
 
-                            $html
-                                ->open('p')
-                                    ->node("File: <code><b>{$file}</b></code>")
-                                    ->entity('nbsp')
-                                    ->entity('nbsp')
-                                    ->entity('nbsp')
-                                    ->a('Open in <b>VS Code</b>', [
-                                        'href'  => sprintf('vscode://file/%s:%d', $file, $line),
-                                        'class' => 'external-link',
-                                    ])
-                                ->close();
-
-                            $html->open('ul', ['class' => 'code']);
-                            for ($i = $line - 3; $i < $line + 4; $i++) {
-                                if ($i > 0 && $i < count($lines)) {
-                                    $highlightedCode = highlight_string('<?php ' . $lines[$i], true);
-                                    $highlightedCode = preg_replace(
-                                        ['/\n/', '/<br ?\/?>/', '/&lt;\?php&nbsp;/'],
-                                        ['', '', ''],
-                                        $highlightedCode
-                                    );
-                                    if ($i == $line - 1) {
-                                        $arrow = str_pad('>', strlen("{$i}"), '=', STR_PAD_LEFT);
-                                        $html
-                                            ->open('li', ['class' => 'exception-line'])
-                                                ->span($arrow, ['class' => 'line'])
-                                                ->node($highlightedCode)
-                                            ->close();
-                                    } else {
-                                        $number = strval($i + 1);
-                                        $html
-                                            ->open('li')
-                                                ->span($number, ['class' => 'line'])
-                                                ->node($highlightedCode)
-                                            ->close();
-                                    }
+                            for ($i = $line - $offset; $i < $line + $offset; $i++) {
+                                if (!($i > 0 && $i < $count)) {
+                                    continue;
                                 }
+
+                                $highlightedCode = highlight_string('<?php ' . $lines[$i], true);
+                                $highlightedCode = preg_replace(
+                                    ['/\n/', '/<br ?\/?>/', '/&lt;\?php&nbsp;/'],
+                                    ['', '', ''],
+                                    $highlightedCode
+                                );
+
+                                $causer = $i === $line - 1;
+                                $number = strval($i + 1);
+
+                                if ($causer) {
+                                    $number = str_pad('>', strlen($number), '=', STR_PAD_LEFT);
+                                }
+
+                                $html
+                                    ->open('li')
+                                        ->condition($causer === true)
+                                        ->span($number, ['class' => 'code-line exception-line'])
+                                        ->condition($causer === false)
+                                        ->span($number, ['class' => 'code-line'])
+                                        ->node($highlightedCode)
+                                    ->close();
                             }
-                            $html->close();
                         })
+                    ->close()
+                ->close()
+            ->return();
+        };
 
-                        ->h2('Stack trace:')
-                        ->execute(function (HTML $html) use ($trace, $traceString) {
-                            if (!count($trace)) {
-                                $html->pre($traceString);
+        function tabulate($trace) {
+            return (new HTML(false))
+                ->p('<i>Fields with * can reveal more info. * Hoverable. ** Clickable.</i>')
+                ->open('div', ['class' => 'scrollable'])
+                    ->open('table', ['class' => 'table'])
+                        ->open('thead', ['class' => 'table-head'])
+                            ->open('tr', ['class' => 'table-row'])
+                                ->th('No.&nbsp;**', ['class' => 'table-cell compact'])
+                                ->th('File&nbsp;*', ['class' => 'table-cell'])
+                                ->th('Line', ['class' => 'table-cell compact'])
+                                ->th('Class', ['class' => 'table-cell'])
+                                ->th('Function', ['class' => 'table-cell'])
+                                ->th('Arguments&nbsp;*', ['class' => 'table-cell'])
+                            ->close()
+                        ->close()
+                        ->open('tbody', ['class' => 'table-body'])
+                            ->execute(function (HTML $html) use ($trace) {
+                                foreach ($trace as $i => $trace) {
+                                    $count = (int)$i + 1;
 
-                                return;
-                            }
-
-                            $html->open('p')
-                                ->i('Hover on fields with * to reveal more info.')
-                            ->close();
-
-                            $html->open('div', ['class' => 'table-container'])
-                                ->open('table')
-                                    ->open('thead')
-                                        ->open('tr')
-                                            ->th('No.')
-                                            ->th('File&nbsp;*')
-                                            ->th('Line')
-                                            ->th('Class')
-                                            ->th('Function')
-                                            ->th('Arguments&nbsp;*')
-                                        ->close()
-                                    ->close()
-                                    ->open('tbody')
-                                    ->execute(function (HTML $html) use ($trace) {
-                                        foreach ($trace as $i => $trace) {
-                                            $count = (int)$i + 1;
-                                            $html
-                                            ->open('tr', ['class' => $count % 2 == 0 ? 'even' : 'odd'])
-                                                ->td(strval($count), ['class' => 'number'])
-                                                ->td(isset($trace['file']) ? basename($trace['file']) : '', ['class' => 'file', 'title' => $trace['file'] ?? false])
-                                                ->td(strval($trace['line'] ?? ''), ['class' => 'line'])
-                                                ->td(strval($trace['class'] ?? ''), ['class' => 'class'])
-                                                ->td(strval($trace['function'] ?? ''), ['class' => 'function'])
-                                                ->open('td', ['class' => 'arguments'])
+                                    $html
+                                        ->open('tr', ['class' => 'table-row ' . ($count % 2 == 0 ? 'even' : 'odd')])
+                                            ->td(isset($trace['file']) ? '' : strval($count), ['class' => 'table-cell number'])
+                                            ->td(
+                                                isset($trace['file'])
+                                                    ? sprintf('<a href="vscode://file/%s:%d" title="Open in VS Code">%s</a>', $trace['file'], $trace['line'], basename($trace['file']))
+                                                    : 'N/A',
+                                                ['class' => 'table-cell file pop-up', 'title' => $trace['file'] ?? 'N/A']
+                                            )
+                                            ->td(strval($trace['line'] ?? 'N/A'), ['class' => 'table-cell line'])
+                                            ->td(strval($trace['class'] ?? 'N/A'), ['class' => 'table-cell class monospace'])
+                                            ->td(strval($trace['function'] ?? 'N/A'), ['class' => 'table-cell function monospace'])
+                                            ->open('td', ['class' => 'table-cell arguments monospace'])
                                                 ->execute(function (HTML $html) use ($trace) {
                                                     if (!isset($trace['args'])) {
                                                         $html->node('NULL');
@@ -291,22 +273,97 @@ class Dumper
 
                                                     foreach ($trace['args'] as $argument) {
                                                         $html->span(gettype($argument), [
+                                                            'class' => 'argument pop-up',
                                                             'title' => htmlspecialchars(
-                                                                Dumper::exportExpression($argument),
+                                                                Misc::callObjectMethod(Dumper::class, 'exportExpression', $argument),
                                                                 ENT_QUOTES,
                                                                 'UTF-8'
-                                                            )
+                                                            ),
                                                         ]);
                                                     }
                                                 })
-                                                ->close()
-                                            ->close();
-                                        }
-                                    })
-                                    ->close()
-                                ->close()
-                            ->close();
-                        })
+                                            ->close()
+                                        ->close()
+                                        ->execute(function (HTML $html) use ($trace, $count) {
+                                            isset($trace['file']) && $html
+                                                ->open('tr', ['class' => 'table-row additional', 'id' => 'trace-' . $count])
+                                                    ->open('td', ['class' => 'table-cell', 'colspan' => 6])
+                                                        ->open('details', ['class' => 'accordion'])
+                                                            ->summary(strval($count), ['class' => 'accordion-summary'])
+                                                            ->div(
+                                                                highlight($trace['file'] ?? null, $trace['line'] ?? null),
+                                                                ['class' => 'accordion-details']
+                                                            )
+                                                        ->close()
+                                                    ->close()
+                                                ->close();
+                                        });
+                                }
+                            })
+                        ->close()
+                    ->close()
+                ->close()
+            ->return();
+        }
+
+        (new HTML(false))
+            ->node('<!DOCTYPE html>')
+            ->open('html', ['lang' => 'en'])
+                ->open('head')
+                    ->title('Oops! Something went wrong')
+                    ->link(null, ['rel' => 'icon', 'href' => 'data:image/svg+xml;base64,' . base64_encode($favicon)])
+                    ->style($style, ['type' => 'text/css'])
+                ->close()
+
+                ->open('body')
+                    ->open('div', ['class' => 'container'])
+                        ->open('section', ['class' => 'info-section'])
+                            ->h1('Uncaught "' . Misc::transform($shortName, 'title') . '"')
+                            ->p(
+                                "<code><b>{$shortName}</b></code> was thrown on line <code><b>{$line}</b></code> of file " .
+                                "<code><b>{$fileName}</b></code> which prevented further execution of the code."
+                            )
+                            ->open('div', ['class' => 'message'])
+                                ->h3($name)
+                                // we need to decode and encode because some messages come escaped
+                                ->p(htmlspecialchars(htmlspecialchars_decode((string)$message), ENT_QUOTES, 'UTF-8'))
+                            ->close()
+                        ->close()
+
+                        ->open('section', ['class' => 'capture-section'])
+                            ->h2('Thrown in:')
+                            ->execute(function (HTML $html) use ($file, $line) {
+                                if (!file_exists($file)) {
+                                    return;
+                                }
+
+                                $html
+                                    ->open('p')
+                                        ->node("File: <code><b>{$file}</b></code>")
+                                        ->entity('nbsp')
+                                        ->entity('nbsp')
+                                        ->a('Open in <b>VS Code</b>', [
+                                            'href'  => sprintf('vscode://file/%s:%d', $file, $line),
+                                            'class' => 'button',
+                                        ])
+                                    ->close();
+
+                                $html->div(highlight($file, $line), ['class' => 'scrollable']);
+                            })
+                        ->close()
+
+                        ->open('section', ['class' => 'trace-section'])
+                            ->h2('Stack trace:')
+                            ->execute(function (HTML $html) use ($trace, $traceString) {
+                                if (!count($trace)) {
+                                    $html->pre($traceString);
+
+                                    return;
+                                }
+
+                                $html->node(tabulate($trace));
+                            })
+                        ->close()
                     ->close()
                 ->close()
             ->close()
@@ -347,7 +404,7 @@ class Dumper
             '/\[[ ]?\n[ ]+\]/'                      => '[]',
             '/=>[ ]?\n[ ]+(\[|\()/'                 => '=> $1',
             '/=>[ ]?\n[ ]+([a-zA-Z0-9_\x7f-\xff])/' => '=> $1',
-            '/(\n)([ ]*)\]\)/'                      => '$1$2  ])',
+            '/(\n)([ ]*)\]\)/'                      => '$1$2 ])',
             '/([ ]*)(\'[^\']+\') => ([\[\'])/'      => '$1$2 => $3',
         ];
 
@@ -376,7 +433,8 @@ class Dumper
         $html = preg_replace(
             '/&lt;\?php&nbsp;/',
             $phpReplacement ?? '',
-            $code
+            $code,
+            1
         );
 
         if (!self::isCli()) {
