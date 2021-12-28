@@ -11,13 +11,15 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend\Model;
 
-use MAKS\Velox\Helper\Misc;
+use MAKS\Velox\Backend\Exception;
 use MAKS\Velox\Backend\Model\DBAL;
+use MAKS\Velox\Helper\Misc;
 
 /**
  * An abstract class that holds the base functionality of a model.
  * NOTE: This class is not meant to be used directly.
  *
+ * @package Velox\Backend\Model
  * @since 1.5.1
  */
 abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \IteratorAggregate
@@ -64,7 +66,7 @@ abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \Iter
      *
      * @return void
      *
-     * @throws \Exception If attribute name is not a part of model `$columns`.
+     * @throws \OutOfBoundsException If attribute name is not a part of model `$columns`.
      */
     protected static function assertAttributeExists($name): void
     {
@@ -75,11 +77,10 @@ abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \Iter
         }
 
         if (!in_array((string)$name, $columns)) {
-            throw new \Exception(sprintf(
-                'Cannot find attribute with the name "%s". %s model table does not consist of this column',
-                $name,
-                static::class
-            ));
+            Exception::throw(
+                'UnknownAttributeException:OutOfBoundsException',
+                sprintf('Cannot find attribute with the name "%s". %s model table does not consist of this column', $name, static::class)
+            );
         }
     }
 
@@ -90,7 +91,7 @@ abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \Iter
      *
      * @return mixed Attribute value.
      *
-     * @throws \Exception If the attribute does not exists.
+     * @throws \OutOfBoundsException If the attribute does not exists.
      */
     public function get(string $name)
     {
@@ -107,7 +108,7 @@ abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \Iter
      *
      * @return $this
      *
-     * @throws \Exception If the attribute does not exists.
+     * @throws \OutOfBoundsException If the attribute does not exists.
      */
     public function set(string $name, $value): self
     {
