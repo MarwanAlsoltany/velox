@@ -61,7 +61,7 @@ class ExceptionTest extends TestCase
     public function testExceptionThrowMethodWithoutMessage()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessageMatches('/' . preg_quote(__FILE__) . '/');
+        $this->expectExceptionMessageMatches('/' . preg_quote(__FILE__, '/') . '/');
 
         Exception::throw('Exception');
     }
@@ -104,7 +104,7 @@ class ExceptionTest extends TestCase
     {
         $this->expectError();
         $this->expectErrorMessageMatches('/(Test error)/');
-        $this->expectErrorMessageMatches('/' . preg_quote(__FILE__) . '/');
+        $this->expectErrorMessageMatches('/' . preg_quote(__FILE__, '/') . '/');
         $this->expectException(\RuntimeException::class);
         $this->expectException(\Tests\ErrorException::class);
 
