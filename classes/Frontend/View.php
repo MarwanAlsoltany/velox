@@ -61,7 +61,7 @@ use MAKS\Velox\Helper\Misc;
  * $html = View::partial('partialName', $vars);
  * ```
  *
- * @package Velox\Frontend
+ * @package Velox\Frontend\View
  * @since 1.0.0
  * @api
  */
