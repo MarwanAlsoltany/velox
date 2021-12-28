@@ -19,10 +19,12 @@ All notable changes to **VELOX** will be documented in this file.
     - Update `Element` class.
 - Update `Dumper` class:
     - Update `$styles` property to improve exceptions page styling.
-    - Update `dumpException()` method to add code snippet for each item in the stacktrace.
-    - Update `dump()` method to fix an issue with block styling.
     - Update `exportExpression()` method.
     - Update `exportExpressionWithSyntaxHighlighting()` method.
+    - Update `dump()` method to fix an issue with block styling.
+    - Update `dumpException()` method to add code snippet for each item in the stacktrace.
+    - Add `highlightedFile()` method.
+    - Add `tabulatedStacktrace()` method.
 - Update `Config` class:
     - Add `getReference()` method.
     - Update `getAll()` method.
