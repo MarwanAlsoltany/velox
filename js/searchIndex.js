@@ -376,6 +376,11 @@ Search.appendIndex(
             "summary": "Returns\u0020the\u0020currently\u0020loaded\u0020configuration.",
             "url": "classes/MAKS-Velox-Backend-Config.html#method_getAll"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003AgetReference\u0028\u0029",
+            "name": "getReference",
+            "summary": "Returns\u0020a\u0020referenced\u0020to\u0020the\u0020current\u0020configuration\u0020array.",
+            "url": "classes/MAKS-Velox-Backend-Config.html#method_getReference"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Backend\\Config\u003A\u003AON_LOAD",
             "name": "ON_LOAD",
             "summary": "This\u0020event\u0020will\u0020be\u0020dispatched\u0020when\u0020the\u0020config\u0020is\u0020loaded.",
@@ -1421,6 +1426,156 @@ Search.appendIndex(
             "summary": "Allows\u0020static\u0020methods\u0020handled\u0020by\u0020\u0060self\u003A\u003A__callStatic\u0028\u0029\u0060\u0020to\u0020be\u0020accessible\u0020via\u0020object\u0020operator\u0020\u0060\u002D\u003E\u0060.",
             "url": "classes/MAKS-Velox-Frontend-Path.html#method___call"
         },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine",
+            "name": "Engine",
+            "summary": "A\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020templating\u0020engine\u0020for\u0020view\u0020files.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003Arender\u0028\u0029",
+            "name": "render",
+            "summary": "Renders\u0020a\u0020template\u0020file\u0020and\u0020pass\u0020the\u0020passed\u0020variables\u0020to\u0020it.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_render"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AclearCache\u0028\u0029",
+            "name": "clearCache",
+            "summary": "",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_clearCache"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AgetCompiledFile\u0028\u0029",
+            "name": "getCompiledFile",
+            "summary": "Compiles\u0020a\u0020template\u0020file\u0020and\u0020returns\u0020the\u0020path\u0020to\u0020the\u0020compiled\u0020template\u0020file\u0020from\u0020cache\u0020directory.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_getCompiledFile"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AgetCompiledContent\u0028\u0029",
+            "name": "getCompiledContent",
+            "summary": "Compiles\u0020a\u0020template\u0020file\u0020and\u0020returns\u0020the\u0020result\u0020after\u0020compilation.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_getCompiledContent"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AgetEvaluatedContent\u0028\u0029",
+            "name": "getEvaluatedContent",
+            "summary": "Evaluates\u0020a\u0020template\u0020file\u0020after\u0020compiling\u0020it\u0020in\u0020a\u0020temporary\u0020file\u0020and\u0020returns\u0020the\u0020result\u0020after\u0020evaluation.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_getEvaluatedContent"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AcreateCacheDirectory\u0028\u0029",
+            "name": "createCacheDirectory",
+            "summary": "Creates\u0020cache\u0020directory\u0020if\u0020it\u0020does\u0020not\u0020exist.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_createCacheDirectory"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AassertFileExists\u0028\u0029",
+            "name": "assertFileExists",
+            "summary": "Asserts\u0020that\u0020a\u0020file\u0020exists.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_assertFileExists"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003Arequire\u0028\u0029",
+            "name": "require",
+            "summary": "Requires\u0020a\u0020PHP\u0020file\u0020and\u0020pass\u0020it\u0020the\u0020passed\u0020variables.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_require"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AresolvePath\u0028\u0029",
+            "name": "resolvePath",
+            "summary": "Resolves\u0020a\u0020template\u0020file\u0020path.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_resolvePath"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AresolveCachePath\u0028\u0029",
+            "name": "resolveCachePath",
+            "summary": "Resolves\u0020a\u0020template\u0020file\u0020path\u0020from\u0020cache\u0020directory.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_resolveCachePath"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AimportDependencies\u0028\u0029",
+            "name": "importDependencies",
+            "summary": "Imports\u0020template\u0020dependencies.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_importDependencies"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AimportIncludes\u0028\u0029",
+            "name": "importIncludes",
+            "summary": "Imports\u0020template\u0020includes.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_importIncludes"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AparseBlock\u0028\u0029",
+            "name": "parseBlock",
+            "summary": "Parses\u0020a\u0020template\u0020block,\u0020extract\u0020data\u0020from\u0020it,\u0020and\u0020updates\u0020class\u0020internal\u0020state.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_parseBlock"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AextractBlocks\u0028\u0029",
+            "name": "extractBlocks",
+            "summary": "Extract\u0020blocks\u0020data\u0020from\u0020template\u0020code.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_extractBlocks"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AinjectBlocks\u0028\u0029",
+            "name": "injectBlocks",
+            "summary": "Injects\u0020blocks\u0020data\u0020in\u0020template\u0020code.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_injectBlocks"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AprintVariables\u0028\u0029",
+            "name": "printVariables",
+            "summary": "Echos\u0020escaped\u0020and\u0020unescaped\u0020variables\u0020in\u0020template\u0020code.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_printVariables"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AwrapPhp\u0028\u0029",
+            "name": "wrapPhp",
+            "summary": "Wraps\u0020PHP\u0020in\u0020template\u0020code.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_wrapPhp"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AwrapControlStructures\u0028\u0029",
+            "name": "wrapControlStructures",
+            "summary": "Wraps\u0020control\u0020structures\u0020and\u0020PHP\u0020code\u0020in\u0020template\u0020code.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_wrapControlStructures"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AwrapComments\u0028\u0029",
+            "name": "wrapComments",
+            "summary": "Wraps\u0020comments\u0020in\u0020template\u0020code.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_wrapComments"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AisDebug\u0028\u0029",
+            "name": "isDebug",
+            "summary": "Get\u0020the\u0020value\u0020of\u0020\u0060static\u003A\u003A\u0024debug\u0060.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_isDebug"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AsetDebug\u0028\u0029",
+            "name": "setDebug",
+            "summary": "Set\u0020the\u0020value\u0020of\u0020\u0060static\u003A\u003A\u0024debug\u0060",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#method_setDebug"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003AREGEX",
+            "name": "REGEX",
+            "summary": "Regular\u0020expressions\u0020for\u0020syntax\u0020tokens.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#constant_REGEX"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003A\u0024blocks",
+            "name": "blocks",
+            "summary": "Currently\u0020captured\u0020template\u0020blocks.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#property_blocks"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003A\u0024templatesDirectory",
+            "name": "templatesDirectory",
+            "summary": "Template\u0020files\u0020directory.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#property_templatesDirectory"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003A\u0024templatesFileExtension",
+            "name": "templatesFileExtension",
+            "summary": "Template\u0020files\u0020file\u0020extension.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#property_templatesFileExtension"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003A\u0024cacheDirectory",
+            "name": "cacheDirectory",
+            "summary": "Template\u0020files\u0020cache\u0020directory.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#property_cacheDirectory"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003A\u0024cache",
+            "name": "cache",
+            "summary": "Whether\u0020or\u0020not\u0020to\u0020cache\u0020compiled\u0020template\u0020files.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#property_cache"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Frontend\\View\\Engine\u003A\u003A\u0024debug",
+            "name": "debug",
+            "summary": "Whether\u0020or\u0020not\u0020to\u0020add\u0020debugging\u0020info\u0020to\u0020the\u0020compiled\u0020template.",
+            "url": "classes/MAKS-Velox-Frontend-View-Engine.html#property_debug"
+        },                {
             "fqsen": "\\MAKS\\Velox\\Frontend\\View",
             "name": "View",
             "summary": "A\u0020class\u0020that\u0020renders\u0020view\u0020files\u0020\u0028Layouts,\u0020Pages,\u0020and\u0020Partials\u0029\u0020with\u0020the\u0020ability\u0020to\u0020include\u0020additional\u0020files\u0020and\u0020divide\u0020page\u0020content\u0020into\u0020sections\u0020and\u0020cache\u0020rendered\u0020views.",
@@ -1545,6 +1700,16 @@ Search.appendIndex(
             "name": "dumpException",
             "summary": "Dumps\u0020an\u0020exception\u0020in\u0020a\u0020nice\u0020HTML\u0020page\u0020or\u0020as\u0020string\u0020and\u0020exits\u0020the\u0020script.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_dumpException"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AhighlightedFile\u0028\u0029",
+            "name": "highlightedFile",
+            "summary": "Highlights\u0020the\u0020passed\u0020file\u0020with\u0020the\u0020possibility\u0020to\u0020focus\u0020a\u0020specific\u0020line.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_highlightedFile"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AtabulatedStacktrace\u0028\u0029",
+            "name": "tabulatedStacktrace",
+            "summary": "Tabulates\u0020the\u0020passed\u0020stacktrace\u0020in\u0020an\u0020HTML\u0020table.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_tabulatedStacktrace"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AexportExpression\u0028\u0029",
             "name": "exportExpression",
@@ -2030,6 +2195,41 @@ Search.appendIndex(
             "name": "resolve",
             "summary": "Resolves\u0020a\u0020file\u0020from\u0020the\u0020active\u0020theme\u0020or\u0020inherits\u0020it\u0020from\u0020a\u0020parent\u0020theme.",
             "url": "classes/MAKS-Velox-Frontend-View-Compiler.html#method_resolve"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Exception",
+            "name": "Exception",
+            "summary": "A\u0020class\u0020that\u0020serves\u0020as\u0020a\u0020base\u0020exception\u0020class\u0020with\u0020helpers\u0020to\u0020assist\u0020with\u0020errors\/exceptions\u0020handling.",
+            "url": "classes/MAKS-Velox-Backend-Exception.html"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Exception\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Class\u0020constructor.",
+            "url": "classes/MAKS-Velox-Backend-Exception.html#method___construct"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Exception\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "Returns\u0020a\u0020string\u0020representation\u0020of\u0020the\u0020exception\u0020object.",
+            "url": "classes/MAKS-Velox-Backend-Exception.html#method___toString"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Exception\u003A\u003Acreate\u0028\u0029",
+            "name": "create",
+            "summary": "Creates\u0020an\u0020exception\u0020class\u0020dynamically\u0020and\u0020returns\u0020its\u0020class\u0020FQN.",
+            "url": "classes/MAKS-Velox-Backend-Exception.html#method_create"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Exception\u003A\u003Athrow\u0028\u0029",
+            "name": "throw",
+            "summary": "Throws\u0020an\u0020exception\u0020using\u0020the\u0020given\u0020signature.",
+            "url": "classes/MAKS-Velox-Backend-Exception.html#method_throw"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Exception\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Handles\u0020the\u0020passed\u0020callback\u0020in\u0020a\u0020safe\u0020context\u0020where\u0020PHP\u0020errors\u0020\u0028and\u0020exceptions\u0029\u0020result\u0020in\u0020exceptions\u0020that\u0020can\u0020be\u0020caught.",
+            "url": "classes/MAKS-Velox-Backend-Exception.html#method_handle"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Backend\\Exception\u003A\u003Atrigger\u0028\u0029",
+            "name": "trigger",
+            "summary": "Triggers\u0020a\u0020user\u002Dlevel\u0020error,\u0020warning,\u0020notice,\u0020or\u0020deprecation\u0020with\u0020backtrace\u0020info.",
+            "url": "classes/MAKS-Velox-Backend-Exception.html#method_trigger"
         },                {
             "fqsen": "\\",
             "name": "\\",

@@ -255,6 +255,13 @@
 <dd>Returns the last caller trace before `dd()` or `dump()` if the format of `file:line`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#method_highlightedFile">highlightedFile()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Highlights the passed file with the possibility to focus a specific line.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#method_isCli">isCli()</a>
     <span>
                         &nbsp;: bool    </span>
@@ -267,6 +274,13 @@
                         &nbsp;: void    </span>
 </dt>
 <dd>Sets PHP syntax highlighting colors according to current class state.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#method_tabulatedStacktrace">tabulatedStacktrace()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Tabulates the passed stacktrace in an HTML table.</dd>
 
         </dl>
 
@@ -690,7 +704,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">382</span>
+    <span class="phpdocumentor-element-found-in__line">407</span>
 
     </aside>
 
@@ -733,7 +747,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">426</span>
+    <span class="phpdocumentor-element-found-in__line">451</span>
 
     </aside>
 
@@ -785,7 +799,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">520</span>
+    <span class="phpdocumentor-element-found-in__line">545</span>
 
     </aside>
 
@@ -831,7 +845,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">468</span>
+    <span class="phpdocumentor-element-found-in__line">493</span>
 
     </aside>
 
@@ -867,7 +881,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">495</span>
+    <span class="phpdocumentor-element-found-in__line">520</span>
 
     </aside>
 
@@ -893,6 +907,83 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
             -private
                                     -static                    "
 >
+    <h4 class="phpdocumentor-element__name" id="method_highlightedFile">
+        highlightedFile()
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#method_highlightedFile" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">267</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Highlights the passed file with the possibility to focus a specific line.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">highlightedFile</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$file</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$line</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$file</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The file to highlight.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$line</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The line to focus.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.5.5</span>
+                                                                                
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The hightailed file as HTML.</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                    -static                    "
+>
     <h4 class="phpdocumentor-element__name" id="method_isCli">
         isCli()
         <a href="classes/MAKS-Velox-Helper-Dumper.html#method_isCli" class="headerlink"><i class="fas fa-link"></i></a>
@@ -900,7 +991,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">601</span>
+    <span class="phpdocumentor-element-found-in__line">626</span>
 
     </aside>
 
@@ -933,7 +1024,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">577</span>
+    <span class="phpdocumentor-element-found-in__line">602</span>
 
     </aside>
 
@@ -964,6 +1055,74 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_tabulatedStacktrace">
+        tabulatedStacktrace()
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#method_tabulatedStacktrace" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">324</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Tabulates the passed stacktrace in an HTML table.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">tabulatedStacktrace</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$trace</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$trace</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Exception stacktrace array.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.5.5</span>
+                                                                                
+                                             
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The tabulated trace as HTML.</p>
+</section>
+
     
 </article>
             </section>
