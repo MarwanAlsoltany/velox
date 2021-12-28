@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend\Model;
 
+use MAKS\Velox\Backend\Exception;
 use MAKS\Velox\Backend\Database;
 use MAKS\Velox\Helper\Misc;
 
@@ -18,6 +19,7 @@ use MAKS\Velox\Helper\Misc;
  * An abstract class that serves as a DBAL for models.
  * NOTE: This class is not meant to be used directly.
  *
+ * @package Velox\Backend\Model
  * @since 1.5.1
  */
 abstract class DBAL
@@ -120,7 +122,7 @@ abstract class DBAL
     final public static function migrate(): void
     {
         if (self::class === static::class || (new \ReflectionClass(static::class))->isAbstract()) {
-            throw new \BadMethodCallException(sprintf(
+            Exception::throw('CannotMigrateException:BadMethodCallException', sprintf(
                 'Cannot migrate an abstract class, "%s" methods should be used by extension only',
                 self::class
             ));
@@ -171,7 +173,7 @@ abstract class DBAL
     public static function fetch(string $query, ?array $variables = [], bool $raw = false): array
     {
         if (static::class === self::class || (new \ReflectionClass(static::class))->isAbstract()) {
-            throw new \BadMethodCallException(sprintf(
+            Exception::throw('CannotFetchException:BadMethodCallException', sprintf(
                 'Cannot fetch for an abstract class, "%s" methods should be used by extension only',
                 self::class
             ));
@@ -355,13 +357,23 @@ abstract class DBAL
 
         // $operator1, $column, $value, $operator2
         if (!is_string($condition[0]) || !is_string($condition[1]) || !is_string($condition[2]) || !isset($condition[3])) {
-            throw new \InvalidArgumentException(sprintf(
+            $formatter = fn ($name, $type) => sprintf('%s (%s)', $name, $type);
+            $variables = [
+                'linkingOperator'    => 'string',
+                'column'             => 'string',
+                'comparisonOperator' => 'string',
+                'value'              => 'mixed',
+            ];
+
+            $message = sprintf(
                 "The passed condition ['%s'] in query at index (%s) is invalid. Was expecting ['%s'], got ['%s']",
                 implode("', '", $condition),
                 $index,
-                implode("', '", ['operator1 (string)', 'column (string)', 'operator2 (string)', 'value (mixed)']),
-                implode("', '", array_map(fn ($var) => gettype($var), $condition))
-            ));
+                implode("', '", array_map($formatter, array_keys($variables), array_values($variables))),
+                implode("', '", array_map($formatter, array_keys($variables), array_map('gettype', $condition)))
+            );
+
+            Exception::throw('QueryBuilderException:InvalidArgumentException', $message);
         }
 
         return $condition;
@@ -383,12 +395,15 @@ abstract class DBAL
         $supported = ['', 'LIKE', 'NOT LIKE', 'IN', 'NOT IN', 'AND', 'OR', '=', '!=', '<>', '<', '>', '<=', '>='];
 
         if (!in_array($operator, $supported)) {
-            throw new \InvalidArgumentException(sprintf(
-                "Got '%s' as an argument in query at index (%s), which is an invalid or unsupported SQL operator. Supported operators are: ['%s']",
+            $message = sprintf(
+                "Got '%s' as an argument in query at index (%s), " .
+                "which is an invalid or unsupported SQL operator. Supported operators are: ['%s']",
                 $operator,
                 $index,
-                implode("', '", $supported),
-            ));
+                implode("', '", array_filter($supported)),
+            );
+
+            Exception::throw('QueryBuilderException:InvalidArgumentException', $message);
         }
 
         return $operator;
