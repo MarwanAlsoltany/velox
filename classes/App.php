@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace MAKS\Velox;
 
+use MAKS\Velox\Backend\Exception;
 use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Router;
@@ -149,10 +150,11 @@ class App
         try {
             return isset($this->methods[$method]) ? $this->methods[$method](...$arguments) : $this->{$method};
         } catch (\Exception $error) {
-            throw new \Exception(
+            Exception::throw(
+                'UndefinedMethodException:BadMethodCallException',
                 "Call to undefined method {$class}::{$method}()",
-                (int)$error->getCode(),
-                $error
+                $error->getCode(),
+                $error,
             );
         }
     }
@@ -162,7 +164,10 @@ class App
         $class = static::class;
 
         if (!isset(static::$staticMethods[$method])) {
-            throw new \Exception("Call to undefined static method {$class}::{$method}()");
+            Exception::throw(
+                'UndefinedStaticMethodException:BadMethodCallException',
+                "Call to undefined static method {$class}::{$method}()"
+            );
         }
 
         return static::$staticMethods[$method](...$arguments);
