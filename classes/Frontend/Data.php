@@ -65,9 +65,8 @@ class Data
             static::$bag = (array)Config::get('data', static::$bag);
 
             // make `Config::$config['data']` points to `Data::$bag` (the same array in memory)
-            $config = Config::getAll();
+            $config = &Config::getReference();
             $config['data'] = &static::$bag;
-            Misc::setObjectProperty(new Config(), 'config', $config);
 
             Event::dispatch(self::ON_LOAD, [&static::$bag]);
         }
