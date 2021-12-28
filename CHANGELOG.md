@@ -4,6 +4,38 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.5.5] - 2021-12-28](https://github.com/MarwanAlsoltany/velox/compare/v1.5.4...v1.5.5)
+
+- Add `Exception` class.
+- Update the following classes to improve thrown exceptions classes and messages:
+    - Update `App` class.
+    - Update `Auth` class.
+    - Update `Controller` class.
+    - Update `Globals` class.
+    - Update `Router` class.
+    - Update `Database` class.
+    - Update `Model` class.
+    - Update `DBAL` class.
+    - Update `Element` class.
+- Update `Dumper` class:
+    - Update `$styles` property to improve exceptions page styling.
+    - Update `dumpException()` method to add code snippet for each item in the stacktrace.
+    - Update `dump()` method to fix an issue with block styling.
+    - Update `exportExpression()` method.
+    - Update `exportExpressionWithSyntaxHighlighting()` method.
+- Update `Config` class:
+    - Add `getReference()` method.
+    - Update `getAll()` method.
+- Update `Data` class:
+    - Update `load()` method to make use of `Config::getReference()` instead of resetting the config array.
+- Update `loader.php`:
+    - Update error handler function.
+    - Update exception handler function to allow for rendering specific error pages using exception code.
+- Update tests:
+    - Add `ExceptionTest` class.
+
+<br />
+
 ## [[1.5.4] - 2021-12-20](https://github.com/MarwanAlsoltany/velox/compare/v1.5.3...v1.5.4)
 
 - Update `App` class:
@@ -15,8 +47,8 @@ All notable changes to **VELOX** will be documented in this file.
 - Add `Compiler` class.
 - Update `Session` class:
     - Refactor class by extracting parts of it to `Session/Flash` and `Session/CSRF`.
-    - Add `Flash` class.
-    - Add `Csrf` class.
+- Add `Session\Flash` class.
+- Add `Session\CSRF` class.
 - Update tests:
     - Update `AppTest` class.
     - Update `EngineTest` class.
