@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Backend;
 
 use MAKS\Velox\App;
+use MAKS\Velox\Backend\Exception;
 use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Router;
@@ -139,9 +140,10 @@ abstract class Controller
             return App::instance()->{$property};
         }
 
-        $class = static::class;
-
-        throw new \Exception("Call to undefined property {$class}::${$property}");
+        Exception::throw(
+            'UndefinedPropertyException:OutOfBoundsException',
+            sprintf('Call to undefined property %s::$%s', static::class, $property),
+        );
     }
 
     public function __isset(string $property)
