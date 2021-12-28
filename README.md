@@ -446,9 +446,11 @@ class PersonsController extends Controller
 
 ![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *To make the model available as property for the controller (`$this->model`), use `Controller::associateModel()`. See `Controller::associateModel()` DocBlock to learn more.*
 
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *If in production mode, as a shortcut, throwing an exception with a code matching `{global.errorPages.CODE}` config value will render the corresponding error page. For example, when throwing `new Exception('Not found', 404)` form the controller, the configured `404` error page will be rendered and will be passed the exception message. If the page is not configured, the `500` error page will be rendered as a fallback instead.*
+
 ### Using the Model in a View:
 
-```html
+```blade
 {# theme/pages/persons/index.phtml #}
 
 {! @extends 'theme/pages/persons/base' !}
