@@ -30,7 +30,7 @@ use MAKS\Velox\Helper\Misc;
  * - Print a variable without escaping `{{{ $var }}}`, content can be a variable or any PHP expression that can be casted to a string.
  * - Comment something `{# This is a comment #}`, this will be a PHP comment (will not be available in final HTML).
  *
- * @internal
+ * @package Velox\Frontend\View
  * @since 1.3.0
  */
 class Engine
