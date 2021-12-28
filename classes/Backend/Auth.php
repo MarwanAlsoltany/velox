@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Backend;
 
 use MAKS\Velox\App;
+use MAKS\Velox\Backend\Exception;
 use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Model;
@@ -256,17 +257,30 @@ class Auth
      *
      * @return void
      *
-     * @throws \Exception If the user could not be authenticated.
+     * @throws \DomainException If the user could not be authenticated or the model is not an auth user model.
      */
     public static function authenticate(Model $user): void
     {
-        $success = static::instance()->login(
-            $user->getUsername(),
-            $user->getPassword()
+        $instance = static::instance();
+
+        $success  = false;
+
+        Exception::handle(
+            function () use ($instance, $user, &$success) {
+                $success = $instance->login(
+                    $user->getUsername(),
+                    $user->getPassword()
+                );
+            },
+            'AuthenticationFailedException:DomainException',
+            "Could not authenticate the model, the model may not be a valid auth user model"
         );
 
         if (!$success) {
-            throw new \Exception("Could not authenticate auth user with ID '{$user->getId()}'");
+            Exception::throw(
+                'AuthenticationFailedException:DomainException',
+                "Could not authenticate auth user with ID '{$user->getId()}'",
+            );
         }
     }
 
@@ -309,12 +323,17 @@ class Auth
      *
      * @return void
      *
+     * @throws \InvalidArgumentException If no logins where provided.
+     *
      * @codeCoverageIgnore Can't test methods that send headers.
      */
-    public static function basic(array $logins = [])
+    public static function basic(array $logins)
     {
         if (count($logins) === 0) {
-            throw new \Exception('No login(s) provided');
+            Exception::throw(
+                'BadLoginCredentialsException:InvalidArgumentException',
+                'No valid login(s) provided',
+            );
         }
 
         $username = Globals::getServer('PHP_AUTH_USER');
