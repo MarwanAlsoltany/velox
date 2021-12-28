@@ -11,8 +11,9 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend;
 
-use MAKS\Velox\Helper\Misc;
+use MAKS\Velox\Backend\Exception;
 use MAKS\Velox\Backend\Session;
+use MAKS\Velox\Helper\Misc;
 
 /**
  * A class that serves as an abstraction/wrapper to work with superglobals.
@@ -128,7 +129,7 @@ final class Globals
      *
      * @return mixed
      *
-     * @throws \Exception If the passed name is not a superglobal.
+     * @throws \OutOfBoundsException If the passed name is not a superglobal.
      */
     public static function get(string $name, string $key = null)
     {
@@ -152,7 +153,7 @@ final class Globals
      *
      * @return static
      *
-     * @throws \Exception If the passed name is not a superglobal.
+     * @throws \OutOfBoundsException If the passed name is not a superglobal.
      */
     public static function set(string $name, string $key, $value)
     {
@@ -173,7 +174,7 @@ final class Globals
      *
      * @return static
      *
-     * @throws \Exception If the passed name is not a superglobal.
+     * @throws \OutOfBoundsException If the passed name is not a superglobal.
      */
     public static function cut(string $name, string $key)
     {
@@ -208,7 +209,7 @@ final class Globals
      *
      * @return string
      *
-     * @throws \Exception
+     * @throws \OutOfBoundsException
      */
     private static function getValidNameOrFail(string $name): string
     {
@@ -217,7 +218,10 @@ final class Globals
         if (!in_array($variable, self::GLOBALS)) {
             $available = implode(', ', self::GLOBALS);
 
-            throw new \Exception("There is no PHP superglobal with the name '{$name}'. Available superglobals are: [{$available}]");
+            Exception::throw(
+                'UnknownSuperglobalException:OutOfBoundsException',
+                "There is no PHP superglobal with the name '{$name}'. Available superglobals are: [{$available}]"
+            );
         }
 
         return $variable;
@@ -274,7 +278,12 @@ final class Globals
                 }
             };
         } catch (\Exception $error) {
-            throw new \Exception(sprintf('Call to undefined property %s::$%s', static::class, $name), 0, $error);
+            Exception::throw(
+                'UndefinedPropertyException:OutOfBoundsException',
+                sprintf('Call to undefined property %s::$%s', static::class, $name),
+                $error->getCode(),
+                $error
+            );
         }
     }
 
@@ -299,7 +308,12 @@ final class Globals
                 );
             }
         } catch (\Exception $error) {
-            throw new \Exception(sprintf('Call to undefined method %s::%s', static::class, $name), 0, $error);
+            Exception::throw(
+                'UndefinedMethodException:BadMethodCallException',
+                sprintf('Call to undefined method %s::%s', static::class, $name),
+                $error->getCode(),
+                $error
+            );
         }
     }
 }
