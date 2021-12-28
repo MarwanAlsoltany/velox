@@ -84,7 +84,7 @@ $errorHandler = function (int $code, string $message, string $file, int $line) {
         class ErrorOrWarningException extends \ErrorException {};
     }
 
-    throw new ErrorOrWarningException($message, $code, 1, $file, $line, null);
+    throw new ErrorOrWarningException($message, $code, E_ERROR, $file, $line);
 };
 
 // exceptions handler, logs the exception and then dumps it and/or displays a nice page
@@ -108,7 +108,16 @@ $exceptionHandler = function (\Throwable $exception) {
 
     if (in_array(strtoupper($environment), ['PROD', 'PRODUCTION'])) {
         // if in production environment, return a nice page without all the details
-        \MAKS\Velox\App::abort(500, null, 'An error occurred, try again later.');
+        $view = \MAKS\Velox\Backend\Config::get('global.errorPages.' . $exception->getCode());
+
+        if ($view) {
+            // if exception code matches a error page code, then render it
+            \MAKS\Velox\App::abort($exception->getCode(), null, $exception->getMessage());
+        } else {
+            // otherwise, fall back to 500 error page
+            \MAKS\Velox\App::abort(500, null, 'An error occurred, try again later.');
+        }
+
     } else {
         // if in development environment, dump a detailed exception
         \MAKS\Velox\Helper\Dumper::dumpException($exception);
