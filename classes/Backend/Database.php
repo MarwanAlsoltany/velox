@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace MAKS\Velox\Backend;
 
+use MAKS\Velox\Backend\Exception;
+
 /**
  * A class that represents the database and handles database operations.
  *
@@ -186,7 +188,12 @@ class Database extends \PDO
 
             return $statement;
         } catch (\PDOException $error) {
-            throw $error;
+            Exception::throw(
+                'QueryFailedException:PDOException',
+                "Could not execute the query '{$query}'",
+                (int)$error->getCode(),
+                $error
+            );
         }
     }
 
@@ -197,6 +204,8 @@ class Database extends \PDO
      * @param int $retries The number of times to attempt the transaction. Each retry will be delayed by 1-3 seconds.
      *
      * @return mixed The result of the callback.
+     *
+     * @throws \RuntimeException If the transaction fails after all retries.
      */
     public function transactional(callable $callback, int $retries = 3)
     {
@@ -217,7 +226,8 @@ class Database extends \PDO
                 $this->rollBack();
 
                 if (++$attempts === $retries) {
-                    throw new \Exception(
+                    Exception::throw(
+                        'TransactionFailedException:RuntimeException',
                         "Could not complete the transaction after {$retries} attempt(s).",
                         (int)$error->getCode(),
                         $error
@@ -276,7 +286,8 @@ class Database extends \PDO
             }
             private static function fail(): void
             {
-                throw new \Exception(
+                Exception::throw(
+                    'ConnectionFailedException:LogicException',
                     'The app is currently running using a fake database, all database related operations will fail. ' .
                     'Add valid database credentials using "config/database.php" to resolve this issue'
                 );
