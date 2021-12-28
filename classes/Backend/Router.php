@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace MAKS\Velox\Backend;
 
 use MAKS\Velox\App;
+use MAKS\Velox\Backend\Exception;
 use MAKS\Velox\Backend\Event;
 use MAKS\Velox\Backend\Config;
 use MAKS\Velox\Backend\Globals;
@@ -291,7 +292,7 @@ class Router
      *
      * @return void
      *
-     * @throws \Exception If route handler failed or returned false.
+     * @throws \LogicException If route handler failed or returned false.
      */
     public static function start(?string $base = null, ?bool $allowMultiMatch = null, ?bool $caseMatters = null, ?bool $slashMatters = null): void
     {
@@ -333,7 +334,11 @@ class Router
                     $result = call_user_func_array($route['handler'], $route['arguments']);
 
                     if ($result === false) {
-                        throw new \Exception("Something went wrong when trying to respond to '{$path}'! Check the handler for this route");
+                        Exception::throw(
+                            'InvalidResponseException:LogicException',
+                            "Something went wrong when trying to respond to '{$path}'! " .
+                            "Check the handler for this route, was expecting 'string' as a response but got 'false' instead"
+                        );
                     }
                 }
             }
@@ -615,8 +620,10 @@ class Router
         );
 
         if (!$methodAllowed) {
-            $class = static::class;
-            throw new \Exception("Call to undefined method {$class}::{$method}()");
+            Exception::throw(
+                'UndefinedMethodException:BadMethodCallException',
+                sprintf('Call to undefined method %s::%s()', static::class, $method)
+            );
         }
 
         if (count($arguments) > 2) {
