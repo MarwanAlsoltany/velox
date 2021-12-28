@@ -122,7 +122,7 @@ final class Misc
     /**
      * Gets a private, protected, or public property (default, static, or constant) of an object.
      *
-     * @param object $object Class instance.
+     * @param object|string $object Class instance, or FQN if static.
      * @param string $property Property name.
      *
      * @return mixed The property value.
@@ -156,7 +156,7 @@ final class Misc
     /**
      * Sets a private, protected, or public property (default or static) of an object.
      *
-     * @param object $object Class instance.
+     * @param object|string $object Class instance, or FQN if static.
      * @param string $property Property name.
      * @param mixed $value Property value.
      *
@@ -188,7 +188,7 @@ final class Misc
     /**
      * Calls a private, protected, or public method on an object.
      *
-     * @param object $object Class instance.
+     * @param object|string $object Class instance, or FQN if static.
      * @param string $method Method name.
      * @param mixed ...$arguments
      *
