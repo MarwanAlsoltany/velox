@@ -42,7 +42,7 @@ use MAKS\Velox\Backend\Config;
  * $flash = Session::csrf();
  * ```
  *
- * @package Velox\Backend
+ * @package Velox\Backend\Session
  * @since 1.3.0
  * @api
  */
