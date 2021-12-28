@@ -186,126 +186,6 @@ class Dumper
         );
         $favicon = '<svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="512" height="512"><circle cx="256" cy="256" r="256" fill="#F00" /></svg>';
 
-        function highlight($file, $line = null) {
-            return (new HTML(false))
-                ->open('div', ['class' => 'code-highlight'])
-                    ->open('ul', ['class' => 'code'])
-                        ->execute(function (HTML $html) use ($file, $line) {
-                            $file   = (string)$file;
-                            $line   = (int)$line;
-                            $lines  = file_exists($file) ? file($file) : [];
-                            $count  = count($lines);
-                            $offset = $line === 0 ? $count : 5;
-
-                            for ($i = $line - $offset; $i < $line + $offset; $i++) {
-                                if (!($i > 0 && $i < $count)) {
-                                    continue;
-                                }
-
-                                $highlightedCode = highlight_string('<?php ' . $lines[$i], true);
-                                $highlightedCode = preg_replace(
-                                    ['/\n/', '/<br ?\/?>/', '/&lt;\?php&nbsp;/'],
-                                    ['', '', ''],
-                                    $highlightedCode
-                                );
-
-                                $causer = $i === $line - 1;
-                                $number = strval($i + 1);
-
-                                if ($causer) {
-                                    $number = str_pad('>', strlen($number), '=', STR_PAD_LEFT);
-                                }
-
-                                $html
-                                    ->open('li')
-                                        ->condition($causer === true)
-                                        ->span($number, ['class' => 'code-line exception-line'])
-                                        ->condition($causer === false)
-                                        ->span($number, ['class' => 'code-line'])
-                                        ->node($highlightedCode)
-                                    ->close();
-                            }
-                        })
-                    ->close()
-                ->close()
-            ->return();
-        };
-
-        function tabulate($trace) {
-            return (new HTML(false))
-                ->p('<i>Fields with * can reveal more info. * Hoverable. ** Clickable.</i>')
-                ->open('div', ['class' => 'scrollable'])
-                    ->open('table', ['class' => 'table'])
-                        ->open('thead', ['class' => 'table-head'])
-                            ->open('tr', ['class' => 'table-row'])
-                                ->th('No.&nbsp;**', ['class' => 'table-cell compact'])
-                                ->th('File&nbsp;*', ['class' => 'table-cell'])
-                                ->th('Line', ['class' => 'table-cell compact'])
-                                ->th('Class', ['class' => 'table-cell'])
-                                ->th('Function', ['class' => 'table-cell'])
-                                ->th('Arguments&nbsp;*', ['class' => 'table-cell'])
-                            ->close()
-                        ->close()
-                        ->open('tbody', ['class' => 'table-body'])
-                            ->execute(function (HTML $html) use ($trace) {
-                                foreach ($trace as $i => $trace) {
-                                    $count = (int)$i + 1;
-
-                                    $html
-                                        ->open('tr', ['class' => 'table-row ' . ($count % 2 == 0 ? 'even' : 'odd')])
-                                            ->td(isset($trace['file']) ? '' : strval($count), ['class' => 'table-cell number'])
-                                            ->td(
-                                                isset($trace['file'])
-                                                    ? sprintf('<a href="vscode://file/%s:%d" title="Open in VS Code">%s</a>', $trace['file'], $trace['line'], basename($trace['file']))
-                                                    : 'N/A',
-                                                ['class' => 'table-cell file pop-up', 'title' => $trace['file'] ?? 'N/A']
-                                            )
-                                            ->td(strval($trace['line'] ?? 'N/A'), ['class' => 'table-cell line'])
-                                            ->td(strval($trace['class'] ?? 'N/A'), ['class' => 'table-cell class monospace'])
-                                            ->td(strval($trace['function'] ?? 'N/A'), ['class' => 'table-cell function monospace'])
-                                            ->open('td', ['class' => 'table-cell arguments monospace'])
-                                                ->execute(function (HTML $html) use ($trace) {
-                                                    if (!isset($trace['args'])) {
-                                                        $html->node('NULL');
-
-                                                        return;
-                                                    }
-
-                                                    foreach ($trace['args'] as $argument) {
-                                                        $html->span(gettype($argument), [
-                                                            'class' => 'argument pop-up',
-                                                            'title' => htmlspecialchars(
-                                                                Misc::callObjectMethod(Dumper::class, 'exportExpression', $argument),
-                                                                ENT_QUOTES,
-                                                                'UTF-8'
-                                                            ),
-                                                        ]);
-                                                    }
-                                                })
-                                            ->close()
-                                        ->close()
-                                        ->execute(function (HTML $html) use ($trace, $count) {
-                                            isset($trace['file']) && $html
-                                                ->open('tr', ['class' => 'table-row additional', 'id' => 'trace-' . $count])
-                                                    ->open('td', ['class' => 'table-cell', 'colspan' => 6])
-                                                        ->open('details', ['class' => 'accordion'])
-                                                            ->summary(strval($count), ['class' => 'accordion-summary'])
-                                                            ->div(
-                                                                highlight($trace['file'] ?? null, $trace['line'] ?? null),
-                                                                ['class' => 'accordion-details']
-                                                            )
-                                                        ->close()
-                                                    ->close()
-                                                ->close();
-                                        });
-                                }
-                            })
-                        ->close()
-                    ->close()
-                ->close()
-            ->return();
-        }
-
         (new HTML(false))
             ->node('<!DOCTYPE html>')
             ->open('html', ['lang' => 'en'])
@@ -348,7 +228,7 @@ class Dumper
                                         ])
                                     ->close();
 
-                                $html->div(highlight($file, $line), ['class' => 'scrollable']);
+                                $html->div(Dumper::highlightedFile($file, $line), ['class' => 'scrollable']);
                             })
                         ->close()
 
@@ -361,7 +241,7 @@ class Dumper
                                     return;
                                 }
 
-                                $html->node(tabulate($trace));
+                                $html->node(Dumper::tabulatedStacktrace($trace));
                             })
                         ->close()
                     ->close()
@@ -370,6 +250,151 @@ class Dumper
         ->echo();
 
         App::terminate();
+    }
+
+    /**
+     * Highlights the passed file with the possibility to focus a specific line.
+     *
+     * @param string $file The file to highlight.
+     * @param int $line The line to focus.
+     *
+     * @return string The hightailed file as HTML.
+     *
+     * @since 1.5.5
+     *
+     * @codeCoverageIgnore
+     */
+    private static function highlightedFile(string $file, ?int $line = null): string
+    {
+        return (new HTML(false))
+            ->open('div', ['class' => 'code-highlight'])
+                ->open('ul', ['class' => 'code'])
+                    ->execute(function (HTML $html) use ($file, $line) {
+                        $file   = (string)$file;
+                        $line   = (int)$line;
+                        $lines  = file_exists($file) ? file($file) : [];
+                        $count  = count($lines);
+                        $offset = !$line ? $count : 5;
+
+                        for ($i = $line - $offset; $i < $line + $offset; $i++) {
+                            if (!($i > 0 && $i < $count)) {
+                                continue;
+                            }
+
+                            $highlightedCode = highlight_string('<?php ' . $lines[$i], true);
+                            $highlightedCode = preg_replace(
+                                ['/\n/', '/<br ?\/?>/', '/&lt;\?php&nbsp;/'],
+                                ['', '', ''],
+                                $highlightedCode
+                            );
+
+                            $causer = $i === $line - 1;
+                            $number = strval($i + 1);
+
+                            if ($causer) {
+                                $number = str_pad('>', strlen($number), '=', STR_PAD_LEFT);
+                            }
+
+                            $html
+                                ->open('li')
+                                    ->condition($causer === true)
+                                    ->span($number, ['class' => 'code-line exception-line'])
+                                    ->condition($causer === false)
+                                    ->span($number, ['class' => 'code-line'])
+                                    ->node($highlightedCode)
+                                ->close();
+                        }
+                    })
+                ->close()
+            ->close()
+        ->return();
+    }
+
+    /**
+     * Tabulates the passed stacktrace in an HTML table.
+     *
+     * @param array $trace Exception stacktrace array.
+     *
+     * @return string The tabulated trace as HTML.
+     *
+     * @since 1.5.5
+     *
+     * @codeCoverageIgnore
+     */
+    private static function tabulatedStacktrace(array $trace): string
+    {
+        return (new HTML(false))
+            ->p('<i>Fields with * can reveal more info. * Hoverable. ** Clickable.</i>')
+            ->open('div', ['class' => 'scrollable'])
+                ->open('table', ['class' => 'table'])
+                    ->open('thead', ['class' => 'table-head'])
+                        ->open('tr', ['class' => 'table-row'])
+                            ->th('No.&nbsp;**', ['class' => 'table-cell compact'])
+                            ->th('File&nbsp;*', ['class' => 'table-cell'])
+                            ->th('Line', ['class' => 'table-cell compact'])
+                            ->th('Class', ['class' => 'table-cell'])
+                            ->th('Function', ['class' => 'table-cell'])
+                            ->th('Arguments&nbsp;*', ['class' => 'table-cell'])
+                        ->close()
+                    ->close()
+                    ->open('tbody', ['class' => 'table-body'])
+                        ->execute(function (HTML $html) use ($trace) {
+                            foreach ($trace as $i => $trace) {
+                                $count = (int)$i + 1;
+
+                                $html
+                                    ->open('tr', ['class' => 'table-row ' . ($count % 2 == 0 ? 'even' : 'odd')])
+                                        ->td(isset($trace['file']) ? '' : strval($count), ['class' => 'table-cell number'])
+                                        ->td(
+                                            isset($trace['file'])
+                                                ? sprintf('<a href="vscode://file/%s:%d" title="Open in VS Code">%s</a>', $trace['file'], $trace['line'], basename($trace['file']))
+                                                : 'N/A',
+                                            ['class' => 'table-cell file pop-up', 'title' => $trace['file'] ?? 'N/A']
+                                        )
+                                        ->td(strval($trace['line'] ?? 'N/A'), ['class' => 'table-cell line'])
+                                        ->td(strval($trace['class'] ?? 'N/A'), ['class' => 'table-cell class monospace'])
+                                        ->td(strval($trace['function'] ?? 'N/A'), ['class' => 'table-cell function monospace'])
+                                        ->open('td', ['class' => 'table-cell arguments monospace'])
+                                            ->execute(function (HTML $html) use ($trace) {
+                                                if (!isset($trace['args'])) {
+                                                    $html->node('NULL');
+
+                                                    return;
+                                                }
+
+                                                foreach ($trace['args'] as $argument) {
+                                                    $html->span(gettype($argument), [
+                                                        'class' => 'argument pop-up',
+                                                        'title' => htmlspecialchars(
+                                                            Misc::callObjectMethod(Dumper::class, 'exportExpression', $argument),
+                                                            ENT_QUOTES,
+                                                            'UTF-8'
+                                                        ),
+                                                    ]);
+                                                }
+                                            })
+                                        ->close()
+                                    ->close()
+                                    ->execute(function (HTML $html) use ($trace, $count) {
+                                        isset($trace['file']) && $html
+                                            ->open('tr', ['class' => 'table-row additional', 'id' => 'trace-' . $count])
+                                                ->open('td', ['class' => 'table-cell', 'colspan' => 6])
+                                                    ->open('details', ['class' => 'accordion'])
+                                                        ->summary(strval($count), ['class' => 'accordion-summary'])
+                                                        ->div(
+                                                            Dumper::highlightedFile($trace['file'] ?? null, $trace['line'] ?? null),
+                                                            ['class' => 'accordion-details']
+                                                        )
+                                                    ->close()
+                                                ->close()
+                                            ->close();
+                                    });
+                            }
+                        })
+                    ->close()
+                ->close()
+            ->close()
+        ->return();
     }
 
     /**
