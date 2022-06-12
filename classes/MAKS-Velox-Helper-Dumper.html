@@ -156,6 +156,96 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -protected">
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#constant_VAR_DUMP_CONVERSIONS">VAR_DUMP_CONVERSIONS</a>
+    <span>
+        &nbsp;= [
+    // replace unnecessary line breaks after arrow with spaces only
+    &#039;/(=&gt;)\s*(.+)/&#039; =&gt; &#039; $1 $2&#039;,
+    // replace opening curly brace with opening square bracket
+    &#039;/{\n/&#039; =&gt; &quot;[
+&quot;,
+    // replace closing curly brace with closing square bracket
+    &#039;/}\n/&#039; =&gt; &quot;]
+&quot;,
+    // replace multiline empty square brackets with single line square brackets
+    &#039;/\[\n\s*\]/&#039; =&gt; &quot;[]&quot;,
+    // add comma to all line endings except opening brackets
+    &#039;/(?&lt;!\[)\n/&#039; =&gt; &quot;,
+&quot;,
+    // add object type info as comment after array opening bracket
+    &#039;/&amp;?(object\(.+\))(#\d+) \(\d+\) (\[)/&#039; =&gt; &#039;$3 // $1 [SPL-ID: $2]&#039;,
+    // add resource type info as comment in a single line
+    &#039;/&amp;?(resource\(\d+\) ([\w ]+) \((\w+)\))(,)*/&#039; =&gt; &#039;&quot;$3&quot;$4 // $1&#039;,
+    // remove the type hint and variable length for strings, and arrays at the beginning of line
+    &#039;/^&amp;?(?:string|array|\w+)(\(.+\)) /m&#039; =&gt; &#039;&#039;,
+    // remove the type hint and variable length for strings, and arrays after arrow
+    &#039;/(=&gt;) &amp;?(?:string|array|\w+)(\(.+\)) ([\[&quot;])/&#039; =&gt; &#039;$1 $3&#039;,
+    // replace bool($var) with $var
+    &#039;/&amp;?bool\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
+    // replace int($var) with $var
+    &#039;/&amp;?int\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
+    // replace float($var) with $var
+    &#039;/&amp;?float\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
+    // replace NULL with null
+    &#039;/NULL/&#039; =&gt; &#039;null&#039;,
+    // replace all single quotes with an escaped single quotes
+    &#039;/(&#039;)/&#039; =&gt; &#039;\\$1&#039;,
+    // replace all backslashes with escaped backslashes
+    &#039;/(\\)/&#039; =&gt; &#039;\\$1&#039;,
+    // replace private visibility with a better formatted one
+    &#039;/\[&quot;(.+?)&quot;:&quot;(.+)&quot;:(private)\]/&#039; =&gt; &#039;[&quot;$1&quot;:$3($2)]&#039;,
+    // replace key with visibility in double quotes in square brackets with key in single quotes and add visibility as comment
+    &#039;/\[&quot;(.+?)&quot;:(.+?)\] (=&gt;) (.+)/&#039; =&gt; &quot;&#039;$1&#039; $3 $4 // $2&quot;,
+    // replace key in double quotes in square brackets with key in single quotes
+    &#039;/\[&quot;(.*)&quot;\] (=&gt;)/&#039; =&gt; &quot;&#039;$1&#039; $2&quot;,
+    // replace numeric key in square brackets with key
+    &#039;/\[(-?\d+)\] (=&gt;)/&#039; =&gt; &#039;$1 $2&#039;,
+    // replace string opening double quotes with single quotes
+    &#039;/(=&gt;) &quot;/&#039; =&gt; &quot;$1 &#039;&quot;,
+    // replace string closing double quotes with single quotes
+    &#039;/(.+)&quot;(,)( \/\/.*)?\n/&#039; =&gt; &quot;$1&#039;$2$3
+&quot;,
+    // replace double quotes at the beginning of line with single quotes
+    &#039;/^&quot;/m&#039; =&gt; &quot;&#039;&quot;,
+    // replace *RECURSION* with __RECURSION__
+    &#039;/\*(RECURSION)\*/&#039; =&gt; &#039;__$1__&#039;,
+]                    </span>
+</dt>
+<dd>Regular expressions to transform `var_dump()` result
+from var dump syntax to a valid square brackets array (`[]`).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -protected">
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#constant_VAR_EXPORT_CONVERSIONS">VAR_EXPORT_CONVERSIONS</a>
+    <span>
+        &nbsp;= [
+    // replace array construct opening alone
+    &#039;/array \(/&#039; =&gt; &#039;[&#039;,
+    // replace array construct opening inside a function call
+    &#039;/(\()array\(/&#039; =&gt; &#039;$1[&#039;,
+    // replace array construct opening for stdClass
+    &#039;/\(object\) array\(/&#039; =&gt; &#039;(object)[&#039;,
+    // replace array construct closing not part of a string
+    &#039;/\)(\))(?=([^&#039;]*&#039;[^&#039;]*&#039;)*[^&#039;]*$)/&#039; =&gt; &#039;]$1&#039;,
+    // replace array construct closing alone
+    &#039;/^([ ]*)\)(,?)$/m&#039; =&gt; &#039;$1]$2&#039;,
+    // replace array construct closing inside a function call
+    &#039;/(\n)([ ]*)\]\)/&#039; =&gt; &#039;$1$2])&#039;,
+    // replace array key with nested array
+    &#039;/([ ]*)(&#039;[^&#039;]+&#039;) =&gt; ([\[&#039;])/&#039; =&gt; &#039;$1$2 =&gt; $3&#039;,
+    // replace array construct/bracket opening after arrow with newline and spaces
+    &#039;/=&gt;[ ]?\n[ ]+(\[|\()/&#039; =&gt; &#039;=&gt; $1&#039;,
+    // replace any valid php after arrow with a newline and spaces
+    &#039;/=&gt;[ ]?\n[ ]+([a-zA-Z0-9_\x7f-\xff])/&#039; =&gt; &#039;=&gt; $1&#039;,
+    // replace empty array brackets array with a newline and spaces
+    &#039;/\[[ ]?\n[ ]*\]/&#039; =&gt; &#039;[]&#039;,
+    // replace NULL with null
+    &#039;/NULL/&#039; =&gt; &#039;null&#039;,
+]                    </span>
+</dt>
+<dd>Regular expressions to transform `var_export()` result
+from array construct (`array()`) to valid square brackets array (`[]`).</dd>
+
                 <dt class="phpdocumentor-table-of-contents__entry -property -public">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#property_accentColor">$accentColor</a>
     <span>
@@ -191,6 +281,13 @@
 </dt>
 <dd>Additional CSS styling of syntax tokens.</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#property_useVarDump">$useVarDump</a>
+    <span>
+                &nbsp;: bool            </span>
+</dt>
+<dd>Whether or not to use `var_dump()` instead of `var_export()` to dump the variables.</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#property_syntaxHighlightTokens">$syntaxHighlightTokens</a>
     <span>
@@ -219,19 +316,33 @@
 </dt>
 <dd>Dumps an exception in a nice HTML page or as string and exits the script.</dd>
 
-            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#method_exportExpression">exportExpression()</a>
     <span>
                         &nbsp;: string    </span>
 </dt>
-<dd>Dumps an expression using `var_export()` or `print_r()`.</dd>
+<dd>Dumps an expression using `var_export()` or `var_dump()`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#method_varDump">varDump()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Returns dump of the passed variable using `var_dump()`.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#method_varExport">varExport()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>Returns dump of the passed variable using `var_export()`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#method_exportExpressionWithSyntaxHighlighting">exportExpressionWithSyntaxHighlighting()</a>
     <span>
                         &nbsp;: string    </span>
 </dt>
-<dd>Dumps an expression using `var_export()` or `print_r()` with syntax highlighting.</dd>
+<dd>Dumps an expression using `var_export()` or `var_dump()` with syntax highlighting.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/MAKS-Velox-Helper-Dumper.html#method_getAnsiCodeFromHexColor">getAnsiCodeFromHexColor()</a>
@@ -255,7 +366,7 @@
 <dd>Returns the last caller trace before `dd()` or `dump()` if the format of `file:line`.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/MAKS-Velox-Helper-Dumper.html#method_highlightedFile">highlightedFile()</a>
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#method_highlightFile">highlightFile()</a>
     <span>
                         &nbsp;: string    </span>
 </dt>
@@ -276,7 +387,7 @@
 <dd>Sets PHP syntax highlighting colors according to current class state.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/MAKS-Velox-Helper-Dumper.html#method_tabulatedStacktrace">tabulatedStacktrace()</a>
+    <a href="classes/MAKS-Velox-Helper-Dumper.html#method_tabulateStacktrace">tabulateStacktrace()</a>
     <span>
                         &nbsp;: string    </span>
 </dt>
@@ -287,6 +398,172 @@
 
 
         
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/MAKS-Velox-Helper-Dumper.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article class="phpdocumentor-element -constant -protected ">
+    <h4 class="phpdocumentor-element__name" id="constant_VAR_DUMP_CONVERSIONS">
+        VAR_DUMP_CONVERSIONS
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#constant_VAR_DUMP_CONVERSIONS" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">67</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Regular expressions to transform `var_dump()` result
+from var dump syntax to a valid square brackets array (`[]`).</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">VAR_DUMP_CONVERSIONS</span>
+    = <span class="phpdocumentor-signature__default-value">[
+    // replace unnecessary line breaks after arrow with spaces only
+    &#039;/(=&gt;)\s*(.+)/&#039; =&gt; &#039; $1 $2&#039;,
+    // replace opening curly brace with opening square bracket
+    &#039;/{\n/&#039; =&gt; &quot;[
+&quot;,
+    // replace closing curly brace with closing square bracket
+    &#039;/}\n/&#039; =&gt; &quot;]
+&quot;,
+    // replace multiline empty square brackets with single line square brackets
+    &#039;/\[\n\s*\]/&#039; =&gt; &quot;[]&quot;,
+    // add comma to all line endings except opening brackets
+    &#039;/(?&lt;!\[)\n/&#039; =&gt; &quot;,
+&quot;,
+    // add object type info as comment after array opening bracket
+    &#039;/&amp;?(object\(.+\))(#\d+) \(\d+\) (\[)/&#039; =&gt; &#039;$3 // $1 [SPL-ID: $2]&#039;,
+    // add resource type info as comment in a single line
+    &#039;/&amp;?(resource\(\d+\) ([\w ]+) \((\w+)\))(,)*/&#039; =&gt; &#039;&quot;$3&quot;$4 // $1&#039;,
+    // remove the type hint and variable length for strings, and arrays at the beginning of line
+    &#039;/^&amp;?(?:string|array|\w+)(\(.+\)) /m&#039; =&gt; &#039;&#039;,
+    // remove the type hint and variable length for strings, and arrays after arrow
+    &#039;/(=&gt;) &amp;?(?:string|array|\w+)(\(.+\)) ([\[&quot;])/&#039; =&gt; &#039;$1 $3&#039;,
+    // replace bool($var) with $var
+    &#039;/&amp;?bool\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
+    // replace int($var) with $var
+    &#039;/&amp;?int\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
+    // replace float($var) with $var
+    &#039;/&amp;?float\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
+    // replace NULL with null
+    &#039;/NULL/&#039; =&gt; &#039;null&#039;,
+    // replace all single quotes with an escaped single quotes
+    &#039;/(&#039;)/&#039; =&gt; &#039;\\$1&#039;,
+    // replace all backslashes with escaped backslashes
+    &#039;/(\\)/&#039; =&gt; &#039;\\$1&#039;,
+    // replace private visibility with a better formatted one
+    &#039;/\[&quot;(.+?)&quot;:&quot;(.+)&quot;:(private)\]/&#039; =&gt; &#039;[&quot;$1&quot;:$3($2)]&#039;,
+    // replace key with visibility in double quotes in square brackets with key in single quotes and add visibility as comment
+    &#039;/\[&quot;(.+?)&quot;:(.+?)\] (=&gt;) (.+)/&#039; =&gt; &quot;&#039;$1&#039; $3 $4 // $2&quot;,
+    // replace key in double quotes in square brackets with key in single quotes
+    &#039;/\[&quot;(.*)&quot;\] (=&gt;)/&#039; =&gt; &quot;&#039;$1&#039; $2&quot;,
+    // replace numeric key in square brackets with key
+    &#039;/\[(-?\d+)\] (=&gt;)/&#039; =&gt; &#039;$1 $2&#039;,
+    // replace string opening double quotes with single quotes
+    &#039;/(=&gt;) &quot;/&#039; =&gt; &quot;$1 &#039;&quot;,
+    // replace string closing double quotes with single quotes
+    &#039;/(.+)&quot;(,)( \/\/.*)?\n/&#039; =&gt; &quot;$1&#039;$2$3
+&quot;,
+    // replace double quotes at the beginning of line with single quotes
+    &#039;/^&quot;/m&#039; =&gt; &quot;&#039;&quot;,
+    // replace *RECURSION* with __RECURSION__
+    &#039;/\*(RECURSION)\*/&#039; =&gt; &#039;__$1__&#039;,
+]</span>
+</code>
+
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.5.6</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+</article>
+                    <article class="phpdocumentor-element -constant -protected ">
+    <h4 class="phpdocumentor-element__name" id="constant_VAR_EXPORT_CONVERSIONS">
+        VAR_EXPORT_CONVERSIONS
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#constant_VAR_EXPORT_CONVERSIONS" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Regular expressions to transform `var_export()` result
+from array construct (`array()`) to valid square brackets array (`[]`).</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">VAR_EXPORT_CONVERSIONS</span>
+    = <span class="phpdocumentor-signature__default-value">[
+    // replace array construct opening alone
+    &#039;/array \(/&#039; =&gt; &#039;[&#039;,
+    // replace array construct opening inside a function call
+    &#039;/(\()array\(/&#039; =&gt; &#039;$1[&#039;,
+    // replace array construct opening for stdClass
+    &#039;/\(object\) array\(/&#039; =&gt; &#039;(object)[&#039;,
+    // replace array construct closing not part of a string
+    &#039;/\)(\))(?=([^&#039;]*&#039;[^&#039;]*&#039;)*[^&#039;]*$)/&#039; =&gt; &#039;]$1&#039;,
+    // replace array construct closing alone
+    &#039;/^([ ]*)\)(,?)$/m&#039; =&gt; &#039;$1]$2&#039;,
+    // replace array construct closing inside a function call
+    &#039;/(\n)([ ]*)\]\)/&#039; =&gt; &#039;$1$2])&#039;,
+    // replace array key with nested array
+    &#039;/([ ]*)(&#039;[^&#039;]+&#039;) =&gt; ([\[&#039;])/&#039; =&gt; &#039;$1$2 =&gt; $3&#039;,
+    // replace array construct/bracket opening after arrow with newline and spaces
+    &#039;/=&gt;[ ]?\n[ ]+(\[|\()/&#039; =&gt; &#039;=&gt; $1&#039;,
+    // replace any valid php after arrow with a newline and spaces
+    &#039;/=&gt;[ ]?\n[ ]+([a-zA-Z0-9_\x7f-\xff])/&#039; =&gt; &#039;=&gt; $1&#039;,
+    // replace empty array brackets array with a newline and spaces
+    &#039;/\[[ ]?\n[ ]*\]/&#039; =&gt; &#039;[]&#039;,
+    // replace NULL with null
+    &#039;/NULL/&#039; =&gt; &#039;null&#039;,
+]</span>
+</code>
+
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.5.6</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+</article>
+            </section>
 
         
     <section class="phpdocumentor-properties">
@@ -310,7 +587,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">130</span>
 
     </aside>
 
@@ -343,7 +620,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">137</span>
 
     </aside>
 
@@ -376,7 +653,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">54</span>
+    <span class="phpdocumentor-element-found-in__line">154</span>
 
     </aside>
 
@@ -386,7 +663,7 @@
     <span class="phpdocumentor-signature__visibility">public</span>
     <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
     <span class="phpdocumentor-signature__name">$styles</span>
-     = <span class="phpdocumentor-signature__default-value">[&#039;exceptionPage&#039; =&gt; &quot;:root{--light:#fff;--dark:#000;--accent-color:%accentColor%;--contrast-color:%contrastColor%;--font-normal:-apple-system,&#039;Fira Sans&#039;,Ubuntu,Helvetica,Arial,sans-serif;--font-mono:&#039;Fira Code&#039;,&#039;Ubuntu Mono&#039;,Courier,monospace;--font-base-size:16px;--container-width:85vw;--container-max-width:1364px}@media (max-width:992px){:root{--font-base-size:14px;--container-width:100%;--container-max-width:100vw}}*,::after,::before{box-sizing:border-box;scrollbar-width:thin;scrollbar-color:var(--accent-color) rgba(0,0,0,.15)}::-webkit-scrollbar{width:8px;height:8px;opacity:1;-webkit-appearance:none}::-webkit-scrollbar-thumb{background:var(--accent-color);border-radius:4px}::-webkit-scrollbar-track,::selection{background:rgba(0,0,0,.15)}body{background:var(--light);color:var(--dark);font-family:var(--font-normal);font-size:var(--font-base-size);line-height:1.5;margin:0}h1,h2,h3,h4,h5,h6{margin:0}h1{color:var(--accent-color);font-size:2rem}h2{color:var(--accent-color);font-size:1.75rem}h3{color:var(--light)}p{font-size:1rem;margin:1rem 0}a{color:var(--accent-color)}a:hover{text-decoration:underline}ul{padding:1.5rem 1rem;margin:1rem 0}li{white-space:pre;list-style-type:none}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.monospace,code{font-family:var(--font-mono);word-wrap:break-word;word-break:break-all}.container{width:var(--container-width);max-width:var(--container-max-width);min-height:100vh;background:var(--light);padding:7vh calc((var(--container-max-width) * .03)) 10vh;margin:0 auto;overflow:hidden}.capture-section,.info-section,.trace-section{margin-bottom:3rem}.message{background:var(--accent-color);color:var(--light);padding:2rem 1rem 1rem 1rem}.scrollable{overflow-x:scroll}.code{display:block;width:max-content;min-width:100%;background:var(--contrast-color);font-family:var(--font-mono);font-size:.875rem;margin:0;overflow-y:scroll;-ms-overflow-style:none;scrollbar-width:none;cursor:initial}.code::-webkit-scrollbar{display:none}.code *{background:0 0}.code-line{display:inline-block;width:calc(3ch + (2 * .75ch));background:rgba(255,255,255,.25);color:var(--light);text-align:right;padding:.25rem .75ch;margin:0 1.5ch 0 0;user-select:none}.code-line.exception-line{color:var(--accent-color);font-weight:700}.code-line.exception-line+code&gt;span&gt;span:not(:first-child){padding-bottom:3px;border-bottom:2px solid var(--accent-color)}.button{display:inline-block;vertical-align:baseline;background:var(--accent-color);color:var(--light);font-size:1rem;text-decoration:none;padding:.5rem 1rem;margin:0 0 1rem 0;border:none;border-radius:2.5rem;cursor:pointer}.button:hover{background:var(--contrast-color);text-decoration:inherit}.button:last-child{margin-bottom:0}.table{width:100%;border-collapse:collapse;border-spacing:0}.table .table-cell{padding:.75rem}.table .table-head .table-cell{background:var(--contrast-color);color:var(--light);text-align:left;padding-top:.75rem;padding-bottom:.75rem}.table-cell.compact{width:1%}.table-row{background:var(--light);border-top:1px solid rgba(0,0,0,.15)}.table .table-row:hover{background:rgba(0,0,0,.065)!important}.table .table-row.additional .table-cell{padding:0}.table .table-row.odd,.table .table-row.odd+.additional{background:var(--light)}.table .table-row.even,.table .table-row.even+.additional{background:rgba(0,0,0,.035)}.table .table-row.even+.additional,.table .table-row.odd+.additional{border-top:none}.pop-up{cursor:help}.line,.number{text-align:center}.class,.function{font-size:.875rem;font-weight:700}.arguments{white-space:nowrap}.argument{display:inline-block;background:rgba(0,0,0,.125);color:var(--accent-color);font-size:.875rem;font-style:italic;padding:.125rem .5rem;margin:0 .25rem 0 0;border-radius:2.5rem}.argument:hover{background:var(--accent-color);color:var(--contrast-color)}.accordion{cursor:pointer;position:relative}.accordion-summary{width:1.5rem;height:1.5rem;background:var(--accent-color);color:var(--light);line-height:1.5rem;text-align:center;list-style:none;border-radius:50%;position:absolute;top:-2.2925rem;left:1.425rem;user-select:none;cursor:pointer}.accordion-summary:hover{background:var(--contrast-color)}.accordion-details{padding:0}&quot;, &#039;traceBlock&#039; =&gt; &quot;background:#fff;color:%accentColor%;font-family:-apple-system,&#039;Fira Sans&#039;,Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;padding:4px 8px;margin-bottom:18px;&quot;, &#039;dumpBlock&#039; =&gt; &quot;display:table;background:%contrastColor%;color:#fff;font-family:&#039;Fira Code&#039;,&#039;Ubuntu Mono&#039;,Courier,monospace;font-size:18px;padding:18px;margin-bottom:8px;&quot;, &#039;timeBlock&#039; =&gt; &quot;display:table;background:%accentColor%;color:#fff;font-family:&#039;Fira Code&#039;,&#039;Ubuntu Mono&#039;,Courier,monospace;font-size:12px;font-weight:bold;padding:12px;margin-bottom:8px;&quot;]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[&#039;exceptionPage&#039; =&gt; &quot;:root{--light:#fff;--dark:#000;--accent-color:%accentColor%;--contrast-color:%contrastColor%;--font-normal:-apple-system,&#039;Fira Sans&#039;,Ubuntu,Helvetica,Arial,sans-serif;--font-mono:&#039;Fira Code&#039;,&#039;Ubuntu Mono&#039;,Courier,monospace;--font-base-size:16px;--container-width:85vw;--container-max-width:1364px}@media (max-width:992px){:root{--font-base-size:14px;--container-width:100%;--container-max-width:100vw}}*,::after,::before{box-sizing:border-box;scrollbar-width:thin;scrollbar-color:var(--accent-color) rgba(0,0,0,.15)}::-webkit-scrollbar{width:8px;height:8px;opacity:1;-webkit-appearance:none}::-webkit-scrollbar-thumb{background:var(--accent-color);border-radius:4px}::-webkit-scrollbar-track,::selection{background:rgba(0,0,0,.15)}body{background:var(--light);color:var(--dark);font-family:var(--font-normal);font-size:var(--font-base-size);line-height:1.5;margin:0}h1,h2,h3,h4,h5,h6{margin:0}h1{color:var(--accent-color);font-size:2rem}h2{color:var(--accent-color);font-size:1.75rem}h3{color:var(--light)}p{font-size:1rem;margin:1rem 0}a{color:var(--accent-color)}a:hover{text-decoration:underline}ul{padding:1.5rem 1rem;margin:1rem 0}li{white-space:pre;list-style-type:none}pre{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.monospace,code{font-family:var(--font-mono);word-wrap:break-word;word-break:break-all}.container{width:var(--container-width);max-width:var(--container-max-width);min-height:100vh;background:var(--light);padding:7vh calc((var(--container-max-width) * .03)) 10vh;margin:0 auto;overflow:hidden}.capture-section,.info-section,.trace-section{margin-bottom:3rem}.message{background:var(--accent-color);color:var(--light);padding:2rem 1rem 1rem 1rem}.scrollable{overflow-x:scroll}.code{display:block;width:max-content;min-width:100%;background:var(--contrast-color);font-family:var(--font-mono);font-size:.875rem;margin:0;overflow-y:scroll;-ms-overflow-style:none;scrollbar-width:none;cursor:initial}.code::-webkit-scrollbar{display:none}.code *{background:0 0}.code-line{display:inline-block;width:calc(3ch + (2 * .75ch));background:rgba(255,255,255,.25);color:var(--light);text-align:right;padding:.25rem .75ch;margin:0 1.5ch 0 0;user-select:none}.code-line.exception-line{color:var(--accent-color);font-weight:700}.code-line.exception-line+code&gt;span&gt;span:not(:first-child){padding-bottom:3px;border-bottom:2px solid var(--accent-color)}.button{display:inline-block;vertical-align:baseline;background:var(--accent-color);color:var(--light);font-size:1rem;text-decoration:none;padding:.5rem 1rem;margin:0 0 1rem 0;border:none;border-radius:2.5rem;cursor:pointer}.button:hover{background:var(--contrast-color);text-decoration:inherit}.button:last-child{margin-bottom:0}.table{width:100%;border-collapse:collapse;border-spacing:0}.table .table-cell{padding:.75rem}.table .table-head .table-cell{background:var(--contrast-color);color:var(--light);text-align:left;padding-top:.75rem;padding-bottom:.75rem}.table-cell.compact{width:1%}.table-row{background:var(--light);border-top:1px solid rgba(0,0,0,.15)}.table .table-row:hover{background:rgba(0,0,0,.065)!important}.table .table-row.additional .table-cell{padding:0}.table .table-row.odd,.table .table-row.odd+.additional{background:var(--light)}.table .table-row.even,.table .table-row.even+.additional{background:rgba(0,0,0,.035)}.table .table-row.even+.additional,.table .table-row.odd+.additional{border-top:none}.pop-up{cursor:help}.line,.number{text-align:center}.class,.function{font-size:.875rem;font-weight:700}.arguments{white-space:nowrap}.argument{display:inline-block;background:rgba(0,0,0,.125);color:var(--accent-color);font-size:.875rem;font-style:italic;padding:.125rem .5rem;margin:0 .25rem 0 0;border-radius:2.5rem}.argument:hover{background:var(--accent-color);color:var(--contrast-color)}.accordion{cursor:pointer;position:relative}.accordion-summary{width:1.5rem;height:1.5rem;background:var(--accent-color);color:var(--light);line-height:1.5rem;text-align:center;list-style:none;border-radius:50%;position:absolute;top:-2.2925rem;left:1.425rem;user-select:none;cursor:pointer}.accordion-summary:hover{background:var(--contrast-color)}.accordion-details{padding:0}&quot;, &#039;traceBlock&#039; =&gt; &quot;background:#fff;color:%accentColor%;font-family:-apple-system,&#039;Fira Sans&#039;,Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;padding:4px 8px;margin-bottom:18px;&quot;, &#039;dumpBlock&#039; =&gt; &quot;display:table;background:%contrastColor%;color:#fff;font-family:&#039;Fira Code&#039;,&#039;Ubuntu Mono&#039;,Courier,monospace;font-size:18px;padding:18px;margin-bottom:8px;&quot;, &#039;timeBlock&#039; =&gt; &quot;display:table;background:%accentColor%;color:#fff;font-family:&#039;Fira Code&#039;,&#039;Ubuntu Mono&#039;,Courier,monospace;font-size:12px;font-weight:bold;padding:12px;margin-bottom:8px;&quot;, &#039;detailsBlock&#039; =&gt; &quot;background:%accentColor%;color:#fff;font-family:-apple-system,&#039;Fira Sans&#039;,Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;padding:12px;margin-bottom:8px;cursor:pointer;user-select:none;&quot;]</span></code>
 
         <section class="phpdocumentor-description"><p>The array contains styles for:</p>
 <ul>
@@ -401,6 +678,9 @@
 </li>
 <li>
 <code class="prettyprint">timeBlock</code>
+</li>
+<li>
+<code class="prettyprint">detailsBlock</code>
 </li>
 </ul>
 <p>Currently set dumper colors can be inject in CSS using the <code class="prettyprint">%accentColor%</code> and <code class="prettyprint">%contrastColor%</code> placeholders.</p>
@@ -440,7 +720,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">167</span>
 
     </aside>
 
@@ -473,7 +753,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">180</span>
 
     </aside>
 
@@ -494,6 +774,41 @@
         class="
             phpdocumentor-element
             -property
+            -public
+            -static                                            "
+>
+    <h4 class="phpdocumentor-element__name" id="property_useVarDump">
+        $useVarDump
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#property_useVarDump" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">123</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Whether or not to use `var_dump()` instead of `var_export()` to dump the variables.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$useVarDump</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+        <section class="phpdocumentor-description"><p>NOTE: The dumper will always fall back to <code class="prettyprint">var_dump()</code> if <code class="prettyprint">var_export()</code> fails.</p>
+</section>
+
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
             -private
             -static                                            "
 >
@@ -506,7 +821,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">92</span>
+    <span class="phpdocumentor-element-found-in__line">193</span>
 
     </aside>
 
@@ -543,7 +858,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">104</span>
+    <span class="phpdocumentor-element-found-in__line">205</span>
 
     </aside>
 
@@ -601,7 +916,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">219</span>
 
     </aside>
 
@@ -646,7 +961,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">159</span>
+    <span class="phpdocumentor-element-found-in__line">262</span>
 
     </aside>
 
@@ -694,7 +1009,7 @@
                     <article
         class="phpdocumentor-element
             -method
-            -private
+            -public
                                     -static                    "
 >
     <h4 class="phpdocumentor-element__name" id="method_exportExpression">
@@ -704,14 +1019,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">407</span>
+    <span class="phpdocumentor-element-found-in__line">564</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Dumps an expression using `var_export()` or `print_r()`.</p>
+        <p class="phpdocumentor-summary">Dumps an expression using `var_export()` or `var_dump()`.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">private</span>
+    <span class="phpdocumentor-signature__visibility">public</span>
             <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">exportExpression</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expression</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     
@@ -737,6 +1052,120 @@
                     <article
         class="phpdocumentor-element
             -method
+            -protected
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_varDump">
+        varDump()
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#method_varDump" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">542</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns dump of the passed variable using `var_dump()`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">varDump</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$variable</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$variable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.5.6</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_varExport">
+        varExport()
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#method_varExport" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">512</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns dump of the passed variable using `var_export()`.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">varExport</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$variable</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$variable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">since</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                            <span class="phpdocumentor-tag-link">1.5.6</span>
+                                                                                
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
             -private
                                     -static                    "
 >
@@ -747,11 +1176,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">451</span>
+    <span class="phpdocumentor-element-found-in__line">594</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Dumps an expression using `var_export()` or `print_r()` with syntax highlighting.</p>
+        <p class="phpdocumentor-summary">Dumps an expression using `var_export()` or `var_dump()` with syntax highlighting.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
@@ -799,7 +1228,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">545</span>
+    <span class="phpdocumentor-element-found-in__line">706</span>
 
     </aside>
 
@@ -845,7 +1274,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">493</span>
+    <span class="phpdocumentor-element-found-in__line">636</span>
 
     </aside>
 
@@ -855,7 +1284,7 @@
     <span class="phpdocumentor-signature__visibility">private</span>
             <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">getDumpingBlocks</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"><p>Available blocks are: <code class="prettyprint">traceBlock</code>, <code class="prettyprint">dumpBlock</code>, and <code class="prettyprint">timeBlock</code>.
+        <section class="phpdocumentor-description"><p>Available blocks are: <code class="prettyprint">traceBlock</code>, <code class="prettyprint">dumpBlock</code>, <code class="prettyprint">timeBlock</code>, and <code class="prettyprint">detailsBlock</code>.
 All this blocks will contain a placeholder for a <code class="prettyprint">*printf()</code> function to inject content.</p>
 </section>
 
@@ -881,7 +1310,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">520</span>
+    <span class="phpdocumentor-element-found-in__line">681</span>
 
     </aside>
 
@@ -907,14 +1336,14 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
             -private
                                     -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_highlightedFile">
-        highlightedFile()
-        <a href="classes/MAKS-Velox-Helper-Dumper.html#method_highlightedFile" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_highlightFile">
+        highlightFile()
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#method_highlightFile" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">267</span>
+    <span class="phpdocumentor-element-found-in__line">370</span>
 
     </aside>
 
@@ -922,7 +1351,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">highlightedFile</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$file</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$line</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">highlightFile</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$file</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$line</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -991,7 +1420,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">626</span>
+    <span class="phpdocumentor-element-found-in__line">787</span>
 
     </aside>
 
@@ -1024,7 +1453,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">602</span>
+    <span class="phpdocumentor-element-found-in__line">763</span>
 
     </aside>
 
@@ -1063,14 +1492,14 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
             -private
                                     -static                    "
 >
-    <h4 class="phpdocumentor-element__name" id="method_tabulatedStacktrace">
-        tabulatedStacktrace()
-        <a href="classes/MAKS-Velox-Helper-Dumper.html#method_tabulatedStacktrace" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_tabulateStacktrace">
+        tabulateStacktrace()
+        <a href="classes/MAKS-Velox-Helper-Dumper.html#method_tabulateStacktrace" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">324</span>
+    <span class="phpdocumentor-element-found-in__line">427</span>
 
     </aside>
 
@@ -1078,7 +1507,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">tabulatedStacktrace</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$trace</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">tabulateStacktrace</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$trace</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>

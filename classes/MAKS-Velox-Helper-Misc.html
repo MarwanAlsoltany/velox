@@ -217,7 +217,7 @@
     <span>
                         &nbsp;: string    </span>
 </dt>
-<dd>Transforms the case/content of a string by applying a one or more of the 20 available transformations.</dd>
+<dd>Transforms the case/content of a string by applying a one or more of the 26 available transformations.</dd>
 
         </dl>
 
@@ -245,7 +245,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Misc.php"><a href="files/classes-helper-misc.html"><abbr title="classes/Helper/Misc.php">Misc.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">317</span>
+    <span class="phpdocumentor-element-found-in__line">326</span>
 
     </aside>
 
@@ -793,11 +793,11 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Misc.php"><a href="files/classes-helper-misc.html"><abbr title="classes/Helper/Misc.php">Misc.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">265</span>
+    <span class="phpdocumentor-element-found-in__line">270</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Transforms the case/content of a string by applying a one or more of the 20 available transformations.</p>
+        <p class="phpdocumentor-summary">Transforms the case/content of a string by applying a one or more of the 26 available transformations.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
@@ -807,7 +807,7 @@
 Available transformations:</p>
 <ul>
 <li>
-<code class="prettyprint">clean</code>: discards all meta-characters (@#$%&amp;^*+=-~:;,.!?()}[]|/\'&quot;`), separates concatenated words [<code class="prettyprint">ExampleString-num.1</code>, <code class="prettyprint">Example String num 1</code>].</li>
+<code class="prettyprint">clean</code>: discards all punctuations and meta-characters (@#%&amp;$^*+-=_~:;,.?!()}[]|/\'&quot;`), separates concatenated words [<code class="prettyprint">ExampleString-num.1</code>, <code class="prettyprint">Example String num 1</code>].</li>
 <li>
 <code class="prettyprint">alnum</code>: removes every thing other that english letters, numbers and spaces. [<code class="prettyprint">Example@123</code> -&gt; <code class="prettyprint">Example123</code>]</li>
 <li>
@@ -819,11 +819,21 @@ Available transformations:</p>
 <li>
 <code class="prettyprint">title</code>: titlecase [<code class="prettyprint">example string</code> -&gt; <code class="prettyprint">Example String</code>].</li>
 <li>
+<code class="prettyprint">sentence</code>: lowercase, first letter uppercase [<code class="prettyprint">exampleString</code> -&gt; <code class="prettyprint">Example string</code>].</li>
+<li>
+<code class="prettyprint">lower</code>: lowercase [<code class="prettyprint">Example String</code> -&gt; <code class="prettyprint">example string</code>].</li>
+<li>
+<code class="prettyprint">upper</code>: uppercase [<code class="prettyprint">Example String</code> -&gt; <code class="prettyprint">EXAMPLE STRING</code>].</li>
+<li>
 <code class="prettyprint">pascal</code>: titlecase, no spaces [<code class="prettyprint">example string</code> -&gt; <code class="prettyprint">ExampleString</code>].</li>
 <li>
 <code class="prettyprint">camel</code>: titlecase, no spaces, first letter lowercase [<code class="prettyprint">example string</code> -&gt; <code class="prettyprint">exampleString</code>].</li>
 <li>
 <code class="prettyprint">constant</code>: uppercase, spaces to underscores [<code class="prettyprint">Example String</code> -&gt; <code class="prettyprint">EXAMPLE_STRING</code>].</li>
+<li>
+<code class="prettyprint">cobol</code>: uppercase, spaces to dashes [<code class="prettyprint">example string</code> -&gt; <code class="prettyprint">EXAMPLE-STRING</code>].</li>
+<li>
+<code class="prettyprint">train</code>: titlecase, spaces to dashes [<code class="prettyprint">example string</code> -&gt; <code class="prettyprint">Example-String</code>].</li>
 <li>
 <code class="prettyprint">snake</code>: lowercase, spaces to underscores [<code class="prettyprint">Example String</code> -&gt; <code class="prettyprint">example_string</code>].</li>
 <li>
@@ -831,7 +841,7 @@ Available transformations:</p>
 <li>
 <code class="prettyprint">dot</code>: lowercase, spaces to dots [<code class="prettyprint">Example String</code> -&gt; <code class="prettyprint">example.string</code>].</li>
 <li>
-<code class="prettyprint">spaceless</code>: removes spaces [<code class="prettyprint">Example String</code> -&gt; <code class="prettyprint">ExampleString</code>].</li>
+<code class="prettyprint">spaceless</code>: removes any whitespaces [<code class="prettyprint">Example String</code> -&gt; <code class="prettyprint">ExampleString</code>].</li>
 <li>A built-in function name from this list can also be used: <code class="prettyprint">strtolower</code>, <code class="prettyprint">strtoupper</code>, <code class="prettyprint">lcfirst</code>, <code class="prettyprint">ucfirst</code>, <code class="prettyprint">ucwords</code>, <code class="prettyprint">trim</code>, <code class="prettyprint">ltrim</code>, <code class="prettyprint">rtrim</code>.</li>
 </ul>
 <p>NOTE: Unknown transformations will be ignored silently.</p>

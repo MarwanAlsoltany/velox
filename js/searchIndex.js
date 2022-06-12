@@ -1701,24 +1701,34 @@ Search.appendIndex(
             "summary": "Dumps\u0020an\u0020exception\u0020in\u0020a\u0020nice\u0020HTML\u0020page\u0020or\u0020as\u0020string\u0020and\u0020exits\u0020the\u0020script.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_dumpException"
         },                {
-            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AhighlightedFile\u0028\u0029",
-            "name": "highlightedFile",
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AhighlightFile\u0028\u0029",
+            "name": "highlightFile",
             "summary": "Highlights\u0020the\u0020passed\u0020file\u0020with\u0020the\u0020possibility\u0020to\u0020focus\u0020a\u0020specific\u0020line.",
-            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_highlightedFile"
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_highlightFile"
         },                {
-            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AtabulatedStacktrace\u0028\u0029",
-            "name": "tabulatedStacktrace",
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AtabulateStacktrace\u0028\u0029",
+            "name": "tabulateStacktrace",
             "summary": "Tabulates\u0020the\u0020passed\u0020stacktrace\u0020in\u0020an\u0020HTML\u0020table.",
-            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_tabulatedStacktrace"
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_tabulateStacktrace"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AvarExport\u0028\u0029",
+            "name": "varExport",
+            "summary": "Returns\u0020dump\u0020of\u0020the\u0020passed\u0020variable\u0020using\u0020\u0060var_export\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_varExport"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AvarDump\u0028\u0029",
+            "name": "varDump",
+            "summary": "Returns\u0020dump\u0020of\u0020the\u0020passed\u0020variable\u0020using\u0020\u0060var_dump\u0028\u0029\u0060.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#method_varDump"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AexportExpression\u0028\u0029",
             "name": "exportExpression",
-            "summary": "Dumps\u0020an\u0020expression\u0020using\u0020\u0060var_export\u0028\u0029\u0060\u0020or\u0020\u0060print_r\u0028\u0029\u0060.",
+            "summary": "Dumps\u0020an\u0020expression\u0020using\u0020\u0060var_export\u0028\u0029\u0060\u0020or\u0020\u0060var_dump\u0028\u0029\u0060.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_exportExpression"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AexportExpressionWithSyntaxHighlighting\u0028\u0029",
             "name": "exportExpressionWithSyntaxHighlighting",
-            "summary": "Dumps\u0020an\u0020expression\u0020using\u0020\u0060var_export\u0028\u0029\u0060\u0020or\u0020\u0060print_r\u0028\u0029\u0060\u0020with\u0020syntax\u0020highlighting.",
+            "summary": "Dumps\u0020an\u0020expression\u0020using\u0020\u0060var_export\u0028\u0029\u0060\u0020or\u0020\u0060var_dump\u0028\u0029\u0060\u0020with\u0020syntax\u0020highlighting.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_exportExpressionWithSyntaxHighlighting"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AgetDumpingBlocks\u0028\u0029",
@@ -1745,6 +1755,21 @@ Search.appendIndex(
             "name": "isCli",
             "summary": "Checks\u0020whether\u0020the\u0020script\u0020is\u0020currently\u0020running\u0020in\u0020CLI\u0020mode\u0020or\u0020not.",
             "url": "classes/MAKS-Velox-Helper-Dumper.html#method_isCli"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AVAR_EXPORT_CONVERSIONS",
+            "name": "VAR_EXPORT_CONVERSIONS",
+            "summary": "Regular\u0020expressions\u0020to\u0020transform\u0020\u0060var_export\u0028\u0029\u0060\u0020result\nfrom\u0020array\u0020construct\u0020\u0028\u0060array\u0028\u0029\u0060\u0029\u0020to\u0020valid\u0020square\u0020brackets\u0020array\u0020\u0028\u0060\u005B\u005D\u0060\u0029.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#constant_VAR_EXPORT_CONVERSIONS"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003AVAR_DUMP_CONVERSIONS",
+            "name": "VAR_DUMP_CONVERSIONS",
+            "summary": "Regular\u0020expressions\u0020to\u0020transform\u0020\u0060var_dump\u0028\u0029\u0060\u0020result\nfrom\u0020var\u0020dump\u0020syntax\u0020to\u0020a\u0020valid\u0020square\u0020brackets\u0020array\u0020\u0028\u0060\u005B\u005D\u0060\u0029.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#constant_VAR_DUMP_CONVERSIONS"
+        },                {
+            "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024useVarDump",
+            "name": "useVarDump",
+            "summary": "Whether\u0020or\u0020not\u0020to\u0020use\u0020\u0060var_dump\u0028\u0029\u0060\u0020instead\u0020of\u0020\u0060var_export\u0028\u0029\u0060\u0020to\u0020dump\u0020the\u0020variables.",
+            "url": "classes/MAKS-Velox-Helper-Dumper.html#property_useVarDump"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Dumper\u003A\u003A\u0024accentColor",
             "name": "accentColor",
@@ -1818,7 +1843,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003Atransform\u0028\u0029",
             "name": "transform",
-            "summary": "Transforms\u0020the\u0020case\/content\u0020of\u0020a\u0020string\u0020by\u0020applying\u0020a\u0020one\u0020or\u0020more\u0020of\u0020the\u002020\u0020available\u0020transformations.",
+            "summary": "Transforms\u0020the\u0020case\/content\u0020of\u0020a\u0020string\u0020by\u0020applying\u0020a\u0020one\u0020or\u0020more\u0020of\u0020the\u002026\u0020available\u0020transformations.",
             "url": "classes/MAKS-Velox-Helper-Misc.html#method_transform"
         },                {
             "fqsen": "\\MAKS\\Velox\\Helper\\Misc\u003A\u003Abacktrace\u0028\u0029",
