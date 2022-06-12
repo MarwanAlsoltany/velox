@@ -4,6 +4,33 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.5.6] - 2022-06-12](https://github.com/MarwanAlsoltany/velox/compare/v1.5.5...v1.5.6)
+
+- Update `Exception` class:
+    - Update `create()` method to fix an issue with returned namespace.
+    - Update `throw()` method to accept `$previous` as `\Throwable` instead of `\Exception`.
+    - Update `handle()` method.
+- Update `Misc` class:
+    - Update `transform()` method to add new cases.
+- Update `Event` class:
+    - Update `listen()` method to add the `$priority` argument.
+    - Refactor `dispatch()` method to allow listeners to attach events when executed.
+- Update `Dumper` class:
+    - Add `VAR_EXPORT_CONVERSIONS` class constant.
+    - Add `VAR_DUMP_CONVERSIONS` class constant.
+    - Update `$styles` static property.
+    - Add `varExport()` method.
+    - Add `verDump()` method.
+    - Refactor `exportExpression()` method and change visibility to `public`.
+    - Refactor `getDumpingBlocks()` method.
+    - Update `dump()` method.
+- Update tests:
+    - Add `EventTest` class.
+    - Add `MiscTest` class.
+    - Add `DumperTest` class.
+
+<br />
+
 ## [[1.5.5] - 2021-12-28](https://github.com/MarwanAlsoltany/velox/compare/v1.5.4...v1.5.5)
 
 - Add `Exception` class.
