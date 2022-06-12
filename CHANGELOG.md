@@ -28,6 +28,9 @@ All notable changes to **VELOX** will be documented in this file.
     - Add `EventTest` class.
     - Add `MiscTest` class.
     - Add `DumperTest` class.
+- Update `composer.json`:
+    - Update required `php` version.
+    - Add required PHP extensions `ext-mbstring`.
 
 <br />
 
