@@ -561,7 +561,7 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 
 
 
-[php-icon]: https://img.shields.io/badge/php-%3D%3C7.4-yellow?style=flat&logo=php
+[php-icon]: https://img.shields.io/badge/php-%3E=7.4-yellow?style=flat&logo=php
 [version-icon]: https://img.shields.io/packagist/v/marwanalsoltany/velox.svg?style=flat&logo=packagist
 [downloads-icon]: https://img.shields.io/packagist/dt/marwanalsoltany/velox.svg?style=flat&logo=packagist
 [license-icon]: https://img.shields.io/badge/license-MIT-red.svg?style=flat&logo=github
@@ -572,8 +572,8 @@ Copyright (c) 2021 Marwan Al-Soltany. All rights reserved.
 [scrutinizer-quality-icon]: https://img.shields.io/scrutinizer/g/MarwanAlsoltany/velox.svg?style=flat&logo=scrutinizer
 [travis-icon]: https://img.shields.io/travis/com/MarwanAlsoltany/velox/master.svg?style=flat&logo=travis
 [styleci-icon]: https://github.styleci.io/repos/356515801/shield?branch=master&style=flat
-[vscode-icon]: https://open.vscode.dev/badges/open-in-vscode.svg
-[replit-icon]: https://repl.it/badge/github/MarwanAlsoltany/velox
+[vscode-icon]: https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20VS%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc
+[replit-icon]: https://img.shields.io/static/v1?logo=replit&label=&message=Run%20on%20Replit&labelColor=0e1525&color=ffffff&logoColor=ffffff
 [tweet-icon]: https://img.shields.io/twitter/url/http/shields.io.svg?style=social
 [github-icon]: https://img.shields.io/github/stars/MarwanAlsoltany/velox.svg?style=social&label=Star
 
