@@ -92,12 +92,21 @@ class Event
      *
      * @param string $event Event name.
      * @param callable $callback A callback to process the event.
+     * @param int $priority [optional] The priority of the listener.
+     *      Higher number means higher priority, numbers can be positive only (negative numbers are treated as zero).
+     *      Zero (`0`) is reserved to add to the end of the stack (lowest priority).
      *
      * @return void
      */
-    public static function listen(string $event, callable $callback): void
+    public static function listen(string $event, callable $callback, int $priority = 0): void
     {
-        static::get($event)->listeners[] = \Closure::fromCallable($callback);
+        $callback = $callback instanceof \Closure ? $callback : \Closure::fromCallable($callback);
+
+        $listeners = &static::get($event)->listeners;
+
+        $priority <= 0
+            ? array_push($listeners, $callback)
+            : array_splice($listeners, $priority * -1, 0, $callback);
     }
 
     /**
