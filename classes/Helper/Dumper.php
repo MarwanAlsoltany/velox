@@ -73,42 +73,40 @@ class Dumper
         '/}\n/' => "]\n",
         // replace multiline empty square brackets with single line square brackets
         '/\[\n\s*\]/' => "[]",
-        // add comma to all line endings except opening brackets
-        '/(?<!\[)\n/' => ",\n",
+        // add comma to all line endings except the ones wrapped in double quotes and the ones preceded by opening brackets
+        '/(?<!\[)\n(?=([^"]*["][^"]*["])*[^"]*$)/' => ",\n",
         // add object type info as comment after array opening bracket
-        '/&?(object\(.+\))(#\d+) \(\d+\) (\[)/' => '$3 // $1 [SPL-ID: $2]',
+        '/&?(object\(.+\))(#\d+) \(\d+\) (\[)/' => '/* $1 [SPL-ID: $2] */ $3',
         // add resource type info as comment in a single line
-        '/&?(resource\(\d+\) ([\w ]+) \((\w+)\))(,)*/' => '"$3"$4 // $1',
+        '/&?(resource\(\d+\) ([\w ]+) \((\w+)\))(,)*/' => '/* $1 */ "$3"$4',
         // remove the type hint and variable length for strings, and arrays at the beginning of line
         '/^&?(?:string|array|\w+)(\(.+\)) /m' => '',
         // remove the type hint and variable length for strings, and arrays after arrow
         '/(=>) &?(?:string|array|\w+)(\(.+\)) ([\["])/' => '$1 $3',
-        // replace bool($var) with $var
-        '/&?bool\((.+?)\)/' => '$1',
-        // replace int($var) with $var
-        '/&?int\((.+?)\)/' => '$1',
-        // replace float($var) with $var
-        '/&?float\((.+?)\)/' => '$1',
+        // replace bool($var), int($var), float($var) with $var
+        '/&?(?:bool|int|float)\((.+?)\)/' => '$1',
         // replace NULL with null
         '/NULL/' => 'null',
-        // replace all single quotes with an escaped single quotes
-        '/(\')/' => '\\\\$1',
         // replace all backslashes with escaped backslashes
         '/(\\\\)/' => '\\\\$1',
+        // replace all single quotes with an escaped single quotes
+        '/(\')/' => '\\\\$1',
         // replace private visibility with a better formatted one
         '/\["(.+?)":"(.+)":(private)\]/' => '["$1":$3($2)]',
         // replace key with visibility in double quotes in square brackets with key in single quotes and add visibility as comment
-        '/\["(.+?)":(.+?)\] (=>) (.+)/' => "'$1' $3 $4 // $2",
+        '/\["(.+?)":(.+?)\] (=>) (.+)/' => "'$1' $3 /* $2 */ $4",
         // replace key in double quotes in square brackets with key in single quotes
         '/\["(.*)"\] (=>)/' => "'$1' $2",
         // replace numeric key in square brackets with key
         '/\[(-?\d+)\] (=>)/' => '$1 $2',
         // replace string opening double quotes with single quotes
-        '/(=>) "/' => "$1 '",
+        '/(=>)([ ]\/\*.*\*\/)? "/' => "$1$2 '",
         // replace string closing double quotes with single quotes
         '/(.+)"(,)( \/\/.*)?\n/' => "$1'$2$3\n",
         // replace double quotes at the beginning of line with single quotes
         '/^"/m' => "'",
+        // combine consequent comments with semicolon
+        '/[ ]\*\/ \/\*[ ]/' => '; ',
         // replace *RECURSION* with __RECURSION__
         '/\*(RECURSION)\*/' => '__$1__',
     ];
@@ -563,20 +561,18 @@ class Dumper
      */
     public static function exportExpression($expression): string
     {
-        $dump = '';
-
         $recursive = strpos(print_r($expression, true), '*RECURSION*') !== false;
 
-        $dump = static::$useVarDump || $recursive
+        $dump = static::$useVarDump == true || $recursive == true
             ? self::varDump($expression)
             : self::varExport($expression);
 
-        $info = !static::$useVarDump && !$recursive ? '' : Misc::interpolate(
+        $info = static::$useVarDump == false && $recursive == true ? Misc::interpolate(
             '// {class} failed to dump the variable.{eol}' .
             '// Reason: var_export() does not handle circular references.{eol}' .
             '// Here is a dump of the variable using var_dump() formatted in a valid PHP array.{eol}{eol}',
             ['class' => static::class, 'eol' => PHP_EOL]
-        );
+        ) : '';
 
         $dump = $info . $dump;
 
