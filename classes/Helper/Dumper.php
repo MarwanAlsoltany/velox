@@ -44,6 +44,7 @@ class Dumper
      * - `traceBlock`
      * - `dumpBlock`
      * - `timeBlock`
+     * - `detailsBlock`
      *
      * Currently set dumper colors can be inject in CSS using the `%accentColor%` and `%contrastColor%` placeholders.
      *
@@ -56,6 +57,7 @@ class Dumper
         'traceBlock'    => "background:#fff;color:%accentColor%;font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;padding:4px 8px;margin-bottom:18px;",
         'dumpBlock'     => "display:table;background:%contrastColor%;color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:18px;padding:18px;margin-bottom:8px;",
         'timeBlock'     => "display:table;background:%accentColor%;color:#fff;font-family:'Fira Code','Ubuntu Mono',Courier,monospace;font-size:12px;font-weight:bold;padding:12px;margin-bottom:8px;",
+        'detailsBlock'  => "background:%accentColor%;color:#fff;font-family:-apple-system,'Fira Sans',Ubuntu,Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;padding:12px;margin-bottom:8px;cursor:pointer;user-select:none;",
     ];
 
     /**
@@ -125,7 +127,9 @@ class Dumper
         foreach ($variable as $var) {
             $trace = sprintf($blocks['traceBlock'], $caller);
             $highlightedDump = self::exportExpressionWithSyntaxHighlighting($var, $trace);
-            $dump .= sprintf($blocks['dumpBlock'], $highlightedDump);
+            $block = sprintf($blocks['dumpBlock'], $highlightedDump);
+
+            $dump .= sprintf($blocks['detailsBlock'], $block);
         }
 
         $time = (microtime(true) - START_TIME) * 1000;
@@ -228,7 +232,7 @@ class Dumper
                                         ])
                                     ->close();
 
-                                $html->div(Dumper::highlightedFile($file, $line), ['class' => 'scrollable']);
+                                $html->div(Dumper::highlightFile($file, $line), ['class' => 'scrollable']);
                             })
                         ->close()
 
@@ -241,7 +245,7 @@ class Dumper
                                     return;
                                 }
 
-                                $html->node(Dumper::tabulatedStacktrace($trace));
+                                $html->node(Dumper::tabulateStacktrace($trace));
                             })
                         ->close()
                     ->close()
@@ -264,7 +268,7 @@ class Dumper
      *
      * @codeCoverageIgnore
      */
-    private static function highlightedFile(string $file, ?int $line = null): string
+    private static function highlightFile(string $file, ?int $line = null): string
     {
         return (new HTML(false))
             ->open('div', ['class' => 'code-highlight'])
@@ -321,7 +325,7 @@ class Dumper
      *
      * @codeCoverageIgnore
      */
-    private static function tabulatedStacktrace(array $trace): string
+    private static function tabulateStacktrace(array $trace): string
     {
         return (new HTML(false))
             ->p('<i>Fields with * can reveal more info. * Hoverable. ** Clickable.</i>')
@@ -382,7 +386,7 @@ class Dumper
                                                     ->open('details', ['class' => 'accordion'])
                                                         ->summary(strval($count), ['class' => 'accordion-summary'])
                                                         ->div(
-                                                            Dumper::highlightedFile($trace['file'] ?? null, $trace['line'] ?? null),
+                                                            Dumper::highlightFile($trace['file'] ?? '', $trace['line'] ?? null),
                                                             ['class' => 'accordion-details']
                                                         )
                                                     ->close()
@@ -416,7 +420,7 @@ class Dumper
             $line2 = "// here is a dump of the variable using print_r()" . PHP_EOL . PHP_EOL . PHP_EOL;
 
             return $line1 . $line2 . print_r($expression, true);
-        }
+    }
 
         // convert array construct to square brackets
         $acToSbPatterns = [
@@ -441,7 +445,7 @@ class Dumper
     }
 
     /**
-     * Dumps an expression using `var_export()` or `print_r()` with syntax highlighting.
+     * Dumps an expression using `var_export()` or `var_dump()` with syntax highlighting.
      *
      * @param mixed $expression
      * @param string|null $phpReplacement `<?php` replacement.
@@ -485,7 +489,7 @@ class Dumper
 
     /**
      * Returns an array containing HTML/ANSI wrapping blocks.
-     * Available blocks are: `traceBlock`, `dumpBlock`, and `timeBlock`.
+     * Available blocks are: `traceBlock`, `dumpBlock`, `timeBlock`, and `detailsBlock`.
      * All this blocks will contain a placeholder for a `*printf()` function to inject content.
      *
      * @return void
@@ -509,6 +513,14 @@ class Dumper
             'timeBlock' => $isCli ? "\n\n// \e[36mSTART_TIME\e[0m + \e[35m%.2f\e[0mms \n\n\n" : HTML::div('START_TIME + %.2fms', [
                 'style' => Misc::interpolate(static::$styles['timeBlock'], $colors, '%%')
             ]),
+            'detailsBlock' => $isCli ? '%s' : (new HTML(false))
+                ->open('details', ['open' => null])
+                    ->summary('Expand/Collapse', [
+                        'style' => Misc::interpolate(static::$styles['detailsBlock'], $colors, '%%')
+                    ])
+                    ->main('%s')
+                ->close()
+            ->return(),
         ];
     }
 
