@@ -61,27 +61,30 @@ class Event
      */
     public static function dispatch(string $event, ?array $arguments = null, ?object $callbackThis = null): void
     {
-        if (static::hasListener($event) === false) {
+        if (static::isDispatched($event) === false) {
             static::get($event)->dispatched = true;
+        }
 
+        if (static::hasListener($event) === false) {
             return;
         }
 
         $callbacks = &static::get($event)->listeners;
-        foreach ($callbacks as $callback) {
-            $parameters = array_merge(array_values($arguments ?? []), [$event]);
 
+        $parameters = array_merge(array_values($arguments ?? []), [$event]);
+
+        // array_walk is used instead of foreach to give the possibility
+        // for the callback to attach new listeners to the current event
+        array_walk($callbacks, function (&$callback) use (&$callbackThis, &$parameters) {
+            /** @var \Closure $callback */
             if ($callbackThis) {
                 $callback->call($callbackThis, ...$parameters);
-                continue;
+
+                return;
             }
 
             $callback(...$parameters);
-        }
-
-        if (static::isDispatched($event) === false) {
-            static::get($event)->dispatched = true;
-        }
+        });
     }
 
     /**
