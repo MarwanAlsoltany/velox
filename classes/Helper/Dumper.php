@@ -24,6 +24,105 @@ use MAKS\Velox\Helper\Misc;
 class Dumper
 {
     /**
+     * Regular expressions to transform `var_export()` result
+     * from array construct (`array()`) to valid square brackets array (`[]`).
+     *
+     * @var array
+     *
+     * @since 1.5.6
+     */
+    protected const VAR_EXPORT_CONVERSIONS = [
+        // replace array construct opening alone
+        '/array \(/' => '[',
+        // replace array construct opening inside a function call
+        '/(\()array\(/' => '$1[',
+        // replace array construct opening for stdClass
+        '/\(object\) array\(/' => '(object)[',
+        // replace array construct closing not part of a string
+        '/\)(\))(?=([^\']*\'[^\']*\')*[^\']*$)/' => ']$1',
+        // replace array construct closing alone
+        '/^([ ]*)\)(,?)$/m' => '$1]$2',
+        // replace array construct closing inside a function call
+        '/(\n)([ ]*)\]\)/' => '$1$2])',
+        // replace array key with nested array
+        '/([ ]*)(\'[^\']+\') => ([\[\'])/' => '$1$2 => $3',
+        // replace array construct/bracket opening after arrow with newline and spaces
+        '/=>[ ]?\n[ ]+(\[|\()/' => '=> $1',
+        // replace any valid php after arrow with a newline and spaces
+        '/=>[ ]?\n[ ]+([a-zA-Z0-9_\x7f-\xff])/' => '=> $1',
+        // replace empty array brackets array with a newline and spaces
+        '/\[[ ]?\n[ ]*\]/' => '[]',
+        // replace NULL with null
+        '/NULL/' => 'null',
+    ];
+
+    /**
+     * Regular expressions to transform `var_dump()` result
+     * from var dump syntax to a valid square brackets array (`[]`).
+     *
+     * @var array
+     *
+     * @since 1.5.6
+     */
+    protected const VAR_DUMP_CONVERSIONS = [
+        // replace unnecessary line breaks after arrow with spaces only
+        '/(=>)\s*(.+)/' => ' $1 $2',
+        // replace opening curly brace with opening square bracket
+        '/{\n/' => "[\n",
+        // replace closing curly brace with closing square bracket
+        '/}\n/' => "]\n",
+        // replace multiline empty square brackets with single line square brackets
+        '/\[\n\s*\]/' => "[]",
+        // add comma to all line endings except opening brackets
+        '/(?<!\[)\n/' => ",\n",
+        // add object type info as comment after array opening bracket
+        '/&?(object\(.+\))(#\d+) \(\d+\) (\[)/' => '$3 // $1 [SPL-ID: $2]',
+        // add resource type info as comment in a single line
+        '/&?(resource\(\d+\) ([\w ]+) \((\w+)\))(,)*/' => '"$3"$4 // $1',
+        // remove the type hint and variable length for strings, and arrays at the beginning of line
+        '/^&?(?:string|array|\w+)(\(.+\)) /m' => '',
+        // remove the type hint and variable length for strings, and arrays after arrow
+        '/(=>) &?(?:string|array|\w+)(\(.+\)) ([\["])/' => '$1 $3',
+        // replace bool($var) with $var
+        '/&?bool\((.+?)\)/' => '$1',
+        // replace int($var) with $var
+        '/&?int\((.+?)\)/' => '$1',
+        // replace float($var) with $var
+        '/&?float\((.+?)\)/' => '$1',
+        // replace NULL with null
+        '/NULL/' => 'null',
+        // replace all single quotes with an escaped single quotes
+        '/(\')/' => '\\\\$1',
+        // replace all backslashes with escaped backslashes
+        '/(\\\\)/' => '\\\\$1',
+        // replace private visibility with a better formatted one
+        '/\["(.+?)":"(.+)":(private)\]/' => '["$1":$3($2)]',
+        // replace key with visibility in double quotes in square brackets with key in single quotes and add visibility as comment
+        '/\["(.+?)":(.+?)\] (=>) (.+)/' => "'$1' $3 $4 // $2",
+        // replace key in double quotes in square brackets with key in single quotes
+        '/\["(.*)"\] (=>)/' => "'$1' $2",
+        // replace numeric key in square brackets with key
+        '/\[(-?\d+)\] (=>)/' => '$1 $2',
+        // replace string opening double quotes with single quotes
+        '/(=>) "/' => "$1 '",
+        // replace string closing double quotes with single quotes
+        '/(.+)"(,)( \/\/.*)?\n/' => "$1'$2$3\n",
+        // replace double quotes at the beginning of line with single quotes
+        '/^"/m' => "'",
+        // replace *RECURSION* with __RECURSION__
+        '/\*(RECURSION)\*/' => '__$1__',
+    ];
+
+    /**
+     * Whether or not to use `var_dump()` instead of `var_export()` to dump the variables.
+     *
+     * NOTE: The dumper will always fall back to `var_dump()` if `var_export()` fails.
+     *
+     * @var bool
+     */
+    public static bool $useVarDump = false;
+
+    /**
      * Accent color of exceptions page and dump block.
      *
      * @var string
@@ -402,46 +501,86 @@ class Dumper
     }
 
     /**
-     * Dumps an expression using `var_export()` or `print_r()`.
+     * Returns dump of the passed variable using `var_export()`.
+     *
+     * @param mixed $variable
+     *
+     * @return string
+     *
+     * @since 1.5.6
+     */
+    protected static function varExport($variable): string
+    {
+        $dump = var_export($variable, true);
+        $dump = preg_replace(
+            array_keys(static::VAR_EXPORT_CONVERSIONS),
+            array_values(static::VAR_EXPORT_CONVERSIONS),
+            $dump
+        );
+        $dump = rtrim(trim($dump), ',');
+
+        // var_export() indents using 3 spaces and messes the indentation up
+        // with odd numbers starting from number 3, this omits spaces
+        // for odd numbers making it indents using 2 spaces instead of 3
+        $dump = preg_replace_callback('/([ ]{3,})/', function ($matches) {
+            $indentation = strlen(strlen($matches[1]) % 2 === 0 ? $matches[1] : substr($matches[1], 0, -1));
+            return str_repeat(' ', $indentation);
+        }, $dump);
+
+        return $dump;
+    }
+
+    /**
+     * Returns dump of the passed variable using `var_dump()`.
+     *
+     * @param mixed $variable
+     *
+     * @return string
+     *
+     * @since 1.5.6
+     */
+    protected static function varDump($variable): string
+    {
+        ob_start();
+        var_dump($variable);
+        $dump = ob_get_clean();
+        $dump = preg_replace(
+            array_keys(static::VAR_DUMP_CONVERSIONS),
+            array_values(static::VAR_DUMP_CONVERSIONS),
+            $dump
+        );
+        $dump = rtrim(trim($dump), ',');
+
+        return $dump;
+    }
+
+    /**
+     * Dumps an expression using `var_export()` or `var_dump()`.
      *
      * @param mixed $expression
      *
      * @return string
      */
-    private static function exportExpression($expression): string
+    public static function exportExpression($expression): string
     {
-        $export = null;
+        $dump = '';
 
-        try {
-            $export = var_export($expression, true);
-        } catch (\Throwable $e) {
-            $class = self::class;
-            $line1 = "// {$class} failed to dump the variable. Reason: {$e->getMessage()}. " . PHP_EOL;
-            $line2 = "// here is a dump of the variable using print_r()" . PHP_EOL . PHP_EOL . PHP_EOL;
+        $recursive = strpos(print_r($expression, true), '*RECURSION*') !== false;
 
-            return $line1 . $line2 . print_r($expression, true);
-    }
+        $dump = static::$useVarDump || $recursive
+            ? self::varDump($expression)
+            : self::varExport($expression);
 
-        // convert array construct to square brackets
-        $acToSbPatterns = [
-            '/(\()array\(/'                         => '$1[',
-            '/\)(\))/'                              => ']$1',
-            '/array \(/'                            => '[',
-            '/\(object\) array\(/'                  => '(object)[',
-            '/^([ ]*)\)(,?)$/m'                     => '$1]$2',
-            '/\[\n\]/'                              => '[]',
-            '/\[[ ]?\n[ ]+\]/'                      => '[]',
-            '/=>[ ]?\n[ ]+(\[|\()/'                 => '=> $1',
-            '/=>[ ]?\n[ ]+([a-zA-Z0-9_\x7f-\xff])/' => '=> $1',
-            '/(\n)([ ]*)\]\)/'                      => '$1$2 ])',
-            '/([ ]*)(\'[^\']+\') => ([\[\'])/'      => '$1$2 => $3',
-        ];
-
-        return preg_replace(
-            array_keys($acToSbPatterns),
-            array_values($acToSbPatterns),
-            $export
+        $info = !static::$useVarDump && !$recursive ? '' : Misc::interpolate(
+            '// {class} failed to dump the variable.{eol}' .
+            '// Reason: var_export() does not handle circular references.{eol}' .
+            '// Here is a dump of the variable using var_dump() formatted in a valid PHP array.{eol}{eol}',
+            ['class' => static::class, 'eol' => PHP_EOL]
         );
+
+        $dump = $info . $dump;
+
+        return $dump;
     }
 
     /**
@@ -503,25 +642,35 @@ class Dumper
             'contrastColor' => static::$contrastColor,
         ];
 
-        return [
-            'traceBlock' => $isCli ? "\n// \e[33;1mTRACE:\e[0m \e[34;46m[%s]\e[0m \n\n" : HTML::div('%s', [
-                'style' => Misc::interpolate(static::$styles['traceBlock'], $colors, '%%')
-            ]),
-            'dumpBlock' => $isCli ? '%s' : HTML::div('%s', [
-                'style' => Misc::interpolate(static::$styles['dumpBlock'], $colors, '%%')
-            ]),
-            'timeBlock' => $isCli ? "\n\n// \e[36mSTART_TIME\e[0m + \e[35m%.2f\e[0mms \n\n\n" : HTML::div('START_TIME + %.2fms', [
-                'style' => Misc::interpolate(static::$styles['timeBlock'], $colors, '%%')
-            ]),
-            'detailsBlock' => $isCli ? '%s' : (new HTML(false))
-                ->open('details', ['open' => null])
-                    ->summary('Expand/Collapse', [
-                        'style' => Misc::interpolate(static::$styles['detailsBlock'], $colors, '%%')
-                    ])
-                    ->main('%s')
-                ->close()
-            ->return(),
-        ];
+        $traceBlock = HTML::div('%s', [
+            'style' => Misc::interpolate(static::$styles['traceBlock'], $colors, '%%')
+        ]);
+
+        $dumpBlock = HTML::div('%s', [
+            'style' => Misc::interpolate(static::$styles['dumpBlock'], $colors, '%%')
+        ]);
+
+        $timeBlock = HTML::div('START_TIME + %.2fms', [
+            'style' => Misc::interpolate(static::$styles['timeBlock'], $colors, '%%')
+        ]);
+
+        $detailsBlock = (new HTML(false))
+            ->open('details', ['open' => null])
+                ->summary('Expand/Collapse', [
+                    'style' => Misc::interpolate(static::$styles['detailsBlock'], $colors, '%%')
+                ])
+                ->main('%s')
+            ->close()
+        ->return();
+
+        if ($isCli) {
+            $traceBlock   = "\n// \e[33;1mTRACE:\e[0m \e[34;46m[%s]\e[0m \n\n";
+            $dumpBlock    = "%s";
+            $timeBlock    = "\n\n// \e[36mSTART_TIME\e[0m + \e[35m%.2f\e[0mms \n\n\n";
+            $detailsBlock = "%s";
+        }
+
+        return compact('traceBlock', 'dumpBlock', 'timeBlock', 'detailsBlock');
     }
 
     /**
