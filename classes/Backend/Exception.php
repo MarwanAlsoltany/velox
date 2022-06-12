@@ -73,7 +73,7 @@ class Exception extends \Exception
     final protected static function create(string $signature): string
     {
         if (class_exists($signature, false)) {
-            return '\\' . $signature;
+            return '\\' . trim($signature, '\\');
         }
 
         $namespace = static::class;
@@ -81,7 +81,7 @@ class Exception extends \Exception
         $class     = $signature = trim($signature, '\\');
 
         if (strpos($signature, ':') !== false) {
-            [$class, $parent] = explode(':', $signature);
+            [$class, $parent] = explode(':', $signature, 2);
 
             if (strpos($class, '\\') !== false) {
                 $namespace = implode('\\', explode('\\', $class, -1));
@@ -133,13 +133,13 @@ class Exception extends \Exception
      *      Note that exception class will be created at runtime if it does not exist.
      * @param string $message [optional] Exception message. An auto-generated exception message will be created using backtrace if this is left empty.
      * @param int|string $code [optional] Exception code. The code will be casted into an integer.
-     * @param \Exception|null $previous [optional] Previous exception.
+     * @param \Throwable|null $previous [optional] Previous exception.
      *
      * @return void
      *
      * @throws \Exception Throws the given or the created exception.
      */
-    public static function throw(string $signature, ?string $message = null, $code = 0, \Exception $previous = null): void
+    public static function throw(string $signature, ?string $message = null, $code = 0, \Throwable $previous = null): void
     {
         $exception = static::create($signature);
 
@@ -150,6 +150,13 @@ class Exception extends \Exception
                 'suffix'  => isset($trace['function']) ? "{$trace['function']}() failed!" : '',
                 'file'    => $trace['file'],
                 'line'    => $trace['line'],
+            ]);
+        }
+
+        if ($previous instanceof \Throwable) {
+            $message = $message . Misc::interpolate(': [{class}] {message}', [
+                'class'   => (new \ReflectionClass($previous))->getShortName(),
+                'message' => $previous->getMessage(),
             ]);
         }
 
@@ -192,7 +199,7 @@ class Exception extends \Exception
             $message = $message . ': ' . $exception->getMessage();
             $code    = $exception->getCode();
 
-            static::throw($signature ?? static::class, $message, $code, $exception);
+            static::throw($signature ?? static::class, $message, $code);
         } finally {
             restore_error_handler();
         }
