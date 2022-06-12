@@ -4,6 +4,14 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.5.7] - 2022-06-12](https://github.com/MarwanAlsoltany/velox/compare/v1.5.6...v1.5.7)
+
+- Update `Dumper` class:
+    - Update `VAR_EXPORT_CONVERSIONS` class constant to fix an issue with multiline strings.
+    - Refactor `exportExpression()` method and fix an issue when `var_export()` fails.
+
+<br />
+
 ## [[1.5.6] - 2022-06-12](https://github.com/MarwanAlsoltany/velox/compare/v1.5.5...v1.5.6)
 
 - Update `Exception` class:
