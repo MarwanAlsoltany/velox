@@ -170,44 +170,42 @@
 &quot;,
     // replace multiline empty square brackets with single line square brackets
     &#039;/\[\n\s*\]/&#039; =&gt; &quot;[]&quot;,
-    // add comma to all line endings except opening brackets
-    &#039;/(?&lt;!\[)\n/&#039; =&gt; &quot;,
+    // add comma to all line endings except the ones wrapped in double quotes and the ones preceded by opening brackets
+    &#039;/(?&lt;!\[)\n(?=([^&quot;]*[&quot;][^&quot;]*[&quot;])*[^&quot;]*$)/&#039; =&gt; &quot;,
 &quot;,
     // add object type info as comment after array opening bracket
-    &#039;/&amp;?(object\(.+\))(#\d+) \(\d+\) (\[)/&#039; =&gt; &#039;$3 // $1 [SPL-ID: $2]&#039;,
+    &#039;/&amp;?(object\(.+\))(#\d+) \(\d+\) (\[)/&#039; =&gt; &#039;/* $1 [SPL-ID: $2] */ $3&#039;,
     // add resource type info as comment in a single line
-    &#039;/&amp;?(resource\(\d+\) ([\w ]+) \((\w+)\))(,)*/&#039; =&gt; &#039;&quot;$3&quot;$4 // $1&#039;,
+    &#039;/&amp;?(resource\(\d+\) ([\w ]+) \((\w+)\))(,)*/&#039; =&gt; &#039;/* $1 */ &quot;$3&quot;$4&#039;,
     // remove the type hint and variable length for strings, and arrays at the beginning of line
     &#039;/^&amp;?(?:string|array|\w+)(\(.+\)) /m&#039; =&gt; &#039;&#039;,
     // remove the type hint and variable length for strings, and arrays after arrow
     &#039;/(=&gt;) &amp;?(?:string|array|\w+)(\(.+\)) ([\[&quot;])/&#039; =&gt; &#039;$1 $3&#039;,
-    // replace bool($var) with $var
-    &#039;/&amp;?bool\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
-    // replace int($var) with $var
-    &#039;/&amp;?int\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
-    // replace float($var) with $var
-    &#039;/&amp;?float\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
+    // replace bool($var), int($var), float($var) with $var
+    &#039;/&amp;?(?:bool|int|float)\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
     // replace NULL with null
     &#039;/NULL/&#039; =&gt; &#039;null&#039;,
-    // replace all single quotes with an escaped single quotes
-    &#039;/(&#039;)/&#039; =&gt; &#039;\\$1&#039;,
     // replace all backslashes with escaped backslashes
     &#039;/(\\)/&#039; =&gt; &#039;\\$1&#039;,
+    // replace all single quotes with an escaped single quotes
+    &#039;/(&#039;)/&#039; =&gt; &#039;\\$1&#039;,
     // replace private visibility with a better formatted one
     &#039;/\[&quot;(.+?)&quot;:&quot;(.+)&quot;:(private)\]/&#039; =&gt; &#039;[&quot;$1&quot;:$3($2)]&#039;,
     // replace key with visibility in double quotes in square brackets with key in single quotes and add visibility as comment
-    &#039;/\[&quot;(.+?)&quot;:(.+?)\] (=&gt;) (.+)/&#039; =&gt; &quot;&#039;$1&#039; $3 $4 // $2&quot;,
+    &#039;/\[&quot;(.+?)&quot;:(.+?)\] (=&gt;) (.+)/&#039; =&gt; &quot;&#039;$1&#039; $3 /* $2 */ $4&quot;,
     // replace key in double quotes in square brackets with key in single quotes
     &#039;/\[&quot;(.*)&quot;\] (=&gt;)/&#039; =&gt; &quot;&#039;$1&#039; $2&quot;,
     // replace numeric key in square brackets with key
     &#039;/\[(-?\d+)\] (=&gt;)/&#039; =&gt; &#039;$1 $2&#039;,
     // replace string opening double quotes with single quotes
-    &#039;/(=&gt;) &quot;/&#039; =&gt; &quot;$1 &#039;&quot;,
+    &#039;/(=&gt;)([ ]\/\*.*\*\/)? &quot;/&#039; =&gt; &quot;$1$2 &#039;&quot;,
     // replace string closing double quotes with single quotes
     &#039;/(.+)&quot;(,)( \/\/.*)?\n/&#039; =&gt; &quot;$1&#039;$2$3
 &quot;,
     // replace double quotes at the beginning of line with single quotes
     &#039;/^&quot;/m&#039; =&gt; &quot;&#039;&quot;,
+    // combine consequent comments with semicolon
+    &#039;/[ ]\*\/ \/\*[ ]/&#039; =&gt; &#039;; &#039;,
     // replace *RECURSION* with __RECURSION__
     &#039;/\*(RECURSION)\*/&#039; =&gt; &#039;__$1__&#039;,
 ]                    </span>
@@ -434,44 +432,42 @@ from var dump syntax to a valid square brackets array (`[]`).</p>
 &quot;,
     // replace multiline empty square brackets with single line square brackets
     &#039;/\[\n\s*\]/&#039; =&gt; &quot;[]&quot;,
-    // add comma to all line endings except opening brackets
-    &#039;/(?&lt;!\[)\n/&#039; =&gt; &quot;,
+    // add comma to all line endings except the ones wrapped in double quotes and the ones preceded by opening brackets
+    &#039;/(?&lt;!\[)\n(?=([^&quot;]*[&quot;][^&quot;]*[&quot;])*[^&quot;]*$)/&#039; =&gt; &quot;,
 &quot;,
     // add object type info as comment after array opening bracket
-    &#039;/&amp;?(object\(.+\))(#\d+) \(\d+\) (\[)/&#039; =&gt; &#039;$3 // $1 [SPL-ID: $2]&#039;,
+    &#039;/&amp;?(object\(.+\))(#\d+) \(\d+\) (\[)/&#039; =&gt; &#039;/* $1 [SPL-ID: $2] */ $3&#039;,
     // add resource type info as comment in a single line
-    &#039;/&amp;?(resource\(\d+\) ([\w ]+) \((\w+)\))(,)*/&#039; =&gt; &#039;&quot;$3&quot;$4 // $1&#039;,
+    &#039;/&amp;?(resource\(\d+\) ([\w ]+) \((\w+)\))(,)*/&#039; =&gt; &#039;/* $1 */ &quot;$3&quot;$4&#039;,
     // remove the type hint and variable length for strings, and arrays at the beginning of line
     &#039;/^&amp;?(?:string|array|\w+)(\(.+\)) /m&#039; =&gt; &#039;&#039;,
     // remove the type hint and variable length for strings, and arrays after arrow
     &#039;/(=&gt;) &amp;?(?:string|array|\w+)(\(.+\)) ([\[&quot;])/&#039; =&gt; &#039;$1 $3&#039;,
-    // replace bool($var) with $var
-    &#039;/&amp;?bool\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
-    // replace int($var) with $var
-    &#039;/&amp;?int\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
-    // replace float($var) with $var
-    &#039;/&amp;?float\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
+    // replace bool($var), int($var), float($var) with $var
+    &#039;/&amp;?(?:bool|int|float)\((.+?)\)/&#039; =&gt; &#039;$1&#039;,
     // replace NULL with null
     &#039;/NULL/&#039; =&gt; &#039;null&#039;,
-    // replace all single quotes with an escaped single quotes
-    &#039;/(&#039;)/&#039; =&gt; &#039;\\$1&#039;,
     // replace all backslashes with escaped backslashes
     &#039;/(\\)/&#039; =&gt; &#039;\\$1&#039;,
+    // replace all single quotes with an escaped single quotes
+    &#039;/(&#039;)/&#039; =&gt; &#039;\\$1&#039;,
     // replace private visibility with a better formatted one
     &#039;/\[&quot;(.+?)&quot;:&quot;(.+)&quot;:(private)\]/&#039; =&gt; &#039;[&quot;$1&quot;:$3($2)]&#039;,
     // replace key with visibility in double quotes in square brackets with key in single quotes and add visibility as comment
-    &#039;/\[&quot;(.+?)&quot;:(.+?)\] (=&gt;) (.+)/&#039; =&gt; &quot;&#039;$1&#039; $3 $4 // $2&quot;,
+    &#039;/\[&quot;(.+?)&quot;:(.+?)\] (=&gt;) (.+)/&#039; =&gt; &quot;&#039;$1&#039; $3 /* $2 */ $4&quot;,
     // replace key in double quotes in square brackets with key in single quotes
     &#039;/\[&quot;(.*)&quot;\] (=&gt;)/&#039; =&gt; &quot;&#039;$1&#039; $2&quot;,
     // replace numeric key in square brackets with key
     &#039;/\[(-?\d+)\] (=&gt;)/&#039; =&gt; &#039;$1 $2&#039;,
     // replace string opening double quotes with single quotes
-    &#039;/(=&gt;) &quot;/&#039; =&gt; &quot;$1 &#039;&quot;,
+    &#039;/(=&gt;)([ ]\/\*.*\*\/)? &quot;/&#039; =&gt; &quot;$1$2 &#039;&quot;,
     // replace string closing double quotes with single quotes
     &#039;/(.+)&quot;(,)( \/\/.*)?\n/&#039; =&gt; &quot;$1&#039;$2$3
 &quot;,
     // replace double quotes at the beginning of line with single quotes
     &#039;/^&quot;/m&#039; =&gt; &quot;&#039;&quot;,
+    // combine consequent comments with semicolon
+    &#039;/[ ]\*\/ \/\*[ ]/&#039; =&gt; &#039;; &#039;,
     // replace *RECURSION* with __RECURSION__
     &#039;/\*(RECURSION)\*/&#039; =&gt; &#039;__$1__&#039;,
 ]</span>
@@ -587,7 +583,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">128</span>
 
     </aside>
 
@@ -620,7 +616,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">137</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 
     </aside>
 
@@ -653,7 +649,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">154</span>
+    <span class="phpdocumentor-element-found-in__line">152</span>
 
     </aside>
 
@@ -720,7 +716,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">167</span>
+    <span class="phpdocumentor-element-found-in__line">165</span>
 
     </aside>
 
@@ -753,7 +749,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">180</span>
+    <span class="phpdocumentor-element-found-in__line">178</span>
 
     </aside>
 
@@ -786,7 +782,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">123</span>
+    <span class="phpdocumentor-element-found-in__line">121</span>
 
     </aside>
 
@@ -821,7 +817,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">193</span>
+    <span class="phpdocumentor-element-found-in__line">191</span>
 
     </aside>
 
@@ -858,7 +854,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">205</span>
+    <span class="phpdocumentor-element-found-in__line">203</span>
 
     </aside>
 
@@ -916,7 +912,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">219</span>
+    <span class="phpdocumentor-element-found-in__line">217</span>
 
     </aside>
 
@@ -961,7 +957,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">262</span>
+    <span class="phpdocumentor-element-found-in__line">260</span>
 
     </aside>
 
@@ -1019,7 +1015,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">564</span>
+    <span class="phpdocumentor-element-found-in__line">562</span>
 
     </aside>
 
@@ -1062,7 +1058,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">542</span>
+    <span class="phpdocumentor-element-found-in__line">540</span>
 
     </aside>
 
@@ -1119,7 +1115,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">512</span>
+    <span class="phpdocumentor-element-found-in__line">510</span>
 
     </aside>
 
@@ -1176,7 +1172,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">594</span>
+    <span class="phpdocumentor-element-found-in__line">590</span>
 
     </aside>
 
@@ -1228,7 +1224,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">706</span>
+    <span class="phpdocumentor-element-found-in__line">702</span>
 
     </aside>
 
@@ -1274,7 +1270,7 @@ from array construct (`array()`) to valid square brackets array (`[]`).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">636</span>
+    <span class="phpdocumentor-element-found-in__line">632</span>
 
     </aside>
 
@@ -1310,7 +1306,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">681</span>
+    <span class="phpdocumentor-element-found-in__line">677</span>
 
     </aside>
 
@@ -1343,7 +1339,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">370</span>
+    <span class="phpdocumentor-element-found-in__line">368</span>
 
     </aside>
 
@@ -1420,7 +1416,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">787</span>
+    <span class="phpdocumentor-element-found-in__line">783</span>
 
     </aside>
 
@@ -1453,7 +1449,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">763</span>
+    <span class="phpdocumentor-element-found-in__line">759</span>
 
     </aside>
 
@@ -1499,7 +1495,7 @@ All this blocks will contain a placeholder for a <code class="prettyprint">*prin
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="classes/Helper/Dumper.php"><a href="files/classes-helper-dumper.html"><abbr title="classes/Helper/Dumper.php">Dumper.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">427</span>
+    <span class="phpdocumentor-element-found-in__line">425</span>
 
     </aside>
 
