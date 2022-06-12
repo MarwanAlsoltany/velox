@@ -234,22 +234,27 @@ final class Misc
     }
 
     /**
-     * Transforms the case/content of a string by applying a one or more of the 20 available transformations.
+     * Transforms the case/content of a string by applying a one or more of the 26 available transformations.
      * The transformations are applied in the order they are specified.
      * Available transformations:
-     * - `clean`: discards all meta-characters (@#$%&^*+=-~:;,.!?(){}[]|/\\'"\`), separates concatenated words [`ExampleString-num.1`, `Example String num 1`].
+     * - `clean`: discards all punctuations and meta-characters (@#%&$^*+-=_~:;,.?!(){}[]|/\\'"\`), separates concatenated words [`ExampleString-num.1`, `Example String num 1`].
      * - `alnum`: removes every thing other that english letters, numbers and spaces. [`Example@123` -> `Example123`]
      * - `alpha`: removes every thing other that english letters. [`Example123` -> `Example`]
      * - `numeric`: removes every thing other that numbers. [`Example123` -> `123`]
      * - `slug`: lowercase, all letters to their A-Z representation (transliteration), spaces to dashes, no special characters (URL-safe) [`Example (String)` -> `example-string`].
      * - `title`: titlecase [`example string` -> `Example String`].
+     * - `sentence`: lowercase, first letter uppercase [`exampleString` -> `Example string`].
+     * - `lower`: lowercase [`Example String` -> `example string`].
+     * - `upper`: uppercase [`Example String` -> `EXAMPLE STRING`].
      * - `pascal`: titlecase, no spaces [`example string` -> `ExampleString`].
      * - `camel`: titlecase, no spaces, first letter lowercase [`example string` -> `exampleString`].
      * - `constant`: uppercase, spaces to underscores [`Example String` -> `EXAMPLE_STRING`].
+     * - `cobol`: uppercase, spaces to dashes [`example string` -> `EXAMPLE-STRING`].
+     * - `train`: titlecase, spaces to dashes [`example string` -> `Example-String`].
      * - `snake`: lowercase, spaces to underscores [`Example String` -> `example_string`].
      * - `kebab`: lowercase, spaces to dashes [`Example String` -> `example-string`].
      * - `dot`: lowercase, spaces to dots [`Example String` -> `example.string`].
-     * - `spaceless`: removes spaces [`Example String` -> `ExampleString`].
+     * - `spaceless`: removes any whitespaces [`Example String` -> `ExampleString`].
      * - A built-in function name from this list can also be used: `strtolower`, `strtoupper`, `lcfirst`, `ucfirst`, `ucwords`, `trim`, `ltrim`, `rtrim`.
      *
      * NOTE: Unknown transformations will be ignored silently.
@@ -264,26 +269,30 @@ final class Misc
      */
     public static function transform(string $subject, string ...$transformations): string
     {
-        $specialMetaChars = '/[@\#\$%&\^\*\+\=\-~\:;,\.\!\?\(\)\{\}\[\]\|\/\\\\\'"`]+/';
         $transliterations = 'Any-Latin;Latin-ASCII;NFD;NFC;Lower();[:NonSpacing Mark:] Remove;[:Punctuation:] Remove;[:Other:] Remove;[\u0080-\u7fff] Remove;';
 
         static $cases = null;
 
         if ($cases === null) {
             $cases = [
-                'clean'     => fn ($string) => static::transform(preg_replace([$specialMetaChars, '/(?<!^)[A-Z]/', '/[ ]+/'], [' ', ' $0', ' '], $string), 'trim'),
+                'clean'     => fn ($string) => static::transform(preg_replace(['/[^\p{L}\p{N}\s]+/', '/(?<!^)[A-Z]/', '/[\s]+/'], [' ', ' $0', ' '], $string), 'trim'),
                 'alnum'     => fn ($string) => static::transform(preg_replace('/[^a-zA-Z0-9 ]+/', '', $string), 'trim'),
                 'alpha'     => fn ($string) => static::transform(preg_replace('/[^a-zA-Z]+/', '', $string), 'trim'),
                 'numeric'   => fn ($string) => static::transform(preg_replace('/[^0-9]+/', '', $string), 'trim'),
                 'slug'      => fn ($string) => static::transform(transliterator_transliterate($transliterations, preg_replace('/-+/', ' ', $string)), 'kebab'),
+                'sentence'  => fn ($string) => static::transform($string, 'clean', 'lower', 'ucfirst'),
                 'title'     => fn ($string) => static::transform($string, 'clean', 'ucwords'),
                 'pascal'    => fn ($string) => static::transform($string, 'title', 'spaceless'),
                 'camel'     => fn ($string) => static::transform($string, 'pascal', 'lcfirst'),
-                'constant'  => fn ($string) => static::transform($string, 'snake', 'strtoupper'),
-                'snake'     => fn ($string) => strtr(static::transform($string, 'clean', 'strtolower'), [' ' => '_']),
-                'kebab'     => fn ($string) => strtr(static::transform($string, 'clean', 'strtolower'), [' ' => '-']),
-                'dot'       => fn ($string) => strtr(static::transform($string, 'clean', 'strtolower'), [' ' => '.']),
-                'spaceless' => fn ($string) => strtr($string, [' ' => '']),
+                'constant'  => fn ($string) => static::transform($string, 'snake', 'upper'),
+                'cobol'     => fn ($string) => strtr(static::transform($string, 'constant'), ['_' => '-']),
+                'train'     => fn ($string) => strtr(static::transform($string, 'title'), [' ' => '-']),
+                'snake'     => fn ($string) => strtr(static::transform($string, 'clean', 'lower'), [' ' => '_']),
+                'kebab'     => fn ($string) => strtr(static::transform($string, 'clean', 'lower'), [' ' => '-']),
+                'dot'       => fn ($string) => strtr(static::transform($string, 'clean', 'lower'), [' ' => '.']),
+                'spaceless' => fn ($string) => preg_replace('/[\s]+/', '', $string),
+                'lower'     => fn ($string) => mb_strtolower($string),
+                'upper'     => fn ($string) => mb_strtoupper($string),
                 '*'         => ['strtolower', 'strtoupper', 'lcfirst', 'ucfirst', 'ucwords', 'trim', 'ltrim', 'rtrim'],
             ];
         }
