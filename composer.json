@@ -31,7 +31,8 @@
         "issues": "https://github.com/MarwanAlsoltany/velox/issues"
     },
     "require": {
-        "php" : "^7.4|^8.0",
+        "php": ">=7.4",
+        "ext-mbstring": "*",
         "ext-json": "*",
         "ext-dom": "*",
         "ext-intl": "*",
@@ -59,7 +60,7 @@
     },
     "scripts": {
         "test": "phpunit",
-        "document": "[ -f ./phpDocumentor.phar ] && php phpDocumentor.phar",
+        "document": "([ -f ./phpDocumentor.phar ] && php phpDocumentor.phar) || echo phpDocumentor.phar is not available in CWD. Download using [php -r \"copy('https://phpdoc.org/phpDocumentor.phar', 'phpDocumentorNew.phar');\"]",
         "build": [
             "@test",
             "@document"
