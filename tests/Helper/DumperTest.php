@@ -51,7 +51,16 @@ class DumperTest extends TestCase
 
     public function testDumperDumpMethodFailure()
     {
-        $this->expectOutputRegex('/(here is a dump of the variable using print_r\(\))/');
+        $this->expectOutputRegex('/(failed to dump the variable)/');
+
+        $this->dumper->dump($GLOBALS);
+    }
+
+    public function testDumperDumpMethodWithVarDump()
+    {
+        Dumper::$useVarDump = true;
+
+        $this->expectOutputRegex('/(__RECURSION__)/');
 
         $this->dumper->dump($GLOBALS);
     }
