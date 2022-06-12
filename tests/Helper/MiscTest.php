@@ -151,14 +151,19 @@ class MiscTest extends TestCase
         $alpha      = $this->misc->transform('Test123', 'alpha');
         $numeric    = $this->misc->transform('Test123', 'numeric');
         $slug       = $this->misc->transform('Test+String', 'slug');
+        $sentence   = $this->misc->transform('Test+String', 'sentence');
         $title      = $this->misc->transform('test string', 'title');
         $pascal     = $this->misc->transform('test string', 'pascal');
         $camel      = $this->misc->transform('test string', 'camel');
         $constant   = $this->misc->transform('Test String', 'constant');
+        $cobol      = $this->misc->transform('Test String', 'cobol');
+        $train      = $this->misc->transform('Test String', 'train');
         $snake      = $this->misc->transform('Test String', 'snake');
         $kebab      = $this->misc->transform('Test String', 'kebab');
         $dot        = $this->misc->transform('Test String', 'dot');
         $spaceless  = $this->misc->transform('Test String', 'spaceless');
+        $lower      = $this->misc->transform('Test String', 'lower');
+        $upper      = $this->misc->transform('Test String', 'upper');
         $strtolower = $this->misc->transform('Test String', 'strtolower');
 
         $this->assertEquals('Test String num 1', $clean);
@@ -166,14 +171,19 @@ class MiscTest extends TestCase
         $this->assertEquals('Test', $alpha);
         $this->assertEquals('123', $numeric);
         $this->assertEquals('test-string', $slug);
+        $this->assertEquals('Test string', $sentence);
         $this->assertEquals('Test String', $title);
         $this->assertEquals('TestString', $pascal);
         $this->assertEquals('testString', $camel);
         $this->assertEquals('TEST_STRING', $constant);
+        $this->assertEquals('TEST-STRING', $cobol);
+        $this->assertEquals('Test-String', $train);
         $this->assertEquals('test_string', $snake);
         $this->assertEquals('test-string', $kebab);
         $this->assertEquals('test.string', $dot);
         $this->assertEquals('TestString', $spaceless);
+        $this->assertEquals('test string', $lower);
+        $this->assertEquals('TEST STRING', $upper);
         $this->assertEquals('test string', $strtolower);
     }
 
