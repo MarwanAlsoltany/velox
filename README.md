@@ -92,7 +92,7 @@ Do you feel like reading? Check out the full API on the documentation website on
 composer create-project marwanalsoltany/velox my-velox-app
 ```
 
-![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *You may need to add the `--stability=dev` depending on the version/branch. You may also want to add `--no-dev` flag to not install development dependencies.*
+![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+++) **Note:** *You may need to add the `--stability=dev` depending on the version/branch. You may also want to add `--no-dev` flag to not install development dependencies.*
 
 #### Using Git:
 
@@ -100,13 +100,13 @@ composer create-project marwanalsoltany/velox my-velox-app
 git clone https://github.com/MarwanAlsoltany/velox.git my-velox-app
 ```
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *If you don't want to use any other third party packages. Installing VELOX using Git is sufficient.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+++) **Fact:** *If you don't want to use any other third party packages. Installing VELOX using Git is sufficient.*
 
 #### Using Source:
 
 Download [VELOX](https://github.com/MarwanAlsoltany/velox/releases) as a `.zip` or `.tar.gz` and extract it in your server web root directory.
 
-![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *If you want to test out VELOX quickly and you don't have any web server available, use whatever installing method and run `php bin/app-serve` from inside VELOX directory. This command will spin up a development web server on `localhost:8000` (Note that you need to have at least PHP installed on your system).*
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+++) **Advice:** *If you want to test out VELOX quickly and you don't have any web server available, use whatever installing method and run `php bin/app-serve` from inside VELOX directory. This command will spin up a development web server on `localhost:8000` (Note that you need to have at least PHP installed on your system).*
 
 
 ---
@@ -146,7 +146,7 @@ VELOX has a very special use-case, simple websites, and here is meant really sim
 | [`public`](./public) | This is where you should put your `index.php` with a symlink for static assets (active theme `assets/` directory for example) for maximum security. You can freely delete this directory if you want to. |
 | [`vendor`](./vendor) | This is where your Composer dependencies will be placed. You can freely delete this directory if you don't want to use Composer. |
 
-![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Most files listed in these directories are documented. Take a look through them to learn more about VELOX.*
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+++) **Advice:** *Most files listed in these directories are documented. Take a look through them to learn more about VELOX.*
 
 ### App Entry
 
@@ -170,7 +170,7 @@ Additionally, you can add middlewares using `Router::middleware()` and/or set up
 Alternatively, you can extract the *"routes registration part"* in its own file and let VELOX know about it using [`bootstrap/additional.php`](./bootstrap/additional.php).
 Starting from `v1.2.0` VELOX does that by default, the file [`includes/routes/web.php`](./includes/routes/web.php) is where you should register your routes. The router will also start automatically if not started explicitly.
 
-![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *In order for VELOX to work correctly and safely, you need to redirect all requests to application entry point (`index.php`) and block all requests to other PHP files on the server (take a look at [`.htaccess.dist`](./.htaccess.dist) to get started with Apache).*
+![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+++) **Note:** *In order for VELOX to work correctly and safely, you need to redirect all requests to application entry point (`index.php`) and block all requests to other PHP files on the server (take a look at [`.htaccess.dist`](./.htaccess.dist) to get started with Apache).*
 
 
 ---
@@ -192,7 +192,7 @@ The following table lists all config files that come shipped with VELOX.
 | [`data.php`](./config/data.php) | This config file can be used to provide any arbitrary data, which then will get injected in the `Data::class`. |
 | [`cli.php`](./config/cli.php) | This config file can be used to enable/disable the commands or change their arguments. |
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own config files too, all you need to do is to create a new file under `/config` and add your configuration to it. VELOX will know about this file and load it in the application. You can access your config via `Config::get('filename.whateverKeyYouWrote')`.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+++) **Fact:** *You can freely add your own config files too, all you need to do is to create a new file under `/config` and add your configuration to it. VELOX will know about this file and load it in the application. You can access your config via `Config::get('filename.whateverKeyYouWrote')`.*
 
 
 ---
@@ -232,9 +232,9 @@ The following table lists all available classes with their description:
 | [`Helper\Misc`](./classes/Helper/Misc.php) | A class that serves as a holder for various miscellaneous utility function. |
 
 
-![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+) **Note:** *This all what the VELOX package provides out of the box.*
+![#ff6347](https://via.placeholder.com/11/f03c15/000000?text=+++) **Note:** *This all what the VELOX package provides out of the box.*
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *The `App`, `Event`, `Config`, `Router`, `Globals`, `Session`, `Database`, `Auth`, `Data`, `View`, `HTML`, `Path` classes are aliased on the root namespace for ease-of-use.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+++) **Fact:** *The `App`, `Event`, `Config`, `Router`, `Globals`, `Session`, `Database`, `Auth`, `Data`, `View`, `HTML`, `Path` classes are aliased on the root namespace for ease-of-use.*
 
 
 ---
@@ -267,7 +267,7 @@ The following table lists all available functions and to which class/group they 
 | HTML Helpers | `he()`, `hd()`, `hse()`, `hsd()`, `st()`, `nb()` |
 
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *You can freely add your own functions too, all you need to do is to create a new file under `/functions` and add your functions to it. VELOX will know about this file and load it in the application.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+++) **Fact:** *You can freely add your own functions too, all you need to do is to create a new file under `/functions` and add your functions to it. VELOX will know about this file and load it in the application.*
 
 
 ---
@@ -306,7 +306,7 @@ VELOX is built around the idea of <b><u><i>themes</i></u></b>, a theme is divide
 
 You can customize the behavior of themes using the [`config/theme.php`](./config/theme.php) file. Here you can set the active theme with the `active` key. Themes can inherit from each other by setting parent(s) with the `parent` key. You can also change the theme directory structure if you wish to using the `paths` key. Other configurations (caching for example) that worth taking a look at which have to do with themes can be found in the [`config/view.php`](./config/view.php) file.
 
-![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *You can take a look at the provided [`velox`](./themes/velox) theme to see how all stuff work together in practice.*
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+++) **Advice:** *You can take a look at the provided [`velox`](./themes/velox) theme to see how all stuff work together in practice.*
 
 ### Examples:
 
@@ -442,11 +442,11 @@ class PersonsController extends Controller
 }
 ```
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *CRUD operations (namely: `index`, `create`, `store`, `show`, `edit`, `update`, `destroy`) are registered and configured by default. To register your own routes automatically, use the `@route("<path>", {<http-verb>, ...})` annotation. See `Controller::registerRoutes()` DocBlock to learn more.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+++) **Fact:** *CRUD operations (namely: `index`, `create`, `store`, `show`, `edit`, `update`, `destroy`) are registered and configured by default. To register your own routes automatically, use the `@route("<path>", {<http-verb>, ...})` annotation. See `Controller::registerRoutes()` DocBlock to learn more.*
 
-![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+) **Fact:** *To make the model available as property for the controller (`$this->model`), use `Controller::associateModel()`. See `Controller::associateModel()` DocBlock to learn more.*
+![#1e90ff](https://via.placeholder.com/11/1e90ff/000000?text=+++) **Fact:** *To make the model available as property for the controller (`$this->model`), use `Controller::associateModel()`. See `Controller::associateModel()` DocBlock to learn more.*
 
-![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *If in production mode, as a shortcut, throwing an exception with a code matching `{global.errorPages.CODE}` config value will render the corresponding error page. For example, when throwing `new Exception('Not found', 404)` form the controller, the configured `404` error page will be rendered and will be passed the exception message. If the page is not configured, the `500` error page will be rendered as a fallback instead.*
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+++) **Advice:** *If in production mode, as a shortcut, throwing an exception with a code matching `{global.errorPages.CODE}` config value will render the corresponding error page. For example, when throwing `new Exception('Not found', 404)` form the controller, the configured `404` error page will be rendered and will be passed the exception message. If the page is not configured, the `500` error page will be rendered as a fallback instead.*
 
 ### Using the Model in a View:
 
@@ -470,7 +470,7 @@ class PersonsController extends Controller
 {! @endblock !}
 ```
 
-![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Check out the [`Person`](./app/Model/Person.php) model and the [`PersonsController`](./app/Controller/PersonsController.php) to see a realistic example.*
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+++) **Advice:** *Check out the [`Person`](./app/Model/Person.php) model and the [`PersonsController`](./app/Controller/PersonsController.php) to see a realistic example.*
 
 
 ---
@@ -496,7 +496,7 @@ The following table lists all available tags and what they do:
 | <code>{{{&nbsp;$var&nbsp;}}}</code> | Print a variable without escaping. Content can be a variable or any PHP expression that can be casted to a string. |
 | <code>{#&nbsp;This&nbsp;is&nbsp;a&nbsp;comment&nbsp;#}</code> | Comment something. This will be a PHP comment (will not be available in final HTML). |
 
-![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Take a look at [`persons`](themes/velox/pages/persons) views of [`PersonsController`](./app/Controller/PersonsController.php) in VELOX theme for a realistic example.*
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+++) **Advice:** *Take a look at [`persons`](themes/velox/pages/persons) views of [`PersonsController`](./app/Controller/PersonsController.php) in VELOX theme for a realistic example.*
 
 
 ---
@@ -539,7 +539,7 @@ $user = Auth::user();
 Auth::basic(['username' => 'password']);
 ```
 
-![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+) **Advice:** *Check out the [`UsersController`](./app/Controller/UsersController.php) to see a realistic example.*
+![#32cd32](https://via.placeholder.com/11/32cd32/000000?text=+++) **Advice:** *Check out the [`UsersController`](./app/Controller/UsersController.php) to see a realistic example.*
 
 
 ---
