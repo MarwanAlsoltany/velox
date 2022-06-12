@@ -9,7 +9,7 @@ use MAKS\Velox\Backend\Event;
 
 class EventTest extends TestCase
 {
-    private Event $config;
+    private Event $event;
 
 
     public function setUp(): void
@@ -41,7 +41,7 @@ class EventTest extends TestCase
 
             $test->assertIsArray($events);
             $test->assertEquals('param', $param);
-        });
+        }, 100);
 
         $this->event->dispatch('test.event.0', ['no', 'one', 'will', 'listen', 'for', 'this']);
         $this->event->dispatch('test.event.1', ['param']);
