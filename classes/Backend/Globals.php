@@ -112,6 +112,12 @@ final class Globals
             // otherwise we will be referencing an array that is not referencing the actual $_SESSION superglobal.
             Session::start();
 
+            // this is done to initialize the superglobals
+            // see https://www.php.net/manual/en/ini.core.php#ini.auto-globals-jit
+            is_array($_REQUEST);
+            is_array($_SERVER);
+            is_array($_ENV);
+
             foreach (self::GLOBALS as $global) {
                 global $$global;
                 self::$$global = isset($$global) ? self::$$global = &$$global : [];
