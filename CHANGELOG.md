@@ -4,6 +4,32 @@ All notable changes to **VELOX** will be documented in this file.
 
 <br />
 
+## [[1.5.8] - 2022-08-19](https://github.com/MarwanAlsoltany/velox/compare/v1.5.7...v1.5.8)
+
+- Update `App` class:
+    - Make constructor final.
+    - Update `instance()` method.
+    - Update `terminate()` method.
+    - Update `shutdown()` method.
+- Update `Globals` class:
+    - Update `initialize()` method.
+- Update `Database` class:
+    - Add `#[\ReturnTypeWillChange]` attribute where necessary.
+- Update `Element` class:
+    - Add `#[\ReturnTypeWillChange]` attribute where necessary.
+- Update `Dumper` class:
+    - Update `VAR_DUMP_CONVERSIONS` class constant.
+    - Update `dump()` method.
+    - Update `varExport()` method.
+    - Update `varDump()` method.
+- Update `autoload.php`:
+    - Add `$_VELOX` superglobal.
+- PHP `8.1` support:
+- Update tests:
+    - Update `DumperTest` class.
+
+<br />
+
 ## [[1.5.7] - 2022-06-12](https://github.com/MarwanAlsoltany/velox/compare/v1.5.6...v1.5.7)
 
 - Update `Dumper` class:
