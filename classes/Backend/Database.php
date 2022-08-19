@@ -130,6 +130,7 @@ class Database extends \PDO
     {
         $statement = new class () extends \PDOStatement {
             // Makes method chaining a little bit more convenient.
+            #[\ReturnTypeWillChange]
             public function execute($params = null)
             {
                 parent::execute($params);
@@ -137,6 +138,7 @@ class Database extends \PDO
                 return $this;
             }
             // Catches the debug dump instead of printing it out directly.
+            #[\ReturnTypeWillChange]
             public function debugDumpParams()
             {
                 ob_start();
@@ -157,6 +159,7 @@ class Database extends \PDO
      * Adds caching capabilities for prepared statement.
      * {@inheritDoc}
      */
+    #[\ReturnTypeWillChange]
     public function prepare($query, $options = [])
     {
         $hash = md5($query);
@@ -260,30 +263,37 @@ class Database extends \PDO
             {
                 // constructor arguments are not used
             }
+            #[\ReturnTypeWillChange]
             public function exec($statement)
             {
                 static::fail();
             }
+            #[\ReturnTypeWillChange]
             public function prepare($query, $options = [])
             {
                 static::fail();
             }
+            #[\ReturnTypeWillChange]
             public function query($query, $fetchMode = null, ...$fetchModeArgs)
             {
                 static::fail();
             }
+            #[\ReturnTypeWillChange]
             public function beginTransaction()
             {
                 static::fail();
             }
+            #[\ReturnTypeWillChange]
             public function commit()
             {
                 static::fail();
             }
+            #[\ReturnTypeWillChange]
             public function rollBack()
             {
                 static::fail();
             }
+
             private static function fail(): void
             {
                 Exception::throw(
