@@ -130,7 +130,7 @@ $exceptionHandler = function (\Throwable $exception) {
 // shutdown function, makes errors and exceptions handlers available at shutdown
 $shutdownFunction = function () use ($errorHandler, $exceptionHandler) {
     // die only if no shutdown is allowed
-    if (\MAKS\Velox\Helper\Misc::getArrayValueByKey($GLOBALS, '_VELOX.TERMINATE', false)) {
+    if (\MAKS\Velox\Helper\Misc::getArrayValueByKey($GLOBALS['_VELOX'], 'TERMINATE', false)) {
         die;
     }
 
@@ -139,7 +139,7 @@ $shutdownFunction = function () use ($errorHandler, $exceptionHandler) {
     \MAKS\Velox\App::extendStatic('handleException', $exceptionHandler);
 
     // execute the shutdown event only if it is not already executed
-    if (\MAKS\Velox\Helper\Misc::getArrayValueByKey($GLOBALS, '_VELOX.SHUTDOWN', true)) {
+    if (\MAKS\Velox\Helper\Misc::getArrayValueByKey($GLOBALS['_VELOX'], 'SHUTDOWN', true)) {
         \MAKS\Velox\App::shutdown();
     }
 };
@@ -157,13 +157,15 @@ date_default_timezone_set(\MAKS\Velox\Backend\Config::get('global.timezone'));
 
 
 // clean up
-unset($paths);
-unset($namespaces);
-unset($aliases);
-unset($loader);
-unset($exceptionHandler);
-unset($errorHandler);
-unset($shutdownFunction);
+unset(
+    $paths,
+    $namespaces,
+    $aliases,
+    $loader,
+    $exceptionHandler,
+    $errorHandler,
+    $shutdownFunction,
+);
 
 
 
