@@ -51,17 +51,40 @@ class DumperTest extends TestCase
 
     public function testDumperDumpMethodFailure()
     {
+        $array = $this->getSelfReferencingArray();
+
         $this->expectOutputRegex('/(failed to dump the variable)/');
 
-        $this->dumper->dump($GLOBALS);
+        $this->dumper->dump($array);
     }
 
     public function testDumperDumpMethodWithVarDump()
     {
+        $array = $this->getSelfReferencingArray();
+
         Dumper::$useVarDump = true;
 
         $this->expectOutputRegex('/(__RECURSION__)/');
 
-        $this->dumper->dump($GLOBALS);
+        $this->dumper->dump($array);
+    }
+
+
+    private function getSelfReferencingArray(): array
+    {
+        $array = [
+            'null'    => null,
+            'true'    => true,
+            'false'   => false,
+            'string'  => 'string',
+            'integer' => 1234567890,
+            'array'   => [],
+            'object'  => (object)[],
+        ];
+
+        $array['array'] = &$array;
+        $array['object']->self = &$array['object'];
+
+        return $array;
     }
 }
