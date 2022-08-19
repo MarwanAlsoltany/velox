@@ -83,8 +83,10 @@ class Dumper
         '/^&?(?:string|array|\w+)(\(.+\)) /m' => '',
         // remove the type hint and variable length for strings, and arrays after arrow
         '/(=>) &?(?:string|array|\w+)(\(.+\)) ([\["])/' => '$1 $3',
-        // replace bool($var), int($var), float($var) with $var
-        '/&?(?:bool|int|float)\((.+?)\)/' => '$1',
+        // replace bool($var), int($var), float($var), enum($var) with $var
+        '/&?(?:bool|int|float|enum)\((.+?)\)/' => '$1',
+        // replace uninitialized($var) with empty __NONE__ and add type info as comment
+        '/(uninitialized\(.+\))/' => '/* $1 */ __NONE__',
         // replace NULL with null
         '/NULL/' => 'null',
         // replace all backslashes with escaped backslashes
@@ -307,7 +309,7 @@ class Dumper
                             ->open('div', ['class' => 'message'])
                                 ->h3($name)
                                 // we need to decode and encode because some messages come escaped
-                                ->p(htmlspecialchars(htmlspecialchars_decode((string)$message), ENT_QUOTES, 'UTF-8'))
+                                ->p(nl2br(htmlspecialchars(htmlspecialchars_decode((string)$message), ENT_QUOTES, 'UTF-8')))
                             ->close()
                         ->close()
 
@@ -515,7 +517,7 @@ class Dumper
             array_values(static::VAR_EXPORT_CONVERSIONS),
             $dump
         );
-        $dump = rtrim(trim($dump), ',');
+        $dump = rtrim(trim(strval($dump)), ',');
 
         // var_export() indents using 3 spaces and messes the indentation up
         // with odd numbers starting from number 3, this omits spaces
@@ -547,7 +549,7 @@ class Dumper
             array_values(static::VAR_DUMP_CONVERSIONS),
             $dump
         );
-        $dump = rtrim(trim($dump), ',');
+        $dump = rtrim(trim(strval($dump)), ',');
 
         return $dump;
     }
