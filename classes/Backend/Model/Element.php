@@ -70,11 +70,7 @@ abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \Iter
      */
     protected static function assertAttributeExists($name): void
     {
-        static $columns = null;
-
-        if ($columns === null) {
-            $columns = static::getColumns();
-        }
+        $columns = static::getColumns();
 
         if (!in_array((string)$name, $columns)) {
             Exception::throw(
@@ -208,6 +204,7 @@ abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \Iter
     /**
      * `ArrayAccess::offsetGet()` interface implementation.
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->get($offset);
@@ -216,6 +213,7 @@ abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \Iter
     /**
      * `ArrayAccess::offsetSet()` interface implementation.
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value): void
     {
         $this->set($offset, $value);
@@ -224,6 +222,7 @@ abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \Iter
     /**
      * `ArrayAccess::offsetExists()` interface implementation.
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset): bool
     {
         return $this->get($offset) !== null;
@@ -232,6 +231,7 @@ abstract class Element extends DBAL implements \ArrayAccess, \Traversable, \Iter
     /**
      * `ArrayAccess::offsetUnset()` interface implementation.
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset): void
     {
         $this->set($offset, null);
