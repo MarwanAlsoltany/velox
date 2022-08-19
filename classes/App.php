@@ -119,11 +119,9 @@ class App
     /**
      * Class constructor.
      */
-    public function __construct()
+    final public function __construct()
     {
-        if (empty(static::$instance)) {
-            static::$instance = $this;
-        }
+        empty(static::$instance) && static::$instance = $this;
 
         $this->event    = new Event();
         $this->config   = new Config();
@@ -186,9 +184,7 @@ class App
      */
     final public static function instance(): self
     {
-        if (empty(static::$instance)) {
-            static::$instance = new static();
-        }
+        empty(static::$instance) && static::$instance = new static();
 
         return static::$instance;
     }
@@ -387,7 +383,7 @@ class App
         if ($noShutdown) {
             // app shutdown function checks for this variable
             // to determine if it should exit, see bootstrap/loader.php
-            Misc::setArrayValueByKey($GLOBALS, '_VELOX.TERMINATE', true);
+            Misc::setArrayValueByKey($GLOBALS['_VELOX'], 'TERMINATE', true);
         }
 
         exit($status);
@@ -410,7 +406,7 @@ class App
     {
         Event::dispatch(self::ON_SHUTDOWN);
 
-        Misc::setArrayValueByKey($GLOBALS, '_VELOX.SHUTDOWN', false);
+        Misc::setArrayValueByKey($GLOBALS['_VELOX'], 'SHUTDOWN', false);
 
         exit;
     }
